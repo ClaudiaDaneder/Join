@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task</title>
+</head>
+
+<body>
+    <h1>Add Task</h1>
+    <form onsubmit="addNewTask()">
+        <p>Title</p>
+        <input type="text" placeholder="Enter a title" required>
+        <p>Description</p>
+        <textarea placeholder="Enter a description"></textarea>
+        <p>Assigned to</p>
+        <select name="assignedTo">
+            <option value="" disabled selected hidden>Select contacts to assign</option>
+            <option value="">Name</option>
+        </select>
+        <p>Due date</p>
+        <input type="date" required>
+        <p>Prio</p>
+        <button>Urgent</button>
+        <button>Medium</button>
+        <button>Low</button>
+        <p>Category</p>
+        <select name="category" required>
+            <option value="" disabled selected hidden>Select task category</option>
+            <option value="user_story">User Story</option>
+            <option value="technical_task">Technical Task</option>
+        </select>
+        <p>Subtasks</p>
+        <input type="text" placeholder="Add new subtask">
+        <div>
+        <button onclick="clearForm()">Clear</button>
+        <button>Create Task</button>
+        </div>
+    </form>
+</body>
+
+</html>
