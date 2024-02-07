@@ -1,0 +1,120 @@
+html,
+body {
+    background-color: #F6F7F8;
+    margin: 0;
+    scroll-behavior: smooth;
+    width: 1440px;
+    height: 1024px;
+}
+
+p {
+    display: block;
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+.contacts {
+    display: flex;
+    width: 456px;
+    height: 928px;
+    top: 96px;
+    left: 232px;
+    background-color: #ffffff;
+    box-shadow: 4px 0px 6px 0px #00000014;
+    position: relative;
+}
+
+.addContact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 456px;
+    height: 101px;
+    padding: 22.5px, 52px, 22.5px, 52px;
+    gap: 10px;
+    background: #FFFFFF;
+    position: fixed;
+}
+
+.addContactButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 352px;
+    height: 56px;
+    top: 22.5px;
+    left: 52px;
+    padding: 12px 0px 12px 0px;
+    border-radius: 10px;
+    gap: 16px;
+    background: #2A3647;
+    border: 1px solid #2A3647
+}
+
+.addContactButton p {
+    width: 175px;
+    height: 25px;
+    font-family: 'Inter';
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 25px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #FFFFFF;
+}
+
+.contactsView {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.contactShow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 569px;
+    height: 73px;
+    top: 206px;
+    left: 743px;
+    gap: 30px
+}
+
+.cut {
+    width: 0;
+    height: 65px;
+    border: 3px solid #29ABE2;
+    border-radius: 3px;
+}
+
+.contactsHeader {
+    width: 274px;
+    height: 73px;
+    font-weight: 700;
+    font-size: 61px;
+    font-family: 'Inter';
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.contactsTitle {
+    width: 235px;
+    height: 32px;
+    font-weight: 400;
+    font-size: 27px;
+    font-family: 'Inter';
+    letter-spacing: 0em;
+    text-align: left;
+    color: #2A3647;
+}
+
+#showContact {
+    position: absolute;
+    width: 461px;
+    height: 364px;
+    top: 311px;
+    left: 750px;
+    gap: 21px;
+}
