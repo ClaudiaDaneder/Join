@@ -5,39 +5,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Task</title>
+
+    <link rel="stylesheet" href="addtask.css">
+    <link rel="stylesheet" href="fonts.css">
 </head>
 
 <body>
     <h1>Add Task</h1>
-    <form onsubmit="addNewTask()">
-        <p>Title</p>
-        <input type="text" placeholder="Enter a title" required>
-        <p>Description</p>
-        <textarea placeholder="Enter a description"></textarea>
-        <p>Assigned to</p>
-        <select name="assignedTo">
-            <option value="" disabled selected hidden>Select contacts to assign</option>
-            <option value="">Name</option>
-        </select>
-        <p>Due date</p>
-        <input type="date" required>
-        <p>Prio</p>
-        <button>Urgent</button>
-        <button>Medium</button>
-        <button>Low</button>
-        <p>Category</p>
-        <select name="category" required>
-            <option value="" disabled selected hidden>Select task category</option>
-            <option value="user_story">User Story</option>
-            <option value="technical_task">Technical Task</option>
-        </select>
-        <p>Subtasks</p>
-        <input type="text" placeholder="Add new subtask">
+    <form id="my-form" onsubmit="addNewTask(); return false">
+        <div class="container">
+            <div>
+                <p>Title</p>
+                <input type="text" placeholder="Enter a title" id="title">
+                <p>Description</p>
+                <textarea placeholder="Enter a description" id="description"></textarea>
+                <p>Assigned to</p>
+                <select id="assignee" name="assignedTo">
+                    <option disabled selected hidden>Select contacts to assign</option>
+                    <option>Name 1</option>
+                    <option>Name 2</option>
+                    <option>Name 3</option>
+                </select>
+            </div>
+            <hr>
+            <div>
+                <p>Due date</p>
+                <input type="date" id="due-date">
+                <p>Prio</p>
+                <button>Urgent</button>
+                <button>Medium</button>
+                <button>Low</button>
+                <p>Category</p>
+                <select name="category" id="category">
+                    <option disabled selected hidden>Select task category</option>
+                    <option>User Story</option>
+                    <option>Technical Task</option>
+                </select>
+                <p>Subtasks</p>
+                <input type="text" placeholder="Add new subtask" id="subtasks"><button onclick="addToSubtaskList(); return false">+</button>
+                <ul id="subtask-list"></ul>
+            </div>
+        </div>
         <div>
-        <button onclick="clearForm()">Clear</button>
-        <button>Create Task</button>
+            <input class="reset-button" type="reset" value="Clear">
+            <input class="create-button" type="submit" value="Create Task">
         </div>
     </form>
+
 </body>
+
+<script src="addtask.js"></script>
 
 </html>
