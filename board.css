@@ -1,3 +1,29 @@
+body{
+    margin: 0;
+}
 .boardSiteContainer{
     display: flex;
+}
+.bar{
+    padding: 64px, 0px, 64px, 0px;
+    display: flex;
+    justify-content: space-between ;
+}
+.boardSubhHader{
+    display: flex;
+    justify-content: space-around;
+}
+.taskContainer{
+    display: flex;
+    justify-content: space-around;
+    gap: 24px;
+    width: 80vw;
+}
+.tasks{
+    display: flex;
+    border: solid;
+}
+.noTask{
+    width: 246px;
+    background-color: #A8A8A8;
 }

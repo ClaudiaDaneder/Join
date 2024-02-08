@@ -9,15 +9,27 @@
 </head>
 <body>
     <div class="boardSiteContainer">
-        <div>Menü</div>
-        <div>
-            <div><h3>Headline</h3></div>
-            <div><h1>Board</h1> <input type="text"> <button>Add task</button></div>
+        <div class="bar">Menü</div>
+        <div class="content">
+            <div class="headline">
+                <h3>Headline</h3>
+            </div>
+            <div class="boardSubhHader">
+                <h1>Board</h1> <input type="text"> <button>Add task</button>
+            </div>
             <div class="taskContainer">
-                <section class="toDo" id="toDo"></section>
-                <section class="inProgress" id="inProgress"></section>
-                <section class="awaitFeedback" id="awaitFeedback"></section>
-                <section class="done" id="done"></section>
+                <section class="tasks" id="toDo">
+                    <div class="noTask"> No tasks To do</div>
+                </section>
+                <section class="tasks" id="inProgress">
+                    <div class="noTask"> No tasks To do</div>
+                </section>
+                <section class="tasks" id="awaitFeedback">
+                    <div class="noTask"> No tasks To do</div>
+                </section>
+                <section class="tasks" id="done">
+                    <div class="noTask"> No tasks To do</div>
+                </section>  
             </div>
         </div>
     </div>
