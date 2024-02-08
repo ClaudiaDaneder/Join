@@ -5,6 +5,7 @@ body {
     scroll-behavior: smooth;
     width: 1440px;
     height: 1024px;
+    font-family: 'Inter';
 }
 
 p {
@@ -15,6 +16,7 @@ p {
 
 .contacts {
     display: flex;
+    flex-direction: column;
     width: 456px;
     height: 928px;
     top: 96px;
@@ -30,7 +32,6 @@ p {
     align-items: center;
     width: 456px;
     height: 101px;
-    padding: 22.5px, 52px, 22.5px, 52px;
     gap: 10px;
     background: #FFFFFF;
     position: fixed;
@@ -48,19 +49,109 @@ p {
     border-radius: 10px;
     gap: 16px;
     background: #2A3647;
-    border: 1px solid #2A3647
+    border: 1px solid #2A3647;
+    transition: all 75ms ease-in-out;
+    cursor: pointer;
+}
+
+.addContactButton:hover {
+    background: #29ABE2;
+    box-shadow: 0px 4px 4px 0px #00000040;
+    border: 1px solid #29ABE2;
 }
 
 .addContactButton p {
     width: 175px;
     height: 25px;
-    font-family: 'Inter';
     font-size: 21px;
     font-weight: 700;
     line-height: 25px;
     letter-spacing: 0em;
     text-align: left;
     color: #FFFFFF;
+}
+
+.contactList {
+    margin-top: 110px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.letter {
+    width: 352px !important;
+    display: flex;
+    padding-bottom: 17px;
+    padding-top: 17px;
+    padding-left: 36px;
+    font-size: 20px;
+}
+
+.line {
+    width: 352px;
+    height: 16px;
+    padding: 8px 0px 8px 0px;
+    gap: 10px
+}
+
+.lineBorder {
+    width: 352px;
+    border: 1px solid #D1D1D1;
+}
+
+.list {
+    display: flex;
+    align-items: center;
+    width: 304px;
+    height: 78px;
+    padding-bottom: 15px;
+    padding-left: 24px;
+    padding-top: 15px;
+    padding-right: 24px;
+    border-radius: 10px;
+    gap: 35px;
+    cursor: pointer;
+    transition: all 100ms ease-in-out;
+}
+
+.list:hover{
+    background: linear-gradient(180deg, #F9F9F9 0%, #F0F0F0 100%);
+}
+
+.list:visited{
+    background-color: #2A3647 !important;
+    color: white !important;
+}
+
+.contactName{
+    gap: 5px;
+}
+
+.listName{
+    font-size: 20px;
+}
+
+.listEmail{
+    color: #007CEE;
+    font-size: 16px;
+}
+.circle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border: 1px solid white;
+    background-color: orange;
+    color: white;
+    border-radius: 21px;
+}
+
+.contactName{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 20px;
 }
 
 .contactsView {
@@ -79,7 +170,7 @@ p {
     height: 73px;
     top: 206px;
     left: 743px;
-    gap: 30px
+    gap: 25px
 }
 
 .cut {
@@ -94,7 +185,6 @@ p {
     height: 73px;
     font-weight: 700;
     font-size: 61px;
-    font-family: 'Inter';
     letter-spacing: 0em;
     text-align: left;
 }
@@ -104,7 +194,6 @@ p {
     height: 32px;
     font-weight: 400;
     font-size: 27px;
-    font-family: 'Inter';
     letter-spacing: 0em;
     text-align: left;
     color: #2A3647;
