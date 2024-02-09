@@ -102,7 +102,7 @@ p {
 .list {
     display: flex;
     align-items: center;
-    width: 304px;
+    width: 352px;
     height: 78px;
     padding-bottom: 15px;
     padding-left: 24px;
@@ -141,10 +141,11 @@ p {
     justify-content: center;
     width: 42px;
     height: 42px;
-    border: 1px solid white;
+    border: 2px solid white;
     background-color: orange;
     color: white;
     border-radius: 21px;
+    font-size: 12px;
 }
 
 .contactName{
@@ -200,10 +201,81 @@ p {
 }
 
 #showContact {
+    display: flex;
+    flex-direction: column;
     position: absolute;
-    width: 461px;
+    width: 452px;
     height: 364px;
     top: 311px;
     left: 750px;
     gap: 21px;
+}
+
+.cHeader{
+    display: flex;
+    justify-content: flex-start;
+    gap: 54px;
+}
+
+.cwidth{
+    width: 120px !important;
+    height: 120px !important;
+    border-radius: 60px !important;
+    font-size: 47px;
+}
+
+.contactName{
+    width: 278px;
+    height: 56px;
+    gap: 8px;
+}
+
+.cName{
+    font-size: 47px;
+    font-weight: 500;
+}
+
+.edit{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 159px;
+    height: 24px;
+}
+
+.edit p{
+    display: flex;
+    align-items: center;
+    width: 66px;
+    height: 24px;
+    gap: 13px;
+    font-size: 16px;
+}
+
+.edit img{
+    width: 24px;
+    height: 24px;
+}
+
+.cInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.cInfo p{
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.email{
+    color: #007CEE;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.phone{
+    color: #000000;
+    text-decoration: none;
+    font-size: 16px;
 }
