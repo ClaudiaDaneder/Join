@@ -1,0 +1,231 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #F6F7F8;
+    color: #2A3647;
+    font-size: 20px;
+}
+
+p {
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+button,
+input,
+textarea,
+select {
+    border: unset;
+    border-radius: 10px;
+}
+
+input,
+textarea,
+select {
+    font-family: inherit;
+    font-size: 20px;
+    width: 440px;
+    border: 1px solid #D1D1D1;
+    margin-bottom: 24px;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #D1D1D1;
+}
+
+textarea {
+    padding: 18px 16px;
+    overflow: auto;
+}
+
+input,
+select {
+    padding: 12px 16px;
+
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background-image: url(/img/addtask_icon_datepicker.svg);
+    margin-right: -4px;
+}
+
+select {
+    appearance: unset;
+    -moz-appearance: none;
+    /* Firefox */
+    -webkit-appearance: none;
+    /* Safari and Chrome */
+    background-image: url(/img/addtask_icon_dropdown-menu.svg);
+    background-repeat: no-repeat;
+    background-position-x: calc(100% - 8px);
+    background-position-y: 50%;
+}
+
+button,
+input,
+textarea,
+select,
+a:hover {
+    cursor: pointer;
+}
+
+
+.main-container {
+    padding-left: 328px;
+    padding-top: 206px;
+    max-width: 1440px;
+}
+
+.add-task-headline {
+    font-size: 61px;
+    font-weight: 700;
+    margin: 0;
+    margin-bottom: 32px;
+    color: #000;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 980px;
+    height: 85vh;
+    margin-bottom: 30px;
+}
+
+.form-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+}
+
+hr {
+    height: 424px;
+    width: 0;
+    border: none;
+    border-right: 1px solid #D1D1D1;
+    margin: 0;
+}
+
+.styled-subtask-field {
+    width: 440px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.subtask-field {
+    border: unset;
+    background: transparent;
+    margin-bottom: 0;
+}
+
+.subtask-button {
+    padding-right: 8px;
+    padding-top: 4px;
+}
+
+.subtask-button:hover {
+    cursor: pointer;
+}
+
+.reset-button,
+.create-button {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    justify-content: center;
+    gap: 6px;
+}
+
+.reset-button {
+    border: 1px solid #2A3647;
+    background-color: transparent;
+}
+
+.create-button {
+    background-color: #2A3647;
+    color: #fff;
+    font-weight: 700;
+}
+
+.reset-button:hover,
+.create-button:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18)
+}
+
+.create-button:hover {
+    background-color: #29abe2;
+}
+
+.reset-button:hover {
+    border-color: #29abe2;
+    color: #29abe2;
+}
+
+.task-bottom-container {
+    bottom: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 16px;
+}
+
+.task-submit-buttons {
+    display: flex;
+    gap: 16px;
+}
+
+.mandatory {
+    color: #FF8190;
+}
+
+.task-label {
+    margin-bottom: 8px;
+}
+
+.prio-button-container {
+    display: flex;
+    justify-content: space-evenly;
+    width: 440px;
+    margin-bottom: 32px;
+    gap: 16px;
+}
+
+.button-prio-urgent,
+.button-prio-medium,
+.button-prio-low {
+    padding: 10px 16px;
+    font-size: 20px;
+    background-color: #fff;
+    box-shadow: 0px 0px 4px 0px #0000001A;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.button-prio-urgent:focus {
+    background-color: #ff3d00;
+    color: #fff;
+}
+
+.button-prio-medium:focus {
+    background-color: #ffa800;
+    color: #fff;
+}
+
+.button-prio-low:focus {
+    background-color: #7ae229;
+    color: #fff;
+}

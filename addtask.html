@@ -6,54 +6,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Task</title>
 
-    <link rel="stylesheet" href="addtask.css">
-    <link rel="stylesheet" href="fonts.css">
+    <link rel="stylesheet" href="css/addtask.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <script src="js/templates.js"></script>
+    <script src="js/addtask.js" defer></script>
 </head>
 
-<body>
-    <h1>Add Task</h1>
-    <form id="my-form" onsubmit="addNewTask(); return false">
-        <div class="container">
-            <div>
-                <p>Title</p>
-                <input type="text" placeholder="Enter a title" id="title">
-                <p>Description</p>
-                <textarea placeholder="Enter a description" id="description"></textarea>
-                <p>Assigned to</p>
-                <select id="assignee" name="assignedTo">
-                    <option disabled selected hidden>Select contacts to assign</option>
-                    <option>Name 1</option>
-                    <option>Name 2</option>
-                    <option>Name 3</option>
-                </select>
-            </div>
-            <hr>
-            <div>
-                <p>Due date</p>
-                <input type="date" id="due-date">
-                <p>Prio</p>
-                <button>Urgent</button>
-                <button>Medium</button>
-                <button>Low</button>
-                <p>Category</p>
-                <select name="category" id="category">
-                    <option disabled selected hidden>Select task category</option>
-                    <option>User Story</option>
-                    <option>Technical Task</option>
-                </select>
-                <p>Subtasks</p>
-                <input type="text" placeholder="Add new subtask" id="subtasks"><button onclick="addToSubtaskList(); return false">+</button>
-                <ul id="subtask-list"></ul>
-            </div>
-        </div>
-        <div>
-            <input class="reset-button" type="reset" value="Clear">
-            <input class="create-button" type="submit" value="Create Task">
-        </div>
-    </form>
+<body onload="includeHTML()">
+    <div w3-include-html="templates/sidebar.html"></div>
 
+    <div class="main-container">
+        <h1 class="add-task-headline">Add Task</h1>
+        <form id="my-form" onsubmit="addNewTask(); return false" class="form">
+            <div class="form-container">
+                <div>
+                    <p class="task-label">Title<sup class="mandatory">*</sup></p>
+                    <input type="text" placeholder="Enter a title" id="title">
+                    <p class="task-label">Description</p>
+                    <textarea placeholder="Enter a description" id="description" rows="4"></textarea>
+                    <p class="task-label">Assigned to<sup class="mandatory">*</sup></p>
+                    <select id="assignee" name="assignedTo">
+                        <option disabled selected hidden>Select contacts to assign</option>
+                        <option>Name 1</option>
+                        <option>Name 2</option>
+                        <option>Name 3</option>
+                    </select>
+                </div>
+                <hr>
+                <div>
+                    <p class="task-label">Due date<sup class="mandatory">*</sup></p>
+                    <input type="date" id="due-date">
+                    <p class="task-label">Prio</p>
+                    <div class="prio-button-container">
+                        <button class="button-prio-urgent">Urgent <img src="/img/addtask_prio_urgent.svg" alt=""></button>
+                        <button class="button-prio-medium">Medium <img src="/img/addtask_prio_medium.svg" alt=""></button>
+                        <button class="button-prio-low">Low <img src="/img/addtask_prio_low.svg" alt=""></button>
+                    </div>
+                    <p class="task-label">Category<sup class="mandatory">*</sup></p>
+                    <select name="category" id="category">
+                        <option disabled selected hidden>Select task category</option>
+                        <option>User Story</option>
+                        <option>Technical Task</option>
+                    </select>
+                    <p class="task-label">Subtasks</p>
+                    <div class="styled-subtask-field">
+                        <input class="subtask-field" type="text" placeholder="Add new subtask" id="subtasks">
+                        <div class="subtask-button" onclick="addToSubtaskList(); return false"><img
+                                src="/img/addtask_icon_subtask_add.svg"></div>
+                    </div>
+                    <ul id="subtask-list"></ul>
+                </div>
+            </div>
+            <div class="task-bottom-container">
+                <p><sup class="mandatory">*</sup>This field is required</p>
+                <div class="task-submit-buttons">
+                    <button class="reset-button" type="reset">Clear <img
+                            src="/img/addtask_icon_cancel_dark.svg"></button>
+                    <button class="create-button" type="submit">Create Task <img
+                            src="/img/addtask_icon_check.svg"></button>
+                </div>
+            </div>
+        </form>
+    </div>
 </body>
 
-<script src="addtask.js"></script>
+
 
 </html>
