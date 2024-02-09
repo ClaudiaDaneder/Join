@@ -1,13 +1,25 @@
+@font-face {
+    font-family: 'inter700';
+    src: url('fonts/inter-v13-latin-700.woff2');
+}
+@font-face {
+    font-family: 'interrRegular';
+    src: url('fonts/inter-v13-latin-regular.woff2');
+}
 body{
     margin: 0;
 }
 .boardSiteContainer{
     display: flex;
+    background-color: #F0F0F0;
+    height: 100vh;
 }
-.bar{
-    padding: 64px, 0px, 64px, 0px;
+.content{
+    position: relative;
+    margin-left: 240px;
     display: flex;
-    justify-content: space-between ;
+    flex-direction: column;
+    width: 100%;
 }
 .boardSubhHader{
     display: flex;
@@ -17,13 +29,47 @@ body{
     display: flex;
     justify-content: space-around;
     gap: 24px;
-    width: 80vw;
 }
-.tasks{
+.taskColumn{
     display: flex;
-    border: solid;
+    flex-direction: column;
+    gap: 16px;
 }
 .noTask{
     width: 246px;
     background-color: #A8A8A8;
+}
+.taskContent{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.task{
+    display: flex;
+    flex-direction: column;
+    width: 180px;
+    background-color:#FFFFFF ;
+    border-radius: 24px;
+    padding: 16px;
+    gap: 10px;
+}
+.technical{
+    font-family: interrRegular;
+    border-radius: 8px;
+    padding: 4px 16px 4px 16px;
+    background-color: #1FD7C1;
+    color: #FFFFFF;
+}
+.user{
+    font-family: interrRegular;
+    border-radius: 8px;
+    padding: 4px 16px 4px 16px;
+    background-color: #0038FF;
+    color: #FFFFFF;
+}
+.previewTitle{
+    font-family: inter700;
+}
+.previewDescription{
+    font-family: interrRegular;
 }

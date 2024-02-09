@@ -6,10 +6,12 @@
     <title>Board</title>
     <script src="board.js"></script>
     <link rel="stylesheet" href="board.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    
 </head>
-<body>
+<body onload="init() ">
     <div class="boardSiteContainer">
-        <div class="bar">Menü</div>
+        <div w3-include-html="templates/sidebar.html"></div>
         <div class="content">
             <div class="headline">
                 <h3>Headline</h3>
@@ -18,20 +20,25 @@
                 <h1>Board</h1> <input type="text"> <button>Add task</button>
             </div>
             <div class="taskContainer">
-                <section class="tasks" id="toDo">
-                    <div class="noTask"> No tasks To do</div>
+                <section class="taskColumn" >
+                    <div class="noTask" id="noTaskToDo" style="display: none;"> No tasks To do</div>
+                    <div id="toDo" ></div>
                 </section>
-                <section class="tasks" id="inProgress">
-                    <div class="noTask"> No tasks To do</div>
+                <section class="taskColumn" >
+                    <div class="noTask" id="noTaskInProgress" style="display: none;"> No tasks in Progress</div>
+                    <div id="inProgress"></div>
                 </section>
-                <section class="tasks" id="awaitFeedback">
-                    <div class="noTask"> No tasks To do</div>
+                <section class="taskColumn" >
+                    <div class="noTask" id="noTaskAwaitFeedback" style="display: none;"> No tasks await Feedback</div>
+                    <div id="awaitFeedback" class="taskContent"></div>
                 </section>
-                <section class="tasks" id="done">
-                    <div class="noTask"> No tasks To do</div>
+                <section class="taskColumn" >
+                    <div class="noTask" id="noTaskDone" style="display: none;"> No tasks done</div>
+                    <div id="done"></div>
                 </section>  
             </div>
         </div>
     </div>
+    <script src="js/templates.js"></script>
 </body>
 </html>
