@@ -19,24 +19,32 @@
                 <h3>Headline</h3>
             </div>
             <div class="boardSubhHader">
-                <h1>Board</h1> <input type="text"> <button>Add task</button>
+                <h1 class="boardHeadline">Board</h1>
+                 <div class="inputField">
+                    <input type="text" class="input" placeholder="Find Task" id="searchInput">
+                        <div class="verticalLineAndGlassImg">
+                            <div class="verticalLine"></div>
+                            <img onclick="serchTasks()" src="./img/search.png" alt="" srcset="">
+                        </div>
+                </div> 
+                <button>Add task</button>
             </div>
             <div class="taskContainer">
-                <section class="taskColumn" >
+                <section  >
                     <div class="noTask" id="noTaskToDo" style="display: none;"> No tasks To do</div>
-                    <div id="toDo" ></div>
+                    <div id="toDo" class="taskColumn"></div>
                 </section>
-                <section class="taskColumn" >
+                <section>
                     <div class="noTask" id="noTaskInProgress" style="display: none;"> No tasks in Progress</div>
-                    <div id="inProgress"></div>
+                    <div id="inProgress"  class="taskColumn"></div>
                 </section>
                 <section class="taskColumn" >
                     <div class="noTask" id="noTaskAwaitFeedback" style="display: none;"> No tasks await Feedback</div>
-                    <div id="awaitFeedback" class="taskContent"></div>
+                    <div id="awaitFeedback"  class="taskColumn"></div>
                 </section>
                 <section class="taskColumn" >
                     <div class="noTask" id="noTaskDone" style="display: none;"> No tasks done</div>
-                    <div id="done"></div>
+                    <div id="done" class="taskColumn"></div>
                 </section>  
             </div>
         </div>

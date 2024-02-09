@@ -32,3 +32,16 @@ function createTaskHtml(task) {
         </div>
         `;
 }
+
+
+function serchTasks(){
+    let searchValue = document.getElementById("searchInput").value;
+    let matchingTasks = [];
+    for (let i = 0; i < allTasks.length; i++) {
+        if (allTasks[i]["title"].toLowerCase().includes(searchValue) || allTasks[i]["description"].toLowerCase().includes(searchValue) || allTasks[i]["category"].toLowerCase().includes(searchValue)) {
+        matchingTasks.push(allTasks[i]);
+        }
+    }
+  console.log(matchingTasks);
+  return matchingTasks;
+}

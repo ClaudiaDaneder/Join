@@ -24,6 +24,44 @@ body{
 .boardSubhHader{
     display: flex;
     justify-content: space-around;
+    align-items: center;
+}
+.boardHeadline{
+    font-family: "inter700";
+    font-size: 61px;
+}
+.inputField{
+    height: 48px;
+    border: 1px;
+    padding: 8px 16px 8px 16px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FFFFFF;
+    border: solid 1px;
+    border-color:rgba(168, 168, 168, 1);
+}
+.input{
+    height: 26px;
+    border: 0;
+    font-family: interrRegular;
+    font-size: 20px;
+    
+
+}
+.input::placeholder {
+    color:rgba(209, 209, 209, 1);
+  }
+.verticalLineAndGlassImg{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.verticalLine{
+    width: 1px;
+    height: 24px;
+    background-color: rgba(168, 168, 168, 1);
 }
 .taskContainer{
     display: flex;
@@ -34,10 +72,6 @@ body{
     display: flex;
     flex-direction: column;
     gap: 16px;
-}
-.noTask{
-    width: 246px;
-    background-color: #A8A8A8;
 }
 .taskContent{
     display: flex;
