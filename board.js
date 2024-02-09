@@ -3,6 +3,7 @@
 function init() {
     renderTaskList("toDo");
     includeHTML();
+    openAndCloseNoTask();
 }
 
 
@@ -18,7 +19,24 @@ function renderTaskList(toDo) {
         
     }
 }
-
+function openAndCloseNoTask(){
+    let toDo=document.getElementById("toDo");
+    let inProgress= document.getElementById("inProgress");
+    let awaitFeedback= document.getElementById("awaitFeedback");
+    let done= document.getElementById("done");
+    if (toDo.innerHTML=="") {
+        document.getElementById("noTaskToDo").style.display="";
+    }
+    if (inProgress.innerHTML=="") {
+        document.getElementById("noTaskInProgress").style.display="";
+    }
+    if (awaitFeedback.innerHTML=="") {
+        document.getElementById("noTaskAwaitFeedback").style.display="";
+    }
+    if (done.innerHTML=="") {
+        document.getElementById("noTaskDone").style.display="";
+    }
+}
 
 function createTaskHtml(task) {
     let categoryValue = task['category'].split(" ");
