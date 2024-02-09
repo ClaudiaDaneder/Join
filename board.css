@@ -23,7 +23,7 @@ body{
 }
 .boardSubhHader{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
 }
 .boardHeadline{
@@ -31,7 +31,7 @@ body{
     font-size: 61px;
 }
 .inputField{
-    height: 48px;
+    height: 32px;
     border: 1px;
     padding: 8px 16px 8px 16px;
     border-radius: 10px;
@@ -41,6 +41,11 @@ body{
     background-color: #FFFFFF;
     border: solid 1px;
     border-color:rgba(168, 168, 168, 1);
+}
+.inputFieldAndAddTaskBtn{
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
 }
 .input{
     height: 26px;
@@ -62,6 +67,32 @@ body{
     width: 1px;
     height: 24px;
     background-color: rgba(168, 168, 168, 1);
+}
+.addTaskBtn{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 48px;
+    width: 160px;
+    border-radius: 10px;
+    border: 1px solid rgba(42, 54, 71, 1);
+    padding: 8px 16px 8px 16px;
+    gap: 4px;
+    background: rgba(42, 54, 71, 1);
+    
+}
+.addTaskLetterin{
+    color: white;
+    font-family: inter700;
+    font-size: 21px;
+    line-height: 25.2px;
+
+}
+.addImg{
+    height: 18.67px;
+    width: 18.67px;
+    left: 118.7px;
+    top: 14.67px;
 }
 .taskContainer{
     display: flex;
