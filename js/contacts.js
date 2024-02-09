@@ -1,7 +1,30 @@
 const STORAGE_TOKEN = 'TJJS7PQGUMX72JU6UWW00YOS9BIWN99TFB2N438Q';
 const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
 let contacts = [];
+let firstLetter = [];
 
+function loadContacts() {
+    if (loadCont('allContacts')) {
+        contacts = loadCont('allContacts');
+    }
+        loadLetter();
+
+    let contactLoad = document.getElementById('contactLoad');
+    contactLoad.innerHTML = '';
+
+    let loadFirstLetter = firstLetter.sort();
+
+    for (let i = 0; i < loadFirstLetter.length; i++) {
+        let contactLetterLoad = loadFirstLetter[i];
+        contactLoad.innerHTML += /*html*/`
+        <div class="letter">${contactLetterLoad}</div>
+        <div class="line">
+            <div class="lineBorder"></div>
+        </div>
+        `;
+
+    }
+}
 
 function addContact() {
     let addContact = document.getElementById('addContactPopup');
@@ -30,11 +53,11 @@ function editContact(id) {
     back.classList.add('back');
 }
 
-function loadNewContact(name, email, phone){
+function loadNewContact(name, email, phone) {
     let nameShow = name;
     let emailShow = email;
     let phoneShow = phone;
-    if(!name && !email && !phone){
+    if (!name && !email && !phone) {
         nameShow = '';
         emailShow = '';
         phoneShow = '';
@@ -53,7 +76,7 @@ function loadNewContact(name, email, phone){
         </form>`;
 }
 
-function showContact(id){
+function showContact(id) {
     let showContact = document.getElementById('showContact');
     let userId = document.getElementById(`${id}`);
     showContact.innerHTML = '';
@@ -82,15 +105,15 @@ function showContact(id){
     userId.classList.add('listVisited');
 }
 
-function createContact(){
+function createContact() {
     let name = document.getElementById('name');
     let email = document.getElementById('email');
     let phone = document.getElementById('phone');
     let color = getRndInteger(1, 9);
-    
-    contacts.push({"id":2, "name":name.value, "email":email.value, "phone":phone.value, "color":color});
+    contacts.push({ "id": 2, "name": name.value, "email": email.value, "phone": phone.value, "color": color });
     let contactsLoad = JSON.stringify(contacts);
     localStorage.setItem('allContacts', contactsLoad);
+    loadCont();
 }
 
 async function setItem(key, value) {
@@ -119,16 +142,30 @@ function notClose(event) {
 }
 
 function getRndInteger(min, max) {
-        color = Math.floor(Math.random() * (max - min + 1) ) + min;
-        let number = '';
-    if(color == 1){number = 'darkorange';}else
-    if(color == 2){number = 'orange';}else
-    if(color == 3){number = 'lightorange';}else
-    if(color == 4){number = 'pink';}else
-    if(color == 5){number = 'lightpink';}else
-    if(color == 6){number = 'lightpurple';}else
-    if(color == 7){number = 'purple';}else
-    if(color == 8){number = 'blue';}else
-    if(color == 9){number = 'cyan';}
+    color = Math.floor(Math.random() * (max - min + 1)) + min;
+    let number = '';
+    if (color == 1) { number = 'darkorange'; } else
+        if (color == 2) { number = 'orange'; } else
+            if (color == 3) { number = 'lightorange'; } else
+                if (color == 4) { number = 'pink'; } else
+                    if (color == 5) { number = 'lightpink'; } else
+                        if (color == 6) { number = 'lightpurple'; } else
+                            if (color == 7) { number = 'purple'; } else
+                                if (color == 8) { number = 'blue'; } else
+                                    if (color == 9) { number = 'cyan'; }
     return number;
-  }
+}
+
+function loadCont(key) {
+    return JSON.parse(localStorage.getItem(key))
+}
+
+function loadLetter(){
+    for (let i = 0; i < contacts.length; i++) {
+        let contactsLoad = contacts[i]['name'];
+        let saveLetter = contactsLoad.charAt(0);
+        if (!firstLetter.includes(saveLetter)) {
+            firstLetter.push(saveLetter);
+        }
+    }    
+}
