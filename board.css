@@ -16,7 +16,7 @@ body{
 }
 .content{
     position: relative;
-    margin-left: 240px;
+    padding-left: 240px;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -103,6 +103,7 @@ body{
     display: flex;
     flex-direction: column;
     gap: 16px;
+    height: 65vh;
 }
 .taskContent{
     display: flex;
@@ -132,6 +133,11 @@ body{
     border-radius: 24px;
     padding: 16px;
     gap: 10px;
+    cursor: grab;
+    width: 214px;
+}
+.task.draggable {
+    opacity: 0.5;
 }
 .technical{
     font-family: interRegular;

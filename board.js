@@ -3,6 +3,8 @@
 function init() {
     renderTaskList();
     includeHTML();
+    
+    enableDragAndDrop();
     openAndCloseNoTask();
 }
 
@@ -27,8 +29,14 @@ function openAndCloseNoTask(){
     if (toDo.innerHTML=="") {
         document.getElementById("noTaskToDo").style.display="";
     }
+    if (toDo.innerHTML !="") {
+        document.getElementById("noTaskToDo").style.display="none";
+    }
     if (inProgress.innerHTML=="") {
         document.getElementById("noTaskInProgress").style.display="";
+    }
+    if (inProgress.innerHTML !="") {
+        document.getElementById("noTaskToDo").style.display="none";
     }
     if (awaitFeedback.innerHTML=="") {
         document.getElementById("noTaskAwaitFeedback").style.display="";
@@ -62,4 +70,63 @@ function serchTasks(){
     }
   console.log(matchingTasks);
   return matchingTasks;
+}
+
+
+function enableDragAndDrop() {
+    const taskContainers = document.querySelectorAll(".taskColumn");
+
+    taskContainers.forEach(container => {
+        container.addEventListener("dragover", (e) => {
+            e.preventDefault();
+
+            // Hier wird der Container hervorgehoben, um anzuzeigen, dass das Element hier abgelegt werden kann
+            container.classList.add("drag-over");
+
+            const draggedTask = document.querySelector(".dragging");
+
+            if (draggedTask && container !== draggedTask.parentElement) {
+                container.appendChild(draggedTask);
+            }
+        });
+
+        container.addEventListener("dragleave", () => {
+            // Hier wird die Hervorhebung des Containers entfernt, wenn das Element den Container verlässt
+            container.classList.remove("drag-over");
+        });
+
+        container.addEventListener("drop", (e) => {
+            e.preventDefault();
+            container.classList.remove("drag-over");
+
+            const draggedTask = document.querySelector(".dragging");
+            if (draggedTask && container !== draggedTask.parentElement) {
+                container.appendChild(draggedTask);
+                updateTaskStatus(draggedTask.id, container.id);
+            }
+        });
+    });
+
+    const tasks = document.querySelectorAll(".task");
+
+    tasks.forEach(task => {
+        task.setAttribute("draggable", true);
+
+        task.addEventListener("dragstart", (e) => {
+            e.dataTransfer.setData("text/plain", task.id);
+            task.classList.add("dragging");
+        });
+
+        task.addEventListener("dragend", () => {
+            tasks.forEach(t => t.classList.remove("dragging"));
+        });
+    });
+}
+
+
+function updateTaskStatus(taskId, newStatus) {
+    // Hier kannst du die Logik für die Aktualisierung des Task-Status implementieren
+    // Zum Beispiel: Finde den Task mit der taskId in deinem Datenmodell und aktualisiere den Status
+    console.log(`Task ${taskId} moved to ${newStatus}`);
+    openAndCloseNoTask();
 }
