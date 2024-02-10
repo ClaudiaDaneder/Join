@@ -76,8 +76,9 @@ a:hover {
 
 
 .main-container {
-    padding-left: 328px;
-    padding-top: 206px;
+    position: relative;
+    left: 328px;
+    top: 156px;
     max-width: 1440px;
 }
 
@@ -131,6 +132,8 @@ hr {
 .subtask-button {
     padding-right: 8px;
     padding-top: 4px;
+    margin-left: -40.6px;
+    background-color: transparent;
 }
 
 .subtask-button:hover {
@@ -204,7 +207,7 @@ hr {
 .button-prio-urgent,
 .button-prio-medium,
 .button-prio-low {
-    padding: 10px 16px;
+    padding: 10px 40px 10px 16px;
     font-size: 20px;
     background-color: #fff;
     box-shadow: 0px 0px 4px 0px #0000001A;
@@ -215,17 +218,50 @@ hr {
     gap: 8px;
 }
 
+.button-prio-urgent {
+    background-image: url(/img/addtask_prio_urgent.svg);
+    background-repeat: no-repeat;
+    background-position-y: 50%;
+    background-position-x: 85%;
+}
+
 .button-prio-urgent:focus {
-    background-color: #ff3d00;
+    background-color: #ff3d00ff;
     color: #fff;
+    background-image: url(/img/addtask_prio_urgent_white.svg);
+    background-repeat: no-repeat;
+    background-position-y: 50%;
+    background-position-x: 85%;
+}
+
+.button-prio-medium {
+    background-image: url(/img/addtask_prio_medium.svg);
+    background-repeat: no-repeat;
+    background-position-y: 50%;
+    background-position-x: 85%;
 }
 
 .button-prio-medium:focus {
     background-color: #ffa800;
     color: #fff;
+    background-image: url(/img/addtask_prio_medium_white.svg);
+    background-repeat: no-repeat;
+    background-position-y: 50%;
+    background-position-x: 85%;
+}
+
+.button-prio-low {
+    background-image: url(/img/addtask_prio_low.svg);
+    background-repeat: no-repeat;
+    background-position-y: 50%;
+    background-position-x: 85%;
 }
 
 .button-prio-low:focus {
     background-color: #7ae229;
     color: #fff;
+    background-image: url(/img/addtask_prio_low_white.svg);
+    background-repeat: no-repeat;
+    background-position-y: 50%;
+    background-position-x: 85%;
 }
