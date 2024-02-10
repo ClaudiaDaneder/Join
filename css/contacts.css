@@ -35,7 +35,8 @@ body {
     background-color: #0038FF;
 }
 .cyan{
-    background-color: #00BEE8;
+    background-color: #00FFFF;
+    color:#000000 !important;
 }
 /*Colors*/
 
@@ -122,6 +123,7 @@ p {
     display: flex;
     align-items: center;
     flex-direction: column;
+    overflow-y: auto;
 }
 
 .letter {
@@ -202,7 +204,6 @@ p {
     width: 42px;
     height: 42px;
     border: 2px solid white;
-    background-color: orange;
     color: white;
     border-radius: 21px;
     font-size: 12px;

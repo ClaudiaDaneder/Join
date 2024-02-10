@@ -7,7 +7,7 @@ function loadContacts() {
     if (loadCont('allContacts')) {
         contacts = loadCont('allContacts');
     }
-        loadLetter();
+    loadLetter();
 
     let contactLoad = document.getElementById('contactLoad');
     contactLoad.innerHTML = '';
@@ -21,8 +21,30 @@ function loadContacts() {
         <div class="line">
             <div class="lineBorder"></div>
         </div>
+        <div id="contactShow${i}"></div>
         `;
 
+        let contactShow = document.getElementById(`contactShow${i}`);
+
+        for (let c = 0; c < contacts.length; c++) {
+            let saveLetter = contacts[c]['name'].charAt(0);
+            if (contactLetterLoad.includes(saveLetter)) {
+                let contact = contacts[c];
+                const nameParts = contact['name'].split(" ");
+                const initials = nameParts.map(part => part.charAt(0)).join("");
+                contactShow.innerHTML += /*html*/`
+    <div class="list" id="cID${contact['id']}" onclick="showContact(${contact['id']})">
+            <div class="circle" id="listCircle${contact['id']}">${initials}</div>
+            <div class="contactNameList">
+                <p class="listName">${contact['name']}</p>
+                <p class="listEmail">${contact['email']}</p>
+            </div>
+        </div>
+    `;
+    let circle = document.getElementById(`listCircle${contact['id']}`);
+    circle.classList.add(contact['color']);
+            }
+        }
     }
 }
 
@@ -78,13 +100,22 @@ function loadNewContact(name, email, phone) {
 
 function showContact(id) {
     let showContact = document.getElementById('showContact');
-    let userId = document.getElementById(`${id}`);
+    let userId = document.getElementById(`cID${id}`);
+    removeClassList();
+    userId.classList.remove('list');
+    userId.classList.add('listVisited');
     showContact.innerHTML = '';
-    showContact.innerHTML = /*html*/`
+    for (let i = 0; i < contacts.length; i++) {
+        let contactData = contacts[i];
+        if (contactData['id'] == id) {
+                const nameParts = contactData['name'].split(" ");
+                const initials = nameParts.map(part => part.charAt(0)).join("");
+            console.log(contactData['name'].split(' ').length);
+            showContact.innerHTML = /*html*/`
     <div class="cHeader">
-        <div class="circle cwidth" id="AF${id}">AF</div>
+        <div class="circle cwidth" id="circle${id}">${initials}</div>
         <div class="contactName">
-            <p class="cName">Alexander Fischer</p>
+            <p class="cName">${contactData['name']}</p>
             <div class="edit">
                 <p onclick="notClose(event), editContact(1)"><img src="./img/edit.svg">Edit</p>
                 <p><img src="./img/delete.svg">Delete</p>
@@ -94,15 +125,28 @@ function showContact(id) {
     <p>Contact Information</p>
     <div class="cInfo">
         <p>Email</p>
-        <p class="email">alexfischer@gmail.com</p>
+        <p class="email">${contactData['email']}</p>
         <p>Phone</p>
-        <p class="phone">+4917564582069</p>
+        <p class="phone">${contactData['phone']}</p>
     </div>
     `;
-    let circle = document.getElementById(`AF${id}`);
-    circle.style.backgroundColor = 'orange'
-    userId.classList.remove('list');
-    userId.classList.add('listVisited');
+            let circle = document.getElementById(`circle${id}`);
+            circle.classList.add(contactData['color']);
+            userId.classList.remove('list');
+            userId.classList.add('listVisited');
+        }
+    }
+}
+
+function removeClassList() {
+    for (let i = 0; i < contacts.length; i++) {
+        let id = contacts[i]['id'];
+        let userId = document.getElementById(`cID${id}`);
+        if (userId.className == 'listVisited') {
+            userId.classList.remove('listVisited');
+            userId.classList.add('list');
+        }
+    }
 }
 
 function createContact() {
@@ -110,10 +154,16 @@ function createContact() {
     let email = document.getElementById('email');
     let phone = document.getElementById('phone');
     let color = getRndInteger(1, 9);
-    contacts.push({ "id": 2, "name": name.value, "email": email.value, "phone": phone.value, "color": color });
+    let lastID = contacts.length;
+    let idShow = lastID + 1
+    contacts.push({ "id": idShow, "name": name.value, "email": email.value, "phone": phone.value, "color": color });
     let contactsLoad = JSON.stringify(contacts);
     localStorage.setItem('allContacts', contactsLoad);
     loadCont();
+    loadContacts();
+    showContact(idShow);
+    closePopup();
+    location.assign(`#cID${idShow}`);
 }
 
 async function setItem(key, value) {
@@ -160,12 +210,12 @@ function loadCont(key) {
     return JSON.parse(localStorage.getItem(key))
 }
 
-function loadLetter(){
+function loadLetter() {
     for (let i = 0; i < contacts.length; i++) {
         let contactsLoad = contacts[i]['name'];
         let saveLetter = contactsLoad.charAt(0);
         if (!firstLetter.includes(saveLetter)) {
             firstLetter.push(saveLetter);
         }
-    }    
+    }
 }
