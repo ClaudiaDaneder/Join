@@ -25,3 +25,64 @@ function includeHTML() {
     }
   }
 }
+
+/*Contacts Templates*/
+
+function popupTempForm(nameShow, emailShow, phoneShow, button){
+  return /*html*/`
+        <img src="./img/clearcontackt.svg">
+        <form action="#" onsubmit="createContact(); return false">
+            <div class="input"><input type="text" id="name" value="${nameShow}" placeholder="Name" required><img src="./img/personContact.svg"></div>
+            <div class="input"><input type="email" id="email" value="${emailShow}" placeholder="E-Mail" required><img src="./img/emailContact.svg"></div>
+            <div class="input"><input type="text" id="phone" value="${phoneShow}" placeholder="Phone" required><img src="./img/phoneContact.svg"></div>
+            <div class="popupButton">
+                <div class="cancel" onclick="closePopup()">Cancel <img src="./img/addtask_icon_cancel_dark.svg"></div>
+                <button type="submit">${button} contact <img src="./img/addtask_icon_check.svg"></button>
+            </div>
+        </form>`;
+}
+
+function loadContactShow(id, initials, name, email, phone){
+  return /*html*/`
+  <div class="cHeader">
+      <div class="circle cwidth" id="circle${id}">${initials}</div>
+      <div class="contactName">
+          <p class="cName">${name}</p>
+          <div class="edit">
+              <p onclick="notClose(event), editContact(${id})"><img src="./img/edit.svg">Edit</p>
+              <p><img src="./img/delete.svg">Delete</p>
+          </div>
+      </div>
+  </div>
+  <p>Contact Information</p>
+  <div class="cInfo">
+      <p>Email</p>
+      <p class="email">${email}</p>
+      <p>Phone</p>
+      <p class="phone">${phone}</p>
+  </div>
+  `
+}
+
+function letterTemp(contactLetterLoad, i){
+  return /*html*/`
+        <div class="letter">${contactLetterLoad}</div>
+        <div class="line">
+            <div class="lineBorder"></div>
+        </div>
+        <div id="contactShow${i}"></div>
+        `;
+}
+
+function contactListTemp(id, initials, name, email){
+  return /*html*/`
+  <div class="list" id="cID${id}" onclick="showContact(${id})">
+          <div class="circle" id="listCircle${id}">${initials}</div>
+          <div class="contactNameList">
+              <p class="listName">${name}</p>
+              <p class="listEmail">${email}</p>
+          </div>
+      </div>
+  `;
+}
+/*Contacts Templates*/
