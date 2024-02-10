@@ -35,8 +35,7 @@ body {
     background-color: #0038FF;
 }
 .cyan{
-    background-color: #00FFFF;
-    color:#000000 !important;
+    background-color: #003e3e;
 }
 /*Colors*/
 
@@ -455,6 +454,23 @@ p {
     justify-content: space-around;
     align-items: center;
     height: 594px;
+}
+
+.clearContact{
+    width: 120px;
+    height: 120px;
+}
+
+.circleEdit{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 120px;
+    border: 2px solid white;
+    color: white;
+    border-radius: 67px;
+    font-size: 47px;
 }
 
 form{

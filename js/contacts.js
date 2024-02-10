@@ -63,24 +63,36 @@ function editContact(id) {
         <p class="popupTop">Edit contact</p>
         <div class="popupBottomLine"></div>
     `;
-    loadNewContact('Alexander Fischer', 'alexfischer@gmail.com', '017564582069');
+    loadEditContact(id);
     back.classList.add('back');
 }
 
+function loadEditContact(id){
+    for (let i = 0; i < contacts.length; i++){
+        let contactData = contacts[i];
+        if(contactData['id'] == id){
+            loadNewContact(contactData['name'], contactData['email'], contactData['phone'], contactData['color'], id)
+        }
+    }
+}
+
 /**Show Popup Form*/
-function loadNewContact(name, email, phone) {
+function loadNewContact(name, email, phone, color, id) {
     let formNewContact = document.getElementById('user');
     let nameShow = name;
     let emailShow = email;
     let phoneShow = phone;
+    let colorShow = color;
     let button = 'Save';
     if (!name && !email && !phone) {
         nameShow = '';
         emailShow = '';
         phoneShow = '';
+        colorShow = '';
         button = 'Create';
     }
-    formNewContact.innerHTML = popupTempForm(nameShow, emailShow, phoneShow, button);
+    formNewContact.innerHTML = popupTempForm(nameShow, emailShow, phoneShow, button, colorShow, id);
+    loadCircle(id, color, 'circleEdit');
 }
 
 /**Shows the selected contact   */
@@ -108,8 +120,10 @@ function initialsLoad(name){
 
 /**Give Circle with initals the color  */
 function loadCircle(id, color, circleName){
+    if(id != null && color != null && circleName != null){
     let circle = document.getElementById(`${circleName}${id}`);
     circle.classList.add(color);
+    }
 }
 
 /**add Classlist in Contactlist  */
