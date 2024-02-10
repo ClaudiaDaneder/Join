@@ -37,7 +37,16 @@ let subtaskList = document.getElementById('subtask-list')
 
 let selectedPriority = null;
 
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.prio-button-container button').forEach(button => {
+        button.addEventListener('click', function () {
+            selectPriority(button.dataset.priority);
+        });
+    });
+});
+
 function addNewTask() {
+    document.querySelector('.create-button').disabled = true;
 
     let task = {
         'title': title.value,
@@ -49,21 +58,28 @@ function addNewTask() {
         'subtasks': subtasks
     }
 
-    if (selectedPriority) {
-        task.prio = selectedPriority;
-    }
-
+    checkPriority(task);
     storeSubtasks();
     saveToLocalStorage(task);
     clearSubtaskList();
     resetForm();
+    redirectToBoard();
 }
+
 
 function saveToLocalStorage(task) {
     allTasks.push(task);
     let allTasksAsString = JSON.stringify(allTasks);
     localStorage.setItem('allTasks', allTasksAsString);
 }
+
+
+function checkPriority(task) {
+    if (selectedPriority) {
+        task.prio = selectedPriority;
+    }
+}
+
 
 function addToSubtaskList() {
     if (subtaskField.value !== '') {
@@ -72,6 +88,7 @@ function addToSubtaskList() {
     }
 }
 
+
 function storeSubtasks() {
     let subtaskListElements = subtaskList.childNodes;
     for (let i = 0; i < subtaskListElements?.length; i++) {
@@ -79,6 +96,7 @@ function storeSubtasks() {
         subtasks.push(child.innerHTML);
     }
 }
+
 
 function clearSubtaskList() {
     document.getElementById('subtask-list').innerHTML = '';
@@ -90,6 +108,7 @@ function loadContactsFromStorage() {
     loadContactsIntoDropdown(allContacts);
 }
 
+
 function loadContactsIntoDropdown(allContacts) {
     for (let i = 0; i < allContacts?.length; i++) {
         let contact = allContacts[i];
@@ -98,13 +117,12 @@ function loadContactsIntoDropdown(allContacts) {
     }
 }
 
+
 function selectPriority(priority) {
-    selectedPriority = priority; // Setzen der ausgewählten Priorität
-    // Zurücksetzen des Stils aller Prioritätsbuttons
+    selectedPriority = priority;
     document.querySelectorAll('.prio-button-container button').forEach(button => {
         button.classList.remove('selected');
     });
-    // Hinzufügen des Stils nur zum ausgewählten Prioritätsbutton
     document.querySelector(`.button-prio-${priority}`).classList.add('selected');
 }
 
@@ -121,12 +139,6 @@ function resetForm() {
 }
 
 
-document.addEventListener('DOMContentLoaded', function () {
-    // Eventlistener für alle Prioritätsbuttons hinzufügen
-    document.querySelectorAll('.prio-button-container button').forEach(button => {
-        button.addEventListener('click', function () {
-            // Ausgewählten Prioritätsbutton markieren und Priorität festlegen
-            selectPriority(button.dataset.priority);
-        });
-    });
-});
+function redirectToBoard() {
+    window.location.href = 'board.html'
+}
