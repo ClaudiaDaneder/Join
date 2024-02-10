@@ -58,12 +58,15 @@ function addNewTask() {
         'subtasks': subtasks
     }
 
+    disableCreateButton();    
+    changeCreateButtonColor();
     checkPriority(task);
     storeSubtasks();
     saveToLocalStorage(task);
     clearSubtaskList();
     resetForm();
-    //redirectToBoard();
+    showPopup();
+    redirectToBoard();
 }
 
 
@@ -86,6 +89,15 @@ function addToSubtaskList() {
         subtaskList.innerHTML += '<li>' + subtaskField.value + '</li>';
         subtaskField.value = '';
     }
+}
+
+function disableCreateButton() {
+    document.querySelector('.create-button').disabled = true;
+}
+
+
+function changeCreateButtonColor() {
+    document.getElementById('create-button').classList.add('active-create-button');
 }
 
 
@@ -139,9 +151,13 @@ function resetForm() {
     document.querySelector('.create-button').disabled = false;
 }
 
-
-/*function redirectToBoard() {
-    window.location.href = 'board.html';
-
+function showPopup() {
+    document.getElementById('popup-bg').classList.remove('hide')
 }
-*/
+
+
+function redirectToBoard() {
+    setTimeout(function () {
+        window.location.href = 'board.html';
+    }, 2200);
+}

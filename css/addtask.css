@@ -142,6 +142,7 @@ hr {
 
 .reset-button,
 .create-button {
+    padding: 12px 40px 12px 16px;
     display: flex;
     align-items: center;
     font-size: 20px;
@@ -150,7 +151,6 @@ hr {
 }
 
 .reset-button {
-    padding: 12px 40px 12px 16px;
     border: 1px solid #2A3647;
     background-color: transparent;
     background-image: url(/img/addtask_icon_cancel_dark.svg);
@@ -160,10 +160,17 @@ hr {
 }
 
 .create-button {
-    padding: 12px 16px;
     background-color: #2A3647;
     color: #fff;
     font-weight: 700;
+    background-image: url(/img/addtask_icon_check.svg);
+    background-repeat: no-repeat;
+    background-position-y: 52%;
+    background-position-x: 92%;
+}
+
+.active-create-button {
+    background-color: #29abe2 !important;
 }
 
 .reset-button:hover,
@@ -273,4 +280,54 @@ hr {
     background-repeat: no-repeat;
     background-position-y: 50%;
     background-position-x: 85%;
+}
+
+.hide {
+    display: none; 
+}
+
+.popup-bg {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+}
+
+.popup {
+    background-color: #2A3647;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 326px;
+    height: 74px;
+    padding-right: 50px;
+    background-image: url(/img/sidebar_icon_board.svg);
+    background-repeat: no-repeat;
+    background-position-y: 50%;
+    background-position-x: 85%;
+    border-radius: 20px;
+    position: fixed;
+    left: 50%;
+    bottom: -74px;
+    animation: popupSlideIn 600ms ease forwards;
+    animation-delay: 500ms;
+    
+}
+
+@keyframes popupSlideIn {
+    0% {
+        bottom: -74px; /* Ausgangsposition am unteren Bildschirmrand */
+    }
+    50% {
+        bottom: calc(50% - 37px); /* Halber Weg, um die Mitte des Bildschirms zu erreichen */
+    }
+    100% {
+        bottom: calc(50% - 37px); /* Endposition in der Mitte des Bildschirms */
+    }
 }
