@@ -9,6 +9,9 @@
 body{
     margin: 0;
 }
+.width-240px{
+    width: 240px;
+}
 .boardSiteContainer{
     display: flex;
     background-color: #F0F0F0;
