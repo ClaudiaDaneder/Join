@@ -1,20 +1,20 @@
 
 
 function init() {
-    renderTaskList("toDo");
+    renderTaskList();
     includeHTML();
     openAndCloseNoTask();
 }
 
 
-function renderTaskList(toDo) {
-    let container = document.getElementById(toDo);
+function renderTaskList() {
+    let container = document.getElementById("toDo");
     container.innerHTML = "";
 
     for (let i = 0; i < allTasks.length; i++) {
         const task = allTasks[i];
         currentTask = task["id"];
-        const taskHtml = createTaskHtml(task);
+        const taskHtml = createTaskHtml(task,i);
         container.innerHTML += taskHtml;
         
     }
@@ -38,12 +38,12 @@ function openAndCloseNoTask(){
     }
 }
 
-function createTaskHtml(task) {
+function createTaskHtml(task,i) {
     let categoryValue = task['category'].split(" ");
     let firstWord =categoryValue[0];
     let categoryClass = firstWord.charAt(0).toLowerCase() + firstWord.slice(1);
     return `
-        <div class="task">
+        <div class="task" id="${i}">
         <div class="${categoryClass}">${task["category"]}</div>
         <div class="previewTitle">${task["title"]}</div>
         <div class="previewDescription" >${task["description"]}</div>
