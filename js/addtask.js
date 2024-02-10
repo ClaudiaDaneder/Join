@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function addNewTask() {
-    document.querySelector('.create-button').disabled = true;
+
 
     let task = {
         'title': title.value,
@@ -63,7 +63,7 @@ function addNewTask() {
     saveToLocalStorage(task);
     clearSubtaskList();
     resetForm();
-    redirectToBoard();
+    //redirectToBoard();
 }
 
 
@@ -136,9 +136,12 @@ function resetForm() {
         }
         selectedPriority = null;
     }
+    document.querySelector('.create-button').disabled = false;
 }
 
 
-function redirectToBoard() {
-    window.location.href = 'board.html'
+/*function redirectToBoard() {
+    window.location.href = 'board.html';
+
 }
+*/
