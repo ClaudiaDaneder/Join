@@ -39,9 +39,9 @@
                     <input type="date" id="due-date">
                     <p class="task-label">Prio</p>
                     <div class="prio-button-container">
-                        <button type="button" class="button-prio-urgent">Urgent <img src="/img/addtask_prio_urgent.svg" alt=""></button>
-                        <button type="button" class="button-prio-medium">Medium <img src="/img/addtask_prio_medium.svg" alt=""></button>
-                        <button type="button" class="button-prio-low">Low <img src="/img/addtask_prio_low.svg" alt=""></button>
+                        <button type="button" class="button-prio-urgent">Urgent </button>
+                        <button type="button" class="button-prio-medium">Medium </button>
+                        <button type="button" class="button-prio-low">Low</button>
                     </div>
                     <p class="task-label">Category<sup class="mandatory">*</sup></p>
                     <select name="category" id="category">
@@ -52,8 +52,8 @@
                     <p class="task-label">Subtasks</p>
                     <div class="styled-subtask-field">
                         <input class="subtask-field" type="text" placeholder="Add new subtask" id="subtasks">
-                        <div class="subtask-button" onclick="addToSubtaskList(); return false"><img
-                                src="/img/addtask_icon_subtask_add.svg"></div>
+                        <button class="subtask-button" onclick="addToSubtaskList(); return false"><img
+                                src="/img/addtask_icon_subtask_add.svg"></button>
                     </div>
                     <ul id="subtask-list"></ul>
                 </div>
