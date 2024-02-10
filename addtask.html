@@ -11,9 +11,10 @@
     <link rel="stylesheet" href="css/sidebar.css">
     <script src="js/templates.js"></script>
     <script src="js/addtask.js" defer></script>
+
 </head>
 
-<body onload="includeHTML()">
+<body onload="includeHTML(), loadContactsFromStorage()">
     <div w3-include-html="templates/sidebar.html"></div>
 
     <div class="main-container">
@@ -27,10 +28,7 @@
                     <textarea placeholder="Enter a description" id="description" rows="4"></textarea>
                     <p class="task-label">Assigned to<sup class="mandatory">*</sup></p>
                     <select id="assignee" name="assignedTo">
-                        <option disabled selected hidden>Select contacts to assign</option>
-                        <option>Name 1</option>
-                        <option>Name 2</option>
-                        <option>Name 3</option>
+                        <option disabled selected hidden value="">Select contacts to assign</option>
                     </select>
                 </div>
                 <hr>
@@ -39,13 +37,13 @@
                     <input type="date" id="due-date">
                     <p class="task-label">Prio</p>
                     <div class="prio-button-container">
-                        <button type="button" class="button-prio-urgent">Urgent </button>
-                        <button type="button" class="button-prio-medium">Medium </button>
-                        <button type="button" class="button-prio-low">Low</button>
+                        <button type="button" class="button-prio-urgent" data-priority="urgent">Urgent </button>
+                        <button type="button" class="button-prio-medium" data-priority="medium">Medium </button>
+                        <button type="button" class="button-prio-low" data-priority="low">Low</button>
                     </div>
                     <p class="task-label">Category<sup class="mandatory">*</sup></p>
                     <select name="category" id="category">
-                        <option disabled selected hidden>Select task category</option>
+                        <option disabled selected hidden value="">Select task category</option>
                         <option>User Story</option>
                         <option>Technical Task</option>
                     </select>
@@ -61,8 +59,7 @@
             <div class="task-bottom-container">
                 <p><sup class="mandatory">*</sup>This field is required</p>
                 <div class="task-submit-buttons">
-                    <button class="reset-button" type="reset">Clear <img
-                            src="/img/addtask_icon_cancel_dark.svg"></button>
+                    <button class="reset-button" type="reset">Clear </button>
                     <button class="create-button" type="submit">Create Task <img
                             src="/img/addtask_icon_check.svg"></button>
                 </div>
@@ -71,6 +68,6 @@
     </div>
 </body>
 
-
+<script src="js/contacts.js"></script>
 
 </html>

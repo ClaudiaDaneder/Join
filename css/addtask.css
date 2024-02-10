@@ -142,7 +142,6 @@ hr {
 
 .reset-button,
 .create-button {
-    padding: 12px 16px;
     display: flex;
     align-items: center;
     font-size: 20px;
@@ -151,11 +150,17 @@ hr {
 }
 
 .reset-button {
+    padding: 12px 40px 12px 16px;
     border: 1px solid #2A3647;
     background-color: transparent;
+    background-image: url(/img/addtask_icon_cancel_dark.svg);
+    background-repeat: no-repeat;
+    background-position-y: 52%;
+    background-position-x: 84%;
 }
 
 .create-button {
+    padding: 12px 16px;
     background-color: #2A3647;
     color: #fff;
     font-weight: 700;
@@ -173,6 +178,10 @@ hr {
 .reset-button:hover {
     border-color: #29abe2;
     color: #29abe2;
+    background-image: url(/img/addtask_icon_cancel_blue.svg);
+    background-repeat: no-repeat;
+    background-position-y: 52%;
+    background-position-x: 84%;
 }
 
 .task-bottom-container {
@@ -225,7 +234,7 @@ hr {
     background-position-x: 85%;
 }
 
-.button-prio-urgent:focus {
+.button-prio-urgent:focus, .button-prio-urgent.selected {
     background-color: #ff3d00ff;
     color: #fff;
     background-image: url(/img/addtask_prio_urgent_white.svg);
@@ -241,7 +250,7 @@ hr {
     background-position-x: 85%;
 }
 
-.button-prio-medium:focus {
+.button-prio-medium:focus, .button-prio-medium.selected {
     background-color: #ffa800;
     color: #fff;
     background-image: url(/img/addtask_prio_medium_white.svg);
@@ -257,7 +266,7 @@ hr {
     background-position-x: 85%;
 }
 
-.button-prio-low:focus {
+.button-prio-low:focus, .button-prio-low.selected {
     background-color: #7ae229;
     color: #fff;
     background-image: url(/img/addtask_prio_low_white.svg);
