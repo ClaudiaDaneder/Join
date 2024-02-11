@@ -198,11 +198,6 @@ function drag(ev) {
 
 /**
  * Verarbeitet das Ablegen eines Aufgabenelements.
- * 
- * @param {Event} ev - Das Drag-and-Drop-Event.
- */
-/**
- * Behandelt das Drop-Event für ein draggbares Element.
  * Diese Funktion wird aufgerufen, wenn ein draggbares Element über einem Drop-Ziel losgelassen wird.
  * 
  * @param {Event} ev - Das Event-Objekt, das das Drop-Event darstellt.
