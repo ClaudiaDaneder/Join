@@ -1,9 +1,10 @@
 let contacts = [];
 let firstLetter = [];
+let contactsKey = 'allContacts';
 
 function init() {
-    if (loadCont('allContacts')) {
-        contacts = loadCont('allContacts');
+    if (loadCont(contactsKey)) {
+        contacts = loadCont(contactsKey);
     }
     loadLetter();
     loadContacts();
@@ -176,13 +177,21 @@ function createContact() {
     let email = document.getElementById('email');
     let phone = document.getElementById('phone');
     let color = getColor(1, 9);
-    let lastID = contacts.length;
-    let idShow = lastID + 1;
+    let idShow = searchId();
     contacts.push({ "id": idShow, "name": name.value, "email": email.value, "phone": phone.value, "color": color });
     saveStorage();
     init();
     slideContact(idShow);
     closePopup();
+}
+
+/**Search ID */
+function searchId(){
+    lastID = contacts.length;
+    if(lastID == null || lastID == ''){
+        lastID = 0;
+    }
+    return lastID + 1;
 }
 
 /**Closing Popup for Create or Edit Contact */
@@ -241,5 +250,5 @@ function loadLetter() {
 
 /**Save Storage */
 function saveStorage() {
-    localStorage.setItem('allContacts', JSON.stringify(contacts));
+    localStorage.setItem(contactsKey, JSON.stringify(contacts));
 }
