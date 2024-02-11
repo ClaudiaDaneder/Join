@@ -115,8 +115,12 @@ function drag(ev) {
 function drop(ev) {
   ev.preventDefault();
   var data = ev.dataTransfer.getData("id");
-  currentContainer = ev.target.appendChild(document.getElementById(data));
-  console.log(ev.target.id)
-  console.log(data)
+  ev.target.appendChild(document.getElementById(data));
+  current = ev.target.id;
+  console.log(ev.target.id);
+  console.log(data);
+  if(current == 'done'){
+    id = 3;
+  }
   openAndCloseNoTask();
 }
