@@ -76,6 +76,16 @@ function loadEditContact(id){
     }
 }
 
+/**Delete Contact*/
+function deleteContact(id){
+    contacts.splice(id, 1);
+    localStorage.setItem('allContacts', JSON.stringify(contacts));
+    firstLetter = [];
+    let showContact = document.getElementById('showContact');
+    showContact.innerHTML = '';
+    init();
+}
+
 /**Show Popup Form*/
 function loadNewContact(name, email, phone, color, id) {
     let formNewContact = document.getElementById('user');
@@ -106,7 +116,7 @@ function showContact(id) {
         let contactData = contacts[i];
         if (contactData['id'] == id) {
             let initials = initialsLoad(contactData['name']);
-            showContact.innerHTML = loadContactShow(id, initials, contactData['name'], contactData['email'], contactData['phone']);
+            showContact.innerHTML = loadContactShow(id, initials, contactData['name'], contactData['email'], contactData['phone'], i);
             loadCircle(id, contactData['color'], 'circle');
         }
     }

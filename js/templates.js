@@ -47,7 +47,7 @@ function popupTempForm(nameShow, emailShow, phoneShow, button, color, id){
         </form>`;
 }
 
-function loadContactShow(id, initials, name, email, phone){
+function loadContactShow(id, initials, name, email, phone, i){
   return /*html*/`
   <div class="cHeader">
       <div class="circle cwidth" id="circle${id}">${initials}</div>
@@ -55,7 +55,7 @@ function loadContactShow(id, initials, name, email, phone){
           <p class="cName">${name}</p>
           <div class="edit">
               <p onclick="notClose(event), editContact(${id})"><img src="./img/edit.svg">Edit</p>
-              <p><img src="./img/delete.svg">Delete</p>
+              <p onclick="deleteContact(${i})"><img src="./img/delete.svg">Delete</p>
           </div>
       </div>
   </div>
