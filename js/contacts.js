@@ -75,23 +75,23 @@ function loadEditContact(id) {
 }
 
 /**Edit Save Data */
-function saveContact(i, id) {
+async function saveContact(i, id) {
     let nameEdit = document.getElementById('name').value;
     let emailEdit = document.getElementById('email').value;
     let phoneEdit = document.getElementById('phone').value;
     contacts[i]['name'] = nameEdit;
     contacts[i]['email'] = emailEdit;
     contacts[i]['phone'] = phoneEdit;
-    saveStorage();
+    await setItem(contactsKey, JSON.stringify(contacts));
     showContact(id);
     init();
     closePopup();
 }
 
 /**Delete Contact*/
-function deleteContact(id) {
+async function deleteContact(id) {
     contacts.splice(id, 1);
-    saveStorage();
+    await setItem(contactsKey, JSON.stringify(contacts));
     firstLetter = [];
     let showContact = document.getElementById('showContact');
     showContact.innerHTML = '';
@@ -243,12 +243,6 @@ function getColor(min, max) {
     return number;
 }
 
-/**Load Contacts as JSON Array */
-
-function loadCont(key) {
-    return JSON.parse(localStorage.getItem(key))
-}
-
 /**Load First Letter of Name and Push this in a Array */
 function loadLetter() {
     for (let i = 0; i < contacts.length; i++) {
@@ -260,11 +254,4 @@ function loadLetter() {
             }
         }
     }
-}
-
-
-
-/**Save Storage */
-function saveStorage() {
-    localStorage.setItem(contactsKey, JSON.stringify(contacts));
 }
