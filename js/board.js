@@ -28,30 +28,36 @@ let alltasks = [
   },
 ];
 
+/**
+ * Initialisiert die Anwendung, füllt die ToDo-Liste und rendert alle Aufgaben.
+ */
 function init() {
   filltoDos();
   renderAllTasks();
   includeHTML();  
 }
 
+// Globale Variablen für die Aufgabenlisten
 let currentTask;
-
 let toDos = [];
 let inProgress = [];
 let awaitFeedback = [];
 let done = [];
 
-
-function filltoDos(){
+/**
+ * Füllt die toDos-Liste mit Aufgaben aus einer globalen Quelle `alltasks`.
+ */
+function filltoDos() {
   for (let i = 0; i < alltasks.length; i++) {
     const task = alltasks[i];
     toDos.push(task);
-    
   }
 }
 
-
-function renderAllTasks(){
+/**
+ * Ruft Render-Funktionen für alle Aufgabenlisten auf.
+ */
+function renderAllTasks() {
   renderToDo(),
   renderInProgress(),
   renderAwaitFeedback(),
@@ -59,7 +65,9 @@ function renderAllTasks(){
   openAndCloseNoTask()
 }
 
-
+/**
+ * Rendert die Aufgaben in der ToDo-Liste.
+ */
 function renderToDo() {
   let toDoContainer = document.getElementById("toDo");
   toDoContainer.innerHTML = "";
@@ -70,7 +78,9 @@ function renderToDo() {
   });
 }
 
-
+/**
+ * Rendert die Aufgaben in der InProgress-Liste.
+ */
 function renderInProgress() {
   let inProgressContainer = document.getElementById("inProgress");
   inProgressContainer.innerHTML = "";
@@ -81,8 +91,9 @@ function renderInProgress() {
   });
 }
 
-
-
+/**
+ * Rendert die Aufgaben in der AwaitFeedback-Liste.
+ */
 function renderAwaitFeedback() {
   let awaitFeedbackContainer = document.getElementById("awaitFeedback");
   awaitFeedbackContainer.innerHTML = "";
@@ -93,7 +104,9 @@ function renderAwaitFeedback() {
   });
 }
 
-
+/**
+ * Rendert die Aufgaben in der Done-Liste.
+ */
 function renderDone() {
   let doneContainer = document.getElementById("done");
   doneContainer.innerHTML = "";
@@ -104,8 +117,9 @@ function renderDone() {
   });
 }
 
-
-
+/**
+ * Steuert die Anzeige von 'Keine Aufgaben'-Meldungen, abhängig vom Inhalt der Listen.
+ */
 function openAndCloseNoTask() {
   let toDo = document.getElementById("toDo");
   let inProgress = document.getElementById("inProgress");
@@ -122,7 +136,13 @@ function openAndCloseNoTask() {
     done.innerHTML == "" ? "" : "none";
 }
 
-
+/**
+ * Erstellt das HTML für eine einzelne Aufgabe.
+ * 
+ * @param {Object} task - Das Aufgabenobjekt.
+ * @param {number} i - Die ID der Aufgabe.
+ * @return {string} Das HTML-String der Aufgabe.
+ */
 function createTaskHtml(task, i) {
   let categoryValue = task["category"].split(" ");
   let firstWord = categoryValue[0];
@@ -136,7 +156,11 @@ function createTaskHtml(task, i) {
           `;
 }
 
-
+/**
+ * Sucht nach Aufgaben, die den Suchkriterien entsprechen.
+ * 
+ * @return {Array} Eine Liste von Aufgaben, die den Suchkriterien entsprechen.
+ */
 function searchTasks() {
   let searchValue = document.getElementById("searchInput").value;
   let matchingTasks = [];
@@ -152,20 +176,31 @@ function searchTasks() {
   return matchingTasks;
 }
 
-
+/**
+ * Erlaubt das Ablegen von Elementen während eines Drag-and-Drop-Vorgangs.
+ * 
+ * @param {Event} ev - Das Drag-and-Drop-Event.
+ */
 function allowDrop(ev) {
   ev.preventDefault();
 }
 
-
+/**
+ * Verarbeitet das Ziehen eines Aufgabenelements.
+ * 
+ * @param {Event} ev - Das Drag-and-Drop-Event.
+ */
 function drag(ev) {
   ev.dataTransfer.setData("id", ev.target.id);
   ev.dataTransfer.dropEffect = "move";
   openAndCloseNoTask();
 }
 
-
-
+/**
+ * Verarbeitet das Ablegen eines Aufgabenelements.
+ * 
+ * @param {Event} ev - Das Drag-and-Drop-Event.
+ */
 function drop(ev) {
   ev.preventDefault();
   let taskId = ev.dataTransfer.getData("id");
@@ -199,12 +234,21 @@ function drop(ev) {
   openAndCloseNoTask();
 }
 
-
+/**
+ * Findet eine Aufgabe anhand ihrer ID in allen Listen.
+ * 
+ * @param {number} taskId - Die ID der zu findenden Aufgabe.
+ * @return {Object} Die gefundene Aufgabe, falls vorhanden.
+ */
 function findTaskById(taskId) {
   return [...toDos, ...inProgress, ...awaitFeedback, ...done].find(task => task["id"] == taskId);
 }
 
-
+/**
+ * Entfernt eine Aufgabe aus ihrer aktuellen Liste.
+ * 
+ * @param {Object} task - Das zu entfernende Aufgabenobjekt.
+ */
 function removeTaskFromCurrentList(task) {
   toDos = toDos.filter(t => t.id !== task["id"]);
   inProgress = inProgress.filter(t => t.id !== task["id"]);
