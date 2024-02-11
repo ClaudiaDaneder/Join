@@ -1,13 +1,10 @@
-* {
-    box-sizing: border-box;
-}
-
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
     background-color: #F6F7F8;
     color: #2A3647;
     font-size: 20px;
+    box-sizing: border-box;
 }
 
 p {
