@@ -67,6 +67,7 @@ function editContact(id) {
     back.classList.add('back');
 }
 
+/**Edit Search Data*/
 function loadEditContact(id){
     for (let i = 0; i < contacts.length; i++){
         let contactData = contacts[i];
@@ -76,6 +77,7 @@ function loadEditContact(id){
     }
 }
 
+/**Edit Save Data */
 function saveContact(i, id){
     let nameEdit = document.getElementById('name').value;
     let emailEdit = document.getElementById('email').value;
@@ -83,7 +85,7 @@ function saveContact(i, id){
     contacts[i]['name'] = nameEdit;
     contacts[i]['email'] = emailEdit;
     contacts[i]['phone'] = phoneEdit;
-    localStorage.setItem('allContacts', JSON.stringify(contacts));
+    saveStorage();
     showContact(id);
     init();
     closePopup();
@@ -92,7 +94,7 @@ function saveContact(i, id){
 /**Delete Contact*/
 function deleteContact(id){
     contacts.splice(id, 1);
-    localStorage.setItem('allContacts', JSON.stringify(contacts));
+    saveStorage();
     firstLetter = [];
     let showContact = document.getElementById('showContact');
     showContact.innerHTML = '';
@@ -179,8 +181,7 @@ function createContact() {
     let lastID = contacts.length;
     let idShow = lastID + 1
     contacts.push({ "id": idShow, "name": name.value, "email": email.value, "phone": phone.value, "color": color });
-    let contactsLoad = JSON.stringify(contacts);
-    localStorage.setItem('allContacts', contactsLoad);
+    saveStorage();
     init();
     showContact(idShow);
     closePopup();
@@ -242,4 +243,9 @@ function loadLetter() {
             firstLetter.push(saveLetter);
         }
     }
+}
+
+/**Save Storage */
+function saveStorage(){
+    localStorage.setItem('allContacts', JSON.stringify(contacts));
 }

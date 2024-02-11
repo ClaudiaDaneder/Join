@@ -271,6 +271,8 @@ p {
     top: 311px;
     left: 750px;
     gap: 35px;
+    transform: translatex(150vw);
+    transition: all 500ms ease-in-out;
 }
 
 .cHeader {

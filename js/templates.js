@@ -87,7 +87,7 @@ function letterTemp(contactLetterLoad, i){
 
 function contactListTemp(id, initials, name, email){
   return /*html*/`
-  <div class="list" id="cID${id}" onclick="showContact(${id})">
+  <div class="list" id="cID${id}" onclick="slideContact(${id})">
           <div class="circle" id="listCircle${id}">${initials}</div>
           <div class="contactNameList">
               <p class="listName">${name}</p>
@@ -95,5 +95,19 @@ function contactListTemp(id, initials, name, email){
           </div>
       </div>
   `;
+}
+
+function slideContact(id){
+  let divContacts = document.getElementById('showContact');
+    if(divContacts.style.transform == 'translatex(150vw)'){
+        divContacts.style.transform = 'translatex(0)';
+        showContact(id);
+    }else{
+        divContacts.style.transform = 'translatex(150vw)';
+        setTimeout(() => {
+            divContacts.style.transform = 'translatex(0)';
+            showContact(id);
+        }, 250);
+    }
 }
 /*Contacts Templates*/
