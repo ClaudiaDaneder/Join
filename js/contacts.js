@@ -200,9 +200,13 @@ async function saveRemote(user){
 }
 
 async function loadRemote(){
-    let user = JSON.parse(await getItem(contactsKey));
-    contacts.push(user);
+    let users = JSON.parse(await getItem(contactsKey));
+    if (Array.isArray(users)) {
+        // Stellen Sie sicher, dass jeder Benutzer in 'users' ein gültiges 'name'-Attribut hat
+        contacts = users.filter(user => user && user['name']);
+    }
 }
+
 
 /**Closing Popup for Create or Edit Contact */
 function closePopup() {
@@ -248,15 +252,17 @@ function loadCont(key) {
 /**Load First Letter of Name and Push this in a Array */
 function loadLetter() {
     for (let i = 0; i < contacts.length; i++) {
-        let contactsLoad = contacts[i]['name'];
-        if (contactsLoad != '') {
-            let saveLetter = contactsLoad.charAt(0);
+        let contactsName = contacts[i]['name'];
+        if (contactsName) {
+            let saveLetter = contactsName.charAt(0);
             if (!firstLetter.includes(saveLetter)) {
                 firstLetter.push(saveLetter);
             }
         }
     }
 }
+
+
 
 /**Save Storage */
 function saveStorage() {
