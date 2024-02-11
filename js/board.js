@@ -119,5 +119,11 @@ function drop(ev) {
   ev.preventDefault();
   var data = ev.dataTransfer.getData("id");
   ev.target.appendChild(document.getElementById(data));
+  current = ev.target.id;
+  console.log(ev.target.id);
+  console.log(data);
+  if(current == 'done'){
+    id = 3;
+  }
   openAndCloseNoTask();
 }
