@@ -44,15 +44,20 @@ header {
 }
 
 .headerUser{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 56px;
     height: 56px;
     border: 3px solid #2A3647;
-    border-radius: 28px;
+    border-radius: 32px;
     background-color: white;
     font-size: 24px;
     color: #29ABE2;
+    transition: all 100ms ease-in-out;
 }
 
 .headerUser:hover{
-
+    background: linear-gradient(0deg, rgba(12, 46, 98, 0.12), rgba(12, 46, 98, 0.12)),
+    linear-gradient(0deg, #FFFFFF, #FFFFFF);    
 }
