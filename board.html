@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Board</title>
     <script src="js/addtask.js"></script>
-    <script src="board.js"></script>
+    <script src="js/contacts.js"></script>
+    <script src="js/board.js"></script>
     <link rel="stylesheet" href="board.css">
     <link rel="stylesheet" href="css/sidebar.css">
     
@@ -41,22 +42,22 @@
                 <div class="tasksoverlay"></div>
             </div>
             <div class="taskContainer">
-                <section class="width-240px" >
-                    <div class="noTask" id="noTaskToDo" style="display: none;"> No tasks To do</div>
-                    <div id="toDo" class="taskColumn"></div>
+                <section class="width-240px" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <div class="noTask" id="noTaskToDo"> No tasks To do</div>
+                    <div id="toDo" class="taskColumn drag-area" ></div>
                 </section>
-                <section class="width-240px">
-                    <div class="noTask" id="noTaskInProgress" style="display: none;" > No tasks in Progress</div>
-                    <div id="inProgress"  class="taskColumn"></div>
+                <section class="width-240px" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <div class="noTask" id="noTaskInProgress"> No tasks in Progress</div>
+                    <div id="inProgress"  class="taskColumn drag-area" ></div>
                 </section>
-                <section class="width-240px">
-                    <div class="noTask" id="noTaskAwaitFeedback" style="display: none;"> No tasks await Feedback</div>
-                    <div id="awaitFeedback"  class="taskColumn"></div>
+                <section class="width-240px" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <div class="noTask" id="noTaskAwaitFeedback"> No tasks await Feedback</div>
+                    <div id="awaitFeedback"  class="taskColumn drag-area" ></div>
                 </section>
 
-                <section class="width-240px">
-                    <div class="noTask" id="noTaskDone" style="display: none;"> No tasks done</div>
-                    <div id="done" class="taskColumn"></div>
+                <section class="width-240px" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <div class="noTask" id="noTaskDone" > No tasks done</div>
+                    <div id="done" class="taskColumn drag-area" ></div>
                 </section>  
             </div>
         </div>

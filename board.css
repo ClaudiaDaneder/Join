@@ -18,11 +18,9 @@ body{
     height: 100vh;
 }
 .content{
-    position: relative;
     padding-left: 240px;
     display: flex;
     flex-direction: column;
-    width: 100%;
 }
 .boardSubhHader{
     display: flex;
@@ -136,11 +134,7 @@ body{
     border-radius: 24px;
     padding: 16px;
     gap: 10px;
-    cursor: grab;
     width: 214px;
-}
-.task.draggable {
-    opacity: 0.5;
 }
 .technical{
     font-family: interRegular;
