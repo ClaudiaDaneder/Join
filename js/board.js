@@ -31,7 +31,6 @@ let alltasks = [
 function init(){
   renderToDo();
   includeHTML();
-  openAndCloseNoTask();
 }
 let currentTask;
 
@@ -51,7 +50,7 @@ function renderToDo() {
     toDoContainer.innerHTML += taskHtml;
     toDos.push(task);
   }
-  
+  openAndCloseNoTask();
 }
 
 
@@ -109,8 +108,6 @@ function allowDrop(ev) {
 
 function drag(ev) {
   ev.dataTransfer.setData("id", ev.target.id);
-  currentTask=ev.target.id;
-
   openAndCloseNoTask();
 }
 
@@ -118,6 +115,8 @@ function drag(ev) {
 function drop(ev) {
   ev.preventDefault();
   var data = ev.dataTransfer.getData("id");
-  ev.target.appendChild(document.getElementById(data));
+  currentContainer = ev.target.appendChild(document.getElementById(data));
+  console.log(ev.target.id)
+  console.log(data)
   openAndCloseNoTask();
 }
