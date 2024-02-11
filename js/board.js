@@ -28,14 +28,14 @@ let alltasks = [
   }
 ];
 
-function init() {
+function init(){
   renderToDo();
   includeHTML();
   openAndCloseNoTask();
 }
 let currentTask;
 
-let toDo=[];
+let toDos=[];
 let inProgress=[];
 let awaitFeedback=[];
 let done=[];
@@ -49,7 +49,7 @@ function renderToDo() {
     const task = alltasks[i];
     const taskHtml = createTaskHtml(task, i);
     toDoContainer.innerHTML += taskHtml;
-    toDo.push(task);
+    toDos.push(task);
   }
   
 }
