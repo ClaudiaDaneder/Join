@@ -2,10 +2,8 @@ let contacts = [];
 let firstLetter = [];
 let contactsKey = 'allContacts';
 
-function init() {
-    if (loadCont(contactsKey)) {
-        contacts = loadCont(contactsKey);
-    }
+async function init() {
+    await loadRemote();
     loadLetter();
     loadContacts();
 }
@@ -172,14 +170,16 @@ function removeClassList() {
 }
 
 /**Create and Save the New Contact */
-function createContact() {
+async function createContact() {
     let name = document.getElementById('name');
     let email = document.getElementById('email');
     let phone = document.getElementById('phone');
     let color = getColor(1, 9);
     let idShow = searchId();
-    contacts.push({ "id": idShow, "name": name.value, "email": email.value, "phone": phone.value, "color": color });
-    saveStorage();
+    let dataContact = {
+        "id": idShow, "name": name.value, "email": email.value, "phone": phone.value, "color": color
+    }
+    await saveRemote(dataContact);
     init();
     slideContact(idShow);
     closePopup();
@@ -192,6 +192,16 @@ function searchId(){
         lastID = 0;
     }
     return lastID + 1;
+}
+
+async function saveRemote(user){
+    contacts.push(user);
+    await setItem(contactsKey, JSON.stringify(contacts));
+}
+
+async function loadRemote(){
+    let user = JSON.parse(await getItem(contactsKey));
+    contacts.push(user);
 }
 
 /**Closing Popup for Create or Edit Contact */
