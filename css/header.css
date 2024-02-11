@@ -1,0 +1,30 @@
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+    height: 96px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 4px 0px #0000001A;
+}
+
+.headerText {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 319px;
+    font-size: 20px;
+    color: #000000;
+    padding-left: 348px;
+}
+
+.headerRight{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+    padding-right: 40px;
+}
