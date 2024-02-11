@@ -201,20 +201,39 @@ function drag(ev) {
  * 
  * @param {Event} ev - Das Drag-and-Drop-Event.
  */
+/**
+ * Behandelt das Drop-Event für ein draggbares Element.
+ * Diese Funktion wird aufgerufen, wenn ein draggbares Element über einem Drop-Ziel losgelassen wird.
+ * 
+ * @param {Event} ev - Das Event-Objekt, das das Drop-Event darstellt.
+ */
 function drop(ev) {
+  // Verhindert das Standardverhalten des Browsers für Drop-Events.
   ev.preventDefault();
+
+  // Ruft die ID des gezogenen Aufgabenelements ab, das im Drag-Event festgelegt wurde.
   let taskId = ev.dataTransfer.getData("id");
+
+  // Beginnt mit dem Ziel-Element des Events und sucht nach oben im DOM-Baum,
+  // um das nächstgelegene Element mit einer ID zu finden (den Zielcontainer).
   let targetElement = ev.target;
   while (targetElement && !targetElement.id) {
     targetElement = targetElement.parentElement;
   }
-  let containerId = targetElement ? targetElement.id : null;
 
+  // Bestimmt die ID des Zielcontainers. Wenn kein gültiges Ziel gefunden wird, wird die Funktion beendet.
+  let containerId = targetElement ? targetElement.id : null;
   if (!containerId) return;
 
+  // Findet die Aufgabe mit der entsprechenden ID in den Aufgabenlisten.
   let taskToMove = findTaskById(taskId);
+  // Beendet die Funktion, wenn die Aufgabe nicht gefunden wird.
   if (!taskToMove) return;
+
+  // Entfernt die Aufgabe aus ihrer aktuellen Liste.
   removeTaskFromCurrentList(taskToMove);
+
+  // Fügt die Aufgabe basierend auf dem ID des Zielcontainers der entsprechenden neuen Liste hinzu.
   switch (containerId) {
     case "toDo":
       toDos.push(taskToMove);
@@ -230,9 +249,13 @@ function drop(ev) {
       break;
   }
 
+  // Ruft die Render-Funktionen auf, um die Listenansichten zu aktualisieren.
   renderAllTasks();
+
+  // Aktualisiert die Anzeige von 'Keine Aufgaben'-Meldungen für jede Liste.
   openAndCloseNoTask();
 }
+
 
 /**
  * Findet eine Aufgabe anhand ihrer ID in allen Listen.
