@@ -12,7 +12,7 @@
     <script src="./js/contacts.js"></script>
 </head>
 
-<body onload="includeHTML(), loadContacts()">
+<body onload="includeHTML(), init()">
     <div onclick="closePopup()">
         <div id="back"></div>
         <div w3-include-html="./templates/sidebar.html"></div>
@@ -35,16 +35,7 @@
                     <img src="./img/addContact.svg">
                 </button>
             </div>
-            <div class="contactList" id="contactLoad">
-                
-                <div class="list" id="1" onclick="showContact(1)">
-                    <div class="circle">AF</div>
-                    <div class="contactNameList">
-                        <p class="listName">Alexander Fischer</p>
-                        <p class="listEmail">alexfischer@gmail.com</p>
-                    </div>
-                </div>
-            </div>
+            <div class="contactList" id="contactLoad"></div>
         </div>
         <div class="contactsView">
             <div class="contactShow">

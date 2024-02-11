@@ -7,7 +7,7 @@ let allTasks = [
         "category": "User Story",
         "subtasks": "Subtask Beispiel 1"
     },
-      {
+    {
         "title": "Beispiel 2",
         "description": "Beschreibung Beispiel 2",
         "assignee": "Name 2",
@@ -15,7 +15,7 @@ let allTasks = [
         "category": "User Story",
         "subtasks": "Subtask Beispiel 2"
     },
-      {
+    {
         "title": "Beispiel 3",
         "description": "Beschreibung Beispiel 3",
         "assignee": "Name 3",
@@ -25,36 +25,139 @@ let allTasks = [
     }
 ];
 
+let subtasks = [];
+
 let title = document.getElementById('title');
 let description = document.getElementById('description');
 let assignee = document.getElementById('assignee');
 let dueDate = document.getElementById('due-date');
 let category = document.getElementById('category');
-let subtasks = document.getElementById('subtasks');
+let subtaskField = document.getElementById('subtasks');
+let subtaskList = document.getElementById('subtask-list')
 
+let selectedPriority = null;
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.prio-button-container button').forEach(button => {
+        button.addEventListener('click', function () {
+            selectPriority(button.dataset.priority);
+        });
+    });
+});
 
 function addNewTask() {
+
+
     let task = {
         'title': title.value,
         'description': description.value,
         'assignee': assignee.value,
         'due-date': dueDate.value,
+        'prio': selectedPriority,
         'category': category.value,
-        'subtasks': subtasks.value
+        'subtasks': subtasks
     }
 
-    allTasks.push(task);
-    stringifyJSON();
-    document.getElementById('my-form').reset();
+    disableCreateButton();    
+    changeCreateButtonColor();
+    checkPriority(task);
+    storeSubtasks();
+    saveToLocalStorage(task);
+    clearSubtaskList();
+    resetForm();
+    showPopup();
+    redirectToBoard();
 }
 
-function stringifyJSON() {
+
+function saveToLocalStorage(task) {
+    allTasks.push(task);
     let allTasksAsString = JSON.stringify(allTasks);
     localStorage.setItem('allTasks', allTasksAsString);
 }
 
-function addToSubtaskList() {
-    let subtask = subtasks.value;
 
-    document.getElementById('subtask-list').innerHTML += '<li>' + subtask + '</li>';
+function checkPriority(task) {
+    if (selectedPriority) {
+        task.prio = selectedPriority;
+    }
+}
+
+
+function addToSubtaskList() {
+    if (subtaskField.value !== '') {
+        subtaskList.innerHTML += '<li>' + subtaskField.value + '</li>';
+        subtaskField.value = '';
+    }
+}
+
+function disableCreateButton() {
+    document.querySelector('.create-button').disabled = true;
+}
+
+
+function changeCreateButtonColor() {
+    document.getElementById('create-button').classList.add('active-create-button');
+}
+
+
+function storeSubtasks() {
+    let subtaskListElements = subtaskList.childNodes;
+    for (let i = 0; i < subtaskListElements?.length; i++) {
+        let child = subtaskListElements[i];
+        subtasks.push(child.innerHTML);
+    }
+}
+
+
+function clearSubtaskList() {
+    document.getElementById('subtask-list').innerHTML = '';
+}
+
+function loadContactsFromStorage() {
+    let allContactsAsString = localStorage.getItem('allContacts');
+    allContacts = JSON.parse(allContactsAsString);
+    loadContactsIntoDropdown(allContacts);
+}
+
+
+function loadContactsIntoDropdown(allContacts) {
+    for (let i = 0; i < allContacts?.length; i++) {
+        let contact = allContacts[i];
+        let contactName = contact['name'];
+        document.getElementById('assignee').innerHTML += `<option value="${contactName}">${contactName}</option>`;
+    }
+}
+
+
+function selectPriority(priority) {
+    selectedPriority = priority;
+    document.querySelectorAll('.prio-button-container button').forEach(button => {
+        button.classList.remove('selected');
+    });
+    document.querySelector(`.button-prio-${priority}`).classList.add('selected');
+}
+
+
+function resetForm() {
+    document.getElementById('my-form').reset();
+    if (selectedPriority) {
+        let selectedButton = document.querySelector(`.button-prio-${selectedPriority}`);
+        if (selectedButton) {
+            selectedButton.classList.remove('selected');
+        }
+        selectedPriority = null;
+    }
+    document.querySelector('.create-button').disabled = false;
+}
+
+function showPopup() {
+    document.getElementById('popup-bg').classList.remove('hide')
+}
+
+
+function redirectToBoard() {
+    setTimeout(function () {
+        window.location.href = 'board.html';
+    }, 2200);
 }
