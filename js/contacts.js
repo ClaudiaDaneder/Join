@@ -71,9 +71,22 @@ function loadEditContact(id){
     for (let i = 0; i < contacts.length; i++){
         let contactData = contacts[i];
         if(contactData['id'] == id){
-            loadNewContact(contactData['name'], contactData['email'], contactData['phone'], contactData['color'], id)
+            loadNewContact(contactData['name'], contactData['email'], contactData['phone'], contactData['color'], id, i)
         }
     }
+}
+
+function saveContact(i, id){
+    let nameEdit = document.getElementById('name').value;
+    let emailEdit = document.getElementById('email').value;
+    let phoneEdit = document.getElementById('phone').value;
+    contacts[i]['name'] = nameEdit;
+    contacts[i]['email'] = emailEdit;
+    contacts[i]['phone'] = phoneEdit;
+    localStorage.setItem('allContacts', JSON.stringify(contacts));
+    showContact(id);
+    init();
+    closePopup();
 }
 
 /**Delete Contact*/
@@ -87,21 +100,23 @@ function deleteContact(id){
 }
 
 /**Show Popup Form*/
-function loadNewContact(name, email, phone, color, id) {
+function loadNewContact(name, email, phone, color, id, i) {
     let formNewContact = document.getElementById('user');
     let nameShow = name;
     let emailShow = email;
     let phoneShow = phone;
     let colorShow = color;
+    let array = i;
     let button = 'Save';
-    if (!name && !email && !phone) {
+    if (!name && !email && !phone && i == undefined) {
         nameShow = '';
         emailShow = '';
         phoneShow = '';
         colorShow = '';
+        array = '';
         button = 'Create';
     }
-    formNewContact.innerHTML = popupTempForm(nameShow, emailShow, phoneShow, button, colorShow, id);
+    formNewContact.innerHTML = popupTempForm(nameShow, emailShow, phoneShow, button, colorShow, id, array);
     loadCircle(id, color, 'circleEdit');
 }
 

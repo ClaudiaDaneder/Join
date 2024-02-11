@@ -28,15 +28,21 @@ function includeHTML() {
 
 /*Contacts Templates*/
 
-function popupTempForm(nameShow, emailShow, phoneShow, button, color, id){
+function popupTempForm(nameShow, emailShow, phoneShow, button, color, id, i){
   let ini = initialsLoad(nameShow);
   let img = /*html*/`<div class="circleEdit" id="circleEdit${id}">${ini}</div>`;
+  let saveContact = 'createContact';
+  let saveId = '';
+  if(button == 'Save'){
+    saveContact = 'saveContact';
+    saveId = `${i}, ${id}`;
+  }
   if(!color){
     img = '<img class="clearContact" src="./img/clearcontackt.svg">';
   }
   return /*html*/`
         ${img}
-        <form action="#" onsubmit="createContact(); return false">
+        <form action="#" onsubmit="${saveContact}(${saveId}); return false">
             <div class="input"><input type="text" id="name" value="${nameShow}" placeholder="Name" required><img src="./img/personContact.svg"></div>
             <div class="input"><input type="email" id="email" value="${emailShow}" placeholder="E-Mail" required><img src="./img/emailContact.svg"></div>
             <div class="input"><input type="text" id="phone" value="${phoneShow}" placeholder="Phone" required><img src="./img/phoneContact.svg"></div>
