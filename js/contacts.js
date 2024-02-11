@@ -1,9 +1,7 @@
-const STORAGE_TOKEN = 'TJJS7PQGUMX72JU6UWW00YOS9BIWN99TFB2N438Q';
-const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
 let contacts = [];
 let firstLetter = [];
 
-function init(){
+function init() {
     if (loadCont('allContacts')) {
         contacts = loadCont('allContacts');
     }
@@ -25,17 +23,17 @@ function loadContacts() {
 }
 
 /**Load Names of the Contactlist*/
-function loadNames(contactLetterLoad, i){
+function loadNames(contactLetterLoad, i) {
     let contactShow = document.getElementById(`contactShow${i}`);
-        for (let c = 0; c < contacts.length; c++) {
-            let saveLetter = contacts[c]['name'].charAt(0);
-            if (contactLetterLoad.includes(saveLetter)) {
-                let contact = contacts[c];
-                let initials = initialsLoad(contact['name'])
-                contactShow.innerHTML += contactListTemp(contact['id'], initials, contact['name'], contact['email']);
-                loadCircle(contact['id'], contact['color'], 'listCircle');
-            }
+    for (let c = 0; c < contacts.length; c++) {
+        let saveLetter = contacts[c]['name'].charAt(0);
+        if (contactLetterLoad.includes(saveLetter)) {
+            let contact = contacts[c];
+            let initials = initialsLoad(contact['name'])
+            contactShow.innerHTML += contactListTemp(contact['id'], initials, contact['name'], contact['email']);
+            loadCircle(contact['id'], contact['color'], 'listCircle');
         }
+    }
 }
 
 /**Add Contact Popup*/
@@ -68,17 +66,17 @@ function editContact(id) {
 }
 
 /**Edit Search Data*/
-function loadEditContact(id){
-    for (let i = 0; i < contacts.length; i++){
+function loadEditContact(id) {
+    for (let i = 0; i < contacts.length; i++) {
         let contactData = contacts[i];
-        if(contactData['id'] == id){
+        if (contactData['id'] == id) {
             loadNewContact(contactData['name'], contactData['email'], contactData['phone'], contactData['color'], id, i)
         }
     }
 }
 
 /**Edit Save Data */
-function saveContact(i, id){
+function saveContact(i, id) {
     let nameEdit = document.getElementById('name').value;
     let emailEdit = document.getElementById('email').value;
     let phoneEdit = document.getElementById('phone').value;
@@ -92,7 +90,7 @@ function saveContact(i, id){
 }
 
 /**Delete Contact*/
-function deleteContact(id){
+function deleteContact(id) {
     contacts.splice(id, 1);
     saveStorage();
     firstLetter = [];
@@ -140,21 +138,21 @@ function showContact(id) {
 }
 
 /**Create the initals of Name  */
-function initialsLoad(name){
+function initialsLoad(name) {
     const nameParts = name.split(" ");
     return initials = nameParts.map(part => part.charAt(0)).join("");
 }
 
 /**Give Circle with initals the color  */
-function loadCircle(id, color, circleName){
-    if(id != null && color != null && circleName != null){
-    let circle = document.getElementById(`${circleName}${id}`);
-    circle.classList.add(color);
+function loadCircle(id, color, circleName) {
+    if (id != null && color != null && circleName != null) {
+        let circle = document.getElementById(`${circleName}${id}`);
+        circle.classList.add(color);
     }
 }
 
 /**add Classlist in Contactlist  */
-function addClassList(id){
+function addClassList(id) {
     let userId = document.getElementById(`cID${id}`);
     userId.classList.remove('list');
     userId.classList.add('listVisited');
@@ -165,7 +163,7 @@ function removeClassList() {
     for (let i = 0; i < contacts.length; i++) {
         let id = contacts[i]['id'];
         let userId = document.getElementById(`cID${id}`);
-        if (userId.className == 'listVisited') {
+        if (userId.className === 'listVisited') {
             userId.classList.remove('listVisited');
             userId.classList.add('list');
         }
@@ -179,18 +177,12 @@ function createContact() {
     let phone = document.getElementById('phone');
     let color = getColor(1, 9);
     let lastID = contacts.length;
-    let idShow = lastID + 1
+    let idShow = lastID + 1;
     contacts.push({ "id": idShow, "name": name.value, "email": email.value, "phone": phone.value, "color": color });
     saveStorage();
     init();
-    showContact(idShow);
+    slideContact(idShow);
     closePopup();
-}
-
-async function setItem(key, value) {
-    const payload = { key, value, token: STORAGE_TOKEN };
-    return fetch(STORAGE_URL, { method: 'POST', body: JSON.stringify(payload) })
-        .then(res => res.json());
 }
 
 /**Closing Popup for Create or Edit Contact */
@@ -217,14 +209,14 @@ function getColor(min, max) {
     color = Math.floor(Math.random() * (max - min + 1)) + min;
     let number = '';
     if (color == 1) { number = 'darkorange'; } else
-    if (color == 2) { number = 'orange'; } else
-    if (color == 3) { number = 'lightorange'; } else
-    if (color == 4) { number = 'pink'; } else
-    if (color == 5) { number = 'lightpink'; } else
-    if (color == 6) { number = 'lightpurple'; } else
-    if (color == 7) { number = 'purple'; } else
-    if (color == 8) { number = 'blue'; } else
-    if (color == 9) { number = 'cyan'; }
+        if (color == 2) { number = 'orange'; } else
+            if (color == 3) { number = 'lightorange'; } else
+                if (color == 4) { number = 'pink'; } else
+                    if (color == 5) { number = 'lightpink'; } else
+                        if (color == 6) { number = 'lightpurple'; } else
+                            if (color == 7) { number = 'purple'; } else
+                                if (color == 8) { number = 'blue'; } else
+                                    if (color == 9) { number = 'cyan'; }
     return number;
 }
 
@@ -238,14 +230,16 @@ function loadCont(key) {
 function loadLetter() {
     for (let i = 0; i < contacts.length; i++) {
         let contactsLoad = contacts[i]['name'];
-        let saveLetter = contactsLoad.charAt(0);
-        if (!firstLetter.includes(saveLetter)) {
-            firstLetter.push(saveLetter);
+        if (contactsLoad != '') {
+            let saveLetter = contactsLoad.charAt(0);
+            if (!firstLetter.includes(saveLetter)) {
+                firstLetter.push(saveLetter);
+            }
         }
     }
 }
 
 /**Save Storage */
-function saveStorage(){
+function saveStorage() {
     localStorage.setItem('allContacts', JSON.stringify(contacts));
 }
