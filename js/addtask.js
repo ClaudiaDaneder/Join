@@ -111,7 +111,7 @@ function loadContactsIntoDropdown(allContacts) {
             assignee.innerHTML += `
         <label class="checkbox-option">
         <input type="checkbox" value="${contactName}">
-        <div class="name-plus-circle"><div class="assignee-circle" style="background-color:${contactColor}">${initials}</div>${contactName}</div></label>`;
+        <div class="name-plus-circle"><div class="assignee-circle ${contactColor}">${initials}</div>${contactName}</div></label>`;
         }
     }
 }
@@ -123,7 +123,7 @@ function generateSelectedAssigneesList() {
         if (selectedContact) {
             let contactColor = selectedContact.color;
             let initials = initialsLoad(selectedContact.name);
-            selectedAssignees.innerHTML += `<div class="assignee-circle" style="background-color: ${contactColor}" title="${selectedContact.name}">${initials}</div>`;
+            selectedAssignees.innerHTML += `<div class="assignee-circle ${contactColor}" title="${selectedContact.name}">${initials}</div>`;
         }
     }
 }
