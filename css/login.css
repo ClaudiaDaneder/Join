@@ -1,0 +1,53 @@
+html,
+body {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #F6F7F8;
+    margin: 0;
+    scroll-behavior: smooth;
+    font-family: 'Inter';
+    overflow: hidden;
+}
+
+.logo {
+    width: 100vw;
+    height: 100vh;
+    transition: all 0.7s ease-in-out;
+    background-color: #F6F7F8 !important;
+    z-index: 2;
+}
+
+.logoIMG {
+    display: flex;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 334.07px;
+    width: 274px;
+    transition: all 0.7s ease-in-out;
+}
+
+.selected {
+    top: 80px !important;
+    left: 77px !important;
+    height: 121.97px !important;
+    width: 100.03px !important;
+}
+
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    height: 493px;
+    width: 652px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 0;
+}
