@@ -9,9 +9,11 @@
     <link rel="stylesheet" href="css/addtask.css">
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/sidebar.css">
-    <link rel="stylesheet" href="css/header.css">   
-    <script src="js/templates.js"></script>
+    <link rel="stylesheet" href="css/header.css">
+    <script src="js/templates.js" defer></script>
     <script src="js/addtask.js" defer></script>
+    <script src="js/contacts.js" defer></script>
+    <script src="js/storage.js"></script>
 
 </head>
 
@@ -32,9 +34,12 @@
                     <p class="task-label">Description</p>
                     <textarea placeholder="Enter a description" id="description" rows="4"></textarea>
                     <p class="task-label">Assigned to<sup class="mandatory">*</sup></p>
-                    <select id="assignee" name="assignedTo">
-                        <option disabled selected hidden value="">Select contacts to assign</option>
-                    </select>
+
+                    <div class="dropdown" id="contacts-dropdown" onclick="toggleContactsDropdown(event)">
+                        Select contacts to assign
+                        <div class="dropdown-content" id="assignee"></div>
+                    </div>
+                    <div class="selected-assignees-list" id="selected-assignees-list"></div>
                 </div>
                 <hr>
                 <div>
@@ -47,11 +52,14 @@
                         <button type="button" class="button-prio-low" data-priority="low">Low</button>
                     </div>
                     <p class="task-label">Category<sup class="mandatory">*</sup></p>
-                    <select name="category" id="category">
-                        <option disabled selected hidden value="">Select task category</option>
-                        <option>User Story</option>
-                        <option>Technical Task</option>
-                    </select>
+                    <div class="dropdown" id="category-dropdown" onclick="toggleCategoryDropdown(event)"><p id="category-dropdown-text">Select task
+                        category</p>
+                        <div class="dropdown-content" id="category">
+                            <label class="checkbox-option category" onclick="selectCategory('User Story')">User Story</label>
+                            <label class="checkbox-option category" onclick="selectCategory('Technical Task')">Technical Task</label>
+                        </div>
+                    </div>
+
                     <p class="task-label">Subtasks</p>
                     <div class="styled-subtask-field">
                         <input class="subtask-field" type="text" placeholder="Add new subtask" id="subtasks">
@@ -64,7 +72,7 @@
             <div class="task-bottom-container">
                 <p><sup class="mandatory">*</sup>This field is required</p>
                 <div class="task-submit-buttons">
-                    <button class="reset-button" type="reset">Clear </button>
+                    <button class="reset-button" type="reset" onclick="resetForm()">Clear </button>
                     <button class="create-button" type="submit" id="create-button">Create Task </button>
                 </div>
             </div>
@@ -74,7 +82,5 @@
 
 
 </body>
-
-<script src="js/contacts.js"></script>
 
 </html>
