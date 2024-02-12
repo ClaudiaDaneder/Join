@@ -194,11 +194,13 @@ function searchId(){
     return lastID + 1;
 }
 
+/**Save Remote Storage */
 async function saveRemote(user){
     contacts.push(user);
     await setItem(contactsKey, JSON.stringify(contacts));
 }
 
+/**Load Remote Storage */
 async function loadRemote(){
     let users = JSON.parse(await getItem(contactsKey));
     if (Array.isArray(users)) {
