@@ -124,4 +124,40 @@ function savePopup(saveInfo){
     savePopup.style.transform = 'translatex(150vw)';
   }, 1500);
 }
+
+
+function popupNames(contactAdd){
+  if(contactAdd == 'add'){
+      return /*html*/`
+      <p class="popupTop">Add contact</p>
+      <p class="popupBottom">Tasks are better with a team!</p>
+      <div class="popupBottomLine"></div>
+  `;
+  }else{
+      return /*html*/`
+      <p class="popupTop">Edit contact</p>
+      <div class="popupBottomLine"></div>
+  `;
+  }
+}
+
+/**Closing Popup for Create or Edit Contact */
+function closePopup() {
+  let addContact = document.getElementById('addContactPopup');
+  let back = document.getElementById('back');
+  let formNewContact = document.getElementById('user');
+  let popupTitle = document.getElementById('popupTitle');
+  if (addContact.style.transform == 'translateX(0px)') {
+      addContact.style.transform = 'translateX(150vw)';
+  }
+  formNewContact.innerHTML = '';
+  popupTitle.innerHTML = '';
+  back.classList.remove('back');
+}
+
+/**Not Closing event for Popup with onclick function */
+function notClose(event) {
+  event.stopPropagation();
+}
+
 /*Contacts Templates*/

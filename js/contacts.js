@@ -35,17 +35,37 @@ function loadNames(contactLetterLoad, i) {
     }
 }
 
+/**Create and Save the New Contact */
+async function createContact() {
+    let name = document.getElementById('name');
+    let email = document.getElementById('email');
+    let phone = document.getElementById('phone');
+    let color = getColor(1, 9);
+    let idShow = searchId();
+    let dataContact = {
+        "id": idShow, "name": name.value, "email": email.value, "phone": phone.value, "color": color
+    }
+    await saveRemote(dataContact);
+    init();
+    savePopup('create');
+    slideContact(idShow);
+    closePopup();
+}
+
+/**Search ID */
+function searchId() {
+    lastID = contacts.length;
+    if (lastID == null || lastID == '') lastID = 0;
+    return lastID + 1;
+}
+
 /**Add Contact Popup*/
 function addContact() {
     let addContact = document.getElementById('addContactPopup');
     let popupTitle = document.getElementById('popupTitle');
     let back = document.getElementById('back');
     addContact.style.transform = 'translateX(0)';
-    popupTitle.innerHTML = /*html*/`
-        <p class="popupTop">Add contact</p>
-        <p class="popupBottom">Tasks are better with a team!</p>
-        <div class="popupBottomLine"></div>
-    `;
+    popupTitle.innerHTML = popupNames('add');
     loadNewContact();
     back.classList.add('back');
 }
@@ -56,10 +76,7 @@ function editContact(id) {
     let popupTitle = document.getElementById('popupTitle');
     let back = document.getElementById('back');
     addContact.style.transform = 'translateX(0)';
-    popupTitle.innerHTML = /*html*/`
-        <p class="popupTop">Edit contact</p>
-        <div class="popupBottomLine"></div>
-    `;
+    popupTitle.innerHTML = popupNames('edit');
     loadEditContact(id);
     back.classList.add('back');
 }
@@ -101,24 +118,32 @@ async function deleteContact(id) {
 }
 
 /**Show Popup Form*/
-function loadNewContact(name, email, phone, color, id, i) {
+async function loadNewContact(name, email, phone, color, id, i) {
     let formNewContact = document.getElementById('user');
-    let nameShow = name;
-    let emailShow = email;
-    let phoneShow = phone;
-    let colorShow = color;
-    let array = i;
-    let button = 'Save';
-    if (!name && !email && !phone && i == undefined) {
-        nameShow = '';
-        emailShow = '';
-        phoneShow = '';
-        colorShow = '';
-        array = '';
-        button = 'Create';
-    }
-    formNewContact.innerHTML = popupTempForm(nameShow, emailShow, phoneShow, button, colorShow, id, array);
+    let nameShow = await searchData(name);
+    let emailShow = await searchData(email);
+    let phoneShow = await searchData(phone);
+    let buttonShow = button(name);
+    let colorShow = await searchData(color);
+    let array = await searchData(i);
+    formNewContact.innerHTML = popupTempForm(nameShow, emailShow, phoneShow, buttonShow, colorShow, id, array);
     loadCircle(id, color, 'circleEdit');
+}
+
+function searchData(data) {
+    if (!data || data == undefined) {
+        return '';
+    } else {
+        return data;
+    }
+}
+
+function button(data) {
+    if (!data) {
+        return 'Create';
+    } else {
+        return 'Save';
+    }
 }
 
 /**Shows the selected contact   */
@@ -171,40 +196,14 @@ function removeClassList() {
     }
 }
 
-/**Create and Save the New Contact */
-async function createContact() {
-    let name = document.getElementById('name');
-    let email = document.getElementById('email');
-    let phone = document.getElementById('phone');
-    let color = getColor(1, 9);
-    let idShow = searchId();
-    let dataContact = {
-        "id": idShow, "name": name.value, "email": email.value, "phone": phone.value, "color": color
-    }
-    await saveRemote(dataContact);
-    init();
-    savePopup('create');
-    slideContact(idShow);
-    closePopup();
-}
-
-/**Search ID */
-function searchId(){
-    lastID = contacts.length;
-    if(lastID == null || lastID == ''){
-        lastID = 0;
-    }
-    return lastID + 1;
-}
-
 /**Save Remote Storage */
-async function saveRemote(user){
+async function saveRemote(user) {
     contacts.push(user);
     await setItem(contactsKey, JSON.stringify(contacts));
 }
 
 /**Load Remote Storage */
-async function loadRemote(){
+async function loadRemote() {
     let users = JSON.parse(await getItem(contactsKey));
     if (Array.isArray(users)) {
         // Stellen Sie sicher, dass jeder Benutzer in 'users' ein gültiges 'name'-Attribut hat
@@ -212,40 +211,23 @@ async function loadRemote(){
     }
 }
 
-
-/**Closing Popup for Create or Edit Contact */
-function closePopup() {
-    let addContact = document.getElementById('addContactPopup');
-    let back = document.getElementById('back');
-    let formNewContact = document.getElementById('user');
-    let popupTitle = document.getElementById('popupTitle');
-    if (addContact.style.transform == 'translateX(0px)') {
-        addContact.style.transform = 'translateX(150vw)';
-    }
-    formNewContact.innerHTML = '';
-    popupTitle.innerHTML = '';
-    back.classList.remove('back');
-}
-
-/**Not Closing event for Popup with onclick function */
-function notClose(event) {
-    event.stopPropagation();
-}
-
 /**Random Color */
 function getColor(min, max) {
     color = Math.floor(Math.random() * (max - min + 1)) + min;
-    let number = '';
-    if (color == 1) { number = 'darkorange'; } else
-        if (color == 2) { number = 'orange'; } else
-            if (color == 3) { number = 'lightorange'; } else
-                if (color == 4) { number = 'pink'; } else
-                    if (color == 5) { number = 'lightpink'; } else
-                        if (color == 6) { number = 'lightpurple'; } else
-                            if (color == 7) { number = 'purple'; } else
-                                if (color == 8) { number = 'blue'; } else
-                                    if (color == 9) { number = 'cyan'; }
+    let number = searchColor(color);
     return number;
+}
+
+function searchColor(color) {
+    if (color == 1) { return 'darkorange'; } else
+    if (color == 2) { return 'orange'; } else
+    if (color == 3) { return 'lightorange'; } else
+    if (color == 4) { return 'pink'; } else
+    if (color == 5) { return 'lightpink'; } else
+    if (color == 6) { return 'lightpurple'; } else
+    if (color == 7) { return 'purple'; } else
+    if (color == 8) { return 'blue'; } else
+    if (color == 9) { return 'cyan'; }
 }
 
 /**Load First Letter of Name and Push this in a Array */
