@@ -85,6 +85,7 @@ async function saveContact(i, id) {
     await setItem(contactsKey, JSON.stringify(contacts));
     showContact(id);
     init();
+    savePopup('edit');
     closePopup();
 }
 
@@ -96,6 +97,7 @@ async function deleteContact(id) {
     let showContact = document.getElementById('showContact');
     showContact.innerHTML = '';
     init();
+    savePopup('delete');
 }
 
 /**Show Popup Form*/
@@ -181,6 +183,7 @@ async function createContact() {
     }
     await saveRemote(dataContact);
     init();
+    savePopup('create');
     slideContact(idShow);
     closePopup();
 }

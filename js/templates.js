@@ -45,7 +45,7 @@ function popupTempForm(nameShow, emailShow, phoneShow, button, color, id, i){
         <form action="#" onsubmit="${saveContact}(${saveId}); return false">
             <div class="input"><input type="text" id="name" value="${nameShow}" placeholder="Name" required><img src="./img/personContact.svg"></div>
             <div class="input"><input type="email" id="email" value="${emailShow}" placeholder="E-Mail" required><img src="./img/emailContact.svg"></div>
-            <div class="input"><input type="text" id="phone" value="${phoneShow}" placeholder="Phone" required><img src="./img/phoneContact.svg"></div>
+            <div class="input"><input type="number" id="phone" value="${phoneShow}" placeholder="Phone" required><img src="./img/phoneContact.svg"></div>
             <div class="popupButton">
                 <div class="cancel" onclick="closePopup()">Cancel <img src="./img/addtask_icon_cancel_dark.svg"></div>
                 <button type="submit">${button} contact <img src="./img/addtask_icon_check.svg"></button>
@@ -109,5 +109,19 @@ function slideContact(id){
             showContact(id);
         }, 250);
     }
+}
+
+function savePopup(saveInfo){
+  let savePopup = document.getElementById('save_info');
+  savePopup.innerHTML = 'Contact succesfully created'
+  if(saveInfo == 'edit'){
+    savePopup.innerHTML = 'Contact succesfully saved';
+  }else if(saveInfo == 'delete'){
+    savePopup.innerHTML = 'Contact deleted';
+  }
+  savePopup.style.transform = 'translatex(0)';
+  setTimeout(() => {
+    savePopup.style.transform = 'translatex(150vw)';
+  }, 1500);
 }
 /*Contacts Templates*/
