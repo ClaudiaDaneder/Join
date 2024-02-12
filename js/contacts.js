@@ -42,14 +42,23 @@ async function createContact() {
     let phone = document.getElementById('phone');
     let color = getColor(1, 9);
     let idShow = searchId();
-    let dataContact = {
-        "id": idShow, "name": name.value, "email": email.value, "phone": phone.value, "color": color
-    }
+    let dataContact = returnArray(idShow, name, email, phone, color);
     await saveRemote(dataContact);
     init();
     savePopup('create');
     slideContact(idShow);
     closePopup();
+}
+
+/**Return a Array for Create Contact */
+function returnArray(idShow, name, email, phone, color){
+    return {
+        "id": idShow, 
+        "name": name.value, 
+        "email": email.value, 
+        "phone": phone.value, 
+        "color": color
+    };
 }
 
 /**Search ID */
