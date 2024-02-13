@@ -10,12 +10,24 @@ body {
     overflow: hidden;
 }
 
-.logo {
-    width: 100vw;
-    height: 100vh;
-    transition: all 0.7s ease-in-out;
-    background-color: #F6F7F8 !important;
-    z-index: 2;
+.animated {
+    animation-duration: 3.5s;
+    animation-fill-mode: both;
+    display: none;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.fadeIn {
+    animation-name: fadeIn;
 }
 
 .logoIMG {
@@ -37,12 +49,17 @@ body {
 }
 
 .login {
-    display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     color: black;
     height: 493px;
     width: 652px;
+    border-radius: 30px;
+    padding: 48px 115px 48px 115px;
+    gap: 32px;
+    background-color: white;
+    box-shadow: 0px 0px 14px 3px #0000000A;
     position: absolute;
     top: 0;
     left: 0;
@@ -50,4 +67,51 @@ body {
     bottom: 0;
     margin: auto;
     z-index: 0;
+    transition: all 0.7s ease-in-out;
+}
+
+.loginHeader{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    width: 315px;
+    height: 89px;
+    gap: 16px;
+    font-size: 61px;
+    font-weight: 700;
+}
+
+.line{
+    width: 150px;
+    border: 3px solid #29ABE2;
+    border-radius: 8px;
+}
+
+.loginForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 422px;
+    height: 196px;
+    gap: 20px;
+}
+
+.loginForm input[type="email"], input[type="password"]{
+    width: 422px;
+    height: 48px;
+    gap: 8px;
+}
+
+.checkbox{
+    width: 422px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    position: relative;
+    left: 39px;
+    gap: 8px;
+
 }

@@ -1,13 +1,8 @@
 function logoSize(){
-    let bg = document.getElementById('bg');
-    let logo = document.getElementById('logo');
+    let login = document.getElementById('login');
     let logoIMG = document.getElementById('logoIMG');
     setTimeout(() => {
-        bg.style.backgroundColor = 'transparent';
-        logo.classList.add('selected');
         logoIMG.classList.add('selected');
-        setTimeout(() => {
-            bg.style.display = 'none';
-        }, 500);
+        login.style.display = 'flex';
     }, 1000);
 }
