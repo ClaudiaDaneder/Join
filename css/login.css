@@ -98,10 +98,48 @@ body {
     gap: 20px;
 }
 
-.loginForm input[type="email"], input[type="password"]{
-    width: 422px;
-    height: 48px;
+.loginForm input[type="email"], input[type="password"], input[type="text"]{
+    margin-left: 10px;
+    width: calc(422px - 28px - 24px);
+    height: 24px;
+    font-size: 20px;
+    border: none;
+    background-color: transparent;
     gap: 8px;
+}
+
+.loginForm input[type="email"], input[type="password"], input[type="text"]:focus {
+    outline: none;
+}
+
+.loginForm input[type="email"]::placeholder {
+    color: #D1D1D1;
+}
+
+.loginForm input[type="password"]::placeholder {
+    color: #D1D1D1;
+}
+
+.loginForm input[type="text"]::placeholder {
+    color: #D1D1D1;
+}
+
+.input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 422px;
+    height: 50px;
+    gap: 8px;
+    background: #ffffff;
+    border: 1px solid #D1D1D1;
+    border-radius: 8px;
+}
+
+.input img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
 }
 
 .checkbox{
@@ -114,4 +152,14 @@ body {
     left: 39px;
     gap: 8px;
 
+}
+
+.checkbox img{
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.checkbox img:hover{
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.509));
 }
