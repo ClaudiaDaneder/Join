@@ -54,6 +54,7 @@ async function saveToStorage(task) {
     await setItem('allTasks', updatedTasksAsString);
 }
 
+
 function identifyID() {
     lastID = allTasks.length;
     if (lastID == null || lastID == '') {
