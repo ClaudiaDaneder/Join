@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,83 @@
     <link rel="stylesheet" href="css/sidebar.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/summary.css">
     <script src="js/templates.js"></script>
 </head>
+
 <body onload="includeHTML()">
     <div w3-include-html="templates/sidebar.html"></div>
     <div w3-include-html="templates/header.html"></div>
-<h1>Summary</h1>
+
+    <div class="main-container">
+        <div class="header-container">
+            <h1 class="header-title">Join 360</h1>
+            <div class="blue-line"></div>
+            <span class="header-subtitle">Key Metrics At A Glance</span>
+        </div>
+        <div class="summary-container">
+            <div class="metrics-container">
+                <div class="to-dos">
+                    <div class="metrics-bubble">
+                        <div class="edit-dark-bg"></div>
+                        <div class="number-plus-metric">
+                            <div class="number">[1]</div>
+                            <div class="metric">To-Do</div>
+                        </div>
+                    </div>
+                    <div class="metrics-bubble">
+                        <div class="done-dark-bg"></div>
+                        <div class="number-plus-metric">
+                            <div class="number">[1]</div>
+                            <div class="metric">Done</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="urgent">
+                    <div class="metrics-bubble">
+                        <div class="urgent">
+                            <div class="urgent-left"><img src="img/summary_urgent.svg">
+                                <div class="number-plus-metric">
+                                    <div class="number">[1]</div>
+                                    Urgent
+                                </div>
+                            </div>
+                            <div class="grey-line"></div>
+                            <div class="urgent-right">
+                                <div class="deadline">[October 16, 2022]</div>
+                                Upcoming Deadline
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tasks-in-board">
+                    <div class="metrics-bubble">
+                        <div class="number-plus-metric">
+                            <div class="number">[5]</div>
+                            <div class="metric">Tasks In Board</div>
+                        </div>
+                    </div>
+                    <div class="metrics-bubble">
+                        <div class="number-plus-metric">
+                            <div class="number">[2]</div>
+                            <div class="metric">Tasks In Progress</div>
+                        </div>
+                    </div>
+                    <div class="metrics-bubble">
+                        <div class="number-plus-metric">
+                            <div class="number">[2]</div>
+                            <div class="metric">Awaiting Feedback</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="greeting">
+                <div class="greeting-time">**Good morning,**</div>
+                <div class="greeting-name">[login name]</div>
+            </div>
+        </div>
+
+    </div>
 </body>
+
 </html>
