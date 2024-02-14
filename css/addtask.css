@@ -407,11 +407,9 @@ hr {
     border-radius: 10px;
 }
 
-
 .checkbox-option input[type="checkbox"] {
     margin-bottom: unset;
     width: unset;
-
 }
 
 .no-contacts {
