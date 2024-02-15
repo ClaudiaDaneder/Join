@@ -10,9 +10,10 @@
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/summary.css">
     <script src="js/templates.js"></script>
+    <script src="js/summary.js"></script>
 </head>
 
-<body onload="includeHTML()">
+<body onload="includeHTML(), init()">
     <div w3-include-html="templates/sidebar.html"></div>
     <div w3-include-html="templates/header.html"></div>
 
@@ -25,27 +26,30 @@
         <div class="summary-container">
             <div class="metrics-container">
                 <div class="to-dos">
-                    <div class="metrics-bubble">
-                        <div class="edit-dark-bg"></div>
-                        <div class="number-plus-metric">
-                            <div class="number">[1]</div>
+                    <div class="metrics-bubble" onmouseenter="changeFieldColor('todo'), changeNumberColor('todo')"
+                        onmouseleave="resetFieldColor('todo'), resetNumberColor('todo')">
+                        <div class="todo-dark-bg" id="todo"></div>
+                        <div>
+                            <div class="number" id="number_todo">[1]</div>
                             <div class="metric">To-Do</div>
                         </div>
                     </div>
-                    <div class="metrics-bubble">
-                        <div class="done-dark-bg"></div>
-                        <div class="number-plus-metric">
-                            <div class="number">[1]</div>
+                    <div class="metrics-bubble" onmouseenter="changeFieldColor('done'), changeNumberColor('done')"
+                    onmouseleave="resetFieldColor('done'), resetNumberColor('done')">
+                        <div class="done-dark-bg" id="done"></div>
+                        <div>
+                            <div class="number" id="number_done">[1]</div>
                             <div class="metric">Done</div>
                         </div>
                     </div>
                 </div>
                 <div class="urgent">
-                    <div class="metrics-bubble">
+                    <div class="metrics-bubble" onmouseenter="changeNumberColor('urgent')"
+                        onmouseleave="resetNumberColor('urgent')">
                         <div class="urgent">
                             <div class="urgent-left"><img src="img/summary_urgent.svg">
-                                <div class="number-plus-metric">
-                                    <div class="number">[1]</div>
+                                <div>
+                                    <div class="number" id="number_urgent">[1]</div>
                                     Urgent
                                 </div>
                             </div>
@@ -58,28 +62,31 @@
                     </div>
                 </div>
                 <div class="tasks-in-board">
-                    <div class="metrics-bubble">
-                        <div class="number-plus-metric">
-                            <div class="number">[5]</div>
+                    <div class="metrics-bubble" onmouseenter="changeNumberColor('tasks-in-board')"
+                    onmouseleave="resetNumberColor('tasks-in-board')">
+                        <div>
+                            <div class="number" id="number_tasks-in-board">[5]</div>
                             <div class="metric">Tasks In Board</div>
                         </div>
                     </div>
-                    <div class="metrics-bubble">
-                        <div class="number-plus-metric">
-                            <div class="number">[2]</div>
+                    <div class="metrics-bubble" onmouseenter="changeNumberColor('tasks-in-progress')"
+                    onmouseleave="resetNumberColor('tasks-in-progress')">
+                        <div>
+                            <div class="number" id="number_tasks-in-progress">[2]</div>
                             <div class="metric">Tasks In Progress</div>
                         </div>
                     </div>
-                    <div class="metrics-bubble">
-                        <div class="number-plus-metric">
-                            <div class="number">[2]</div>
+                    <div class="metrics-bubble" onmouseenter="changeNumberColor('awaiting-feedback')"
+                    onmouseleave="resetNumberColor('awaiting-feedback')">
+                        <div>
+                            <div class="number" id="number_awaiting-feedback">[2]</div>
                             <div class="metric">Awaiting Feedback</div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="greeting">
-                <div class="greeting-time">**Good morning,**</div>
+                <div class="greeting-time" id="greeting-time"></div>
                 <div class="greeting-name">[login name]</div>
             </div>
         </div>
