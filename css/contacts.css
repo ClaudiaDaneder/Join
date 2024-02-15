@@ -599,14 +599,13 @@ form input::placeholder {
 }
 
 .cancel:hover {
-    color: #007CEE;
-    border: 2px solid #007CEE;
+    color: #29ABE2;
+    border: 2px solid #29ABE2;
     box-shadow: 0px 4px 4px 0px #00000040;
 }
 
 .cancel:hover img {
-    filter: invert(36%) sepia(38%) saturate(6934%) hue-rotate(194deg) brightness(98%) contrast(102%);
-    -webkit-filter: invert(36%) sepia(38%) saturate(6934%) hue-rotate(194deg) brightness(98%) contrast(102%);
+    filter: invert(57%) sepia(65%) saturate(550%) hue-rotate(155deg) brightness(91%) contrast(95%);
 }
 
 #save_info {
