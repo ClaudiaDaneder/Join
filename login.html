@@ -10,7 +10,7 @@
     <title>Document</title>
 </head>
 
-<body onload="logoSize()">
+<body onload="logoSize()" onclick="restoreIMG()">
     <img class="logoIMG" id="logoIMG" src="./img/join_logo_dark.svg">
     <form>
         <div class="login animated fadeIn" id="login">
@@ -19,7 +19,7 @@
             </div>
             <div class="loginForm">
                 <div class="input"><input type="email" placeholder="Email"><img src="./img/emailContact.svg"></div>
-                <div class="input"><input type="password" placeholder="Password" id="password" onclick="changePWImg()"><img id="changePW" src="./img/password.svg"></div>
+                <div class="input"><input type="password" placeholder="Password" id="password" onclick="changePWImg(); notClose(event)"><img id="changePW" src="./img/password.svg"></div>
                 <div class="checkbox"><img onclick="rememberMe()" id="reme" src="./img/unchecked.svg"> Remember me</div>
             </div>
             <div class="loginButton">
