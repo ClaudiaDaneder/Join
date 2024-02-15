@@ -43,7 +43,7 @@ function addNewTask() {
  */
 async function saveToStorage(task) {
     let existingTasksString = await getItem('allTasks');
-    let existingTasks = existingTasksString ? JSON.parse(existingTasksString) : [];
+    //let existingTasks = existingTasksString ? JSON.parse(existingTasksString) : [];
 
     existingTasks.push(task);
 
