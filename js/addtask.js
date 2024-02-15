@@ -2,6 +2,7 @@ let allTasks = [];
 let subtasks = [];
 let selectedContacts = [];
 let selectedPriority = null;
+
 let title = document.getElementById('title');
 let description = document.getElementById('description');
 let assignee = document.getElementById('assignee');
@@ -11,16 +12,11 @@ let category = document.getElementById('category-dropdown-text');
 let subtaskField = document.getElementById('subtasks');
 let subtaskList = document.getElementById('subtask-list');
 
-document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.prio-button-container button').forEach(button => {
-        button.addEventListener('click', function () {
-            selectPriority(button.dataset.priority);
-        });
-    });
-});
-
+/**
+ * This function defines all elements of a task that will later be stored in an array. 
+ */
 function addNewTask() {
-    let taskID = identifyID();
+    let taskID = identifyTaskId();
     let task = {
         'title': title.value,
         'description': description.value,
@@ -32,7 +28,6 @@ function addNewTask() {
         'task-id': taskID
     }
     disableCreateButton();
-    changeCreateButtonColor();
     checkPriority(task);
     storeSubtasks();
     saveToStorage(task);
@@ -41,21 +36,27 @@ function addNewTask() {
     redirectToBoard();
 }
 
+/**
+ * This function pulls the existing tasks from the remote storage, updates it with the current task, and saves everything to the remote storage under the key 'allTasks'. 
+ * 
+ * @param {string} task 
+ */
 async function saveToStorage(task) {
-    // Holen Sie das vorhandene allTasks-Array aus dem Speicher
     let existingTasksString = await getItem('allTasks');
     let existingTasks = existingTasksString ? JSON.parse(existingTasksString) : [];
 
-    // Fügen Sie den neuen Task zum vorhandenen Array hinzu
     existingTasks.push(task);
 
-    // Konvertieren Sie das aktualisierte Array in einen JSON-String und speichern Sie es
     let updatedTasksAsString = JSON.stringify(existingTasks);
     await setItem('allTasks', updatedTasksAsString);
 }
 
-
-function identifyID() {
+/**
+ * This function identifies which task-id should be assigned to the current task. Tasks are assigned consecutive numbers, starting at 0.
+ * 
+ * @returns {number} The task-id assigned to our current task
+ */
+function identifyTaskId() {
     lastID = allTasks.length;
     if (lastID == null || lastID == '') {
         lastID = 0;
@@ -63,14 +64,9 @@ function identifyID() {
     return lastID + 1;
 }
 
-
-function checkPriority(task) {
-    if (selectedPriority) {
-        task.prio = selectedPriority;
-    }
-}
-
-
+/**
+ * This function is used to generate a list of subtasks, if any were entered in the subtaskField. 
+ */
 function addToSubtaskList() {
     if (subtaskField.value !== '') {
         subtaskList.innerHTML += '<li>' + subtaskField.value + '</li>';
@@ -78,7 +74,9 @@ function addToSubtaskList() {
     }
 }
 
-
+/**
+ * This function is used to store the list of subtasks into an array 'subtasks'.
+ */
 function storeSubtasks() {
     let subtaskListElements = subtaskList.childNodes;
     for (let i = 0; i < subtaskListElements?.length; i++) {
@@ -87,36 +85,82 @@ function storeSubtasks() {
     }
 }
 
-
+/**
+ * This function is used to clear the list of subtasks again, either when the 'clear' button has been pressed, or a new task has been created.
+ */
 function clearSubtaskList() {
     document.getElementById('subtask-list').innerHTML = '';
 }
 
-
+/**
+ * This function is used to get all available contacts from the remote storage under the key 'allContacts'.
+ */
 async function loadContactsFromStorage() {
     let allContactsAsString = await getItem('allContacts');
     allContacts = JSON.parse(allContactsAsString);
     loadContactsIntoDropdown(allContacts);
 }
 
-
+/**
+ * This function checks if contacts are available to load into the Contacts-Dropdown. If no contacts are available, a message is shown. If there are contacts to be displayed, they will be shown in the contacts-dropdown. 
+ * 
+ * @param {Array} allContacts All available contacts, as previously fetched from the remote storage
+ */
 function loadContactsIntoDropdown(allContacts) {
     if (allContacts?.length < 1) {
-        assignee.innerHTML += `<label class="checkbox-option no-contacts">No contacts to display. Please add a contact first.<button onclick="addContact(); return false">Add Contact</button></label>`;
+        assignee.innerHTML = noContactsToShow();
     } else {
         for (let i = 0; i < allContacts?.length; i++) {
             let contact = allContacts[i];
             let contactName = contact['name'];
             let contactColor = contact['color'];
             let initials = initialsLoad(contactName);
-            assignee.innerHTML += `
-        <label class="checkbox-option">
-        <input type="checkbox" value="${contactName}">
-        <div class="name-plus-circle"><div class="assignee-circle ${contactColor}">${initials}</div>${contactName}</div></label>`;
+            assignee.innerHTML += renderContacts(contactName, contactColor, initials);
         }
     }
 }
 
+/**
+ * This function generates a message, in case no contacts are availbale to chose from in the contacts- dropdown.
+ * 
+ * @returns {string}
+ */
+function noContactsToShow() {
+    return `<label class="checkbox-option no-contacts">No contacts to display. Please add a contact first.<button onclick="addContact(); return false">Add Contact</button></label>`;
+}
+
+/**
+ * This function returns a list of available contacts to assign the task to. For each contact, their name, initials in a colored circle, and a checkbox is generated. 
+ * 
+ * @param {string} contactName Name of the contact
+ * @param {string} contactColor Color that has been assigned to the contact randomly upon creation 
+ * @param {string} initials Initials of the contact
+ * @returns {string}
+ */
+function renderContacts(contactName, contactColor, initials) {
+    return `<label class="checkbox-option">
+    <input type="checkbox" value="${contactName}">
+    <div class="name-plus-circle"><div class="assignee-circle ${contactColor}">${initials}</div>${contactName}</div></label>`;
+}
+
+/**
+ * This function is used to record all checked checkboxes within the contacts-dropdown and push the values into the array 'selectedContacts'.
+ */
+function updateSelectedContacts() {
+    selectedContacts = [];
+
+    let checkboxOptions = document.querySelectorAll('.checkbox-option input[type="checkbox"]');
+    checkboxOptions.forEach(function (checkbox) {
+        if (checkbox.checked) {
+            selectedContacts.push(checkbox.value);
+        }
+    });
+    generateSelectedAssigneesList();
+}
+
+/**
+ * This function is used to generate colored circles with the initials of the contacts that have been picked from the contacts-dropdown (i.e. have been pushed into the array 'selectedContacts').
+ */
 function generateSelectedAssigneesList() {
     selectedAssignees.innerHTML = '';
     for (let c = 0; c < selectedContacts.length; c++) {
@@ -129,7 +173,33 @@ function generateSelectedAssigneesList() {
     }
 }
 
+/**
+ * This function is used to check if one of the 3 priority buttons has been activated. If so, the chosen priority is set as 'prio' for the current task.
+ * 
+ * @param {string} task 
+ */
+function checkPriority(task) {
+    if (selectedPriority) {
+        task.prio = selectedPriority;
+    }
+}
 
+/**
+ * This function is used to check if one of the three priority buttons has been clicked. If so, it triggers the {@link selectedPriority}-function with the chosen value of priority (urgent, medium or low). 
+ */
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.prio-button-container button').forEach(button => {
+        button.addEventListener('click', function () {
+            selectPriority(button.dataset.priority);
+        });
+    });
+});
+
+/**
+ * This function updates the global variable 'selectedPriority' to the priority of the chosen button and marks it as selected. Once the user clicks on a different priority button, the selection is removed and added to the current button.
+ * 
+ * @param {string} priority The chosen priority as string ('urgent', 'medium' or 'low')
+ */
 function selectPriority(priority) {
     selectedPriority = priority;
     document.querySelectorAll('.prio-button-container button').forEach(button => {
@@ -138,29 +208,21 @@ function selectPriority(priority) {
     document.querySelector(`.button-prio-${priority}`).classList.add('selected');
 }
 
-
+/**
+ * This function resets the form and all inputs, buttons, lists etc. to their initial state, either when the 'clear' button is pressed or a new task has been created. 
+ */
 function resetForm() {
     document.getElementById('my-form').reset();
     document.querySelector('.create-button').disabled = false;
+    document.getElementById('category-dropdown-text').innerHTML = 'Select task category';
     resetPrioButtons();
     resetCheckboxOptions();
     clearSubtaskList();
-    document.getElementById('category-dropdown-text').innerHTML = 'Select task category';
 }
 
-
-function showPopup() {
-    document.getElementById('popup-bg').classList.remove('hide')
-}
-
-
-function redirectToBoard() {
-    setTimeout(function () {
-        window.location.href = 'board.html';
-    }, 2200);
-}
-
-
+/**
+ * This function resets the priority buttons to their initial state (=none is selected). This function is being triggered by the function {@link resetForm()}
+ */
 function resetPrioButtons() {
     if (selectedPriority) {
         let selectedButton = document.querySelector(`.button-prio-${selectedPriority}`);
@@ -171,33 +233,36 @@ function resetPrioButtons() {
     }
 }
 
+/**
+ * This function is used to record a click event outside of the contacts-dropdown, which then closes it and updates the list of selected contacts.
+ */
+document.addEventListener('click', function (event) {
+    let dropdown = document.getElementById('contacts-dropdown');
 
-function disableCreateButton() {
-    document.querySelector('.create-button').disabled = true;
-}
-
-
-function changeCreateButtonColor() {
-    document.getElementById('create-button').classList.add('active-create-button');
-}
-
-
-function toggleCategoryDropdown() {
-    let dropdown = document.getElementById('category-dropdown');
-    let isActive = dropdown.classList.contains('active');
-    if (isActive) {
+    if (!dropdown.contains(event.target)) {
         dropdown.classList.remove('active');
-    } else {
-        dropdown.classList.add('active');
+        updateSelectedContacts();
+    }
+});
+
+/**
+ * This function is used to either open or close the contacts-dropdown, depending on whether the click event happened inside or outside of the dropdown-content.
+ * 
+ * @param {Event} event Event that triggers the function (= click)
+ */
+function toggleContactsDropdown(event) {
+    let dropdown = document.getElementById('contacts-dropdown');
+    let dropdownContent = dropdown.querySelector('.dropdown-content');
+
+    if (!dropdownContent.contains(event.target)) {
+        dropdown.classList.toggle('active');
     }
 }
 
-function selectCategory(category) {
-    let dropdowntext = document.getElementById('category-dropdown-text');
-    dropdowntext.innerHTML = category;
-    toggleCategoryDropdown();
-}
-
+/**
+ * This function is used to record a click event and to toggle the visibility of the category-dropdown.
+ * Closes the dropdown menu if the click event occurs outside the dropdown menu or its contents.
+ */
 document.addEventListener('click', function (event) {
     let dropdown = document.getElementById('category-dropdown');
     let dropdownContent = document.getElementById('category');
@@ -213,54 +278,61 @@ document.addEventListener('click', function (event) {
     }
 });
 
-
-function toggleContactsDropdown(event) {
-    let dropdown = document.getElementById('contacts-dropdown');
-    let dropdownContent = dropdown.querySelector('.dropdown-content');
-
-    if (!dropdownContent.contains(event.target)) {
-        dropdown.classList.toggle('active');
-        updateSelectedContacts();
-    }
-}
-
-document.addEventListener('click', function (event) {
-    let dropdown = document.getElementById('contacts-dropdown');
-
-    if (!dropdown.contains(event.target)) {
+/**
+ * This function either opens or closes the category-dropdown.
+ */
+function toggleCategoryDropdown() {
+    let dropdown = document.getElementById('category-dropdown');
+    let isActive = dropdown.classList.contains('active');
+    if (isActive) {
         dropdown.classList.remove('active');
-        updateSelectedContacts();
+    } else {
+        dropdown.classList.add('active');
     }
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-    let checkboxOptions = document.querySelectorAll('.checkbox-option input[type="checkbox"]');
-
-    checkboxOptions.forEach(function (option) {
-        option.addEventListener('change', function (event) {
-            updateSelectedContacts();
-        });
-    });
-});
-
-
-function updateSelectedContacts() {
-    selectedContacts = [];
-
-    let checkboxOptions = document.querySelectorAll('.checkbox-option input[type="checkbox"]');
-    checkboxOptions.forEach(function (checkbox) {
-        if (checkbox.checked) {
-            selectedContacts.push(checkbox.value);
-        }
-    });
-    generateSelectedAssigneesList();
 }
 
+/**
+ * This function is used to update the value of the category-dropdown and close the dropdown once a category has been chosen.
+ * 
+ * @param {string} category Category of the task, either 'User Story' or 'Technical Task'
+ */
+function selectCategory(category) {
+    let dropdowntext = document.getElementById('category-dropdown-text');
+    dropdowntext.innerHTML = category;
+    toggleCategoryDropdown();
+}
 
+/**
+ * This function is used to reset all checkboxes within the contacts-dropdown after either the 'clear' button has been pressed or a new task has been created.
+ */
 function resetCheckboxOptions() {
     let checkboxOptions = document.querySelectorAll('.checkbox-option input[type="checkbox"]');
     checkboxOptions.forEach(function (checkbox) {
         checkbox.checked = false;
     });
     updateSelectedContacts();
+}
+
+/**
+ * This function is used to disable and change the color of the Create-button while the current task is being saved. 
+ */
+function disableCreateButton() {
+    document.querySelector('.create-button').disabled = true;
+    document.getElementById('create-button').classList.add('blue-create-button');
+}
+
+/**
+ * This function is used to show the popup that tells the user that the new task has been created and added to the board of tasks.
+ */
+function showPopup() {
+    document.getElementById('popup-bg').classList.remove('hide')
+}
+
+/**
+ * This function redirects to the board-overview after a short delay of 220ms.
+ */
+function redirectToBoard() {
+    setTimeout(function () {
+        window.location.href = 'board.html';
+    }, 2200);
 }
