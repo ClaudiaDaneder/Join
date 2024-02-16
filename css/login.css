@@ -16,6 +16,12 @@ body {
     display: none;
 }
 
+.animated_Out {
+    animation-duration: 1.5s;
+    animation-fill-mode: both;
+    display: none;
+}
+
 @keyframes fadeIn {
     0% {
         opacity: 0;
@@ -26,8 +32,22 @@ body {
     }
 }
 
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
 .fadeIn {
     animation-name: fadeIn;
+}
+
+.fadeOut {
+    animation-name: fadeOut;
 }
 
 .logoIMG {
@@ -172,29 +192,7 @@ body {
     gap: 35px;
 }
 
-form button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 110px;
-    height: 48px;
-    border-radius: 8px;
-    gap: 10px;
-    background: #2A3647;
-    color: #ffffff;
-    border: none;
-    font-size: 21px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 100ms ease-in-out;
-}
-
-form button:hover{
-    background: #29ABE2;
-    box-shadow: 0px 4px 4px 0px #00000040;
-}
-
-form a {
+.loginButton a {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -212,7 +210,7 @@ form a {
     transition: all 100ms ease-in-out;
 }
 
-form a:hover{
+.loginButton a:hover{
     box-shadow: 0px 4px 4px 0px #00000040;
     color: #29ABE2;
     border: 1px solid #29ABE2;
@@ -252,4 +250,73 @@ form a:hover{
 
 .sign_up p{
     font-size: 20px;
+}
+
+.privacy{
+    font-size: 16px;
+    text-decoration: none;
+    color: #29ABE2;
+    transform: scale(1);
+    transition: all 70ms ease-in-out;
+}
+
+.privacy:hover{
+    text-decoration: underline;
+    transform: scale(1.02);
+}
+
+.backTo{
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    top: 80px;
+    left: 50px;
+    cursor: pointer;
+    transform: scale(1);
+    transition: all 100ms ease-in-out;
+}
+
+.backTo:hover{
+    transform: scale(1.05);
+    border-radius: 40px;
+    background-color: rgba(194, 194, 194, 0.405);
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 110px;
+    height: 48px;
+    border-radius: 8px;
+    gap: 10px;
+    background: #2A3647;
+    color: #ffffff;
+    border: none;
+    font-size: 21px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 100ms ease-in-out;
+}
+
+.button:hover{
+    background: #29ABE2;
+    box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.buttonDisabled{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 110px;
+    height: 48px;
+    border-radius: 8px;
+    gap: 10px;
+    background: #2A3647;
+    color: #ffffff;
+    border: none;
+    font-size: 21px;
+    font-weight: 700;
+    cursor: default;
+    transition: all 100ms ease-in-out;
 }

@@ -10,27 +10,14 @@
     <title>Document</title>
 </head>
 
-<body onload="logoSize()" onclick="restoreIMG()">
+<body onload="logoSize()" onclick="pwIdInfo()">
     <img class="logoIMG" id="logoIMG" src="./img/join_logo_dark.svg">
     <div class="sign_up animated fadeIn" id="sign_up">
         <p>Not a Join user?</p>
-        <div class="sign_up_button">Sign up</div>
+        <div class="sign_up_button" onclick="notClose(event), sign_up()">Sign up</div>
     </div>
     <form>
-        <div class="login animated fadeIn" id="login">
-            <div class="loginHeader">Log in
-                <div class="line"></div>
-            </div>
-            <div class="loginForm">
-                <div class="input"><input type="email" placeholder="Email"><img src="./img/emailContact.svg"></div>
-                <div class="input"><input type="password" placeholder="Password" id="password" onclick="changePWImg(); notClose(event)"><img id="changePW" src="./img/password.svg"></div>
-                <div class="checkbox"><img onclick="rememberMe()" id="reme" src="./img/unchecked.svg"> Remember me</div>
-            </div>
-            <div class="loginButton">
-                <button type="submit">Log in</button>
-                <a href="summary.html">Guest Log in</a>
-            </div>
-        </div>
+        <div class="login animated fadeIn" id="login"></div>
     </form>
 </body>
 
