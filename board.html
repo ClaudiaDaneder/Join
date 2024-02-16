@@ -14,26 +14,42 @@
     
 </head>
 <body  onload="init() ">
+
+
+        <!-- Modal Overlay -->
+    <div id="modal-overlay" onclick="closeModal()" style="display: none;">
+       <!-- Modal-Fenster -->
+       <div id="modal-window">
+        <section class="current-task-over-headline" id="current-task-over-headline">
+            
+        </section>
+        </div>
+    </div>
+
+    
+
+
+<div w3-include-html="templates/sidebar.html"></div>
     <div class="boardSiteContainer">
-        <div w3-include-html="templates/sidebar.html"></div>
+        
         <div w3-include-html="./templates/header.html"></div>
         <div class="content">
-            
+         
             <div class="boardSubhHader">
                 <h1 class="boardHeadline">Board</h1>
                 <div class="inputFieldAndAddTaskBtn">
-                 <div class="inputField">
+                 <form onchange="searchTasks()" class="inputField">
                     
                         <input type="text" class="input" placeholder="Find Task" id="searchInput">
                             <div class="verticalLineAndGlassImg">
                                 <div class="verticalLine"></div>
-                                <img onclick="serchTasks()" src="./img/search.png" alt="searchGlass">
+                                <img src="./img/search.png" alt="searchGlass">
                             </div>
                                         </div> 
                                         <a href="./addtask.html">
                         <button class="addTaskBtn"><div class="addTaskLetterin">Add task</div> <img class="addImg" src="./img/add.png" alt="" srcset=""></button>
                                         </a>
-                    </div>
+                                    </form>
             </div>
             <div class="addTaskContainer">
                 <div class="tasksoverlay"></div>

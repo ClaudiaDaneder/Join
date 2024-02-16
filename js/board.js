@@ -111,7 +111,7 @@ function createTaskHtml(task, taskId) {
   let categoryClass = firstWord.charAt(0).toLowerCase() + firstWord.slice(1);
 
   return `
-    <div class="task" onclick="openCurrentTask()" draggable="true" ondragstart="drag(event, '${taskId}')" id="${taskId}">
+    <div class="task" onclick="openCurrentTask('${taskId}')" draggable="true" ondragstart="drag(event, '${taskId}')" id="${taskId}">
       <div class="${categoryClass}">${task.category}</div>
       <div class="previewTitle">${task.title}</div>
       <div class="previewDescription">${task.description}</div>
@@ -119,9 +119,51 @@ function createTaskHtml(task, taskId) {
   `;
 }
 
-function openCurrentTask(){
+
+function openCurrentTask(taskId){
+  document.getElementById("modal-overlay").style.display = "block";
+  let modulWindow = document.getElementById("modal-window");
+  modulWindow.innerHTML = "";
+  
+
+  for (let i = 0; i < allTasks.length; i++) {
+      const element = allTasks[i];
+      
+      // Konvertieren beider IDs in integer
+      let elementTaskId = parseInt(element["task-id"]);
+      let stringTaskId = parseInt(taskId);
+      let category = element["category"];
+      let firstPart = category.split(" ")[0].toLowerCase();
+      if (elementTaskId === stringTaskId) { 
+          modulWindow.innerHTML +=`
+          <div class="overHeadline">
+              <div class="${firstPart}"><h2>${element["category"]}</h2></div>
+              <div> <img onclick="closeModal()" class="close-png" src="./img/close.png" alt=""></div>
+          </div>
+          <div class="Headline"><h1 class="current-task-headline">${element["title"]} </h1></div>
+          <div class="due-date"><h3>Due date: ${element["due-date"]}</h3></div>
+          <div class="current-prio"><h3 class="prio">Priotiy: ${element["prio"]} </h3></div>
+          `;
+      }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  let modalWindow = document.getElementById("modal-window");
+
+  // Event-Listener, der das Klick-Ereignis abfängt
+  modalWindow.addEventListener('click', function(event) {
+      // Verhindert, dass das Klick-Ereignis zum modal-overlay propagiert wird
+      event.stopPropagation();
+  });
+});
+
+
+function closeModal() {
+    document.getElementById("modal-overlay").style.display = "none";
 
 }
+
 
 function searchTasks() {
   let searchValue = document.getElementById("searchInput").value;
@@ -135,7 +177,10 @@ function searchTasks() {
       matchingTasks.push(allTasks[i]);
     }
   }
+  console.log("matchingTasks" + matchingTasks)
+
   return matchingTasks;
+  
 }
 
 

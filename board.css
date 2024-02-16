@@ -9,6 +9,33 @@
 body{
     margin: 0;
 }
+#modal-overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+.overlayAndNewWindow{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#modal-window {
+    position: fixed;
+    margin-left: 36vw;
+    margin-top: 10vh;
+    height: 80vh;
+    width: 50vw;
+    background-color: white;
+}
+.overHeadline{
+    display: flex;
+    justify-content: space-between;
+}
+.close-png{
+    color: black;
+}
 .width-240px{
     width: 240px;
 }
@@ -17,12 +44,15 @@ body{
     background-color: #F0F0F0;
     align-items: center;
     justify-content: flex-start;
-    height: 100vh;
+    padding-top: 60px;
+    padding-left: 233px;
+    padding-bottom: 35px;
 }
 .content{
-    padding-left: 240px;
     display: flex;
     flex-direction: column;
+    height: 100%;
+    width: 100%;
 }
 .boardSubhHader{
     display: flex;
@@ -115,7 +145,6 @@ body{
 }
 .noTask{
     height: 48px;
-    width: 246px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -136,7 +165,6 @@ body{
     border-radius: 24px;
     padding: 16px;
     gap: 10px;
-    width: 214px;
     box-shadow: 0px 4px 4px 0px #0000001A;
 }
 .technical{
