@@ -3,9 +3,11 @@ let remeChecked = [0];
 function logoSize() {
     let login = document.getElementById('login');
     let logoIMG = document.getElementById('logoIMG');
+    let sign_up = document.getElementById('sign_up');
     setTimeout(() => {
         logoIMG.classList.add('selected');
         login.style.display = 'flex';
+        sign_up.style.display = 'flex';
     }, 1000);
 }
 

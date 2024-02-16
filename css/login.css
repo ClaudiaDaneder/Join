@@ -219,13 +219,13 @@ form a:hover{
 }
 
 .sign_up{
-    display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
     top: 67px;
     right: 120px;
     gap: 35px;
+    transition: all 0.7s ease-in-out;
 }
 
 .sign_up_button {
