@@ -1,7 +1,5 @@
 
-/**
- * Initialisiert die Anwendung, füllt die ToDo-Liste und rendert alle Aufgaben.
- */
+
 async function init() {
   await loadTaskFromStorage()
   filltoDos();
@@ -21,12 +19,11 @@ let allTasks=[];
 async function loadTaskFromStorage() {
   let allTaskAsString = await getItem('allTasks');
   allTasks = JSON.parse(allTaskAsString);
+ 
 }
 
 
-/**
- * Füllt die toDos-Liste mit Aufgaben aus einer globalen Quelle `allTasks`.
- */
+
 function filltoDos() {
   
   for (let i = 0; i < allTasks.length; i++) {
@@ -36,9 +33,7 @@ function filltoDos() {
   }
 }
 
-/**
- * Ruft Render-Funktionen für alle Aufgabenlisten auf.
- */
+
 function renderallTasks() {
   renderToDo(),
   renderInProgress(),
@@ -47,9 +42,7 @@ function renderallTasks() {
   openAndCloseNoTask()
 }
 
-/**
- * Rendert die Aufgaben in der ToDo-Liste.
- */
+
 function renderToDo() {
   let toDoContainer = document.getElementById("toDo");
   toDoContainer.innerHTML = "";
@@ -60,9 +53,7 @@ function renderToDo() {
   });
 }
 
-/**
- * Rendert die Aufgaben in der InProgress-Liste.
- */
+
 function renderInProgress() {
   let inProgressContainer = document.getElementById("inProgress");
   inProgressContainer.innerHTML = "";
@@ -73,9 +64,7 @@ function renderInProgress() {
   });
 }
 
-/**
- * Rendert die Aufgaben in der AwaitFeedback-Liste.
- */
+
 function renderAwaitFeedback() {
   let awaitFeedbackContainer = document.getElementById("awaitFeedback");
   awaitFeedbackContainer.innerHTML = "";
@@ -86,9 +75,7 @@ function renderAwaitFeedback() {
   });
 }
 
-/**
- * Rendert die Aufgaben in der Done-Liste.
- */
+
 function renderDone() {
   let doneContainer = document.getElementById("done");
   doneContainer.innerHTML = "";
@@ -99,9 +86,7 @@ function renderDone() {
   });
 }
 
-/**
- * Steuert die Anzeige von 'Keine Aufgaben'-Meldungen, abhängig vom Inhalt der Listen.
- */
+
 function openAndCloseNoTask() {
   let toDo = document.getElementById("toDo");
   let inProgress = document.getElementById("inProgress");
@@ -118,32 +103,22 @@ function openAndCloseNoTask() {
     done.innerHTML == "" ? "" : "none";
 }
 
-/**
- * Erstellt das HTML für eine einzelne Aufgabe.
- * 
- * @param {Object} task - Das Aufgabenobjekt.
- * @param {number} i - Die ID der Aufgabe.
- * @return {string} Das HTML-String der Aufgabe.
- */
+
 function createTaskHtml(task, i) {
-  // let categoryValue = task["category"]
-  // let splitCategoryValue = categoryValue.split(" ");
-  // let firstWord = splitCategoryValue[0];
-  //   let categoryClass = firstWord.charAt(0).toLowerCase() + firstWord.slice(1);
+  let categoryValue = task["category"]
+  let splitCategoryValue = categoryValue.split(" ");
+  let firstWord = splitCategoryValue[0];
+    let categoryClass = firstWord.charAt(0).toLowerCase() + firstWord.slice(1);
     return `
-          <div class="task" draggable="true" ondragstart="drag(event)" id="${i}">
-           
+          <div class="task" draggable="true" ondragstart="drag(event, this.id)" id="${i}">
+            <div class="${categoryClass}">${task["category"]}</div>
             <div class="previewTitle">${task["title"]}</div>
             <div class="previewDescription">${task["description"]}</div>
           </div>
           `;
 }
 
-/**
- * Sucht nach Aufgaben, die den Suchkriterien entsprechen.
- * 
- * @return {Array} Eine Liste von Aufgaben, die den Suchkriterien entsprechen.
- */
+
 function searchTasks() {
   let searchValue = document.getElementById("searchInput").value;
   let matchingTasks = [];
@@ -159,89 +134,62 @@ function searchTasks() {
   return matchingTasks;
 }
 
-/**
- * Erlaubt das Ablegen von Elementen während eines Drag-and-Drop-Vorgangs.
- * 
- * @param {Event} ev - Das Drag-and-Drop-Event.
- */
+
 function allowDrop(ev) {
   ev.preventDefault();
 }
 
-/**
- * Verarbeitet das Ziehen eines Aufgabenelements.
- * 
- * @param {Event} ev - Das Drag-and-Drop-Event.
- */
-function drag(ev) {
-  ev.dataTransfer.setData("id", ev.target.id);
+
+function drag(ev,id) {
+  ev.dataTransfer.setData("text", id);
   ev.dataTransfer.dropEffect = "move";
-  openAndCloseNoTask();
 }
 
-/**
- * Verarbeitet das Ablegen eines Aufgabenelements.
- * Diese Funktion wird aufgerufen, wenn ein draggbares Element über einem Drop-Ziel losgelassen wird.
- * 
- * @param {Event} ev - Das Event-Objekt, das das Drop-Event darstellt.
- */
+
 function drop(ev) {
-  // Verhindert das Standardverhalten des Browsers für Drop-Events.
   ev.preventDefault();
 
-  // Ruft die ID des gezogenen Aufgabenelements ab, das im Drag-Event festgelegt wurde.
   let taskId = ev.dataTransfer.getData("id");
+  let taskElement = document.getElementById(taskId);
 
-  // Beginnt mit dem Ziel-Element des Events und sucht nach oben im DOM-Baum,
-  // um das nächstgelegene Element mit einer ID zu finden (den Zielcontainer).
-  let targetElement = ev.target;
-  while (targetElement && !targetElement.id) {
-    targetElement = targetElement.parentElement;
+  if (taskElement && ev.target.appendChild) {
+      ev.target.appendChild(taskElement);
   }
 
-  // Bestimmt die ID des Zielcontainers. Wenn kein gültiges Ziel gefunden wird, wird die Funktion beendet.
+  // Initialisiert targetElement mit dem Ziel des Drop-Events.
+  let targetElement = ev.target;
+
+
   let containerId = targetElement ? targetElement.id : null;
+  console.log(containerId)
   if (!containerId) return;
 
-  // Findet die Aufgabe mit der entsprechenden ID in den Aufgabenlisten.
-  let taskToMove = findTaskById(taskId);
-  // Beendet die Funktion, wenn die Aufgabe nicht gefunden wird.
+  let taskToMove = findTaskById(taskElement);
+  console.log(taskToMove)
   if (!taskToMove) return;
 
-  // Entfernt die Aufgabe aus ihrer aktuellen Liste.
   removeTaskFromCurrentList(taskToMove);
 
   if (containerId === "toDo") {
-    toDos.push(taskToMove);
+      toDos.push(taskToMove);
   } else if (containerId === "inProgress") {
-    inProgress.push(taskToMove);
+      inProgress.push(taskToMove);
   } else if (containerId === "awaitFeedback") {
-    awaitFeedback.push(taskToMove);
+      awaitFeedback.push(taskToMove);
   } else if (containerId === "done") {
-    done.push(taskToMove);
+      done.push(taskToMove);
   }
-  
-  // Ruft die Render-Funktionen auf, um die Listenansichten zu aktualisieren.
-  renderallTasks();
 
-  // Aktualisiert die Anzeige von 'Keine Aufgaben'-Meldungen für jede Liste.
+  renderallTasks();
   openAndCloseNoTask();
 }
 
 
-/**
- * Findet eine Aufgabe anhand ihrer ID in allen Listen.
- * 
- * @param {number} taskId - Die ID der zu findenden Aufgabe.
- * @return {Object} Die gefundene Aufgabe, falls vorhanden.
- */
 function findTaskById(taskId) {
   return [...toDos, ...inProgress, ...awaitFeedback, ...done].find(task => task["id"] == taskId);
 }
 
-/**
- * Entfernt eine Aufgabe aus ihrer aktuellen Liste.
- */
+
 function removeTaskFromCurrentList(task) {
   toDos = toDos.filter(t => t.id !== task["id"]);
   inProgress = inProgress.filter(t => t.id !== task["id"]);
