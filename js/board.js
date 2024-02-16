@@ -1,39 +1,11 @@
-let alltasks = [
-  {
-    title: "Beispiel 1",
-    description: "Beschreibung Beispiel 1",
-    assignee: "Name 1",
-    "due-date": "2024-03-02",
-    category: "User Story",
-    subtasks: "Subtask Beispiel 1",
-    id: 0,
-  },
-  {
-    title: "Beispiel 2",
-    description: "Beschreibung Beispiel 2",
-    assignee: "Name 2",
-    "due-date": "2024-05-02",
-    category: "User Story",
-    subtasks: "Subtask Beispiel 2",
-    id: 1,
-  },
-  {
-    title: "Beispiel 3",
-    description: "Beschreibung Beispiel 3",
-    assignee: "Name 3",
-    "due-date": "2024-07-18",
-    category: "Technical Task",
-    subtasks: "Subtask Beispiel 3",
-    id: 2,
-  },
-];
 
 /**
  * Initialisiert die Anwendung, füllt die ToDo-Liste und rendert alle Aufgaben.
  */
-function init() {
+async function init() {
+  await loadTaskFromStorage()
   filltoDos();
-  renderAllTasks();
+  renderallTasks();
   includeHTML();  
 }
 
@@ -43,21 +15,33 @@ let toDos = [];
 let inProgress = [];
 let awaitFeedback = [];
 let done = [];
+let allJsonTasks;
+let allTasks=[];
+
+
+async function loadTaskFromStorage() {
+  let allTaskAsString = await getItem('allTasks');
+  allJson = JSON.parse(allTaskAsString);
+  allTasks.push(allJson);
+}
+
 
 /**
- * Füllt die toDos-Liste mit Aufgaben aus einer globalen Quelle `alltasks`.
+ * Füllt die toDos-Liste mit Aufgaben aus einer globalen Quelle `allTasks`.
  */
 function filltoDos() {
-  for (let i = 0; i < alltasks.length; i++) {
-    const task = alltasks[i];
-    toDos.push(task);
+  
+  for (let i = 0; i < allTasks.length; i++) {
+    const task = allTasks[i];
+    toDos.push(task); 
+     console.log(task);
   }
 }
 
 /**
  * Ruft Render-Funktionen für alle Aufgabenlisten auf.
  */
-function renderAllTasks() {
+function renderallTasks() {
   renderToDo(),
   renderInProgress(),
   renderAwaitFeedback(),
@@ -72,7 +56,7 @@ function renderToDo() {
   let toDoContainer = document.getElementById("toDo");
   toDoContainer.innerHTML = "";
 
-  toDos.forEach((task, index) => {
+  toDos.forEach(task => {
     const taskHtml = createTaskHtml(task, task["id"]);
     toDoContainer.innerHTML += taskHtml;
   });
@@ -144,10 +128,11 @@ function openAndCloseNoTask() {
  * @return {string} Das HTML-String der Aufgabe.
  */
 function createTaskHtml(task, i) {
-  let categoryValue = task["category"].split(" ");
-  let firstWord = categoryValue[0];
-  let categoryClass = firstWord.charAt(0).toLowerCase() + firstWord.slice(1);
-  return `
+  let categoryValue = task["category"]
+  let splitCategoryValue = categoryValue.split(" ");
+  let firstWord = splitCategoryValue[0];
+    let categoryClass = firstWord.charAt(0).toLowerCase() + firstWord.slice(1);
+    return `
           <div class="task" draggable="true" ondragstart="drag(event)" id="${i}">
             <div class="${categoryClass}">${task["category"]}</div>
             <div class="previewTitle">${task["title"]}</div>
@@ -228,24 +213,18 @@ function drop(ev) {
   // Entfernt die Aufgabe aus ihrer aktuellen Liste.
   removeTaskFromCurrentList(taskToMove);
 
-  // Fügt die Aufgabe basierend auf dem ID des Zielcontainers der entsprechenden neuen Liste hinzu.
-  switch (containerId) {
-    case "toDo":
-      toDos.push(taskToMove);
-      break;
-    case "inProgress":
-      inProgress.push(taskToMove);
-      break;
-    case "awaitFeedback":
-      awaitFeedback.push(taskToMove);
-      break;
-    case "done":
-      done.push(taskToMove);
-      break;
+  if (containerId === "toDo") {
+    toDos.push(taskToMove);
+  } else if (containerId === "inProgress") {
+    inProgress.push(taskToMove);
+  } else if (containerId === "awaitFeedback") {
+    awaitFeedback.push(taskToMove);
+  } else if (containerId === "done") {
+    done.push(taskToMove);
   }
-
+  
   // Ruft die Render-Funktionen auf, um die Listenansichten zu aktualisieren.
-  renderAllTasks();
+  renderallTasks();
 
   // Aktualisiert die Anzeige von 'Keine Aufgaben'-Meldungen für jede Liste.
   openAndCloseNoTask();
@@ -264,8 +243,6 @@ function findTaskById(taskId) {
 
 /**
  * Entfernt eine Aufgabe aus ihrer aktuellen Liste.
- * 
- * @param {Object} task - Das zu entfernende Aufgabenobjekt.
  */
 function removeTaskFromCurrentList(task) {
   toDos = toDos.filter(t => t.id !== task["id"]);
