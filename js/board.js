@@ -15,14 +15,12 @@ let toDos = [];
 let inProgress = [];
 let awaitFeedback = [];
 let done = [];
-let allJsonTasks;
 let allTasks=[];
 
 
 async function loadTaskFromStorage() {
   let allTaskAsString = await getItem('allTasks');
-  allJson = JSON.parse(allTaskAsString);
-  allTasks.push(allJson);
+  allTasks = JSON.parse(allTaskAsString);
 }
 
 
@@ -128,13 +126,13 @@ function openAndCloseNoTask() {
  * @return {string} Das HTML-String der Aufgabe.
  */
 function createTaskHtml(task, i) {
-  let categoryValue = task["category"]
-  let splitCategoryValue = categoryValue.split(" ");
-  let firstWord = splitCategoryValue[0];
-    let categoryClass = firstWord.charAt(0).toLowerCase() + firstWord.slice(1);
+  // let categoryValue = task["category"]
+  // let splitCategoryValue = categoryValue.split(" ");
+  // let firstWord = splitCategoryValue[0];
+  //   let categoryClass = firstWord.charAt(0).toLowerCase() + firstWord.slice(1);
     return `
           <div class="task" draggable="true" ondragstart="drag(event)" id="${i}">
-            <div class="${categoryClass}">${task["category"]}</div>
+           
             <div class="previewTitle">${task["title"]}</div>
             <div class="previewDescription">${task["description"]}</div>
           </div>
