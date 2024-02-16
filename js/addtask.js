@@ -1,29 +1,30 @@
 let allTasks = [];
 let subtasks = [];
 let selectedContacts = [];
-let selectedPriority = null;
+let selectedPriority = 'medium';
 
 let title = document.getElementById('title');
 let description = document.getElementById('description');
 let assignee = document.getElementById('assignee');
 let selectedAssignees = document.getElementById('selected-assignees-list');
 let dueDate = document.getElementById('due-date');
-let category = document.getElementById('category-dropdown-text');
+let categoryField = document.getElementById('category-dropdown-text');
 let subtaskField = document.getElementById('subtasks');
 let subtaskList = document.getElementById('subtask-list');
+let hiddenCategoryDropdown = document.getElementById('hidden-dropdown')
 
 /**
  * This function defines all elements of a task that will later be stored in an array. 
  */
-function addNewTask() {
-    let taskID = identifyTaskId();
+async function addNewTask() {
+    let taskID = await identifyTaskId();
     let task = {
         'title': title.value,
         'description': description.value,
         'assignee': selectedContacts,
         'due-date': dueDate.value,
         'prio': selectedPriority,
-        'category': category.value,
+        'category': hiddenCategoryDropdown.value,
         'subtasks': subtasks,
         'task-id': taskID
     }
@@ -43,7 +44,7 @@ function addNewTask() {
  */
 async function saveToStorage(task) {
     let existingTasksString = await getItem('allTasks');
-    //let existingTasks = existingTasksString ? JSON.parse(existingTasksString) : [];
+    let existingTasks = existingTasksString ? JSON.parse(existingTasksString) : [];
 
     existingTasks.push(task);
 
@@ -56,9 +57,10 @@ async function saveToStorage(task) {
  * 
  * @returns {number} The task-id assigned to our current task
  */
-function identifyTaskId() {
-    lastID = allTasks.length;
-    if (lastID == null || lastID == '') {
+async function identifyTaskId() {
+    let allSavedTasks = JSON.parse(await getItem('allTasks'));
+    lastID = allSavedTasks.length;
+    if (!lastID) {
         lastID = 0;
     }
     return lastID + 1;
@@ -185,9 +187,11 @@ function checkPriority(task) {
 }
 
 /**
- * This function is used to check if one of the three priority buttons has been clicked. If so, it triggers the {@link selectedPriority}-function with the chosen value of priority (urgent, medium or low). 
+ * This function is used to check if one of the three priority buttons has been clicked. If so, it triggers the {@link selectedPriority}-function with the chosen value of priority (urgent, medium or low). If no button is clicked, the standard prio is set to 'medium'.
  */
 document.addEventListener('DOMContentLoaded', function () {
+    selectPriority('medium');
+
     document.querySelectorAll('.prio-button-container button').forEach(button => {
         button.addEventListener('click', function () {
             selectPriority(button.dataset.priority);
@@ -206,31 +210,6 @@ function selectPriority(priority) {
         button.classList.remove('selected');
     });
     document.querySelector(`.button-prio-${priority}`).classList.add('selected');
-}
-
-/**
- * This function resets the form and all inputs, buttons, lists etc. to their initial state, either when the 'clear' button is pressed or a new task has been created. 
- */
-function resetForm() {
-    document.getElementById('my-form').reset();
-    document.querySelector('.create-button').disabled = false;
-    document.getElementById('category-dropdown-text').innerHTML = 'Select task category';
-    resetPrioButtons();
-    resetCheckboxOptions();
-    clearSubtaskList();
-}
-
-/**
- * This function resets the priority buttons to their initial state (=none is selected). This function is being triggered by the function {@link resetForm()}
- */
-function resetPrioButtons() {
-    if (selectedPriority) {
-        let selectedButton = document.querySelector(`.button-prio-${selectedPriority}`);
-        if (selectedButton) {
-            selectedButton.classList.remove('selected');
-        }
-        selectedPriority = null;
-    }
 }
 
 /**
@@ -297,9 +276,34 @@ function toggleCategoryDropdown() {
  * @param {string} category Category of the task, either 'User Story' or 'Technical Task'
  */
 function selectCategory(category) {
-    let dropdowntext = document.getElementById('category-dropdown-text');
-    dropdowntext.innerHTML = category;
+    categoryField.innerHTML = category;
     toggleCategoryDropdown();
+    document.getElementById('hidden-dropdown').value = category;
+}
+
+/**
+ * This function resets the form and all inputs, buttons, lists etc. to their initial state, either when the 'clear' button is pressed or a new task has been created. 
+ */
+function resetForm() {
+    document.getElementById('my-form').reset();
+    document.querySelector('.create-button').disabled = false;
+    document.getElementById('category-dropdown-text').innerHTML = 'Select task category';
+    resetPrioButtons();
+    resetCheckboxOptions();
+    clearSubtaskList();
+}
+
+/**
+ * This function resets the priority buttons to their initial state (=none is selected). This function is being triggered by the function {@link resetForm()}
+ */
+function resetPrioButtons() {
+    if (selectedPriority) {
+        let selectedButton = document.querySelector(`.button-prio-${selectedPriority}`);
+        if (selectedButton) {
+            selectedButton.classList.remove('selected');
+        }
+        selectedPriority = null;
+    }
 }
 
 /**

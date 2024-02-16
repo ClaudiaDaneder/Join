@@ -401,6 +401,14 @@ hr {
     flex-direction: row;
 }
 
+#hidden-dropdown {
+    position: absolute;
+}
+
+.category-dropdown-container {
+    position: relative;
+}
+
 .checkbox-option:hover, .checkbox-option.selected {
     background-color: #2A3647;
     color: #fff;
