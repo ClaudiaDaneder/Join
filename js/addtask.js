@@ -21,7 +21,7 @@ async function addNewTask() {
     let task = {
         'title': title.value,
         'description': description.value,
-        'assignee': selectedContacts,
+        'assignee-infos': selectedContacts,
         'due-date': dueDate.value,
         'prio': selectedPriority,
         'category': hiddenCategoryDropdown.value,
@@ -155,11 +155,28 @@ function updateSelectedContacts() {
     checkboxOptions.forEach(function (checkbox) {
         if (checkbox.classList.contains('checkbox-option-selected')) {
             let contactName = checkbox.querySelector('.name-plus-circle').childNodes[1].textContent.trim();
-            selectedContacts.push(contactName);
+            let contactColor = checkbox.querySelector('.assignee-circle').classList[1];
+            selectedContacts.push({'name': contactName, 'color': contactColor});
         }
     });
     generateSelectedAssigneesList();
-    console.log(selectedContacts)
+}
+
+
+function changeContactColor(i) {
+    let checkboxOption = document.getElementById(`checkbox-option_${i}`);
+    checkboxOption.classList.toggle('checkbox-option-selected');
+    
+    let checkboxImage = document.getElementById(`checkbox_${i}`);
+    let contactName = checkboxOption.querySelector('.name-plus-circle').childNodes[1].textContent.trim();
+    
+    if (checkboxOption.classList.contains('checkbox-option-selected')) {
+        checkboxImage.src = './img/addtask_contacts_checkbox_checked.svg';
+        selectedContacts.push(contactName);
+    } else {
+        checkboxImage.src = './img/addtask_contacts_checkbox_empty.svg';
+        selectedContacts = selectedContacts.filter(name => name !== contactName);
+    }
 }
 
 /**
@@ -343,41 +360,3 @@ function redirectToBoard() {
         window.location.href = 'board.html';
     }, 2200);
 }
-
-
-function changeContactColor(i) {
-    let checkboxOption = document.getElementById(`checkbox-option_${i}`);
-    checkboxOption.classList.toggle('checkbox-option-selected');
-    
-    let checkboxImage = document.getElementById(`checkbox_${i}`);
-    let contactName = checkboxOption.querySelector('.name-plus-circle').childNodes[1].textContent.trim();
-    
-    if (checkboxOption.classList.contains('checkbox-option-selected')) {
-        checkboxImage.src = './img/addtask_contacts_checkbox_checked.svg';
-        selectedContacts.push(contactName);
-    } else {
-        checkboxImage.src = './img/addtask_contacts_checkbox_empty.svg';
-        selectedContacts = selectedContacts.filter(name => name !== contactName);
-    }
-    generateSelectedAssigneesList();
-}
-
-
-/*function changeContactColor(i) {
-
-    let checkboxOption = document.getElementById(`checkbox-option_${i}`);
-    checkboxOption.classList.toggle('checkbox-option-selected');
-
-    let checkboxImage = document.getElementById(`checkbox_${i}`);
-    let contactName = checkboxOption.querySelector('.name-plus-circle').childNodes[1].textContent.trim();
-    
-    if (selectedContacts.includes(contactName)) {
-        checkboxImage.src = './img/addtask_contacts_checkbox_checked.svg';
-    } else {
-        checkboxImage.src = './img/addtask_contacts_checkbox_empty.svg';
-    }
-
-    document.getElementById(`checkbox_${i}`).src = './img/addtask_contacts_checkbox_checked.svg'
-}
-
-*/

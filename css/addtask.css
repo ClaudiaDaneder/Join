@@ -52,6 +52,14 @@ textarea {
     overflow: auto;
     resize: vertical;
     min-height: 100px;
+    background-image: url(../img/addtask_icon_textarea-grabber.svg);
+    background-repeat: no-repeat;
+    background-position: 99% 97%;
+    background-size: 18.9px 18.9px;
+}
+
+textarea::-webkit-resizer {
+    display: none;
 }
 
 input,
@@ -430,20 +438,10 @@ hr {
     border-radius: 10px;
 }
 
-input[type="checkbox"] {
-    margin-bottom: unset;
-    width: unset;
-    outline-style: auto;
-}
-
 .no-contacts {
     font-size: 16px;
     flex-direction: column;
     color: #A8A8A8;
-}
-
-input[type=checkbox], input[type=checkbox]:hover {
-    accent-color: #2A3647 !important;
 }
 
 .selected-assignees-list {
