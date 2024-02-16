@@ -29,7 +29,6 @@ function filltoDos() {
   for (let i = 0; i < allTasks.length; i++) {
     const task = allTasks[i];
     toDos.push(task); 
-     console.log(task);
   }
 }
 
@@ -47,10 +46,10 @@ function renderToDo() {
   let toDoContainer = document.getElementById("toDo");
   toDoContainer.innerHTML = "";
 
-  toDos.forEach(task => {
-    const taskHtml = createTaskHtml(task, task["id"]);
+  for (let i = 0; i < toDos.length; i++) {
+    const taskHtml = createTaskHtml(toDos[i], toDos[i]["task-id"]);
     toDoContainer.innerHTML += taskHtml;
-  });
+  }
 }
 
 
@@ -58,10 +57,10 @@ function renderInProgress() {
   let inProgressContainer = document.getElementById("inProgress");
   inProgressContainer.innerHTML = "";
 
-  inProgress.forEach(task => {
-    const taskHtml = createTaskHtml(task, task["id"]);
+  for (let i = 0; i < inProgress.length; i++) {
+    const taskHtml = createTaskHtml(inProgress[i], inProgress[i]["task-id"]);
     inProgressContainer.innerHTML += taskHtml;
-  });
+  }
 }
 
 
@@ -69,10 +68,10 @@ function renderAwaitFeedback() {
   let awaitFeedbackContainer = document.getElementById("awaitFeedback");
   awaitFeedbackContainer.innerHTML = "";
 
-  awaitFeedback.forEach(task => {
-    const taskHtml = createTaskHtml(task, task["id"]);
+  for (let i = 0; i < awaitFeedback.length; i++) {
+    const taskHtml = createTaskHtml(awaitFeedback[i], awaitFeedback[i]["task-id"]);
     awaitFeedbackContainer.innerHTML += taskHtml;
-  });
+  }
 }
 
 
@@ -80,11 +79,12 @@ function renderDone() {
   let doneContainer = document.getElementById("done");
   doneContainer.innerHTML = "";
 
-  done.forEach(task => {
-    const taskHtml = createTaskHtml(task, task["id"]);
+  for (let i = 0; i < done.length; i++) {
+    const taskHtml = createTaskHtml(done[i], done[i]["task-id"]);
     doneContainer.innerHTML += taskHtml;
-  });
+  }
 }
+
 
 
 function openAndCloseNoTask() {
@@ -104,20 +104,24 @@ function openAndCloseNoTask() {
 }
 
 
-function createTaskHtml(task, i) {
-  let categoryValue = task["category"]
+function createTaskHtml(task, taskId) {
+  let categoryValue = task.category;
   let splitCategoryValue = categoryValue.split(" ");
   let firstWord = splitCategoryValue[0];
-    let categoryClass = firstWord.charAt(0).toLowerCase() + firstWord.slice(1);
-    return `
-          <div class="task" draggable="true" ondragstart="drag(event)">
-            <div class="${categoryClass}">${task["category"]}</div>
-            <div class="previewTitle">${task["title"]}</div>
-            <div class="previewDescription">${task["description"]}</div>
-          </div>
-          `;
+  let categoryClass = firstWord.charAt(0).toLowerCase() + firstWord.slice(1);
+
+  return `
+    <div class="task" onclick="openCurrentTask()" draggable="true" ondragstart="drag(event, '${taskId}')" id="${taskId}">
+      <div class="${categoryClass}">${task.category}</div>
+      <div class="previewTitle">${task.title}</div>
+      <div class="previewDescription">${task.description}</div>
+    </div>
+  `;
 }
 
+function openCurrentTask(){
+
+}
 
 function searchTasks() {
   let searchValue = document.getElementById("searchInput").value;
@@ -152,55 +156,61 @@ function drop(ev) {
   let taskId = ev.dataTransfer.getData("id");
   let taskElement = document.getElementById(taskId);
 
-  // Ermitteln, ob das Drop-Event auf einem 'NoTask'-Container stattfindet.
-  let isDroppedOnNoTask = ev.target.classList.contains('noTask');
+  if (!taskElement) return;
 
-  // Bestimmen des Zielcontainers basierend auf dem Ort des Drop-Events.
-  let targetElement;
-  
-  if (isDroppedOnNoTask) {
-    // Wählt den Container aus, der den 'NoTask'-Container umschließt.
-    targetElement = ev.target.nextElementSibling;
-  } else {
-    targetElement = ev.target;
+  let targetElement = ev.target.classList.contains('noTask') ? ev.target.nextElementSibling : ev.target;
+
+  while (targetElement && !targetElement.classList.contains('taskColumn')) {
+    targetElement = targetElement.parentElement;
   }
 
-  // Fügt das Element zum Zielcontainer hinzu, wenn möglich.
-  if (taskElement && targetElement && targetElement.appendChild) {
-    targetElement.appendChild(taskElement);
-  }
+  if (!targetElement) return;
 
-  let containerId = targetElement ? targetElement.id : null;
+  targetElement.appendChild(taskElement);
+
+  let containerId = targetElement.id;
   if (!containerId) return;
 
-  let taskToMove = findTaskById(taskElement);
+  let taskToMove = findTaskById(taskId);
   if (!taskToMove) return;
 
   removeTaskFromCurrentList(taskToMove);
 
-  if (containerId === "toDo") {
+  switch (containerId) {
+    case "toDo":
       toDos.push(taskToMove);
-  } else if (containerId === "inProgress") {
+      break;
+    case "inProgress":
       inProgress.push(taskToMove);
-  } else if (containerId === "awaitFeedback") {
+      break;
+    case "awaitFeedback":
       awaitFeedback.push(taskToMove);
-  } else if (containerId === "done") {
+      break;
+    case "done":
       done.push(taskToMove);
+      break;
   }
-
-  renderallTasks();
   openAndCloseNoTask();
+  renderallTasks();
+  
 }
+
 
 
 function findTaskById(taskId) {
-  return [...toDos, ...inProgress, ...awaitFeedback, ...done].find(task => task["id"] == taskId);
+  return [...toDos, ...inProgress, ...awaitFeedback, ...done].find(task => task["task-id"] == taskId);
 }
 
-
-function removeTaskFromCurrentList(task) {
-  toDos = toDos.filter(t => t.id !== task["id"]);
-  inProgress = inProgress.filter(t => t.id !== task["id"]);
-  awaitFeedback = awaitFeedback.filter(t => t.id !== task["id"]);
-  done = done.filter(t => t.id !== task["id"]);
+function removeTaskFromCurrentList(taskToRemove) {
+  // Entfernt das Task-Objekt nur aus seiner aktuellen Liste
+  if (toDos.includes(taskToRemove)) {
+    toDos = toDos.filter(task => task["task-id"] !== taskToRemove["task-id"]);
+  } else if (inProgress.includes(taskToRemove)) {
+    inProgress = inProgress.filter(task => task["task-id"] !== taskToRemove["task-id"]);
+  } else if (awaitFeedback.includes(taskToRemove)) {
+    awaitFeedback = awaitFeedback.filter(task => task["task-id"] !== taskToRemove["task-id"]);
+  } else if (done.includes(taskToRemove)) {
+    done = done.filter(task => task["task-id"] !== taskToRemove["task-id"]);
+  }
 }
+
