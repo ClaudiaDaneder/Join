@@ -110,7 +110,7 @@ function createTaskHtml(task, i) {
   let firstWord = splitCategoryValue[0];
     let categoryClass = firstWord.charAt(0).toLowerCase() + firstWord.slice(1);
     return `
-          <div class="task" draggable="true" ondragstart="drag(event, this.id)" id="${i}">
+          <div class="task" draggable="true" ondragstart="drag(event)">
             <div class="${categoryClass}">${task["category"]}</div>
             <div class="previewTitle">${task["title"]}</div>
             <div class="previewDescription">${task["description"]}</div>
@@ -141,7 +141,7 @@ function allowDrop(ev) {
 
 
 function drag(ev,id) {
-  ev.dataTransfer.setData("text", id);
+  ev.dataTransfer.setData("id", id);
   ev.dataTransfer.dropEffect = "move";
 }
 
@@ -152,20 +152,28 @@ function drop(ev) {
   let taskId = ev.dataTransfer.getData("id");
   let taskElement = document.getElementById(taskId);
 
-  if (taskElement && ev.target.appendChild) {
-      ev.target.appendChild(taskElement);
+  // Ermitteln, ob das Drop-Event auf einem 'NoTask'-Container stattfindet.
+  let isDroppedOnNoTask = ev.target.classList.contains('noTask');
+
+  // Bestimmen des Zielcontainers basierend auf dem Ort des Drop-Events.
+  let targetElement;
+  
+  if (isDroppedOnNoTask) {
+    // Wählt den Container aus, der den 'NoTask'-Container umschließt.
+    targetElement = ev.target.nextElementSibling;
+  } else {
+    targetElement = ev.target;
   }
 
-  // Initialisiert targetElement mit dem Ziel des Drop-Events.
-  let targetElement = ev.target;
-
+  // Fügt das Element zum Zielcontainer hinzu, wenn möglich.
+  if (taskElement && targetElement && targetElement.appendChild) {
+    targetElement.appendChild(taskElement);
+  }
 
   let containerId = targetElement ? targetElement.id : null;
-  console.log(containerId)
   if (!containerId) return;
 
   let taskToMove = findTaskById(taskElement);
-  console.log(taskToMove)
   if (!taskToMove) return;
 
   removeTaskFromCurrentList(taskToMove);
