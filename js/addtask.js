@@ -59,9 +59,9 @@ async function saveToStorage(task) {
  */
 async function identifyTaskId() {
     let allSavedTasks = JSON.parse(await getItem('allTasks'));
-    lastID = allSavedTasks.length;
-    if (!lastID) {
-        lastID = 0;
+    let lastID = -1;
+    if (Array.isArray(allSavedTasks)) {
+        lastID = allSavedTasks.length;
     }
     return lastID + 1;
 }
@@ -117,7 +117,7 @@ function loadContactsIntoDropdown(allContacts) {
             let contactName = contact['name'];
             let contactColor = contact['color'];
             let initials = initialsLoad(contactName);
-            assignee.innerHTML += renderContacts(contactName, contactColor, initials);
+            assignee.innerHTML += renderContacts(contactName, contactColor, initials, i);
         }
     }
 }
@@ -139,9 +139,9 @@ function noContactsToShow() {
  * @param {string} initials Initials of the contact
  * @returns {string}
  */
-function renderContacts(contactName, contactColor, initials) {
-    return `<label class="checkbox-option">
-    <input type="checkbox" value="${contactName}">
+function renderContacts(contactName, contactColor, initials, i) {
+    return `<label class="checkbox-option" id="checkbox-option_${i}" onclick="changeContactColor(${i})">
+    <img id="checkbox_${i}" src="./img/addtask_contacts_checkbox_empty.svg">
     <div class="name-plus-circle"><div class="assignee-circle ${contactColor}">${initials}</div>${contactName}</div></label>`;
 }
 
@@ -151,13 +151,15 @@ function renderContacts(contactName, contactColor, initials) {
 function updateSelectedContacts() {
     selectedContacts = [];
 
-    let checkboxOptions = document.querySelectorAll('.checkbox-option input[type="checkbox"]');
+    let checkboxOptions = document.querySelectorAll('.checkbox-option');
     checkboxOptions.forEach(function (checkbox) {
-        if (checkbox.checked) {
-            selectedContacts.push(checkbox.value);
+        if (checkbox.classList.contains('checkbox-option-selected')) {
+            let contactName = checkbox.querySelector('.name-plus-circle').childNodes[1].textContent.trim();
+            selectedContacts.push(contactName);
         }
     });
     generateSelectedAssigneesList();
+    console.log(selectedContacts)
 }
 
 /**
@@ -222,6 +224,7 @@ document.addEventListener('click', function (event) {
         dropdown.classList.remove('active');
         updateSelectedContacts();
     }
+    updateSelectedContacts();
 });
 
 /**
@@ -340,3 +343,41 @@ function redirectToBoard() {
         window.location.href = 'board.html';
     }, 2200);
 }
+
+
+function changeContactColor(i) {
+    let checkboxOption = document.getElementById(`checkbox-option_${i}`);
+    checkboxOption.classList.toggle('checkbox-option-selected');
+    
+    let checkboxImage = document.getElementById(`checkbox_${i}`);
+    let contactName = checkboxOption.querySelector('.name-plus-circle').childNodes[1].textContent.trim();
+    
+    if (checkboxOption.classList.contains('checkbox-option-selected')) {
+        checkboxImage.src = './img/addtask_contacts_checkbox_checked.svg';
+        selectedContacts.push(contactName);
+    } else {
+        checkboxImage.src = './img/addtask_contacts_checkbox_empty.svg';
+        selectedContacts = selectedContacts.filter(name => name !== contactName);
+    }
+    generateSelectedAssigneesList();
+}
+
+
+/*function changeContactColor(i) {
+
+    let checkboxOption = document.getElementById(`checkbox-option_${i}`);
+    checkboxOption.classList.toggle('checkbox-option-selected');
+
+    let checkboxImage = document.getElementById(`checkbox_${i}`);
+    let contactName = checkboxOption.querySelector('.name-plus-circle').childNodes[1].textContent.trim();
+    
+    if (selectedContacts.includes(contactName)) {
+        checkboxImage.src = './img/addtask_contacts_checkbox_checked.svg';
+    } else {
+        checkboxImage.src = './img/addtask_contacts_checkbox_empty.svg';
+    }
+
+    document.getElementById(`checkbox_${i}`).src = './img/addtask_contacts_checkbox_checked.svg'
+}
+
+*/
