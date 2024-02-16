@@ -179,10 +179,24 @@ function changeContactColor(i) {
     }
 }
 
+
+
+
+function generateSelectedAssigneesList() {
+    selectedAssignees.innerHTML = '';
+    for (let c = 0; c < selectedContacts.length; c++) {
+        let selectedContact = selectedContacts[c];
+        let contactName = selectedContact.name;
+        let contactColor = selectedContact.color;
+        let initials = initialsLoad(contactName);
+        selectedAssignees.innerHTML += `<div class="assignee-circle ${contactColor}" title="${contactName}">${initials}</div>`;
+    }
+}
+
 /**
  * This function is used to generate colored circles with the initials of the contacts that have been picked from the contacts-dropdown (i.e. have been pushed into the array 'selectedContacts').
  */
-function generateSelectedAssigneesList() {
+/*function generateSelectedAssigneesList() {
     selectedAssignees.innerHTML = '';
     for (let c = 0; c < selectedContacts.length; c++) {
         let selectedContact = allContacts.find(contact => contact.name === selectedContacts[c]);
@@ -193,6 +207,7 @@ function generateSelectedAssigneesList() {
         }
     }
 }
+*/
 
 /**
  * This function is used to check if one of the 3 priority buttons has been activated. If so, the chosen priority is set as 'prio' for the current task.
