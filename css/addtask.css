@@ -70,13 +70,15 @@ select,
 .dropdown {
     appearance: unset;
     -moz-appearance: none;
-    /* Firefox */
     -webkit-appearance: none;
-    /* Safari and Chrome */
     background-image: url(/img/addtask_icon_dropdown-menu.svg);
     background-repeat: no-repeat;
     background-position-x: calc(100% - 8px);
     background-position-y: 50%;
+}
+
+select.active, .dropdown.active {
+ background-image: url(/img/addtask_icon_dropdown-menu-180.svg);   
 }
 
 button:hover,
@@ -88,6 +90,14 @@ a:hover {
     cursor: pointer;
 }
 
+select:hover,
+.dropdown:hover {
+    background-image: url(/img/addtask_icon_dropdown-menu_shadow.png);
+}
+
+select.active:hover, .dropdown.active:hover {
+    background-image: url(/img/addtask_icon_dropdown-menu-180_shadow.png);
+}
 
 .main-container {
     position: relative;
@@ -253,7 +263,7 @@ hr {
 .button-prio-urgent:hover,
 .button-prio-medium:hover,
 .button-prio-low:hover {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18)
+    box-shadow: 0px 4px 4px 0px #00000040;
 }
 
 .button-prio-urgent {
@@ -409,15 +419,21 @@ hr {
     position: relative;
 }
 
-.checkbox-option:hover, .checkbox-option.selected {
+.checkbox-option:hover {
+    background-color: #eee;
+    border-radius: 10px;
+}
+
+.checkbox-option-selected, .checkbox-option-selected:hover {
     background-color: #2A3647;
     color: #fff;
     border-radius: 10px;
 }
 
-.checkbox-option input[type="checkbox"] {
+input[type="checkbox"] {
     margin-bottom: unset;
     width: unset;
+    outline-style: auto;
 }
 
 .no-contacts {
@@ -428,7 +444,6 @@ hr {
 
 input[type=checkbox], input[type=checkbox]:hover {
     accent-color: #2A3647 !important;
-    border: #fff !important;
 }
 
 .selected-assignees-list {
@@ -454,6 +469,7 @@ input[type=checkbox], input[type=checkbox]:hover {
     justify-content: center;
     color: #fff;
     font-size: 14px;
+    border: 2px solid #fff;
 }
 
 .assignee-circle:hover {
