@@ -36,6 +36,27 @@ body{
 .close-png{
     color: black;
 }
+.initial-and-name{
+    display: flex;
+    align-items: center;
+    
+}
+.initials{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    height: 42px;
+    width: 42px;
+    border-radius: 45px;
+    background-color: red;
+}
+.initials-first-and-last{
+    color: white;
+}
+.assigne{
+    color: black;
+}
 .width-240px{
     width: 240px;
 }

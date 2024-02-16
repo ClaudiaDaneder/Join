@@ -125,28 +125,61 @@ function openCurrentTask(taskId){
   let modulWindow = document.getElementById("modal-window");
   modulWindow.innerHTML = "";
   
-
   for (let i = 0; i < allTasks.length; i++) {
       const element = allTasks[i];
       
-      // Konvertieren beider IDs in integer
+      // Konvertieren beider IDs in Integer
       let elementTaskId = parseInt(element["task-id"]);
       let stringTaskId = parseInt(taskId);
       let category = element["category"];
       let firstPart = category.split(" ")[0].toLowerCase();
-      if (elementTaskId === stringTaskId) { 
+      
+      if (elementTaskId === stringTaskId) {
+          let assigneeHtml = "";
+          for (let j = 0; j < element["assignee"].length; j++) {
+            const assignee = element["assignee"][j];
+            let names = assignee.split(" ");
+            let initialFirst = "";
+            let initialLast = "";
+            
+            if (names.length > 0) {
+                // Erster Buchstabe des Vornamens
+                initialFirst = names[0].charAt(0).toUpperCase();
+                
+                if (names.length > 1) {
+                    // Erster Buchstabe des Nachnamens
+                    initialLast = names[1].charAt(0).toUpperCase();
+                }
+            }
+            
+            assigneeHtml += `<div class="initial-and-name">
+                <div class="initials">
+                  <h3 class="initials-first-and-last">${initialFirst}</h3>
+                  <h3 class="initials-first-and-last">${initialLast}</h3>
+                </div>
+                <h3 class="assigne">${assignee}</h3>
+            </div>`;
+        }
+        
+          
           modulWindow.innerHTML +=`
           <div class="overHeadline">
               <div class="${firstPart}"><h2>${element["category"]}</h2></div>
               <div> <img onclick="closeModal()" class="close-png" src="./img/close.png" alt=""></div>
           </div>
           <div class="Headline"><h1 class="current-task-headline">${element["title"]} </h1></div>
+          <div class="description"><h3 class="current-task-description">${element["description"]} </h3></div>
+
           <div class="due-date"><h3>Due date: ${element["due-date"]}</h3></div>
           <div class="current-prio"><h3 class="prio">Priotiy: ${element["prio"]} </h3></div>
+          <div class="assigne-container" id="assigne">
+          <class="assigneeHtml">${assigneeHtml}
+          </div>
           `;
       }
   }
 }
+
 
 document.addEventListener('DOMContentLoaded', (event) => {
   let modalWindow = document.getElementById("modal-window");
