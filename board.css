@@ -6,6 +6,9 @@
     font-family: 'interRegular';
     src: url('fonts/inter-v13-latin-regular.woff2');
 }
+h3{
+    margin: 0;
+}
 body{
     margin: 0;
 }
@@ -16,18 +19,32 @@ body{
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
 }
+.rotating {
+    transition: transform 0.37s ease-in-out; /* sanfte Animation */
+    transform-origin: left bottom; /* Drehpunkt auf die linke untere Ecke setzen */
+    transform: rotate(8deg); /* Drehung um 35 Grad */
+  }
+  
+  
+  
+  
 .overlayAndNewWindow{
     display: flex;
     justify-content: center;
     align-items: center;
 }
-#modal-window {
+#modal-window {   
+    display: flex;
+    flex-direction: column;
+    gap: 24px; 
     position: fixed;
-    margin-left: 36vw;
-    margin-top: 10vh;
+    margin-left: 40vw;
+    margin-top: 4vh;
     height: 80vh;
-    width: 50vw;
+    width: 33vw;
     background-color: white;
+    padding: 48px 40px 48px 40px;
+    border-radius: 30px;
 }
 .overHeadline{
     display: flex;
@@ -36,9 +53,17 @@ body{
 .close-png{
     color: black;
 }
+.color-dar-blue{
+    color: #42526E;
+}
+.due-date{
+    display: flex;
+    gap: 25px;
+}
 .initial-and-name{
     display: flex;
     align-items: center;
+    gap: 16px;
     
 }
 .initials{
@@ -57,6 +82,11 @@ body{
 .assigne{
     color: black;
 }
+.assigne-container{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
 .width-240px{
     width: 240px;
 }
@@ -66,8 +96,9 @@ body{
     align-items: center;
     justify-content: flex-start;
     padding-top: 60px;
-    padding-left: 233px;
+    padding-left: 253px;
     padding-bottom: 35px;
+    padding-right: 20px;
 }
 .content{
     display: flex;
@@ -194,6 +225,7 @@ body{
     padding: 4px 16px 4px 16px;
     background-color: #1FD7C1;
     color: #FFFFFF;
+    margin-right: 60px;
 }
 .user{
     font-family: interRegular;
@@ -201,6 +233,7 @@ body{
     padding: 4px 16px 4px 16px;
     background-color: #0038FF;
     color: #FFFFFF;
+    margin-right: 88px;
 }
 .previewTitle{
     font-family: inter700;
