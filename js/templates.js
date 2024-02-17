@@ -161,3 +161,40 @@ function notClose(event) {
 }
 
 /*Contacts Templates*/
+
+/*Login and Sign up Templates*/
+function loginstart() {
+  return /*html*/`
+  <div class="loginHeader">Log in
+      <div class="line"></div>
+  </div>
+  <div class="loginForm" id="loginForm">
+      <div class="input"><input type="email" placeholder="Email" required><img src="./img/emailContact.svg"></div>
+      <div class="input"><input type="password" placeholder="Password" id="passwordchangePW" onclick="changePWImg('changePW'); notClose(event)" required><img id="changePW" src="./img/password.svg"></div>
+      <div class="checkbox" id="checkbox"><img onclick="rememberMe()" id="reme" src="./img/unchecked.svg"> Remember me</div>
+  </div>
+  <div class="loginButton">
+      <button class="button" type="submit">Log in</button>
+      <a href="summary.html">Guest Log in</a>
+  </div>
+  `;
+}
+
+function sign_upStart() {
+  return /*html*/`
+  <div class="loginHeader"><img onclick="loginSite(); notClose(event)" class="backTo" src="./img/backTo.svg">Sign Up
+      <div class="line"></div>
+  </div>
+  <div class="loginForm" id="loginForm">
+  <div class="input"><input type="text" placeholder="Name" required><img src="./img/personContact.svg"></div>
+      <div class="input"><input type="email" placeholder="Email" required><img src="./img/emailContact.svg"></div>
+      <div class="input"><input type="password" placeholder="Password" id="passwordchangePWsign" onclick="changePWImg('changePWsign'); notClose(event)" required><img id="changePWsign" src="./img/password.svg"></div>
+      <div class="input"><input type="password" placeholder="Confirm Password" id="passwordchangePWsignC" onclick="changePWImg('changePWsignC'); notClose(event)" required><img id="changePWsignC" src="./img/password.svg"></div>
+      <div class="checkbox" id="checkbox"><img onclick="rememberMe()" id="reme" src="./img/unchecked.svg"> I accept the <a class="privacy" href="#">Privacy policy</a></div>
+  </div>
+  <div class="loginButton" id="disabled">
+      <button type="submit" class="buttonDisabled" id="anable" disabled>Sign up</button>
+  </div>
+  `;
+}
+/*Login and Sign up Templates*/
