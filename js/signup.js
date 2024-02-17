@@ -1,20 +1,3 @@
-let user = [];
-let contactsKey = 'allContacts';
-
-
-async function signUpLoad() {
-    loadUsers();
-}
-
-async function loadUsers() {
-    try {
-        user = JSON.parse(await getItem(`${contactsKey}`));
-        console.log(user);
-    } catch (e) {
-        console.error('Loading error:', e);
-    }
-}
-
 function checkPasswords() {
     let password = document.getElementById('passwordchangePWsign');
     let passwordC = document.getElementById('passwordchangePWsignC');

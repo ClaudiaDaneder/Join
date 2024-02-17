@@ -163,8 +163,9 @@ function loginstart() {
       <div class="line"></div>
   </div>
   <div class="loginForm" id="loginForm">
-      <div class="input"><input type="email" placeholder="Email" required><img src="./img/emailContact.svg"></div>
-      <div class="input"><input type="password" placeholder="Password" id="passwordchangePW" onclick="changePWImg('changePW'); notClose(event)" required><img id="changePW" src="./img/password.svg"></div>
+      <div class="input" id="wrongUserEmail"><input type="email" id="userEmail" placeholder="Email" required><img src="./img/emailContact.svg"></div>
+      <div class="input" id="wrongUserPass"><input type="password" placeholder="Password" id="passwordchangePW" onclick="changePWImg('changePW'); notClose(event)" required><img id="changePW" src="./img/password.svg"></div>
+      <div id="wrong"></div>
       <div class="checkbox" id="checkbox"><img onclick="rememberMe()" id="reme" src="./img/unchecked.svg"> Remember me</div>
   </div>
   <div class="loginButton">

@@ -10,17 +10,18 @@
     <script src="./js/login.js"></script>
     <script src="./js/storage.js"></script>
     <script src="./js/signup.js"></script>
+    <script src="./js/loginSite.js"></script>
     <title>Document</title>
 </head>
 
-<body onload="logoSize()" onclick="pwIdInfo()">
+<body onload="init()" onclick="pwIdInfo()">
     <div id="secSign">You Signed Up seccesfully</div>
     <img class="logoIMG" id="logoIMG" src="./img/join_logo_dark.svg">
     <div class="sign_up animated fadeIn" id="sign_up">
         <p>Not a Join user?</p>
         <div class="sign_up_button" onclick="notClose(event), sign_up()">Sign up</div>
     </div>
-    <form action="#" onsubmit="logedin(); return false" id="logSign">
+    <form action="#" onsubmit="userLogin(); return false" id="logSign">
         <div class="login animated fadeIn" id="login"></div>
     </form>
 </body>

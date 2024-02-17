@@ -1,4 +1,21 @@
 let remeChecked = [0];
+let user = [];
+let contactsKey = 'allContacts';
+
+
+async function init() {
+    loadUsers();
+    logoSize();
+}
+
+async function loadUsers() {
+    try {
+        user = JSON.parse(await getItem(`${contactsKey}`));
+        console.log(user);
+    } catch (e) {
+        console.error('Loading error:', e);
+    }
+}
 
 function logoSize() {
     let login = document.getElementById('login');
@@ -16,6 +33,8 @@ function loginSite() {
     signUpStyle('animated_Ou', 'fadeOut', 'animated', 'fadeIn');
     loginStyle('493px', '652px', '48px 115px 48px 115px', loginstart());
     loginFormStyle('196px', '20px', 'flex-start', '39px');
+    let form = document.getElementById('logSign');
+    form.setAttribute('onsubmit', 'userLogin(); return false');
 }
 
 function sign_up() {
@@ -25,7 +44,6 @@ function sign_up() {
     signUpLoad();
     let form = document.getElementById('logSign');
     form.setAttribute('onsubmit', 'checkPasswords(); return false');
-    console.log(form);
 }
 
 function signUpStyle(animated, fadeIn, animated_Out, fadeOut) {
