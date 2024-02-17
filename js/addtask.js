@@ -1,6 +1,7 @@
 let allTasks = [];
 let subtasks = [];
 let selectedContacts = [];
+
 let selectedPriority = 'medium';
 
 let title = document.getElementById('title');
@@ -140,13 +141,13 @@ function noContactsToShow() {
  * @returns {string}
  */
 function renderContacts(contactName, contactColor, initials, i) {
-    return `<label class="checkbox-option" id="checkbox-option_${i}" onclick="changeContactColor(${i})">
+    return `<label class="checkbox-option" id="checkbox-option_${i}" onclick="changeSelectedContactBackground(${i})">
     <img id="checkbox_${i}" src="./img/addtask_contacts_checkbox_empty.svg">
     <div class="name-plus-circle"><div class="assignee-circle ${contactColor}">${initials}</div>${contactName}</div></label>`;
 }
 
 /**
- * This function is used to record all checked checkboxes within the contacts-dropdown and push the values into the array 'selectedContacts'.
+ * This function is used to record all checked checkboxes within the contacts-dropdown and push the values (names and assigned colors) into the array 'selectedContacts'.
  */
 function updateSelectedContacts() {
     selectedContacts = [];
@@ -156,32 +157,35 @@ function updateSelectedContacts() {
         if (checkbox.classList.contains('checkbox-option-selected')) {
             let contactName = checkbox.querySelector('.name-plus-circle').childNodes[1].textContent.trim();
             let contactColor = checkbox.querySelector('.assignee-circle').classList[1];
-            selectedContacts.push({'name': contactName, 'color': contactColor});
+            selectedContacts.push({ 'name': contactName, 'color': contactColor });
         }
     });
     generateSelectedAssigneesList();
 }
 
 
-function changeContactColor(i) {
+/**
+ * This function is used to change the background color and font color of selected contacts in the contact-dropdown. With colors, it also changes the image of the checkbox from empty to checked.
+ * 
+ * @param {number} i 
+ */
+function changeSelectedContactBackground(i) {
     let checkboxOption = document.getElementById(`checkbox-option_${i}`);
     checkboxOption.classList.toggle('checkbox-option-selected');
-    
+
     let checkboxImage = document.getElementById(`checkbox_${i}`);
-    let contactName = checkboxOption.querySelector('.name-plus-circle').childNodes[1].textContent.trim();
-    
+
     if (checkboxOption.classList.contains('checkbox-option-selected')) {
         checkboxImage.src = './img/addtask_contacts_checkbox_checked.svg';
-        selectedContacts.push(contactName);
     } else {
         checkboxImage.src = './img/addtask_contacts_checkbox_empty.svg';
-        selectedContacts = selectedContacts.filter(name => name !== contactName);
     }
 }
 
 
-
-
+/**
+ * This function is used to generate colored circles with the initials of the contacts that have been picked from the contacts-dropdown (i.e. have been pushed into the array 'selectedContacts').
+ */
 function generateSelectedAssigneesList() {
     selectedAssignees.innerHTML = '';
     for (let c = 0; c < selectedContacts.length; c++) {
@@ -194,30 +198,12 @@ function generateSelectedAssigneesList() {
 }
 
 /**
- * This function is used to generate colored circles with the initials of the contacts that have been picked from the contacts-dropdown (i.e. have been pushed into the array 'selectedContacts').
- */
-/*function generateSelectedAssigneesList() {
-    selectedAssignees.innerHTML = '';
-    for (let c = 0; c < selectedContacts.length; c++) {
-        let selectedContact = allContacts.find(contact => contact.name === selectedContacts[c]);
-        if (selectedContact) {
-            let contactColor = selectedContact.color;
-            let initials = initialsLoad(selectedContact.name);
-            selectedAssignees.innerHTML += `<div class="assignee-circle ${contactColor}" title="${selectedContact.name}">${initials}</div>`;
-        }
-    }
-}
-*/
-
-/**
  * This function is used to check if one of the 3 priority buttons has been activated. If so, the chosen priority is set as 'prio' for the current task.
  * 
  * @param {string} task 
  */
 function checkPriority(task) {
-    if (selectedPriority) {
-        task.prio = selectedPriority;
-    }
+    task.prio = selectedPriority;
 }
 
 /**
@@ -306,14 +292,14 @@ function toggleCategoryDropdown() {
 }
 
 /**
- * This function is used to update the value of the category-dropdown and close the dropdown once a category has been chosen.
+ * This function is used to update the value of the category-dropdown, put the value also into the hidden input field (needed for form validation) and close the dropdown once a category has been chosen.
  * 
  * @param {string} category Category of the task, either 'User Story' or 'Technical Task'
  */
 function selectCategory(category) {
     categoryField.innerHTML = category;
     toggleCategoryDropdown();
-    document.getElementById('hidden-dropdown').value = category;
+    hiddenCategoryDropdown.value = category;
 }
 
 /**
@@ -322,7 +308,7 @@ function selectCategory(category) {
 function resetForm() {
     document.getElementById('my-form').reset();
     document.querySelector('.create-button').disabled = false;
-    document.getElementById('category-dropdown-text').innerHTML = 'Select task category';
+    categoryField.innerHTML = 'Select task category';
     resetPrioButtons();
     resetCheckboxOptions();
     clearSubtaskList();
@@ -332,22 +318,21 @@ function resetForm() {
  * This function resets the priority buttons to their initial state (=none is selected). This function is being triggered by the function {@link resetForm()}
  */
 function resetPrioButtons() {
-    if (selectedPriority) {
-        let selectedButton = document.querySelector(`.button-prio-${selectedPriority}`);
-        if (selectedButton) {
-            selectedButton.classList.remove('selected');
-        }
-        selectedPriority = null;
-    }
+    selectPriority('medium');
 }
+
 
 /**
  * This function is used to reset all checkboxes within the contacts-dropdown after either the 'clear' button has been pressed or a new task has been created.
  */
 function resetCheckboxOptions() {
-    let checkboxOptions = document.querySelectorAll('.checkbox-option input[type="checkbox"]');
+    let checkboxOptions = document.querySelectorAll('.checkbox-option');
     checkboxOptions.forEach(function (checkbox) {
-        checkbox.checked = false;
+        checkbox.classList.remove('checkbox-option-selected');
+        let checkboxImage = checkbox.querySelector('img');
+        if (checkboxImage) {
+            checkboxImage.src = './img/addtask_contacts_checkbox_empty.svg';
+        }
     });
     updateSelectedContacts();
 }
