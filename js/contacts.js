@@ -57,7 +57,9 @@ function returnArray(idShow, name, email, phone, color){
         "name": name.value, 
         "email": email.value, 
         "phone": phone.value, 
-        "color": color
+        "color": color,
+        "online": false,
+        "password": null
     };
 }
 
