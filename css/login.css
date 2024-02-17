@@ -320,3 +320,35 @@ body {
     cursor: default;
     transition: all 100ms ease-in-out;
 }
+
+#wrong{
+    width: 422px;
+    height: 14px;
+    color: #FF8190;
+    font-size: 12px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#secSign {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 326px;
+    height: 74px;
+    border-radius: 20px;
+    background: #2A3647;
+    box-shadow: 0px 0px 4px 0px #00000026;
+    transform: translateX(150vw);
+    transition: all 250ms ease-in-out;
+    z-index: 900;
+    color: #FFFFFF;
+    font-size: 20px;
+}

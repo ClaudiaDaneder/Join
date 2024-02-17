@@ -110,7 +110,7 @@ async function saveContact(i, id) {
     contacts[i]['name'] = nameEdit;
     contacts[i]['email'] = emailEdit;
     contacts[i]['phone'] = phoneEdit;
-    await setItem(contactsKey, JSON.stringify(contacts));
+    await setItem(`${contactsKey}`, JSON.stringify(contacts));
     showContact(id);
     init();
     savePopup('edit');
@@ -120,7 +120,7 @@ async function saveContact(i, id) {
 /**Delete Contact*/
 async function deleteContact(id) {
     contacts.splice(id, 1);
-    await setItem(contactsKey, JSON.stringify(contacts));
+    await setItem(`${contactsKey}`, JSON.stringify(contacts));
     firstLetter = [];
     let showContact = document.getElementById('showContact');
     showContact.innerHTML = '';
@@ -138,6 +138,12 @@ async function loadNewContact(name, email, phone, color, id, i) {
     let colorShow = await searchData(color);
     let array = await searchData(i);
     formNewContact.innerHTML = popupTempForm(nameShow, emailShow, phoneShow, buttonShow, colorShow, id, array);
+    let createEdit = document.getElementById('createEdit');
+    if(buttonShow == 'Save'){
+        createEdit.setAttribute('onsubmit', `saveContact(${i}, ${id}); return false`);
+    }else{
+        createEdit.setAttribute('onsubmit', 'createContact(); return false');
+    }
     loadCircle(id, color, 'circleEdit');
 }
 
@@ -210,12 +216,12 @@ function removeClassList() {
 /**Save Remote Storage */
 async function saveRemote(user) {
     contacts.push(user);
-    await setItem(contactsKey, JSON.stringify(contacts));
+    await setItem(`${contactsKey}`, JSON.stringify(contacts));
 }
 
 /**Load Remote Storage */
 async function loadRemote() {
-    let users = JSON.parse(await getItem(contactsKey));
+    let users = JSON.parse(await getItem(`${contactsKey}`));
     if (Array.isArray(users)) {
         // Stellen Sie sicher, dass jeder Benutzer in 'users' ein gültiges 'name'-Attribut hat
         contacts = users.filter(user => user && user['name']);

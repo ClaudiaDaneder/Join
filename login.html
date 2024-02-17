@@ -8,16 +8,19 @@
     <link rel="stylesheet" href="./css/login.css">
     <script src="./js/templates.js"></script>
     <script src="./js/login.js"></script>
+    <script src="./js/storage.js"></script>
+    <script src="./js/signup.js"></script>
     <title>Document</title>
 </head>
 
 <body onload="logoSize()" onclick="pwIdInfo()">
+    <div id="secSign">You Signed Up seccesfully</div>
     <img class="logoIMG" id="logoIMG" src="./img/join_logo_dark.svg">
     <div class="sign_up animated fadeIn" id="sign_up">
         <p>Not a Join user?</p>
         <div class="sign_up_button" onclick="notClose(event), sign_up()">Sign up</div>
     </div>
-    <form>
+    <form action="#" onsubmit="logedin(); return false" id="logSign">
         <div class="login animated fadeIn" id="login"></div>
     </form>
 </body>

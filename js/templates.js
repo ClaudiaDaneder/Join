@@ -31,18 +31,12 @@ function includeHTML() {
 function popupTempForm(nameShow, emailShow, phoneShow, button, color, id, i){
   let ini = initialsLoad(nameShow);
   let img = /*html*/`<div class="circleEdit" id="circleEdit${id}">${ini}</div>`;
-  let saveContact = 'createContact';
-  let saveId = '';
-  if(button == 'Save'){
-    saveContact = 'saveContact';
-    saveId = `${i}, ${id}`;
-  }
   if(!color){
     img = '<img class="clearContact" src="./img/clearcontackt.svg">';
   }
   return /*html*/`
         ${img}
-        <form action="#" onsubmit="${saveContact}(${saveId}); return false">
+        <form action="#" id="createEdit" onsubmit="createContact(); return false">
             <div class="input"><input type="text" id="name" value="${nameShow}" placeholder="Name" required><img src="./img/personContact.svg"></div>
             <div class="input"><input type="email" id="email" value="${emailShow}" placeholder="E-Mail" required><img src="./img/emailContact.svg"></div>
             <div class="input"><input type="number" id="phone" value="${phoneShow}" placeholder="Phone" required><img src="./img/phoneContact.svg"></div>
@@ -186,10 +180,11 @@ function sign_upStart() {
       <div class="line"></div>
   </div>
   <div class="loginForm" id="loginForm">
-  <div class="input"><input type="text" placeholder="Name" required><img src="./img/personContact.svg"></div>
-      <div class="input"><input type="email" placeholder="Email" required><img src="./img/emailContact.svg"></div>
+  <div class="input"><input type="text" placeholder="Name" id="name" required><img src="./img/personContact.svg"></div>
+      <div class="input" id="emailwrong"><input type="email" placeholder="Email" id="email" required><img src="./img/emailContact.svg"></div>
       <div class="input"><input type="password" placeholder="Password" id="passwordchangePWsign" onclick="changePWImg('changePWsign'); notClose(event)" required><img id="changePWsign" src="./img/password.svg"></div>
-      <div class="input"><input type="password" placeholder="Confirm Password" id="passwordchangePWsignC" onclick="changePWImg('changePWsignC'); notClose(event)" required><img id="changePWsignC" src="./img/password.svg"></div>
+      <div class="input" id="pwwrong"><input type="password" placeholder="Confirm Password" id="passwordchangePWsignC" onclick="changePWImg('changePWsignC'); notClose(event)" required><img id="changePWsignC" src="./img/password.svg"></div>
+      <div id="wrong"></div>
       <div class="checkbox" id="checkbox"><img onclick="rememberMe()" id="reme" src="./img/unchecked.svg"> I accept the <a class="privacy" href="#">Privacy policy</a></div>
   </div>
   <div class="loginButton" id="disabled">
