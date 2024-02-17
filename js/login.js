@@ -11,7 +11,6 @@ async function init() {
 async function loadUsers() {
     try {
         user = JSON.parse(await getItem(`${contactsKey}`));
-        console.log(user);
     } catch (e) {
         console.error('Loading error:', e);
     }
