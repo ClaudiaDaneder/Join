@@ -134,7 +134,7 @@ function createAssigneeHtml(assignees) {
       let initials = getInitials(assigneeName); // Annahme: getInitials verarbeitet einen String
       return `
           <div class="initial-and-name">
-              <div class="initials" style="background-color: ${assigneeObj.color};">
+              <div class="initials ${assigneeObj.color}">
                   <h3 class="initials-first-and-last">${initials}</h3>
               </div>
               <h3 class="assigne">${assigneeName}</h3>
@@ -176,20 +176,24 @@ function handleNoTaskFound() {
 }
 
 function generateTaskHtml(task, assigneeHtml) {
+  console.log(task);
   const firstPart = task.category.split(" ")[0].toLowerCase();
   return `
       <div class="overHeadline">
-          <div class="${firstPart}"><h2>${task.category}</h2></div>
+          <div class="${firstPart}"><h2 class="category-h2">${task["category"]}</h2></div>
           <div><img onclick="closeModal()" class="close-png" src="./img/close.png" alt=""></div>
       </div>
-      <div class="Headline"><h1 class="current-task-headline">${task.title} </h1></div>
-      <div class="description"><h3 class="current-task-description">${task.description} </h3></div>
+      <div class="Headline"><h1 class="current-task-headline">${task["title"]} </h1></div>
+      <div class="description"><h3 class="current-task-description">${task["description"]} </h3></div>
       <div class="due-date"><h3 class="color-dar-blue">Due date: </h3><h3>${task["due-date"].replace(/-/g, '/')}</h3></div>
-      <div class="current-prio"><h3 class="prio color-dar-blue">Priority: ${task.prio} </h3></div>
+      <div class="current-prio"><h3 class="prio color-dar-blue">Priority:</h3><h3 > ${task["prio"]} </h3></div>
       <div class="assigne-container" id="assigne">
           <h3 class="color-dar-blue">Assigned To: </h3>
           ${assigneeHtml}
-      </div>`;
+      </div>
+      <h3 class="current-subtask">Subtask:</h3>
+      <div class="subtasks">${task["subtasks"]}</div>
+      `;
 }
 
 

@@ -9,6 +9,12 @@
 h3{
     margin: 0;
 }
+h2{
+    margin: 0;
+}
+h1{
+    margin: 0;
+}
 body{
     margin: 0;
 }
@@ -74,7 +80,6 @@ body{
     height: 42px;
     width: 42px;
     border-radius: 45px;
-    background-color: red;
 }
 .initials-first-and-last{
     color: white;
@@ -90,14 +95,40 @@ body{
 .width-240px{
     width: 240px;
 }
+.lightorange{
+    background-color: #FF7A00;
+}
+.blue{
+    background-color: #0038FF;
+}
+.pink{
+    background-color: #FC71FF;
+}
+.current-task-headline{
+    font-family: inter700;
+    font-size: 61px;
+    line-height: 73.2px;
+}
+.current-task-description{
+    color: #A8A8A8;
+    font-family: interRegular;
+}
+.current-subtask{
+    font-family: interRegular;
+    color:#2A3647;
+}
+.current-prio{
+    display: flex;
+    gap: 25px;
+}
 .boardSiteContainer{
     display: flex;
     background-color: #F0F0F0;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 60px;
+    padding-top: 120px;
     padding-left: 253px;
-    padding-bottom: 35px;
+    height: calc(100vh - 120px);
     padding-right: 20px;
 }
 .content{
@@ -137,9 +168,7 @@ body{
     border: 0;
     font-family: interRegular;
     font-size: 20px;
-    
-
-}
+    }
 .input::placeholder {
     color:rgba(209, 209, 209, 1);
   }
