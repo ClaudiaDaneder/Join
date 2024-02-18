@@ -45,7 +45,7 @@ function checkPassData() {
 
 async function userOnlinesave(i){
     user[i]['online'] = true;
-    localStorage.setItem('userOnline', JSON.stringify(user[i]['id']));
+    localStorage.setItem('userOnline', JSON.stringify(user[i]['email']));
     await setItem(`${contactsKey}`, JSON.stringify(user));
 }
 
@@ -125,7 +125,7 @@ function directLogin(email){
         let userOnline = user[i]['online'];
         if(userEmail == email){
             if(userOnline == true){
-                localStorage.setItem('userOnline', JSON.stringify(user[i]['id']));
+                localStorage.setItem('userOnline', JSON.stringify(userEmail));
                 window.open('summary.html', '_self');
             }
         }

@@ -25,7 +25,7 @@ function logout(userFind) {
 
 async function userOnline() {
     for (let i = 0; i < onlineUser.length; i++) {
-        let userID = onlineUser[i]['id'];
+        let userID = onlineUser[i]['email'];
         if (yourId == userID) {
             onlineUser[i]['online'] = false;
             await setItem('allContacts', JSON.stringify(onlineUser));
@@ -40,11 +40,11 @@ function initals() {
     let logout = document.getElementById('logoutButton');
     if (yourId != null) {
         for (let i = 0; i < onlineUser.length; i++) {
-            if (onlineUser[i]['id'] == yourId) {
+            if (onlineUser[i]['email'] == yourId) {
                 names = onlineUser[i]['name'];
                 let nameParts = names.split(" ");
                 initial.innerHTML = nameParts.map(part => part.charAt(0)).join("");
-                logout.setAttribute('onclick', `logout(${yourId})`);
+                logout.setAttribute('onclick', `logout('${yourId}')`);
             }
         }
     } else {
