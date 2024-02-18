@@ -29,6 +29,7 @@ body{
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
 }
+
 .rotating {
     transition: transform 0.37s ease-in-out; /* sanfte Animation */
     transform-origin: left bottom; /* Drehpunkt auf die linke untere Ecke setzen */
@@ -96,6 +97,9 @@ body{
     flex-direction: column;
     gap: 8px;
 }
+.height-100Prozent{
+    height: 100%;
+}
 .width-240px{
     width: 240px;
 }
@@ -128,9 +132,46 @@ body{
     display: flex;
     gap: 25px;
 }
+.subtask-font{
+    font-family: interRegular;
+}
 .subtasks{
     display: flex;
+    flex-direction: column;
+    gap: 4px;
+    
+}
+.subtask-current-box{
+    display: flex;
     align-items: center;
+    gap:16px;
+}
+.delet-edit-box{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.edit-box{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.delete-box{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.delet-string{
+    font-size: 16px;
+    font-family: 'interRegular';
+}
+.edit-string{
+    font-size: 16px;
+    font-family: 'interRegular';
+}
+.delet-edit-container{
+    display: flex;
+    justify-content: space-between;
 }
 .boardSiteContainer{
     display: flex;
@@ -138,13 +179,14 @@ body{
     justify-content: flex-start;
     padding-top: 120px;
     padding-left: 253px;
-    height: calc(100vh - 120px);
     padding-right: 20px;
+}
+.calc-height-248px{
+    height: calc(100vh - 248px);
 }
 .content{
     display: flex;
     flex-direction: column;
-    height: 100%;
     width: 100%;
 }
 .boardSubhHader{
@@ -222,12 +264,13 @@ body{
     display: flex;
     justify-content: space-around;
     gap: 24px;
+    height: 80%;
 }
 .taskColumn{
     display: flex;
     flex-direction: column;
     gap: 16px;
-    height: 65vh;
+    height: 100%;
 }
 .taskContent{
     display: flex;

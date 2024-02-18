@@ -4,7 +4,8 @@ async function init() {
   await loadTaskFromStorage()
   filltoDos();
   renderallTasks();
-  includeHTML();  
+  includeHTML(); 
+  initOnline(); 
 }
 
 // Globale Variablen für die Aufgabenlisten
@@ -25,7 +26,7 @@ async function loadTaskFromStorage() {
 
 
 function filltoDos() {
-  
+  toDos=[];
   for (let i = 0; i < allTasks.length; i++) {
     const task = allTasks[i];
     toDos.push(task); 
@@ -86,7 +87,6 @@ function renderDone() {
 }
 
 
-
 function openAndCloseNoTask() {
   let toDo = document.getElementById("toDo");
   let inProgress = document.getElementById("inProgress");
@@ -124,40 +124,6 @@ function getInitials(name) {
   return initials.length > 1 ? initials : initials + ' '; // Fügt ein Leerzeichen hinzu, falls nur ein Initial vorhanden ist
 }
 
-function createAssigneeHtml(assignees) {
-  if (!Array.isArray(assignees)) {
-    return ''; // Frühzeitige Rückkehr, wenn assignees kein Array ist
-  }
-
-  return assignees.map(assigneeObj => {
-      let assigneeName = assigneeObj.name; // Zugriff auf die 'name'-Eigenschaft
-      let initials = getInitials(assigneeName); // Annahme: getInitials verarbeitet einen String
-      return `
-          <div class="initial-and-name">
-              <div class="initials ${assigneeObj.color}">
-                  <h3 class="initials-first-and-last">${initials}</h3>
-              </div>
-              <h3 class="assigne">${assigneeName}</h3>
-          </div>`;
-  }).join('');
-}
-
-
-
-function openCurrentTask(taskId) {
-  const { modalOverlay, modulWindow } = initializeDomElements();
-  modalOverlay.style.display = "block";
-  modulWindow.innerHTML = "";
-
-  const task = findTaskById(taskId);
-  if (!task) {
-      handleNoTaskFound();
-      return;
-  }
-  const assigneeHtml = createAssigneeHtml(task["assignee-infos"]);
-  modulWindow.innerHTML = generateTaskHtml(task, assigneeHtml);
-}
-
 
 function initializeDomElements() {
   const modalOverlay = document.getElementById("modal-overlay");
@@ -175,8 +141,78 @@ function handleNoTaskFound() {
   // Logik für den Fall, dass kein Task gefunden wird
 }
 
-function generateTaskHtml(task, assigneeHtml) {
-  console.log(task);
+
+function closeCurrentTask(){
+  let modalOverlay=document.getElementById("modal-overlay");
+  modalOverlay.style.display = "none";
+}
+
+
+function openCurrentTask(taskId) {
+  const { modalOverlay, modulWindow } = initializeDomElements();
+  modalOverlay.style.display = "block";
+  modulWindow.innerHTML = "";
+
+  const task = findTaskById(taskId);
+  if (!task) {
+      handleNoTaskFound();
+      return;
+  }
+  const subTasksHtml = createSubtasksHtml(task["subtasks"])
+  const assigneeHtml = createAssigneeHtml(task["assignee-infos"]);
+  modulWindow.innerHTML = generateTaskHtml(task, assigneeHtml,subTasksHtml);
+}
+
+
+function changeSubBox(i) {
+  var checkBox = document.getElementById("checkBox_" + i);
+  if (checkBox) {
+    let src = checkBox.getAttribute('src');
+    if (src.endsWith("img/none-checked.png")) {
+      checkBox.src="./img/checked.png";
+    }
+    if (src.endsWith("img/checked.png")) {
+      checkBox.src="./img/none-checked.png";
+    }
+  }
+}
+
+
+function createAssigneeHtml(assignees) {
+  if (!Array.isArray(assignees)) {
+    return '';
+  }
+  
+
+  let html = '';
+  for (let i = 0; i < assignees.length; i++) {
+    let assigneeObj = assignees[i];
+    let assigneeName = assigneeObj.name;
+    let initials = getInitials(assigneeName);
+    html += `
+        <div class="initial-and-name">
+            <div class="initials ${assigneeObj.color}">
+                <h3 class="initials-first-and-last">${initials}</h3>
+            </div>
+            <h3 class="assignee">${assigneeName}</h3>
+        </div>`;
+  }
+
+  return html;
+}
+
+
+function createSubtasksHtml(subTasks){
+  let subTaskhtml = '';
+  for (let i = 0; i < subTasks.length; i++) {
+      let subTask = subTasks[i];
+      subTaskhtml +=`<div class="subtask-current-box"><img id="checkBox_${i}" onclick="changeSubBox(${i})" src=./img/none-checked.png><h4 class="subtask-font">${subTask}</h4></div>`
+  }
+  return subTaskhtml;
+}
+
+
+function generateTaskHtml(task, assigneeHtml,subTasksHtml) {
   const firstPart = task.category.split(" ")[0].toLowerCase();
   return `
       <div class="overHeadline">
@@ -193,13 +229,48 @@ function generateTaskHtml(task, assigneeHtml) {
       </div>
         <h3 class="current-subtask">Subtask:</h3>
         <div class="subtasks">
-        <img id="taskId_${task["task-id"]}" onclick="checkedBox(${task["task-id"]})" src="./img/none-checked.png">
-        <h4>${task['subtasks']}</h4>
+        ${subTasksHtml}
+      </div>
+      <div class="delet-edit-container">
+        <div></div>
+        <div class="delet-edit-box">
+          <div class="delete-box" onclick="deletThisArray(${task['task-id']})">
+            <div class=""><img class="delete-svg" src="./img/delete.svg"></div>
+            <div class=""><h4 class="delet-string">Delete</h4></div>
+          </div>
+          <img src="./img/delet-edit-line.png">
+          <div onclick="editTask()" class="edit-box">
+            <div class=""><img class="edit-svg" src="./img/edit.svg"></div>
+            <div class=""  ><h4 class="edit-string">Edit</h4></div>
+          </div>
+        </div>
       </div>
       `;
 }
 
-function checkedBox(taskId){
+function editTask(){
+  
+}
+
+async function deletThisArray(taskId) {
+  let foundIndex = -1;
+
+  for (let i = 0; i < allTasks.length; i++) {
+      if (allTasks[i]["task-id"] === taskId) {
+          foundIndex = i;
+          break;
+      }
+  }
+
+  if (foundIndex !== -1) {
+      allTasks.splice(foundIndex, 1);
+      await setItem('allTasks', allTasks);
+      console.log(`Task mit ID ${taskId} wurde gelöscht.`);
+  } else {
+      console.log(`Task mit ID ${taskId} nicht gefunden.`);
+  }
+  closeCurrentTask();
+  await init();
   
 }
 
@@ -233,7 +304,7 @@ function searchTasks() {
       matchingTasks.push(allTasks[i]);
     }
   }
-  console.log("matchingTasks" + matchingTasks)
+  console.log("matchingTasks:" + matchingTasks)
   return matchingTasks;
   
 }
@@ -323,7 +394,6 @@ function findTaskById(taskId) {
 
 
 function removeTaskFromCurrentList(taskToRemove) {
-  // Entfernt das Task-Objekt nur aus seiner aktuellen Liste
   if (toDos.includes(taskToRemove)) {
     toDos = toDos.filter(task => task["task-id"] !== taskToRemove["task-id"]);
   } else if (inProgress.includes(taskToRemove)) {
