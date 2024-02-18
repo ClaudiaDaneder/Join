@@ -43,7 +43,6 @@ function sign_up() {
     signUpStyle('animated', 'fadeIn', 'animated_Out', 'fadeOut');
     loginStyle('550px', '598px', '48px 88px 48px 88px', sign_upStart());
     loginFormStyle('326px', '16px', 'center', 'unset');
-    signUpLoad();
     let form = document.getElementById('logSign');
     form.setAttribute('onsubmit', 'checkPasswords(); return false');
     remeChecked = [];
