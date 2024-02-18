@@ -15,54 +15,60 @@ async function loadOnlineUsers() {
     }
 }
 
-function logout(userFind){
-    if(userFind != 'guest'){
+function logout(userFind) {
+    if (userFind != 'guest') {
         userOnline();
-    }else{
+    } else {
         window.open('login.html', '_self');
     }
 }
 
-async function userOnline(){
-    for(let i = 0; i < onlineUser.length; i++){
+async function userOnline() {
+    for (let i = 0; i < onlineUser.length; i++) {
         let userID = onlineUser[i]['id'];
-        if(yourId == userID){
+        if (yourId == userID) {
             onlineUser[i]['online'] = false;
             await setItem('allContacts', JSON.stringify(onlineUser));
+            localStorage.setItem('userOnline', JSON.stringify(null));
             window.open('login.html', '_self');
         }
     }
 }
 
-function initals(){
+function initals() {
     let initial = document.getElementById('initals');
     let logout = document.getElementById('logoutButton');
-    for (let i = 0; i < onlineUser.length; i++){
-        if(onlineUser[i]['id'] == yourId){
-            names = onlineUser[i]['name'];
-            let nameParts = names.split(" ");
-            initial.innerHTML = nameParts.map(part => part.charAt(0)).join("");
-            logout.setAttribute('onclick', `logout(${yourId})`);
+    if (yourId != null) {
+        for (let i = 0; i < onlineUser.length; i++) {
+            if (onlineUser[i]['id'] == yourId) {
+                names = onlineUser[i]['name'];
+                let nameParts = names.split(" ");
+                initial.innerHTML = nameParts.map(part => part.charAt(0)).join("");
+                logout.setAttribute('onclick', `logout(${yourId})`);
+            }
         }
+    } else {
+        initial.innerHTML = 'G';
+        logout.setAttribute('onclick', `logout('guest')`);
     }
 }
 
-function openUser(){
+
+
+function openUser() {
     let open = document.getElementById('logoutScreen');
-    if(open.style.display == 'flex'){
+    if (open.style.display == 'flex') {
         open.style.display = 'none';
-        console.log('verstecken');
-    }else{
-        console.log('zeigen');
+    } else {
         open.style.display = 'flex';
     }
 }
 
-function notice(){
+function notice() {
     console.log('Notice');
 }
 
-function policy(){
+function policy() {
     console.log('Policy');
 }
 

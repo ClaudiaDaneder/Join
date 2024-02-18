@@ -40,6 +40,19 @@ function loadNames(contactLetterLoad, i) {
 async function createContact() {
     let name = document.getElementById('name');
     let email = document.getElementById('email');
+    if (contactExist(name.value, email.value) == false) {
+        contactCreate();
+    } else {
+        savePopup('exist');
+    }
+
+}
+
+
+/**Finaly Create Contact */
+async function contactCreate() {
+    let name = document.getElementById('name');
+    let email = document.getElementById('email');
     let phone = document.getElementById('phone');
     let color = getColor(1, 9);
     let idShow = searchId();
@@ -51,13 +64,22 @@ async function createContact() {
     closePopup();
 }
 
+/**Check Contact Exist */
+function contactExist(name, email) {
+    if (contacts.find(user => user.name === name && user.email === email)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 /**Return a Array for Create Contact */
-function returnArray(idShow, name, email, phone, color){
+function returnArray(idShow, name, email, phone, color) {
     return {
-        "id": idShow, 
-        "name": name.value, 
-        "email": email.value, 
-        "phone": phone.value, 
+        "id": idShow,
+        "name": name.value,
+        "email": email.value,
+        "phone": phone.value,
         "color": color,
         "online": false,
         "password": null
@@ -140,9 +162,9 @@ async function loadNewContact(name, email, phone, color, id, i) {
     let array = await searchData(i);
     formNewContact.innerHTML = popupTempForm(nameShow, emailShow, phoneShow, buttonShow, colorShow, id, array);
     let createEdit = document.getElementById('createEdit');
-    if(buttonShow == 'Save'){
+    if (buttonShow == 'Save') {
         createEdit.setAttribute('onsubmit', `saveContact(${i}, ${id}); return false`);
-    }else{
+    } else {
         createEdit.setAttribute('onsubmit', 'createContact(); return false');
     }
     loadCircle(id, color, 'circleEdit');
@@ -238,14 +260,14 @@ function getColor(min, max) {
 
 function searchColor(color) {
     if (color == 1) { return 'darkorange'; } else
-    if (color == 2) { return 'orange'; } else
-    if (color == 3) { return 'lightorange'; } else
-    if (color == 4) { return 'pink'; } else
-    if (color == 5) { return 'lightpink'; } else
-    if (color == 6) { return 'lightpurple'; } else
-    if (color == 7) { return 'purple'; } else
-    if (color == 8) { return 'blue'; } else
-    if (color == 9) { return 'cyan'; }
+        if (color == 2) { return 'orange'; } else
+            if (color == 3) { return 'lightorange'; } else
+                if (color == 4) { return 'pink'; } else
+                    if (color == 5) { return 'lightpink'; } else
+                        if (color == 6) { return 'lightpurple'; } else
+                            if (color == 7) { return 'purple'; } else
+                                if (color == 8) { return 'blue'; } else
+                                    if (color == 9) { return 'cyan'; }
 }
 
 /**Load First Letter of Name and Push this in a Array */

@@ -112,6 +112,8 @@ function savePopup(saveInfo){
     savePopup.innerHTML = 'Contact succesfully saved';
   }else if(saveInfo == 'delete'){
     savePopup.innerHTML = 'Contact deleted';
+  }else if(saveInfo == 'exist'){
+    savePopup.innerHTML = 'Contact Exist';
   }
   savePopup.style.transform = 'translatex(0)';
   setTimeout(() => {
