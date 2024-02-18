@@ -65,13 +65,11 @@
                         </div>
                     </div>
                     <p class="task-label">Subtasks</p>
-                    <div class="styled-subtask-field">
-                        <input class="subtask-field" type="text" placeholder="Add new subtask" id="subtasks"
+                    <div class="styled-subtaskfield">
+                        <input class="subtaskfield" type="text" placeholder="Add new subtask" id="subtasks"
                             oninput="substituteSubtaskButtons()">
-                        <div class="subtask-field-button-container">
-                            <button type="button" class="subtask-button-cancel"></button>
-                            <button type="button" class="subtask-button"><img
-                                    src="/img/addtask_icon_subtaskfield_plus.svg"></button>
+                        <div class="subtaskfield-button-container" id="subtaskfield-buttons">
+                            <button type="button" class="subtaskfield-button-general"><img src="/img/addtask_icon_subtaskfield_plus.svg"></button>
                         </div>
                     </div>
                     <ul id="subtask-list"></ul>

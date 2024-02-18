@@ -67,13 +67,13 @@ async function identifyTaskId() {
     return lastID + 1;
 }
 
+
 function substituteSubtaskButtons() {
-    document.getElementById('styled-subtask-field').innerHTML = 
-    `<button type="button" class="subtask-button-cancel" onclick="clearSubtaskField()">
-    </button>
-    <button type="button" class="subtask-button-cancel" onclick="addToSubtaskList()">
-        <img src="/img/addtask_icon_subtaskfield_check.svg">
-    </button>`;
+    document.getElementById('subtaskfield-buttons').innerHTML = `
+    <button type="button" class="subtaskfield-button-general" onclick="clearSubtaskField()"><img src="/img/addtask_icon_subtaskfield_cancel.svg"></button>
+    <hr>
+    <button type="button" class="subtaskfield-button-general" onclick="addToSubtaskList()"><img src="/img/addtask_icon_subtaskfield_check.svg"></button>
+    </div>`;
 }
 
 
