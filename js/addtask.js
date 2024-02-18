@@ -11,7 +11,7 @@ let selectedAssignees = document.getElementById('selected-assignees-list');
 let dueDate = document.getElementById('due-date');
 let categoryField = document.getElementById('category-dropdown-text');
 let subtaskField = document.getElementById('subtasks');
-let subtaskList = document.getElementById('subtask-list');
+let subtaskList = document.getElementById('subtasklist');
 let hiddenCategoryDropdown = document.getElementById('hidden-dropdown')
 
 /**
@@ -27,7 +27,8 @@ async function addNewTask() {
         'prio': selectedPriority,
         'category': hiddenCategoryDropdown.value,
         'subtasks': subtasks,
-        'task-id': taskID
+        'task-id': taskID,
+        'status': 'toDos'
     }
     disableCreateButton();
     checkPriority(task);
@@ -68,23 +69,63 @@ async function identifyTaskId() {
 }
 
 
-function substituteSubtaskButtons() {
-    document.getElementById('subtaskfield-buttons').innerHTML = `
-    <button type="button" class="subtaskfield-button-general" onclick="clearSubtaskField()"><img src="/img/addtask_icon_subtaskfield_cancel.svg"></button>
-    <hr>
-    <button type="button" class="subtaskfield-button-general" onclick="addToSubtaskList()"><img src="/img/addtask_icon_subtaskfield_check.svg"></button>
-    </div>`;
+function subtaskfieldFocus() {
+    document.getElementById('styled-subtaskfield').classList.toggle('subtaskfield-focus')
+}
+
+function subtaskfieldBlur() {
+    document.getElementById('styled-subtaskfield').classList.remove('subtaskfield-focus')
+}
+
+function updateSubtaskButtons() {
+    if (subtaskField.value === '') {
+        document.getElementById('subtaskfield-buttons').innerHTML = `<button type="button" class="subtaskfield-button-general"><img src="/img/addtask_icon_subtaskfield_plus.svg"></button>`;
+
+    } else {
+        document.getElementById('subtaskfield-buttons').innerHTML = `
+        <button type="button" class="subtaskfield-button-general" onclick="clearSubtaskField()"><img src="/img/addtask_icon_subtaskfield_cancel.svg"></button>
+        <button type="button" class="subtaskfield-button-general" onclick="addToSubtasks()"><img src="/img/addtask_icon_subtaskfield_check.svg"></button>
+        </div>`;
+    }
 }
 
 
 /**
  * This function is used to generate a list of subtasks, if any were entered in the subtaskField. 
  */
-function addToSubtaskList() {
-    if (subtaskField.value !== '') {
-        subtaskList.innerHTML += '<li>' + subtaskField.value + '</li>';
-        clearSubtaskField();
+function addToSubtasks() {
+    let subtaskContent = subtaskField.value.trim();
+    if (!subtaskContent) {
+        return;
     }
+    subtasks.push({'subtasktext': subtaskContent, 'done': false});
+    clearSubtaskField();
+    updateSubtasklist();
+}
+
+
+function updateSubtasklist() {
+    subtaskList.innerHTML = '';
+    for (let s = 0; s < subtasks.length; s++) {
+        let subtask = subtasks[s]['subtasktext'];
+        subtaskList.innerHTML +=
+        `<div class="subtasklist-item" id="subtasklist-item_${s}" onclick="editSubtasklistItem(${s})"><li>${subtask}</li></div>`;
+    }
+}
+
+function editSubtasklistItem(s, subtask) {
+    document.getElementById(`subtasklist-item_${s}`).innerHTML = `<div class="styled-subtaskitem-edit-input"><input class="subtaskitem-edit-input" type="text">blabla<div class="subtaskfield-button-container"><button type="button" class="subtaskfield-button-general" onclick="deleteSubtasklistItem(${s})"><img src="/img/addtask_icon_subtaskfield_cancel.svg"></button>
+    <button type="button" class="subtaskfield-button-general" onclick="updateSubtasks(${s})"><img src="/img/addtask_icon_subtaskfield_check.svg"></button>
+    </div></div>`
+}
+
+function updateSubtasks(s) {
+    
+}
+
+function deleteSubtasklistItem(s) {
+    subtasks['subtasktext'].splice(s, 1);
+    updateSubtasklist();
 }
 
 /**
@@ -99,7 +140,8 @@ function storeSubtasks() {
 }
 
 function clearSubtaskField() {
-subtaskField.value = ''
+    subtaskField.value = '';
+    updateSubtaskButtons()
 }
 
 /**
@@ -324,6 +366,7 @@ function resetForm() {
     categoryField.innerHTML = 'Select task category';
     resetPrioButtons();
     resetCheckboxOptions();
+    clearSubtaskField();
     clearSubtaskList();
 }
 
