@@ -137,7 +137,7 @@ function clearSubtaskField() {
  * This function is used to clear the list of subtasks again, either when the 'clear' button has been pressed, or a new task has been created.
  */
 function clearSubtaskList() {
-    document.getElementById('subtask-list').innerHTML = '';
+    subtaskList.innerHTML = '';
 }
 
 /**
