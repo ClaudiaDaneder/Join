@@ -1,5 +1,6 @@
 function init() {
     greet();
+    initOnline()
 }
 
 function greet() {

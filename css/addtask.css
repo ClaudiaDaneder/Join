@@ -159,30 +159,33 @@ select.active:hover,
 }
 
 .styled-subtaskitem-edit-input {
-    position: relative;
     width: 440px;
     height: 32px;
-    padding: 4px 16px;
     background-color: #fff;
     border: none;
     border-bottom: 1px solid #29abe2;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-sizing: border-box;
+    margin-left: -40px;
 }
 
 .subtaskitem-edit-input {
-    border: none;
-    position: absolute;
-    left: 0;
-    top: 0;
+    padding: 4px 16px;
+    width: 360px;
+    height: 32px;
     border-radius: 0;
     background-color: transparent;
+    margin: 0;
 }
 
 .subtaskitem-edit-input:focus {
     border: none;
+}
+
+.edit {
+    position: absolute;
+    right: 0;
 }
 
 .subtaskfield-focus {

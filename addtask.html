@@ -14,10 +14,11 @@
     <script src="js/templates.js" defer></script>
     <script src="js/addtask.js" defer></script>
     <script src="js/contacts.js" defer></script>
-    <script src="js/storage.js"></script>
+    <script src="js/storage.js" defer></script>
+    <script src="/js/logout.js" defer></script>
 </head>
 
-<body onload="includeHTML(), loadContactsFromStorage()">
+<body onload="includeHTML(), init()">
     <div id="popup-bg" class="popup-bg hide">
         <div class="popup">Task added to board</div>
     </div>

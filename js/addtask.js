@@ -14,6 +14,12 @@ let subtaskField = document.getElementById('subtasks');
 let subtaskList = document.getElementById('subtasklist');
 let hiddenCategoryDropdown = document.getElementById('hidden-dropdown')
 
+
+async function init() {
+    await loadContactsFromStorage();
+    await initOnline()
+}
+
 /**
  * This function defines all elements of a task that will later be stored in an array. 
  */
@@ -97,7 +103,7 @@ function addToSubtasks() {
     if (!subtaskContent) {
         return;
     }
-    subtasks.push({'subtasktext': subtaskContent, 'done': false});
+    subtasks.push({ 'subtasktext': subtaskContent, 'done': false });
     clearSubtaskField();
     updateSubtasklist();
 }
@@ -108,18 +114,21 @@ function updateSubtasklist() {
     for (let s = 0; s < subtasks.length; s++) {
         let subtask = subtasks[s]['subtasktext'];
         subtaskList.innerHTML +=
-        `<div class="subtasklist-item" id="subtasklist-item_${s}" onclick="editSubtasklistItem(${s})"><li>${subtask}</li></div>`;
+            `<div class="subtasklist-item" id="subtasklist-item_${s}" onclick="editSubtasklistItem(${s})"><li>${subtask}</li></div>`;
     }
 }
 
-function editSubtasklistItem(s, subtask) {
-    document.getElementById(`subtasklist-item_${s}`).innerHTML = `<div class="styled-subtaskitem-edit-input"><input class="subtaskitem-edit-input" type="text">blabla<div class="subtaskfield-button-container"><button type="button" class="subtaskfield-button-general" onclick="deleteSubtasklistItem(${s})"><img src="/img/addtask_icon_subtaskfield_cancel.svg"></button>
-    <button type="button" class="subtaskfield-button-general" onclick="updateSubtasks(${s})"><img src="/img/addtask_icon_subtaskfield_check.svg"></button>
-    </div></div>`
-}
-
-function updateSubtasks(s) {
-    
+function editSubtasklistItem(e) {
+    document.getElementById(`subtasklist-item_${e}`).innerHTML = `
+    <div class="styled-subtaskitem-edit-input">
+        <input class="subtaskitem-edit-input" type="text" id="editfield">
+        <div class="subtaskfield-button-container">
+            <button type="button" class="subtaskfield-button-general" onclick="deleteSubtasklistItem(${e})"><img src="/img/addtask_icon_subtaskfield_cancel.svg"></button>
+            <button type="button" class="subtaskfield-button-general" onclick="updateSubtasks(${e})"><img src="/img/addtask_icon_subtaskfield_check.svg"></button>
+        </div>
+    </div>`;
+    document.getElementById('editfield').value = e;
+    updateSubtasklist();
 }
 
 function deleteSubtasklistItem(s) {
