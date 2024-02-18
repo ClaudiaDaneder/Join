@@ -108,6 +108,9 @@ body{
 .pink{
     background-color: #FC71FF;
 }
+.lightpink {
+    background-color: #FC71FF;
+}
 .current-task-headline{
     font-family: inter700;
     font-size: 61px;
