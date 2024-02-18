@@ -6,6 +6,7 @@ async function init() {
     await loadRemote();
     loadLetter();
     loadContacts();
+    initOnline();
 }
 
 /**Load Letters of the Contactlist*/
