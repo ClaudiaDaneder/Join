@@ -95,7 +95,7 @@ function saveLoginData(){
 }
 
 function deleteLoginData(){
-    loginData;
+    loginData = null;
     localStorage.setItem('loginData', JSON.stringify(loginData));
 }
 
