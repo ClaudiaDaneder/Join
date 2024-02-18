@@ -204,11 +204,13 @@ function createAssigneeHtml(assignees) {
 
 function createSubtasksHtml(subTasks){
   let subTaskhtml = '';
+  console.log(subTasks)
   for (let i = 0; i < subTasks.length; i++) {
-      let subTask = subTasks[i];
+      let subTask = subTasks[i]["subtasktext"];
       subTaskhtml +=`<div class="subtask-current-box"><img id="checkBox_${i}" onclick="changeSubBox(${i})" src=./img/none-checked.png><h4 class="subtask-font">${subTask}</h4></div>`
-  }
+ console.log(subTask) }
   return subTaskhtml;
+  
 }
 
 
