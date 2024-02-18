@@ -4,7 +4,7 @@ let contactsKey = 'allContacts';
 
 
 async function init() {
-    loadUsers();
+    await loadUsers();
     logoSize();
 }
 
@@ -26,6 +26,7 @@ function logoSize() {
         sign_up.style.display = 'flex';
     }, 1000);
     login.innerHTML = loginstart();
+    loadRememberMe();
 }
 
 function loginSite() {
@@ -34,6 +35,8 @@ function loginSite() {
     loginFormStyle('196px', '20px', 'flex-start', '39px');
     let form = document.getElementById('logSign');
     form.setAttribute('onsubmit', 'userLogin(); return false');
+    remeChecked = [];
+    loadRememberMe();
 }
 
 function sign_up() {
@@ -43,6 +46,7 @@ function sign_up() {
     signUpLoad();
     let form = document.getElementById('logSign');
     form.setAttribute('onsubmit', 'checkPasswords(); return false');
+    remeChecked = [];
 }
 
 function signUpStyle(animated, fadeIn, animated_Out, fadeOut) {
@@ -71,10 +75,10 @@ function loginFormStyle(height, gap, justifyContent, left) {
     checkbox.style.left = left;
 }
 
-function rememberMe() {
+function rememberMe(save) {
     let img = document.getElementById('reme');
     let host = window.location.protocol + "//" + window.location.host;
-    if (img.src == `${host}/img/unchecked.svg`) {
+    if (img.src == `${host}/img/unchecked.svg` || save == 1) {
         img.src = './img/checked.svg';
         remeChecked = [1];
         anable('1');

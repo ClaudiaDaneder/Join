@@ -1,6 +1,10 @@
+let loginData = [];
+let remoteLoginData = [];
+
 function userLogin() {
     if (checkEmaildata() == true) {
         if (checkPassData() == true) {
+            saveLogin();
             window.open('summary.html', '_self');
         } else {
             wrongPassData();
@@ -43,6 +47,7 @@ async function userOnlinesave(i){
     user[i]['online'] = true;
     await setItem(`${contactsKey}`, JSON.stringify(user));
 }
+
 function wrongEmailData() {
     let emailData = document.getElementById('userEmail');
     let div = document.getElementById('wrongUserEmail');
@@ -67,4 +72,60 @@ function wrongPassData() {
         wrong.innerHTML = '';
         passData.value = '';
     }, 2000);
+}
+
+function saveLogin(){
+    if (remeChecked == 1){
+        saveLoginData();
+    }else{
+        deleteLoginData();
+    }
+}
+
+function saveLoginData(){
+    let email = document.getElementById('userEmail');
+    let password = document.getElementById('passwordchangePW');
+    let data = [{
+        'email': email.value,
+        'password': password.value,
+    }];
+    loginData = data;
+    localStorage.setItem('loginData', JSON.stringify(loginData));
+}
+
+function deleteLoginData(){
+    loginData;
+    localStorage.setItem('loginData', JSON.stringify(loginData));
+}
+
+function loadRememberMe(){
+    load = JSON.parse(localStorage.getItem('loginData'));
+    loginData = load;
+    if(loginData != null){
+        console.log(loginData);
+        loadLoginData();
+        rememberMe(1);
+    }
+}
+
+function loadLoginData(){
+    let email = document.getElementById('userEmail');
+    let password = document.getElementById('passwordchangePW');
+    for (let i = 0; i < loginData.length; i++){
+        email.value = loginData[i]['email'];
+        password.value = loginData[i]['password'];
+        directLogin(loginData[i]['email']);
+    }
+}
+
+function directLogin(email){
+    for(let i = 0; i < user.length; i++){
+        let userEmail = user[i]['email'];
+        let userOnline = user[i]['online'];
+        if(userEmail == email){
+            if(userOnline == true){
+                window.open('summary.html', '_self');
+            }
+        }
+    }
 }
