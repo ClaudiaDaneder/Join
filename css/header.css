@@ -63,3 +63,37 @@ header {
     background: linear-gradient(0deg, rgba(12, 46, 98, 0.12), rgba(12, 46, 98, 0.12)),
     linear-gradient(0deg, #FFFFFF, #FFFFFF);    
 }
+
+
+#logoutScreen{
+    width: 150px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    top: 96px;
+    right: 30px;
+    background-color: #2A3647;
+    color: #CDCDCD;
+    padding: 10px;
+    border-radius: 20px 0 20px 20px;
+    box-shadow: 0px 0px 4px 0px #0000001A;
+}
+
+.logoutButton{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    width: 130px;
+    height: 46px;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.logoutButton:hover{
+    background-color: #3e5068;
+}

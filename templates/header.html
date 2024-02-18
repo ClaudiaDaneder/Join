@@ -1,9 +1,14 @@
 <header>
+    <div id="logoutScreen">
+        <div class="logoutButton" onclick="notice()">Legal Notice</div>
+        <div class="logoutButton" onclick="policy()">Privacy Policy</div>
+        <div class="logoutButton" id="logoutButton" onclick="logout('guest')">Logout</div>
+    </div>
     <div class="headerText">Kanban Project Management Tool</div>
     <div class="headerRight">
         <img class="headerHelp" src="../img/question.svg">
-        <div class="headerUser">
-            <p>SM</p>
+        <div class="headerUser" onclick="openUser()">
+            <p id="initals">G</p>
         </div>
     </div>
 </header>

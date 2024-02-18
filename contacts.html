@@ -13,9 +13,10 @@
     <script src="./js/templates.js"></script>
     <script src="./js/storage.js"></script>
     <script src="./js/contacts.js"></script>
+    <script src="./js/logout.js"></script>
 </head>
 
-<body onload="includeHTML(), init()">
+<body onload="includeHTML(), init(), initOnline()">
     <div onclick="closePopup()">
         <div id="back"></div>
         <div w3-include-html="./templates/sidebar.html"></div>
