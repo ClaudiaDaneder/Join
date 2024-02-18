@@ -103,7 +103,6 @@ function loadRememberMe(){
     load = JSON.parse(localStorage.getItem('loginData'));
     loginData = load;
     if(loginData != null){
-        console.log(loginData);
         loadLoginData();
         rememberMe(1);
     }
