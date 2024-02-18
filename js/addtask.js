@@ -128,16 +128,6 @@ function deleteSubtasklistItem(s) {
     updateSubtasklist();
 }
 
-/**
- * This function is used to store the list of subtasks into an array 'subtasks'.
- */
-function storeSubtasks() {
-    let subtaskListElements = subtaskList.childNodes;
-    for (let i = 0; i < subtaskListElements?.length; i++) {
-        let child = subtaskListElements[i];
-        subtasks.push(child.innerHTML);
-    }
-}
 
 function clearSubtaskField() {
     subtaskField.value = '';
