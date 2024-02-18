@@ -32,7 +32,6 @@ async function addNewTask() {
     }
     disableCreateButton();
     checkPriority(task);
-    storeSubtasks();
     saveToStorage(task);
     resetForm();
     showPopup();
