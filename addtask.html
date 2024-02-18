@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<link rel="stylesheet" href="css/fonts.css">
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Task</title>
-
+    <link rel="icon" type="image/x-icon" href="/img/join_logo_dark.svg">
     <link rel="stylesheet" href="css/addtask.css">
-
+    <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/sidebar.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/color.css">
@@ -16,7 +15,6 @@
     <script src="js/addtask.js" defer></script>
     <script src="js/contacts.js" defer></script>
     <script src="js/storage.js"></script>
-
 </head>
 
 <body onload="includeHTML(), loadContactsFromStorage()">
@@ -36,7 +34,6 @@
                     <p class="task-label">Description</p>
                     <textarea placeholder="Enter a description" id="description" rows="4"></textarea>
                     <p class="task-label">Assigned to</p>
-
                     <div class="dropdown" id="contacts-dropdown" onclick="toggleContactsDropdown(event)">
                         Select contacts to assign
                         <div class="dropdown-content" id="assignee"></div>
@@ -46,7 +43,7 @@
                 <hr>
                 <div>
                     <p class="task-label">Due date<sup class="mandatory">*</sup></p>
-                    <input type="date" id="due-date" required>
+                    <input type="date" id="due-date" required placeholder="dd/mm/yyyy" value="" min="0">
                     <p class="task-label">Prio</p>
                     <div class="prio-button-container">
                         <button type="button" class="button-prio-urgent" data-priority="urgent">Urgent </button>
@@ -67,13 +64,15 @@
                             </div>
                         </div>
                     </div>
-
-
                     <p class="task-label">Subtasks</p>
                     <div class="styled-subtask-field">
-                        <input class="subtask-field" type="text" placeholder="Add new subtask" id="subtasks">
-                        <button class="subtask-button" onclick="addToSubtaskList(); return false"><img
-                                src="/img/addtask_icon_subtask_add.svg"></button>
+                        <input class="subtask-field" type="text" placeholder="Add new subtask" id="subtasks"
+                            oninput="substituteSubtaskButtons()">
+                        <div class="subtask-field-button-container">
+                            <button type="button" class="subtask-button-cancel"></button>
+                            <button type="button" class="subtask-button"><img
+                                    src="/img/addtask_icon_subtaskfield_plus.svg"></button>
+                        </div>
                     </div>
                     <ul id="subtask-list"></ul>
                 </div>
@@ -86,10 +85,7 @@
                 </div>
             </div>
         </form>
-
     </div>
-
-
 </body>
 
 </html>

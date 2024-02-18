@@ -67,13 +67,23 @@ async function identifyTaskId() {
     return lastID + 1;
 }
 
+function substituteSubtaskButtons() {
+    document.getElementById('styled-subtask-field').innerHTML = 
+    `<button type="button" class="subtask-button-cancel" onclick="clearSubtaskField()">
+    </button>
+    <button type="button" class="subtask-button-cancel" onclick="addToSubtaskList()">
+        <img src="/img/addtask_icon_subtaskfield_check.svg">
+    </button>`;
+}
+
+
 /**
  * This function is used to generate a list of subtasks, if any were entered in the subtaskField. 
  */
 function addToSubtaskList() {
     if (subtaskField.value !== '') {
         subtaskList.innerHTML += '<li>' + subtaskField.value + '</li>';
-        subtaskField.value = '';
+        clearSubtaskField();
     }
 }
 
@@ -86,6 +96,10 @@ function storeSubtasks() {
         let child = subtaskListElements[i];
         subtasks.push(child.innerHTML);
     }
+}
+
+function clearSubtaskField() {
+subtaskField.value = ''
 }
 
 /**
@@ -240,7 +254,6 @@ document.addEventListener('click', function (event) {
 
     if (!dropdown.contains(event.target)) {
         dropdown.classList.remove('active');
-        updateSelectedContacts();
     }
     updateSelectedContacts();
 });
@@ -353,10 +366,10 @@ function showPopup() {
 }
 
 /**
- * This function redirects to the board-overview after a short delay of 220ms.
+ * This function redirects to the board-overview after a short delay of 180ms.
  */
 function redirectToBoard() {
     setTimeout(function () {
         window.location.href = 'board.html';
-    }, 2200);
+    }, 1800);
 }
