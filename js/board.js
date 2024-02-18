@@ -186,17 +186,22 @@ function generateTaskHtml(task, assigneeHtml) {
       <div class="Headline"><h1 class="current-task-headline">${task["title"]} </h1></div>
       <div class="description"><h3 class="current-task-description">${task["description"]} </h3></div>
       <div class="due-date"><h3 class="color-dar-blue">Due date: </h3><h3>${task["due-date"].replace(/-/g, '/')}</h3></div>
-      <div class="current-prio"><h3 class="prio color-dar-blue">Priority:</h3><h3 > ${task["prio"]} </h3></div>
+      <div class="current-prio"><h3 class="prio color-dar-blue">Priority:</h3><h3> ${task["prio"]} </h3></div>
       <div class="assigne-container" id="assigne">
           <h3 class="color-dar-blue">Assigned To: </h3>
           ${assigneeHtml}
       </div>
-      <h3 class="current-subtask">Subtask:</h3>
-      <div class="subtasks">${task["subtasks"]}</div>
+        <h3 class="current-subtask">Subtask:</h3>
+        <div class="subtasks">
+        <img id="taskId_${task["task-id"]}" onclick="checkedBox(${task["task-id"]})" src="./img/none-checked.png">
+        <h4>${task['subtasks']}</h4>
+      </div>
       `;
 }
 
-
+function checkedBox(taskId){
+  
+}
 
 
 document.addEventListener('DOMContentLoaded', (event) => {

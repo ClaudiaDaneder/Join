@@ -6,6 +6,9 @@
     font-family: 'interRegular';
     src: url('fonts/inter-v13-latin-regular.woff2');
 }
+h4{
+    margin: 0;
+}
 h3{
     margin: 0;
 }
@@ -17,6 +20,7 @@ h1{
 }
 body{
     margin: 0;
+    background-color: #F0F0F0;
 }
 #modal-overlay {
     position: fixed;
@@ -121,9 +125,12 @@ body{
     display: flex;
     gap: 25px;
 }
+.subtasks{
+    display: flex;
+    align-items: center;
+}
 .boardSiteContainer{
     display: flex;
-    background-color: #F0F0F0;
     align-items: center;
     justify-content: flex-start;
     padding-top: 120px;
