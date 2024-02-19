@@ -35,6 +35,11 @@ body{
     transform-origin: left bottom; /* Drehpunkt auf die linke untere Ecke setzen */
     transform: rotate(8deg); /* Drehung um 35 Grad */
   }
+  .zoom-effect {
+    transform: scale(1.1); /* Vergrößert den Container um 10% */
+    transition: transform 0.3s ease-in-out; /* Fügt einen sanften Übergangseffekt hinzu */
+  }
+  
   .ProgressBar-container{
     display: flex;
     align-items: center;
