@@ -28,7 +28,7 @@
         <h1 class="add-task-headline">Add Task</h1>
         <form id="my-form" onsubmit="addNewTask(); return false" class="form">
             <div class="form-container">
-                <div>
+                <div class="left">
                     <p class="task-label">Title<sup class="mandatory">*</sup></p>
                     <input type="text" placeholder="Enter a title" id="title" required>
                     <p class="task-label">Description</p>
@@ -36,12 +36,13 @@
                     <p class="task-label">Assigned to</p>
                     <div class="dropdown" id="contacts-dropdown" onclick="toggleContactsDropdown(event)">
                         Select contacts to assign
+                        <img src="/img/addtask_icon_dropdown-menu.svg" id="assign-arrow">
                         <div class="dropdown-content" id="assignee"></div>
                     </div>
                     <div class="selected-assignees-list" id="selected-assignees-list"></div>
                 </div>
                 <hr>
-                <div>
+                <div class="right">
                     <p class="task-label">Due date<sup class="mandatory">*</sup></p>
                     <input type="date" id="due-date" required placeholder="dd/mm/yyyy" value="" min="0">
                     <p class="task-label">Prio</p>
@@ -55,7 +56,7 @@
                         <input type="text" required id="hidden-dropdown">
                         <div class="dropdown" id="category-dropdown" onclick="toggleCategoryDropdown(event)">
                             <p id="category-dropdown-text">Select task
-                                category</p>
+                                category</p><img src="/img/addtask_icon_dropdown-menu.svg" id="category-arrow">
                             <div class="dropdown-content" id="category" required>
                                 <label class="checkbox-option category" onclick="selectCategory('User Story')">User
                                     Story</label>

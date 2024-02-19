@@ -83,6 +83,7 @@ function updateSubtaskButtons() {
     } else {
         document.getElementById('subtaskfield-buttons').innerHTML = `
         <button type="button" class="subtaskfield-button-general" onclick="clearSubtaskField()"><img src="/img/addtask_icon_subtaskfield_cancel.svg"></button>
+        <hr>
         <button type="button" class="subtaskfield-button-general" onclick="addToSubtasks()"><img src="/img/addtask_icon_subtaskfield_check.svg"></button>
         </div>`;
     }
@@ -112,9 +113,10 @@ function generateSubtasklist() {
                 <div class="subtasklist-infos">
                     <div class="subtasklist-marker">•</div>${subtask}
                 </div>
-                <div id="edit-buttons_${i}" class="subtaskfield-button-container edit-button hide">
-                    <button class="edit-button" type="button" onclick="editSubtasklistItem(${i})"><img src="/img/addtask_icon_subtask_edit.svg"></button>
-                    <button class="delete-button" type="button" onclick="deleteSubtasklistItem(${i})"><img src="/img/addtask_icon_subtask_delete.svg"></button>
+                <div id="edit-buttons_${i}" class="subtaskfield-button-container hide">
+                    <button class="subtaskfield-button-general" type="button" onclick="editSubtasklistItem(${i})"><img src="/img/addtask_icon_subtask_edit.svg"></button>
+                    <hr>
+                    <button class="subtaskfield-button-general" type="button" onclick="deleteSubtasklistItem(${i})"><img src="/img/addtask_icon_subtask_delete.svg"></button>
                 </div>`;
     }
 }
@@ -327,6 +329,12 @@ document.addEventListener('click', function (event) {
     if (!dropdown.contains(event.target)) {
         dropdown.classList.remove('active');
     }
+
+    if (dropdown.classList.contains('active')) {
+        document.getElementById('assign-arrow').style.transform = 'rotate(180deg)';
+    } else {
+        document.getElementById('assign-arrow').style.transform = 'rotate(0deg)';
+    }
     updateSelectedContacts();
 });
 
@@ -341,6 +349,12 @@ function toggleContactsDropdown(event) {
 
     if (!dropdownContent.contains(event.target)) {
         dropdown.classList.toggle('active');
+    }
+
+    if (dropdown.classList.contains('active')) {
+        document.getElementById('assign-arrow').style.transform = 'rotate(180deg)';
+    } else {
+        document.getElementById('assign-arrow').style.transform = 'rotate(0deg)';
     }
 }
 
@@ -358,8 +372,10 @@ document.addEventListener('click', function (event) {
 
     if (dropdownContent.contains(event.target)) {
         toggleCategoryDropdown();
+        document.getElementById('category-arrow').style.transform = 'rotate(180deg)';
     } else if (!dropdown.contains(event.target)) {
         dropdown.classList.remove('active');
+        document.getElementById('category-arrow').style.transform = 'rotate(0deg)';
     }
 });
 
@@ -371,8 +387,10 @@ function toggleCategoryDropdown() {
     let isActive = dropdown.classList.contains('active');
     if (isActive) {
         dropdown.classList.remove('active');
+        document.getElementById('category-arrow').style.transform = 'rotate(0deg)';
     } else {
         dropdown.classList.add('active');
+        document.getElementById('category-arrow').style.transform = 'rotate(180deg)'
     }
 }
 
