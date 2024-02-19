@@ -16,8 +16,9 @@ let hiddenCategoryDropdown = document.getElementById('hidden-dropdown')
 
 async function initAddTask() {
     await includeHTML();
-    await loadContactsFromStorage();
     await initOnline();
+    await enableNavigation();
+    await loadContactsFromStorage();
 }
 
 /**
@@ -171,7 +172,7 @@ function updateSubtasklistItem(s) {
     subtasks[s].subtasktext = editField.value;
     setTimeout(() => {
         generateSubtasklist();
-    }, 100); // Füge eine kurze Verzögerung hinzu (z.B. 100ms)
+    }, 100);
 }
 
 function clearSubtaskField() {
@@ -459,10 +460,10 @@ function showPopup() {
 }
 
 /**
- * This function redirects to the board-overview after a short delay of 180ms.
+ * This function redirects to the board-overview after a short delay of 220ms.
  */
 function redirectToBoard() {
     setTimeout(function () {
         window.location.href = 'board.html';
-    }, 1800);
+    }, 2200);
 }
