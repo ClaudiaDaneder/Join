@@ -35,9 +35,30 @@ body{
     transform-origin: left bottom; /* Drehpunkt auf die linke untere Ecke setzen */
     transform: rotate(8deg); /* Drehung um 35 Grad */
   }
+  .ProgressBar-container{
+    display: flex;
+    align-items: center;
+    gap :10px
+  }
+  .ProgressBarBox{
+    width: 50%;
+
+  }
+  .progressString{
+    font-family: interRegular;
+    font-size: 12px;
+  }
+  #progressbar {
+    border-radius: 16px;
+    height: 8px;
+    padding-left: 4px;
+  }
   
-  
-  
+  #progressbar {
+    background-color:#4589FF;
+    height: 8px;
+    border-radius: 10px;
+  }
   
 .overlayAndNewWindow{
     display: flex;

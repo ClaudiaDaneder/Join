@@ -1,11 +1,9 @@
-
-
 async function init() {
-  await loadTaskFromStorage()
-  filltoDos();
+  await loadTaskFromStorage();
+  fillTasks();
   renderallTasks();
-  includeHTML(); 
-  initOnline(); 
+  includeHTML();
+  initOnline();
 }
 
 // Globale Variablen für die Aufgabenlisten
@@ -14,34 +12,51 @@ let toDos = [];
 let inProgress = [];
 let awaitFeedback = [];
 let done = [];
-let allTasks=[];
-
+let allTasks = [];
 
 async function loadTaskFromStorage() {
-  let allTaskAsString = await getItem('allTasks');
+  let allTaskAsString = await getItem("allTasks");
   allTasks = JSON.parse(allTaskAsString);
- 
 }
 
 
+let subTask=[];
 
-function filltoDos() {
-  toDos=[];
+function fillTasks() {
+  toDos = []; 
+  inProgress = [];
+  awaitFeedback = [];
+  done = [];
+
   for (let i = 0; i < allTasks.length; i++) {
-    const task = allTasks[i];
-    toDos.push(task); 
-  }
+      const task = allTasks[i];
+      subTask.push(task["subtasks"].length);
+      if (task["status"] === "toDos") {
+        toDos.push(task);
+      } else {
+        if (task["status"] === "inProgress") {
+          inProgress.push(task);
+        } else {
+          if (task["status"] === "awaitFeedback") {
+            awaitFeedback.push(task);
+          } else {
+            if (task["status"] === "done") {
+              done.push(task);
+            } else {
+            }
+          }
+        }
+      }
+    }
 }
-
 
 function renderallTasks() {
   renderToDo(),
-  renderInProgress(),
-  renderAwaitFeedback(),
-  renderDone(),
-  openAndCloseNoTask()
+    renderInProgress(),
+    renderAwaitFeedback(),
+    renderDone(),
+    openAndCloseNoTask();
 }
-
 
 function renderToDo() {
   let toDoContainer = document.getElementById("toDo");
@@ -53,7 +68,6 @@ function renderToDo() {
   }
 }
 
-
 function renderInProgress() {
   let inProgressContainer = document.getElementById("inProgress");
   inProgressContainer.innerHTML = "";
@@ -64,17 +78,18 @@ function renderInProgress() {
   }
 }
 
-
 function renderAwaitFeedback() {
   let awaitFeedbackContainer = document.getElementById("awaitFeedback");
   awaitFeedbackContainer.innerHTML = "";
 
   for (let i = 0; i < awaitFeedback.length; i++) {
-    const taskHtml = createTaskHtml(awaitFeedback[i], awaitFeedback[i]["task-id"]);
+    const taskHtml = createTaskHtml(
+      awaitFeedback[i],
+      awaitFeedback[i]["task-id"]
+    );
     awaitFeedbackContainer.innerHTML += taskHtml;
   }
 }
-
 
 function renderDone() {
   let doneContainer = document.getElementById("done");
@@ -85,7 +100,6 @@ function renderDone() {
     doneContainer.innerHTML += taskHtml;
   }
 }
-
 
 function openAndCloseNoTask() {
   let toDo = document.getElementById("toDo");
@@ -103,27 +117,51 @@ function openAndCloseNoTask() {
     done.innerHTML == "" ? "" : "none";
 }
 
-
 function createTaskHtml(task, taskId) {
   let categoryValue = task.category;
   let splitCategoryValue = categoryValue.split(" ");
   let firstWord = splitCategoryValue[0];
   let categoryClass = firstWord.charAt(0).toLowerCase() + firstWord.slice(1);
+
+  let subtasks = task["subtasks"];
+  let completedSubtasks = 0;
+  for (let i = 0; i < subtasks.length; i++) {
+    if (subtasks[i].done) {
+      completedSubtasks++;
+    }
+  }
+
+  let subtaskPercentage = 0;
+  
+  if (subtasks.length > 0) {
+    subtaskPercentage = Math.round((completedSubtasks / subtasks.length) * 100)+"%";
+    parseInt(subtaskPercentage);
+  }
   return `
     <div class="task" onclick="openCurrentTask('${taskId}')" draggable="true" ondragstart="drag(event, '${taskId}')" id="${taskId}">
       <div class="${categoryClass}">${task.category}</div>
       <div class="previewTitle">${task.title}</div>
       <div class="previewDescription">${task.description}</div>
+      <div class="ProgressBar-container">
+        <div class="ProgressBarBox">
+          <div id="progressbar" style='width:${subtaskPercentage}!important;'></div>
+        </div>
+        <h3 class="progressString">${completedSubtasks} / ${subtasks.length} Subtasks</h3>
+      </div>
     </div>
   `;
 }
 
 
-function getInitials(name) {
-  let initials = name.split(' ').map(part => part.charAt(0).toUpperCase()).join('');
-  return initials.length > 1 ? initials : initials + ' '; // Fügt ein Leerzeichen hinzu, falls nur ein Initial vorhanden ist
-}
 
+
+function getInitials(name) {
+  let initials = name
+    .split(" ")
+    .map((part) => part.charAt(0).toUpperCase())
+    .join("");
+  return initials.length > 1 ? initials : initials + " "; // Fügt ein Leerzeichen hinzu, falls nur ein Initial vorhanden ist
+}
 
 function initializeDomElements() {
   const modalOverlay = document.getElementById("modal-overlay");
@@ -131,22 +169,22 @@ function initializeDomElements() {
   return { modalOverlay, modulWindow };
 }
 
-
 function findTaskById(taskId) {
-  return allTasks.find(element => parseInt(element["task-id"]) === parseInt(taskId));
+  return allTasks.find(
+    (element) => parseInt(element["task-id"]) === parseInt(taskId)
+  );
 }
-
 
 function handleNoTaskFound() {
   // Logik für den Fall, dass kein Task gefunden wird
 }
 
-
-function closeCurrentTask(){
-  let modalOverlay=document.getElementById("modal-overlay");
+function closeCurrentTask() {
+  let modalOverlay = document.getElementById("modal-overlay");
   modalOverlay.style.display = "none";
 }
 
+let currentSubTasks = [];
 
 function openCurrentTask(taskId) {
   const { modalOverlay, modulWindow } = initializeDomElements();
@@ -155,36 +193,36 @@ function openCurrentTask(taskId) {
 
   const task = findTaskById(taskId);
   if (!task) {
-      handleNoTaskFound();
-      return;
+    handleNoTaskFound();
+    return;
   }
-  const subTasksHtml = createSubtasksHtml(task["subtasks"])
+  currentSubTasks = task["subtasks"];
+  const subTasksHtml = createSubtasksHtml(task["subtasks"]);
   const assigneeHtml = createAssigneeHtml(task["assignee-infos"]);
-  modulWindow.innerHTML = generateTaskHtml(task, assigneeHtml,subTasksHtml);
+  modulWindow.innerHTML = generateTaskHtml(task, assigneeHtml, subTasksHtml);
 }
-
 
 function changeSubBox(i) {
   var checkBox = document.getElementById("checkBox_" + i);
   if (checkBox) {
-    let src = checkBox.getAttribute('src');
-    if (src.endsWith("img/none-checked.png")) {
-      checkBox.src="./img/checked.png";
-    }
-    if (src.endsWith("img/checked.png")) {
-      checkBox.src="./img/none-checked.png";
+    if (currentSubTasks[i].done) {
+      checkBox.src = "./img/none-checked.png";
+      currentSubTasks[i].done = false; // Aktualisieren von done auf false
+    } else {
+      checkBox.src = "./img/checked.png";
+      currentSubTasks[i].done = true; // Aktualisieren von done auf true
     }
   }
+  upDateAllDate();
 }
 
 
 function createAssigneeHtml(assignees) {
   if (!Array.isArray(assignees)) {
-    return '';
+    return "";
   }
-  
 
-  let html = '';
+  let html = "";
   for (let i = 0; i < assignees.length; i++) {
     let assigneeObj = assignees[i];
     let assigneeName = assigneeObj.name;
@@ -201,30 +239,37 @@ function createAssigneeHtml(assignees) {
   return html;
 }
 
-
-function createSubtasksHtml(subTasks){
-  let subTaskhtml = '';
-  console.log(subTasks)
+function createSubtasksHtml(subTasks) {
+  let subTaskhtml = "";
   for (let i = 0; i < subTasks.length; i++) {
-      let subTask = subTasks[i]["subtasktext"];
-      subTaskhtml +=`<div class="subtask-current-box"><img id="checkBox_${i}" onclick="changeSubBox(${i})" src=./img/none-checked.png><h4 class="subtask-font">${subTask}</h4></div>`
- console.log(subTask) }
+    let subTask = subTasks[i]["subtasktext"];
+    let imgSrc = subTasks[i].done ? "./img/checked.png" : "./img/none-checked.png"; // Bestimmen des Bildpfads basierend auf dem done-Status
+    subTaskhtml += `<div class="subtask-current-box"><img id="checkBox_${i}" onclick="changeSubBox(${i})" src=${imgSrc}><h4 class="subtask-font">${subTask}</h4></div>`;
+  }
   return subTaskhtml;
-  
 }
 
-
-function generateTaskHtml(task, assigneeHtml,subTasksHtml) {
+function generateTaskHtml(task, assigneeHtml, subTasksHtml) {
   const firstPart = task.category.split(" ")[0].toLowerCase();
   return `
       <div class="overHeadline">
-          <div class="${firstPart}"><h2 class="category-h2">${task["category"]}</h2></div>
+          <div class="${firstPart}"><h2 class="category-h2">${
+    task["category"]
+  }</h2></div>
           <div><img onclick="closeModal()" class="close-png" src="./img/close.png" alt=""></div>
       </div>
-      <div class="Headline"><h1 class="current-task-headline">${task["title"]} </h1></div>
-      <div class="description"><h3 class="current-task-description">${task["description"]} </h3></div>
-      <div class="due-date"><h3 class="color-dar-blue">Due date: </h3><h3>${task["due-date"].replace(/-/g, '/')}</h3></div>
-      <div class="current-prio"><h3 class="prio color-dar-blue">Priority:</h3><h3> ${task["prio"]} </h3></div>
+      <div class="Headline"><h1 class="current-task-headline">${
+        task["title"]
+      } </h1></div>
+      <div class="description"><h3 class="current-task-description">${
+        task["description"]
+      } </h3></div>
+      <div class="due-date"><h3 class="color-dar-blue">Due date: </h3><h3>${task[
+        "due-date"
+      ].replace(/-/g, "/")}</h3></div>
+      <div class="current-prio"><h3 class="prio color-dar-blue">Priority:</h3><h3> ${
+        task["prio"]
+      } </h3></div>
       <div class="assigne-container" id="assigne">
           <h3 class="color-dar-blue">Assigned To: </h3>
           ${assigneeHtml}
@@ -236,7 +281,7 @@ function generateTaskHtml(task, assigneeHtml,subTasksHtml) {
       <div class="delet-edit-container">
         <div></div>
         <div class="delet-edit-box">
-          <div class="delete-box" onclick="deletThisArray(${task['task-id']})">
+          <div class="delete-box" onclick="deletThisArray(${task["task-id"]})">
             <div class=""><img class="delete-svg" src="./img/delete.svg"></div>
             <div class=""><h4 class="delet-string">Delete</h4></div>
           </div>
@@ -250,47 +295,43 @@ function generateTaskHtml(task, assigneeHtml,subTasksHtml) {
       `;
 }
 
-function editTask(){
-  
-}
+function editTask() {}
 
 async function deletThisArray(taskId) {
   let foundIndex = -1;
 
   for (let i = 0; i < allTasks.length; i++) {
-      if (allTasks[i]["task-id"] === taskId) {
-          foundIndex = i;
-          break;
-      }
+    if (allTasks[i]["task-id"] === taskId) {
+      foundIndex = i;
+      break;
+    }
   }
 
   if (foundIndex !== -1) {
-      allTasks.splice(foundIndex, 1);
-      await setItem('allTasks', allTasks);
-      console.log(`Task mit ID ${taskId} wurde gelöscht.`);
+    allTasks.splice(foundIndex, 1);
+    await setItem("allTasks", allTasks);
+    console.log(`Task mit ID ${taskId} wurde gelöscht.`);
   } else {
-      console.log(`Task mit ID ${taskId} nicht gefunden.`);
+    console.log(`Task mit ID ${taskId} nicht gefunden.`);
   }
   closeCurrentTask();
   await init();
-  
 }
 
-
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener("DOMContentLoaded", (event) => {
   let modalWindow = document.getElementById("modal-window");
 
   // Event-Listener, der das Klick-Ereignis abfängt
-  modalWindow.addEventListener('click', function(event) {
-      // Verhindert, dass das Klick-Ereignis zum modal-overlay propagiert wird
-      event.stopPropagation();
+  modalWindow.addEventListener("click", function (event) {
+    // Verhindert, dass das Klick-Ereignis zum modal-overlay propagiert wird
+    event.stopPropagation();
   });
 });
 
 
 function closeModal() {
-    document.getElementById("modal-overlay").style.display = "none";
-
+  renderallTasks();
+  document.getElementById("modal-overlay").style.display = "none";
 }
 
 
@@ -306,9 +347,8 @@ function searchTasks() {
       matchingTasks.push(allTasks[i]);
     }
   }
-  console.log("matchingTasks:" + matchingTasks)
+  console.log(matchingTasks);
   return matchingTasks;
-  
 }
 
 
@@ -320,25 +360,32 @@ function allowDrop(ev) {
 function drag(ev, id) {
   const element = document.getElementById(id);
   if (element) {
-    element.classList.add('rotating');
+    element.classList.add("rotating");
+    element.addEventListener("dragend", () => {
+      element.classList.remove("rotating");
+    });
   }
   ev.dataTransfer.setData("id", id);
   ev.dataTransfer.dropEffect = "move";
 }
 
-document.addEventListener('DOMContentLoaded', (event) => {
-  const draggableElements = document.querySelectorAll('.draggable');
-  draggableElements.forEach(element => {
-    element.addEventListener('dragend', function() {
-      this.classList.remove('rotating');
+
+
+document.addEventListener("DOMContentLoaded", (event) => {
+  const draggableElements = document.querySelectorAll(".draggable");
+  draggableElements.forEach((element) => {
+    element.addEventListener("dragend", function () {
+      this.classList.remove("rotating");
     });
   });
 });
 
 
 function determineTargetElement(ev) {
-  let targetElement = ev.target.classList.contains('noTask') ? ev.target.nextElementSibling : ev.target;
-  while (targetElement && !targetElement.classList.contains('taskColumn')) {
+  let targetElement = ev.target.classList.contains("noTask")
+    ? ev.target.nextElementSibling
+    : ev.target;
+  while (targetElement && !targetElement.classList.contains("taskColumn")) {
     targetElement = targetElement.parentElement;
   }
   return targetElement;
@@ -358,20 +405,50 @@ function updateTaskList(taskId, containerId) {
 
   switch (containerId) {
     case "toDo":
+      taskToMove["status"] = "toDos";
       toDos.push(taskToMove);
       break;
     case "inProgress":
+      taskToMove["status"] = "inProgress";
       inProgress.push(taskToMove);
       break;
     case "awaitFeedback":
+      taskToMove["status"] = "awaitFeedback";
       awaitFeedback.push(taskToMove);
       break;
     case "done":
+      taskToMove["status"] = "done";
       done.push(taskToMove);
       break;
   }
 }
 
+async function upDateAllDate() {
+  allTasks = [];
+  for (let i = 0; i < toDos.length; i++) {
+    const element = toDos[i];
+    allTasks.push(element);
+  }
+  for (let i = 0; i < inProgress.length; i++) {
+    const element = inProgress[i];
+    allTasks.push(element);
+  }
+  for (let i = 0; i < awaitFeedback.length; i++) {
+    const element = awaitFeedback[i];
+    allTasks.push(element);
+  }
+  for (let i = 0; i < done.length; i++) {
+    const element = done[i];
+    allTasks.push(element);
+  }
+  await setItem("allTasks", allTasks);
+}
+
+function findTaskById(taskId) {
+  return [...toDos, ...inProgress, ...awaitFeedback, ...done].find(
+    (task) => task["task-id"] == taskId
+  );
+}
 
 function drop(ev) {
   ev.preventDefault();
@@ -387,22 +464,21 @@ function drop(ev) {
 
   openAndCloseNoTask();
   renderallTasks();
+  upDateAllDate();
 }
-
-
-function findTaskById(taskId) {
-  return [...toDos, ...inProgress, ...awaitFeedback, ...done].find(task => task["task-id"] == taskId);
-}
-
 
 function removeTaskFromCurrentList(taskToRemove) {
   if (toDos.includes(taskToRemove)) {
-    toDos = toDos.filter(task => task["task-id"] !== taskToRemove["task-id"]);
+    toDos = toDos.filter((task) => task["task-id"] !== taskToRemove["task-id"]);
   } else if (inProgress.includes(taskToRemove)) {
-    inProgress = inProgress.filter(task => task["task-id"] !== taskToRemove["task-id"]);
+    inProgress = inProgress.filter(
+      (task) => task["task-id"] !== taskToRemove["task-id"]
+    );
   } else if (awaitFeedback.includes(taskToRemove)) {
-    awaitFeedback = awaitFeedback.filter(task => task["task-id"] !== taskToRemove["task-id"]);
+    awaitFeedback = awaitFeedback.filter(
+      (task) => task["task-id"] !== taskToRemove["task-id"]
+    );
   } else if (done.includes(taskToRemove)) {
-    done = done.filter(task => task["task-id"] !== taskToRemove["task-id"]);
+    done = done.filter((task) => task["task-id"] !== taskToRemove["task-id"]);
   }
 }
