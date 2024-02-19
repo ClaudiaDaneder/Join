@@ -14,12 +14,6 @@ let subtaskField = document.getElementById('subtasks');
 let subtaskList = document.getElementById('subtasklist');
 let hiddenCategoryDropdown = document.getElementById('hidden-dropdown')
 
-
-async function init() {
-    await loadContactsFromStorage();
-    await initOnline()
-}
-
 /**
  * This function defines all elements of a task that will later be stored in an array. 
  */
@@ -105,37 +99,75 @@ function addToSubtasks() {
     }
     subtasks.push({ 'subtasktext': subtaskContent, 'done': false });
     clearSubtaskField();
-    updateSubtasklist();
+    generateSubtasklist();
 }
 
 
-function updateSubtasklist() {
+function generateSubtasklist() {
     subtaskList.innerHTML = '';
-    for (let s = 0; s < subtasks.length; s++) {
-        let subtask = subtasks[s]['subtasktext'];
+    for (let i = 0; i < subtasks.length; i++) {
+        let subtask = subtasks[i].subtasktext;
         subtaskList.innerHTML +=
-            `<div class="subtasklist-item" id="subtasklist-item_${s}" onclick="editSubtasklistItem(${s})"><li>${subtask}</li></div>`;
+            `<div class="subtasklist-item" id="subtasklist-item_${i}" ondblclick="editSubtasklistItem(${i})" onmouseenter="showEditButtons(${i})" onmouseleave="showEditButtons(${i})">
+                <div class="subtasklist-infos">
+                    <div class="subtasklist-marker">•</div>${subtask}
+                </div>
+                <div id="edit-buttons_${i}" class="subtaskfield-button-container edit-button hide">
+                    <button class="edit-button" type="button" onclick="editSubtasklistItem(${i})"><img src="/img/addtask_icon_subtask_edit.svg"></button>
+                    <button class="delete-button" type="button" onclick="deleteSubtasklistItem(${i})"><img src="/img/addtask_icon_subtask_delete.svg"></button>
+                </div>`;
     }
 }
 
-function editSubtasklistItem(e) {
-    document.getElementById(`subtasklist-item_${e}`).innerHTML = `
-    <div class="styled-subtaskitem-edit-input">
-        <input class="subtaskitem-edit-input" type="text" id="editfield">
-        <div class="subtaskfield-button-container">
-            <button type="button" class="subtaskfield-button-general" onclick="deleteSubtasklistItem(${e})"><img src="/img/addtask_icon_subtaskfield_cancel.svg"></button>
-            <button type="button" class="subtaskfield-button-general" onclick="updateSubtasks(${e})"><img src="/img/addtask_icon_subtaskfield_check.svg"></button>
-        </div>
-    </div>`;
-    document.getElementById('editfield').value = e;
-    updateSubtasklist();
+function showEditButtons(i) {
+    let editButtons = document.getElementById(`edit-buttons_${i}`);
+    if (editButtons) {
+        editButtons.classList.toggle('hide');
+    }
 }
+
+function editSubtasklistItem(s) {
+    let listItem = document.getElementById(`subtasklist-item_${s}`);
+
+    if (subtasks[s]) {
+        let subtaskText = subtasks[s].subtasktext;
+
+        // Erstelle das neue HTML-Element für das bearbeitete Listenelement
+        let newHTML = `
+        <div class="styled-subtaskitem-edit-input">
+            <input class="subtaskitem-edit-input" type="text" id="editfield" value="${subtaskText}">
+            <div class="subtaskfield-button-container">
+                <button type="button" class="subtaskfield-button-general" onclick="deleteSubtasklistItem(${s})"><img src="/img/addtask_icon_subtask_delete.svg"></button>
+                <button type="button" class="subtaskfield-button-general" onclick="updateSubtasklistItem(${s})"><img src="/img/addtask_icon_subtaskfield_check.svg"></button>
+            </div>
+        </div>`;
+        listItem.innerHTML = newHTML;
+        let editField = document.getElementById('editfield');
+        if (editField) {
+            moveCursorToEnd(editField);
+        }
+    }
+}
+
+function moveCursorToEnd(input) {
+    input.focus(); // Fokussiere das Inputfeld
+    input.setSelectionRange(input.value.length, input.value.length);
+}
+
 
 function deleteSubtasklistItem(s) {
-    subtasks['subtasktext'].splice(s, 1);
-    updateSubtasklist();
+    subtasks.splice(s, 1);
+    generateSubtasklist();
 }
 
+function updateSubtasklistItem(s) {
+    let editField = document.getElementById('editfield');
+
+    subtasks[s].subtasktext = editField.value;
+    setTimeout(() => {
+        generateSubtasklist();
+    }, 100); // Füge eine kurze Verzögerung hinzu (z.B. 100ms)
+}
 
 function clearSubtaskField() {
     subtaskField.value = '';
@@ -374,7 +406,6 @@ function resetForm() {
 function resetPrioButtons() {
     selectPriority('medium');
 }
-
 
 /**
  * This function is used to reset all checkboxes within the contacts-dropdown after either the 'clear' button has been pressed or a new task has been created.

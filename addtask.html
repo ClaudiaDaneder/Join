@@ -14,11 +14,10 @@
     <script src="js/templates.js" defer></script>
     <script src="js/addtask.js" defer></script>
     <script src="js/contacts.js" defer></script>
-    <script src="js/storage.js" defer></script>
-    <script src="/js/logout.js" defer></script>
+    <script src="js/storage.js"></script>
 </head>
 
-<body onload="includeHTML(), init()">
+<body onload="includeHTML(), loadContactsFromStorage()">
     <div id="popup-bg" class="popup-bg hide">
         <div class="popup">Task added to board</div>
     </div>
@@ -73,7 +72,7 @@
                             <button type="button" class="subtaskfield-button-general"><img src="/img/addtask_icon_subtaskfield_plus.svg"></button>
                         </div>
                     </div>
-                    <ul id="subtasklist" class="subtasklist"></ul>
+                    <div id="subtasklist" class="subtasklist"></div>
                 </div>
             </div>
             <div class="task-bottom-container">

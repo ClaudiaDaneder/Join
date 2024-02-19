@@ -156,6 +156,7 @@ select.active:hover,
     justify-content: space-between;
     box-sizing: border-box;
     position: relative;
+    margin-bottom: 8px
 }
 
 .styled-subtaskitem-edit-input {
@@ -167,26 +168,23 @@ select.active:hover,
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-left: -40px;
 }
 
 .subtaskitem-edit-input {
+    border: none;
     padding: 4px 16px;
     width: 360px;
     height: 32px;
     border-radius: 0;
     background-color: transparent;
     margin: 0;
+    font-size: 16px;
 }
 
 .subtaskitem-edit-input:focus {
     border: none;
 }
 
-.edit {
-    position: absolute;
-    right: 0;
-}
 
 .subtaskfield-focus {
     border: 1px solid #29abe2;
@@ -207,7 +205,15 @@ select.active:hover,
     padding: 0 8px;
     gap: 4px;
     align-items: center;
-    justify-content: space-between;
+}
+
+.edit-button {
+    padding: 0
+}
+
+.delete-button {
+    padding: 0;
+    padding-right: 8px
 }
 
 .subtaskfield-button-general {
@@ -228,12 +234,32 @@ select.active:hover,
 
 .subtasklist {
     max-height: 250px;
-    
+    font-size: 16px;
+    color: #000;
 }
 
 .subtasklist-item {
+    box-sizing: border-box;
+    height: 32px;
+    width: 440px;
     display: flex;
+    align-items: center;
     justify-content: space-between;
+    border-radius: 10px;
+}
+
+.subtasklist-item:hover {
+    cursor: pointer;
+    background-color: #eee;
+}
+
+.subtasklist-marker {
+    margin-right: 8px;
+    margin-left: 16px
+}
+
+.subtasklist-infos {
+    display: flex;
 }
 
 .reset-button,
@@ -398,7 +424,7 @@ select.active:hover,
 }
 
 .hide {
-    display: none;
+    visibility: hidden;
 }
 
 .popup-bg {
