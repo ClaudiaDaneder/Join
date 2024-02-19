@@ -1,6 +1,7 @@
 function initSummary() {
-    greet();
     includeHTML();
+    enableNavigation();
+    greet();
     initOnline();
 }
 
