@@ -4,6 +4,7 @@ let contactsKey = 'allContacts';
 
 
 async function init() {
+    await widthSize();
     await loadUsers();
     logoSize();
 }
@@ -16,22 +17,33 @@ async function loadUsers() {
     }
 }
 
-function logoSize() {
+async function logoSize() {
     let login = document.getElementById('login');
     let logoIMG = document.getElementById('logoIMG');
     let sign_up = document.getElementById('sign_up');
+    let footer = document.getElementById('footer');
+    let backgroundLogin = document.getElementById('backgroundLogin');
     setTimeout(() => {
         logoIMG.classList.add('selected');
+        setTimeout(() => {
+            logoIMG.src = './img/join_logo_dark.svg';
+        }, 400);
+        backgroundLogin.classList.add('selectedBackground');
         login.style.display = 'flex';
         sign_up.style.display = 'flex';
+        footer.style.display = 'flex';
     }, 1000);
     login.innerHTML = loginstart();
     loadRememberMe();
 }
 
 function loginSite() {
+    let login = document.getElementById('login');
+    login.classList.remove('signUpSite');
+    login.classList.add('login');
+    login.innerHTML = '';
+    login.innerHTML = loginstart();
     signUpStyle('animated_Ou', 'fadeOut', 'animated', 'fadeIn');
-    loginStyle('493px', '652px', '48px 115px 48px 115px', loginstart());
     loginFormStyle('196px', '20px', 'flex-start', '39px');
     let form = document.getElementById('logSign');
     form.setAttribute('onsubmit', 'userLogin(); return false');
@@ -40,8 +52,12 @@ function loginSite() {
 }
 
 function sign_up() {
+    let login = document.getElementById('login');
+    login.classList.remove('login');
+    login.classList.add('signUpSite');
+    login.innerHTML = '';
+    login.innerHTML = sign_upStart();
     signUpStyle('animated', 'fadeIn', 'animated_Out', 'fadeOut');
-    loginStyle('550px', '598px', '48px 88px 48px 88px', sign_upStart());
     loginFormStyle('326px', '16px', 'center', 'unset');
     let form = document.getElementById('logSign');
     form.setAttribute('onsubmit', 'checkPasswords(); return false');
@@ -54,15 +70,6 @@ function signUpStyle(animated, fadeIn, animated_Out, fadeOut) {
     sign_up.classList.remove(`${fadeIn}`);
     sign_up.classList.add(`${animated_Out}`);
     sign_up.classList.add(`${fadeOut}`);
-}
-
-function loginStyle(height, width, padding, site) {
-    let login = document.getElementById('login');
-    login.style.height = height;
-    login.style.width = width;
-    login.style.padding = padding;
-    login.innerHTML = '';
-    login.innerHTML = site;
 }
 
 function loginFormStyle(height, gap, justifyContent, left) {
@@ -160,3 +167,23 @@ function buttonStyle(disabledButton, anabledStyle, disabledSytle) {
 function notClose(event) {
     event.stopPropagation();
 }
+
+
+async function widthSize(){
+    let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    let backgroundLogin = document.getElementById('backgroundLogin');
+    let logoIMG = document.getElementById('logoIMG');
+    if (width <= 780) {
+        backgroundLogin.classList.remove('backgroundLogin');
+        backgroundLogin.classList.add('backgroundLoginMobile');
+        logoIMG.src = './img/join_logo.svg';
+    } else {
+        backgroundLogin.classList.remove('backgroundLoginMobile');
+        backgroundLogin.classList.add('backgroundLogin');
+        logoIMG.src = './img/join_logo_dark.svg';
+    }
+}
+/*
+window.addEventListener("resize", function () {
+    init();
+});*/

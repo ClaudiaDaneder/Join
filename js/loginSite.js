@@ -44,9 +44,13 @@ function checkPassData() {
 }
 
 async function userOnlinesave(i){
+    await saveOnline(i);
+    await setItem(`${contactsKey}`, JSON.stringify(user));
+}
+
+async function saveOnline(i){
     user[i]['online'] = true;
     localStorage.setItem('userOnline', JSON.stringify(user[i]['email']));
-    await setItem(`${contactsKey}`, JSON.stringify(user));
 }
 
 function wrongEmailData() {
