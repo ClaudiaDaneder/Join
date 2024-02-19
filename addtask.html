@@ -11,13 +11,14 @@
     <link rel="stylesheet" href="css/sidebar.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/color.css">
+    <script src="js/logout.js"></script>
     <script src="js/templates.js" defer></script>
     <script src="js/addtask.js" defer></script>
     <script src="js/contacts.js" defer></script>
     <script src="js/storage.js"></script>
 </head>
 
-<body onload="includeHTML(), loadContactsFromStorage()">
+<body onload="initAddTask()">
     <div id="popup-bg" class="popup-bg hide">
         <div class="popup">Task added to board</div>
     </div>

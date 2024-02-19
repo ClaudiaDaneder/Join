@@ -14,6 +14,12 @@ let subtaskField = document.getElementById('subtasks');
 let subtaskList = document.getElementById('subtasklist');
 let hiddenCategoryDropdown = document.getElementById('hidden-dropdown')
 
+async function initAddTask() {
+    await includeHTML();
+    await loadContactsFromStorage();
+    await initOnline();
+}
+
 /**
  * This function defines all elements of a task that will later be stored in an array. 
  */
