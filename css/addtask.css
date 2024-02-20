@@ -4,7 +4,8 @@ body {
     background-color: #F6F7F8;
     color: #2A3647;
     font-size: 20px;
-    max-width: 1440px;
+    width: 1440px;
+    height: 1024px;
 }
 
 p {

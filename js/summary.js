@@ -1,8 +1,8 @@
-function initSummary() {
-    includeHTML();
-    enableNavigation();
-    greet();
-    initOnline();
+async function initSummary() {
+    await includeHTML();
+    await initOnline();
+    await enableNavigation();
+    await greet();
 }
 
 function greet() {
