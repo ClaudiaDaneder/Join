@@ -5,6 +5,7 @@ async function init() {
   renderallTasks();
   includeHTML();
   initOnline();
+  enableNavigation();
 }
 
 
