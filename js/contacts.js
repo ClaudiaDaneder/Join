@@ -3,6 +3,7 @@ let firstLetter = [];
 let contactsKey = 'allContacts';
 
 async function init() {
+    enableNavigation();
     await loadRemote();
     loadLetter();
     loadContacts();

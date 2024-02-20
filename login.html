@@ -15,19 +15,22 @@
 </head>
 
 <body onload="init()" onclick="pwIdInfo()">
-    <div id="secSign">You Signed Up seccesfully</div>
-    <div class="backgroundLogin" id="backgroundLogin"><img class="logoIMG animated fadeIn" id="logoIMG" src="./img/join_logo_dark.svg"></div>
-    <div class="sign_up animated fadeIn" id="sign_up">
-        <p>Not a Join user?</p>
-        <div class="sign_up_button" onclick="notClose(event), sign_up()">Sign up</div>
+    <div class="settings">
+        <div id="secSign">You Signed Up seccesfully</div>
+        <div class="backgroundLogin" id="backgroundLogin"><img class="logoIMG animated fadeIn" id="logoIMG"
+                src="./img/join_logo_dark.svg"></div>
+        <div class="sign_up animated fadeIn" id="sign_up">
+            <p>Not a Join user?</p>
+            <div class="sign_up_button" onclick="notClose(event), sign_up()">Sign up</div>
+        </div>
+        <form action="#" onsubmit="userLogin(); return false" id="logSign">
+            <div class="login animated fadeIn" id="login"></div>
+        </form>
+        <footer class="footer animated fadeIn" id="footer">
+            <div class="fLinks">Privacy Policy</div>
+            <div class="fLinks">Legal notice</div>
+        </footer>
     </div>
-    <form action="#" onsubmit="userLogin(); return false" id="logSign">
-        <div class="login animated fadeIn" id="login"></div>
-    </form>
-    <footer class="footer animated fadeIn" id="footer">
-        <div class="fLinks">Privacy Policy</div>
-        <div class="fLinks">Legal notice</div>
-    </footer>
 </body>
 
 </html>

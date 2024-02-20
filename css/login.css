@@ -1,13 +1,18 @@
 html,
 body {
-    margin: 0;
     width: 100vw;
     height: 100vh;
     background-color: #F6F7F8;
     margin: 0;
     scroll-behavior: smooth;
     font-family: 'Inter';
-    overflow: hidden;
+    overflow-x: hidden;
+}
+
+.settings{
+    position: relative;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 .animated {
@@ -408,12 +413,22 @@ body {
 @media (max-width: 910px){
     .login{
         width: 94%;
-        padding: 48px 0 48px 0;
+        height: 515px;
+        padding: 32px 0 32px 0;
+        top: 150px;
+        margin: unset;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .signUpSite{
         width: 94%;
-        padding: 48px 0 48px 0;
+        height: 595px;
+        padding: 32px 0 32px 0;
+        top: 150px;
+        margin: unset;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
@@ -421,9 +436,8 @@ body {
     .sign_up{
         width: 100vw;
         align-items: flex-end;
-        top: unset;
+        top: 778px;
         right: unset;
-        bottom: 100px;
     }
 
     .loginForm{
@@ -443,11 +457,19 @@ body {
     }
 
     .footer{
-        bottom: 20px;
+        bottom: unset;
+        top: 869px;
     }
 
     .backgroundLogin{
         background-color: #2A3647;
+    }
+
+    .selected{
+        width: 64px !important;
+        height: 78.03px !important;
+        top: 40px !important;
+        left: 38px !important;
     }
 }
 
@@ -464,4 +486,13 @@ body {
         gap: 15px;
         transition: all 100ms ease-in-out;
     }
+
+    .button {
+        width: 177px;
+    }
+
+    .buttonDisabled{
+        width: 177px;
+    }
+    
 }
