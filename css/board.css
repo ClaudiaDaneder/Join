@@ -136,10 +136,13 @@ body{
     background-color: #0038FF;
 }
 .pink{
-    background-color: #FC71FF;
+    background-color: #FF5EB3;
 }
 .lightpink {
     background-color: #FC71FF;
+}
+.cyan{
+    background-color: #003E3E;
 }
 .current-task-headline{
     font-family: inter700;
