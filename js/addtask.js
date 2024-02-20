@@ -12,7 +12,8 @@ let dueDate = document.getElementById('due-date');
 let categoryField = document.getElementById('category-dropdown-text');
 let subtaskField = document.getElementById('subtasks');
 let subtaskList = document.getElementById('subtasklist');
-let hiddenCategoryDropdown = document.getElementById('hidden-dropdown')
+let hiddenCategoryDropdown = document.getElementById('hidden-category-dropdown');
+let hiddenContactsInput = document.getElementById('hidden-contacts-input')
 
 async function initAddTask() {
     await includeHTML();
@@ -71,7 +72,6 @@ async function identifyTaskId() {
         return lastID;
 }
 
-
 function subtaskfieldFocus() {
     document.getElementById('styled-subtaskfield').classList.toggle('subtaskfield-focus')
 }
@@ -79,6 +79,19 @@ function subtaskfieldFocus() {
 function subtaskfieldBlur() {
     document.getElementById('styled-subtaskfield').classList.remove('subtaskfield-focus')
 }
+
+function enableContactsSearchField() {
+    hiddenContactsInput.classList.remove('hide');
+    moveCursorToEnd(hiddenContactsInput);
+}
+
+
+async function filterContacts() {
+    let search = hiddenContactsInput.value.toLowerCase();
+    let filteredContacts = allContacts.filter(contact => contact['name'].toLowerCase().includes(search));
+    loadContactsIntoDropdown(filteredContacts);
+}
+
 
 function updateSubtaskButtons() {
     if (subtaskField.value === '') {
@@ -201,17 +214,17 @@ async function loadContactsFromStorage() {
  * 
  * @param {Array} allContacts All available contacts, as previously fetched from the remote storage
  */
-function loadContactsIntoDropdown(allContacts) {
-    if (allContacts?.length < 1) {
+function loadContactsIntoDropdown(filteredContacts) {
+    assignee.innerHTML = '';
+    if (filteredContacts?.length < 1) {
         assignee.innerHTML = noContactsToShow();
     } else {
-        for (let i = 0; i < allContacts?.length; i++) {
-            let contact = allContacts[i];
+        filteredContacts.forEach((contact, i) => {
             let contactName = contact['name'];
             let contactColor = contact['color'];
             let initials = initialsLoad(contactName);
             assignee.innerHTML += renderContacts(contactName, contactColor, initials, i);
-        }
+        });
     }
 }
 
@@ -332,6 +345,8 @@ document.addEventListener('click', function (event) {
 
     if (!dropdown.contains(event.target)) {
         dropdown.classList.remove('active');
+        hiddenContactsInput.classList.add('hide');
+        hiddenContactsInput.value = '';
     }
 
     if (dropdown.classList.contains('active')) {
@@ -353,6 +368,7 @@ function toggleContactsDropdown(event) {
 
     if (!dropdownContent.contains(event.target)) {
         dropdown.classList.toggle('active');
+        enableContactsSearchField();
     }
 
     if (dropdown.classList.contains('active')) {

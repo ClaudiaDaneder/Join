@@ -51,7 +51,7 @@ textarea {
     padding: 18px 16px;
     overflow: auto;
     resize: vertical;
-    min-height: 100px;
+    min-height: 136x;
     background-image: url(/img/addtask_icon_textarea-grabber.svg);
     background-repeat: no-repeat;
     background-position: 99% 98%;
@@ -63,7 +63,7 @@ textarea::-webkit-resizer {
 }
 
 textarea::-webkit-scrollbar {
-    width: 24px;
+    width: 16px;
 }
 
 textarea::-webkit-scrollbar-corner {
@@ -73,7 +73,7 @@ textarea::-webkit-scrollbar-corner {
 textarea::-webkit-scrollbar-thumb {
     background-color: #A8A8A8;
     border-radius: 20px;
-    border: solid 8px white;
+    border: solid 4px white;
 }
 
 
@@ -540,7 +540,19 @@ a:hover {
     flex-direction: row;
 }
 
-#hidden-dropdown {
+#hidden-contacts-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 380px;
+    border: none
+}
+
+#hidden-contacts-input.focus {
+    border: none !important
+}
+
+#hidden-category-dropdown {
     position: absolute;
 }
 
