@@ -168,7 +168,9 @@ function loginstart() {
       <div class="input" id="wrongUserEmail"><input type="email" id="userEmail" placeholder="Email" required><img src="./img/emailContact.svg"></div>
       <div class="input" id="wrongUserPass"><input type="password" placeholder="Password" id="passwordchangePW" onclick="changePWImg('changePW'); notClose(event)" required><img id="changePW" src="./img/password.svg"></div>
       <div id="wrong"></div>
-      <div class="checkbox" id="checkbox"><a href="javascript:void(0)" onclick="rememberMe()"><img id="reme" src="./img/unchecked.svg"></a> Remember me</div>
+      <div class="checkbox" id="checkbox">
+        <img onclick="rememberMe(); notClose(event)" id="remeCheck" src="./img/unchecked.svg"> Remember me
+      </div>
   </div>
   <div class="loginButton">
       <button class="button" type="submit">Log in</button>
@@ -188,7 +190,10 @@ function sign_upStart() {
       <div class="input"><input type="password" placeholder="Password" id="passwordchangePWsign" onclick="changePWImg('changePWsign'); notClose(event)" required><img id="changePWsign" src="./img/password.svg"></div>
       <div class="input" id="pwwrong"><input type="password" placeholder="Confirm Password" id="passwordchangePWsignC" onclick="changePWImg('changePWsignC'); notClose(event)" required><img id="changePWsignC" src="./img/password.svg"></div>
       <div id="wrong"></div>
-      <div class="checkbox" id="checkbox"><a href="javascript:void(0)" onclick="rememberMe()"><img id="reme" src="./img/unchecked.svg"></a> I accept the <a class="privacy" href="#">Privacy policy</a></div>
+      <div class="checkbox" id="checkbox">
+        <img onclick="rememberMe(); notClose(event)" id="remeCheck" src="./img/unchecked.svg"> 
+        I accept the <a class="privacy" href="privacy_policy.html" target="_blank">Privacy policy</a>
+      </div>
   </div>
   <div class="loginButton" id="disabled">
       <button type="submit" class="buttonDisabled" id="anable" disabled>Sign up</button>

@@ -83,14 +83,16 @@ function loginFormStyle(height, gap, justifyContent, left) {
 
 function rememberMe(save) {
     let img = document.getElementById('reme');
-    let host = window.location.protocol + "//" + window.location.host;
-    if (img.src == `${host}/img/unchecked.svg` || save == 1) {
-        img.src = './img/checked.svg';
+    let remeCheck = document.getElementById('remeCheck');
+    if (remeCheck || save == 1) {
+        remeCheck.src = './img/checked.svg';
         remeChecked = [1];
+        remeCheck.id = 'reme';
         anable('1');
-    } else {
+    } else if(img){
         img.src = './img/unchecked.svg';
         remeChecked = [0];
+        img.id = 'remeCheck';
         anable('0');
     }
 }
