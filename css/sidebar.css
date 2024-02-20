@@ -83,3 +83,7 @@
     background-color: #091931;
     color: #fff;
 }
+
+.aria[aria-current="page"]:hover {
+    font-weight: 400
+}

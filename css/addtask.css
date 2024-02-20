@@ -115,7 +115,7 @@ a:hover {
 .main-container {
     position: relative;
     left: 328px;
-    top: 156px;
+    top: 206px;
     max-width: calc(1440px - 328px);
     padding-bottom: 20px;
 }
