@@ -209,43 +209,35 @@ function createSubtasksHtml(subTasks) {
 function generateTaskHtml(task, assigneeHtml, subTasksHtml) {
   const firstPart = task.category.split(" ")[0].toLowerCase();
   return `
-      <div class="overHeadline">
-          <div class="${firstPart}"><h2 class="category-h2">${
-    task["category"]
-  }</h2></div>
-          <div><img onclick="closeModal()" class="close-png" src="./img/close.png" alt=""></div>
-      </div>
-      <div class="Headline"><h1 class="current-task-headline">${
-        task["title"]
-      } </h1></div>
-      <div class="description"><h3 class="current-task-description">${
-        task["description"]
-      } </h3></div>
-      <div class="due-date"><h3 class="color-dar-blue">Due date: </h3><h3>${task[
-        "due-date"
-      ].replace(/-/g, "/")}</h3></div>
-      <div class="current-prio"><h3 class="prio color-dar-blue">Priority:</h3><h3> ${
-        task["prio"]
-      } </h3></div>
-      <div class="assigne-container" id="assigne">
-          <h3 class="color-dar-blue">Assigned To: </h3>
-          ${assigneeHtml}
-      </div>
-        <h3 class="current-subtask">Subtask:</h3>
-        <div class="subtasks">
-        ${subTasksHtml}
-      </div>
-      <div class="delet-edit-container">
-        <div></div>
-        <div class="delet-edit-box">
-          <div class="delete-box" onclick="deletThisArray(${task["task-id"]})">
-            <div class=""><img class="delete-svg" src="./img/delete.svg"></div>
-            <div class=""><h4 class="delet-string">Delete</h4></div>
-          </div>
-          <img src="./img/delet-edit-line.png">
-          <div onclick="editTask()" class="edit-box">
-            <div class=""><img class="edit-svg" src="./img/edit.svg"></div>
-            <div class=""  ><h4 class="edit-string">Edit</h4></div>
+      <div class="width-height-full-prozent">
+        <div class="overHeadline">
+            <div class="${firstPart}"><h2 class="category-h2">${task["category"]}</h2></div>
+            <div><img onclick="closeModal()" class="close-png" src="./img/close.png" alt=""></div>
+        </div>
+        <div class="Headline"><h1 class="current-task-headline">${task["title"]} </h1></div>
+        <div class="description"><h3 class="current-task-description">${task["description"]} </h3></div>
+        <div class="due-date"><h3 class="color-dar-blue">Due date: </h3><h3>${task["due-date"].replace(/-/g, "/")}</h3></div>
+        <div class="current-prio"><h3 class="prio color-dar-blue">Priority:</h3><h3> ${task["prio"]} </h3></div>
+        <div class="assigne-container" id="assigne">
+            <h3 class="color-dar-blue">Assigned To: </h3>
+            ${assigneeHtml}
+        </div>
+          <h3 class="current-subtask">Subtask:</h3>
+          <div class="subtasks">
+          ${subTasksHtml}
+        </div>
+        <div class="delet-edit-container">
+          <div></div>
+          <div class="delet-edit-box">
+            <div class="delete-box" onclick="deletThisArray(${task["task-id"]})">
+              <div class=""><img class="delete-svg" src="./img/delete.svg"></div>
+              <div class=""><h4 class="delet-string">Delete</h4></div>
+            </div>
+            <img src="./img/delet-edit-line.png">
+            <div onclick="editTask()" class="edit-box">
+              <div class=""><img class="edit-svg" src="./img/edit.svg"></div>
+              <div class=""  ><h4 class="edit-string">Edit</h4></div>
+            </div>
           </div>
         </div>
       </div>
@@ -478,6 +470,23 @@ function initializeDomElements() {
 function handleNoTaskFound() {
   // Logik für den Fall, dass kein Task gefunden wird
 }
+
+
+document.querySelectorAll('.current-task-headline').forEach(container => {
+  container.addEventListener('click', function() {
+    if (this.style.whiteSpace === 'nowrap') {
+      // Vollständigen Text anzeigen
+      this.style.whiteSpace = 'normal';
+      this.style.overflow = 'visible';
+      this.style.textOverflow = 'clip';
+    } else {
+      // Text wieder abschneiden
+      this.style.whiteSpace = 'nowrap';
+      this.style.overflow = 'hidden';
+      this.style.textOverflow = 'ellipsis';
+    }
+  });
+});
 
 
 document.addEventListener("DOMContentLoaded", (event) => {

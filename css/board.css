@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'inter700';
-    src: url('fonts/inter-v13-latin-700.woff2');
+    src: url('/fonts/inter-v13-latin-700.woff2');
 }
 @font-face {
     font-family: 'interRegular';
-    src: url('fonts/inter-v13-latin-regular.woff2');
+    src: url('/fonts/inter-v13-latin-regular.woff2');
 }
 h4{
     margin: 0;
@@ -30,6 +30,13 @@ body{
     z-index: 1000;
 }
 
+.width-height-full-prozent{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    justify-content: space-between;
+}
 .rotating {
     transition: transform 0.37s ease-in-out; /* sanfte Animation */
     transform-origin: left bottom; /* Drehpunkt auf die linke untere Ecke setzen */
@@ -71,11 +78,9 @@ body{
     align-items: center;
 }
 #modal-window {   
-    display: flex;
-    flex-direction: column;
-    gap: 24px; 
     position: fixed;
     margin-left: 40vw;
+    margin-right: 40vw;
     margin-top: 4vh;
     height: 80vh;
     width: 33vw;
@@ -148,6 +153,9 @@ body{
     font-family: inter700;
     font-size: 61px;
     line-height: 73.2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .current-task-description{
     color: #A8A8A8;
