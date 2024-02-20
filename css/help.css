@@ -81,3 +81,18 @@ li p {
     position: relative;
     top: 16px;
 }
+
+.arrow-back {
+    position: fixed;
+    top: 225px;
+    left: 1307px;
+    border-radius: 100%;
+    z-index: 6;
+    width: 37px;
+    height: 37px;
+}
+
+.arrow-back:hover {
+    background-color: #eee;
+    cursor: pointer;
+}
