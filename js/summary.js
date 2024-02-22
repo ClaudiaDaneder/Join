@@ -1,8 +1,9 @@
 async function initSummary() {
+    greet();
     await includeHTML();
     await initOnline();
     await enableNavigation();
-    await greet();
+    navigation('show');
 }
 
 function greet() {
@@ -10,15 +11,15 @@ function greet() {
     let time = today.getHours();
     let greet;
 
-    if (time > 18) {
-        greet = 'Good evening,';
-    } else if (time > 12) {
-        greet = 'Good afternoon,';
-    } else if (time > 6) {
-        greet = 'Good morning,';
-    } else {
+    if (time < 6) {
         greet = 'Good night,';
-    }
+    } else if (time < 12) {
+        greet = 'Good morning,';
+    } else if (time < 18) {
+        greet = 'Good afternoon,';
+    } else if (time < 24) {
+        greet = 'Good evening,';
+    };
 
     let message = document.getElementById('greeting-time');
     message.innerHTML = greet;

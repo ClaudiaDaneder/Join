@@ -10,13 +10,15 @@
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/sidebar.css">
     <link rel="stylesheet" href="css/header.css">
-
-    <script src="js/logout.js"></script>
     <script src="js/templates.js" defer></script>
-    <script src="js/sidebar.js" defer></script>
-    <script src="js/summary.js" defer></script>
-    <script src="js/contacts.js" defer></script>
     <script src="js/storage.js"></script>
+    <script src="js/logout.js"></script>
+    <script src="js/contacts.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/summary.js"></script>
+
+
+
 
 </head>
 
@@ -29,6 +31,7 @@
             <h1 class="header-title">Join 360</h1>
             <div class="blue-line"></div>
             <span class="header-subtitle">Key Metrics At A Glance</span>
+            <div class="blue-line-mobile"></div>
         </div>
         <div class="summary-container">
             <div class="metrics-container">
@@ -57,13 +60,13 @@
                             <div class="urgent-left"><img src="img/summary_urgent.svg">
                                 <div>
                                     <div class="number" id="number_urgent">[1]</div>
-                                    Urgent
+                                    <div class="metric">Urgent</div>
                                 </div>
                             </div>
                             <div class="grey-line"></div>
                             <div class="urgent-right">
                                 <div class="deadline">[October 16, 2022]</div>
-                                Upcoming Deadline
+                                <div class="metric">Upcoming Deadline</div>
                             </div>
                         </div>
                     </div>
@@ -73,28 +76,28 @@
                         onmouseleave="resetNumberColor('tasks-in-board')">
                         <div>
                             <div class="number" id="number_tasks-in-board">[5]</div>
-                            <div class="metric">Tasks In Board</div>
+                            <div class="metric">Tasks In <br>Board</div>
                         </div>
                     </div>
                     <div class="metrics-bubble" onmouseenter="changeNumberColor('tasks-in-progress')"
                         onmouseleave="resetNumberColor('tasks-in-progress')">
                         <div>
                             <div class="number" id="number_tasks-in-progress">[2]</div>
-                            <div class="metric">Tasks In Progress</div>
+                            <div class="metric">Tasks In <br>Progress</div>
                         </div>
                     </div>
                     <div class="metrics-bubble" onmouseenter="changeNumberColor('awaiting-feedback')"
                         onmouseleave="resetNumberColor('awaiting-feedback')">
                         <div>
                             <div class="number" id="number_awaiting-feedback">[2]</div>
-                            <div class="metric">Awaiting Feedback</div>
+                            <div class="metric">Awaiting <br>Feedback</div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="greeting">
                 <div class="greeting-time" id="greeting-time"></div>
-                <div class="greeting-name">[login name]</div>
+                <div class="greeting-name">[name]</div>
             </div>
         </div>
 
