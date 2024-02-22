@@ -19,7 +19,7 @@ function logout(userFind) {
     if (userFind != 'guest') {
         userOnline();
     } else {
-        window.open('login.html', '_self');
+        window.open('index.html', '_self');
     }
 }
 
@@ -30,7 +30,7 @@ async function userOnline() {
             onlineUser[i]['online'] = false;
             await setItem('allContacts', JSON.stringify(onlineUser));
             localStorage.setItem('userOnline', JSON.stringify(null));
-            window.open('login.html', '_self');
+            window.open('index.html', '_self');
         }
     }
 }
