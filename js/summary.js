@@ -21,8 +21,15 @@ function greet() {
         greet = 'Good evening,';
     };
 
+    /*if (login name is "user") {
+        greet.replace(", ", '!')
+    }
+    */
+
     let message = document.getElementById('greeting-time');
     message.innerHTML = greet;
+    let messageMobile = document.getElementById('greeting-time-mobile');
+    messageMobile.innerHTML = greet;
 }
 
 function changeFieldColor(field) {

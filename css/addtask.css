@@ -480,17 +480,14 @@ a:hover {
 @keyframes popupSlideIn {
     0% {
         bottom: -74px;
-        /* Ausgangsposition am unteren Bildschirmrand */
     }
 
     50% {
         bottom: calc(50% - 37px);
-        /* Halber Weg, um die Mitte des Bildschirms zu erreichen */
     }
 
     100% {
         bottom: calc(50% - 37px);
-        /* Endposition in der Mitte des Bildschirms */
     }
 }
 
