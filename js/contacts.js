@@ -7,6 +7,7 @@ async function init() {
     loadLetter();
     loadContacts();
     initOnline();
+    await enableNavigation();
     navigation('show');
 }
 
