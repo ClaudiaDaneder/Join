@@ -20,6 +20,7 @@ async function initAddTask() {
     await includeHTML();
     await initOnline();
     await enableNavigation();
+    navigation('show');
 }
 
 
