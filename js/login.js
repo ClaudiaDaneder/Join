@@ -38,6 +38,7 @@ async function logoSize() {
 }
 
 function loginSite() {
+    document.title = 'Join Log in';
     let login = document.getElementById('login');
     login.classList.remove('signUpSite');
     login.classList.add('login');
@@ -52,6 +53,7 @@ function loginSite() {
 }
 
 function sign_up() {
+    document.title = 'Join Sign Up';
     let login = document.getElementById('login');
     login.classList.remove('login');
     login.classList.add('signUpSite');
