@@ -3,11 +3,11 @@ let firstLetter = [];
 let contactsKey = 'allContacts';
 
 async function init() {
-    enableNavigation();
     await loadRemote();
     loadLetter();
     loadContacts();
     initOnline();
+    navigation('show');
 }
 
 /**Load Letters of the Contactlist*/

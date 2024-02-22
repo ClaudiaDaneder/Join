@@ -5,3 +5,12 @@ function enableNavigation() {
         }
     })
 }
+
+function navigation(show){
+    let navigation = document.getElementById('navigation_link');
+    let header = document.getElementById('header_link');
+    if(show == 'show'){
+        navigation.style.display = 'flex';
+        header.style.display = 'flex';
+    }
+}

@@ -170,22 +170,21 @@ function notClose(event) {
     event.stopPropagation();
 }
 
-
-async function widthSize(){
+async function widthSize(goToMobile){
     let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
     let backgroundLogin = document.getElementById('backgroundLogin');
     let logoIMG = document.getElementById('logoIMG');
-    if (width <= 780) {
+    if (width <= 850) {
         backgroundLogin.classList.remove('backgroundLogin');
         backgroundLogin.classList.add('backgroundLoginMobile');
-        logoIMG.src = './img/join_logo.svg';
+        if(goToMobile != 'goToMobile'){logoIMG.src = './img/join_logo.svg';}else{logoIMG.src = './img/join_logo_dark.svg';}
     } else {
         backgroundLogin.classList.remove('backgroundLoginMobile');
         backgroundLogin.classList.add('backgroundLogin');
         logoIMG.src = './img/join_logo_dark.svg';
     }
 }
-/*
+
 window.addEventListener("resize", function () {
-    init();
-});*/
+    widthSize('goToMobile');
+});
