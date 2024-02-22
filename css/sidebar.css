@@ -23,8 +23,11 @@
 .navigation-link-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 10px;
     width: 100%;
+    text-align: center;
+    text-wrap: nowrap;
 }
 
 .nav-link {
@@ -68,7 +71,6 @@
     color: #A8A8A8;
     padding: 8px 0;
     width: 100%;
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -86,4 +88,134 @@
 
 .aria[aria-current="page"]:hover {
     font-weight: 400
+}
+
+@media screen and (max-width: 850px) {
+    .sidebar-container {
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: unset;
+        height: 80px;
+        padding: 0 64px;
+        flex-direction: row;
+    }
+
+    .logo {
+        display: none
+    }
+
+    .legal-link-container {
+        display: none;
+    }
+
+    .navigation-link-container {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .nav-link {
+        border-radius: 16px;
+        height: 76px;
+        width: 80px;
+    }
+
+    .nav-link-inner {
+        flex-direction: column;
+        width: 80px;
+        gap: 4px;
+        padding: 8px 0;
+    }
+
+    .nav-link-inner img {
+        height: 24px;
+        width: 24px;
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+    .sidebar-container {
+        font-size: 14px;
+        padding: 0 32px;
+    }
+
+    .navigation-link-container {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .nav-link {
+        border-radius: 16px;
+        height: 76px;
+        width: 80px;
+    }
+
+    .nav-link-inner {
+        flex-direction: column;
+        width: 80px;
+        gap: 4px;
+        padding: 8px 0;
+    }
+
+    .nav-link-inner img {
+        height: 24px;
+        width: 24px;
+    }
+}
+
+@media screen and (max-width: 435px) {
+    .navigation-link-container {
+        gap: 15px;
+        font-size: 12px;
+    }
+
+    .sidebar-container {
+        padding: 0 12px;
+        height: 70px;
+    }
+
+    .nav-link {
+        height: 66px;
+        width: 70px;
+    }
+
+    .nav-link-inner {
+        width: 70px;
+    }
+
+    .nav-link-inner img {
+        height: 20px;
+        width: 20px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .navigation-link-container {
+        gap: 8px;
+        font-size: 11px;
+        ;
+    }
+
+    .sidebar-container {
+        padding: 0 8px;
+        height: 60px;
+    }
+
+    .nav-link {
+        height: 56px;
+        width: 60px;
+    }
+
+    .nav-link-inner {
+        width: 60px;
+    }
+
+    .nav-link-inner img {
+        height: 18px;
+        width: 18px;
+    }
 }
