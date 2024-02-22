@@ -90,6 +90,16 @@
     font-weight: 400
 }
 
+@media screen and (max-width: 1000px){
+    .sidebar-container {
+        width: 200px;
+    }
+
+    .logo img {
+        width: 80px;
+    }
+}
+
 @media screen and (max-width: 850px) {
     .sidebar-container {
         width: 100%;

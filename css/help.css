@@ -3,8 +3,8 @@ body {
     font-family: 'Inter', sans-serif;
     background-color: #F6F7F8;
     font-size: 16px;
-    width: 1440px;
-    height: 1024px;
+    max-width: 1440px;
+    max-height: 1024px;
     color: #000;
 }
 
@@ -17,7 +17,8 @@ body {
     position: relative;
     left: 328px;
     top: 206px;
-    max-width: 1014px;
+    width: 1014px;
+    padding-right: 16px;
     padding-bottom: 32px;
 }
 
@@ -110,4 +111,67 @@ ol li p {
 
 .legal p {
     margin-bottom: 24px;
+}
+
+@media screen and (max-width: 1300px){
+    .main-container {
+        width: calc(95% - 328px);
+    }
+
+    .arrow-back {
+        left: 95%
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .main-container {
+        left: 270px;
+        width: calc(95% - 270px)
+    }
+}
+
+@media screen and (max-width: 850px){
+    .main-container {
+        left: 0;
+        top: 128px;
+        width: 85%;
+        padding: 0 32px 100px;
+    }
+
+    .arrow-back {
+        top: 128px;
+        left: 90%;
+        right: 16px;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .main-container {
+        width: 85%
+    }
+
+    h1 {
+        font-size: 54px
+    }
+}
+
+@media screen and (max-width: 450px){
+    h1 {
+        font-size: 47px;
+    }
+    
+    .main-container {
+        padding: 0 16px 100px;
+    }
+
+    
+    .arrow-back { 
+        left: 88%
+    }
+}
+
+@media screen and (max-width: 370px) {
+    h1 {
+        font-size: 42px
+    }
 }
