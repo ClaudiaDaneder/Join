@@ -71,8 +71,12 @@ async function register() {
 }
 
 function searchId() {
-    lastID = user.length;
-    if (lastID == null || lastID == '') lastID = 0;
+    lastID = user[user.length-1];
+    if (lastID == null || lastID == ''){
+        lastID = 0;
+    }else{
+        lastID = lastID['id'];
+    }
     return lastID + 1;
 }
 
@@ -94,7 +98,7 @@ function searchColor(color) {
                                     if (color == 9) { return 'cyan'; }
 }
 
-function savePopup() {
+function savePopupSign() {
     let savePopup = document.getElementById('secSign');
     savePopup.style.transform = 'translatex(0)';
     setTimeout(() => {
@@ -104,7 +108,7 @@ function savePopup() {
 }
 
 function resetForm() {
-    savePopup();
+    savePopupSign();
     let registerBtn = document.getElementById('disabled');
     let name = document.getElementById('name');
     let email = document.getElementById('email');
