@@ -42,8 +42,9 @@ body{
     transform-origin: left bottom; /* Drehpunkt auf die linke untere Ecke setzen */
     transform: rotate(8deg); /* Drehung um 35 Grad */
   }
-  .zoom-effect {
-    transform: scale(1.1); /* Vergrößert den Container um 10% */
+  .highlight {
+    background-color: rgba(0, 0, 0, 0.04);
+    transform: scale(1.05); /* Vergrößert den Container um 10% */
     transition: transform 0.3s ease-in-out; /* Fügt einen sanften Übergangseffekt hinzu */
   }
   
@@ -332,7 +333,6 @@ body{
 .task{
     display: flex;
     flex-direction: column;
-    background-color:#FFFFFF ;
     border-radius: 24px;
     padding: 16px;
     gap: 10px;

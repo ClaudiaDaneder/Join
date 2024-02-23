@@ -1,11 +1,12 @@
 //Initialisierung
 async function init() {
+  includeHTML();
   await loadTaskFromStorage();
   fillTasks();
   renderallTasks();
-  includeHTML();
   initOnline();
   enableNavigation();
+  navigation('show');
 }
 
 
@@ -18,6 +19,7 @@ let done = [];
 let allTasks = [];
 let currentSubTasks = [];
 let subTask=[];
+let searchResults = [];
 
 
 // Datenladen und -verarbeiten
@@ -57,23 +59,41 @@ function fillTasks() {
 
 //Rendering und UI Updates
 function renderallTasks() {
-  renderToDo(),
+    renderToDo(),
     renderInProgress(),
     renderAwaitFeedback(),
     renderDone(),
     openAndCloseNoTask();
 }
 
+function updateTaskElement(taskId, isHighlighted) {
+  const taskElement = document.getElementById(taskId);
+  if (taskElement) {
+    if (isHighlighted) {
+      taskElement.classList.add('highlight');
+    } else {
+      taskElement.classList.remove('highlight');
+    }
+  }
+}
 
 function renderToDo() {
   let toDoContainer = document.getElementById("toDo");
-  toDoContainer.innerHTML = "";
 
-  for (let i = 0; i < toDos.length; i++) {
-    const taskHtml = createTaskHtml(toDos[i], toDos[i]["task-id"]);
-    toDoContainer.innerHTML += taskHtml;
-  }
+  // Aktualisieren bestehender Elemente
+  toDos.forEach(task => {
+    updateTaskElement(task["task-id"], searchResults.includes(task["task-id"]));
+  });
+
+  // Fügen Sie neue Aufgaben hinzu, falls welche fehlen
+  toDos.forEach(task => {
+    if (!document.getElementById(task["task-id"])) {
+      const taskHtml = createTaskHtml(task, task["task-id"], searchResults.includes(task["task-id"]));
+      toDoContainer.innerHTML += taskHtml;
+    }
+  });
 }
+
 
 
 function renderInProgress() {
@@ -81,24 +101,26 @@ function renderInProgress() {
   inProgressContainer.innerHTML = "";
 
   for (let i = 0; i < inProgress.length; i++) {
-    const taskHtml = createTaskHtml(inProgress[i], inProgress[i]["task-id"]);
+    let isHighlighted = searchResults.includes(inProgress[i]["task-id"]);
+    const taskHtml = createTaskHtml(inProgress[i], inProgress[i]["task-id"], isHighlighted);
     inProgressContainer.innerHTML += taskHtml;
   }
 }
 
 
+
+
 function renderAwaitFeedback() {
-  let awaitFeedbackContainer = document.getElementById("awaitFeedback");
-  awaitFeedbackContainer.innerHTML = "";
+  let feedbackContainer = document.getElementById("awaitFeedback");
+  feedbackContainer.innerHTML = "";
 
   for (let i = 0; i < awaitFeedback.length; i++) {
-    const taskHtml = createTaskHtml(
-      awaitFeedback[i],
-      awaitFeedback[i]["task-id"]
-    );
-    awaitFeedbackContainer.innerHTML += taskHtml;
+    let isHighlighted = searchResults.includes(awaitFeedback[i]["task-id"]);
+    const taskHtml = createTaskHtml(awaitFeedback[i], awaitFeedback[i]["task-id"], isHighlighted);
+    feedbackContainer.innerHTML += taskHtml;
   }
 }
+
 
 
 function renderDone() {
@@ -106,10 +128,12 @@ function renderDone() {
   doneContainer.innerHTML = "";
 
   for (let i = 0; i < done.length; i++) {
-    const taskHtml = createTaskHtml(done[i], done[i]["task-id"]);
+    let isHighlighted = searchResults.includes(done[i]["task-id"]);
+    const taskHtml = createTaskHtml(done[i], done[i]["task-id"], isHighlighted);
     doneContainer.innerHTML += taskHtml;
   }
 }
+
 
 
 function openAndCloseNoTask() {
@@ -155,21 +179,23 @@ function createProgressBar(subtaskPercentage, completedSubtasks, totalSubtasks) 
 }
 
 
-function createTaskHtml(task, taskId) {
+function createTaskHtml(task, taskId, isHighlighted) {
+  let highlightClass = isHighlighted ? "highlight" : "";
   let categoryClass = getCategoryClass(task.category);
   let subtaskPercentage = calculateSubtaskProgress(task["subtasks"]);
   let progressBarHtml = createProgressBar(subtaskPercentage, task["subtasks"].filter(subtask => subtask.done).length, task["subtasks"].length);
+  
 
   return `
-    <div class="task" onclick="openCurrentTask('${taskId}')" draggable="true" ondragstart="drag(event, '${taskId}')" id="${taskId}">
-      <div class="${categoryClass
-}">${task.category}</div>
-<div class="previewTitle">${task.title}</div>
-<div class="previewDescription">${task.description}</div>
-${progressBarHtml}
-</div>
-`;
+    <div class="task ${highlightClass}" onchange="openCurrentTask('${taskId}')" draggable="true" ondragstart="drag(event, '${taskId}')" id="${taskId}">
+      <div class="${categoryClass}">${task.category}</div>
+      <div class="previewTitle">${task.title}</div>
+      <div class="previewDescription">${task.description}</div>
+      ${progressBarHtml}
+    </div>
+  `;
 }
+
 
 
 function createAssigneeHtml(assignees) {
@@ -434,20 +460,24 @@ async function upDateAllDate() {
 
 //Suchfunktion
 function searchTasks() {
-  let searchValue = document.getElementById("searchInput").value;
-  let matchingTasks = [];
-  for (let i = 0; i < allTasks.length; i++) {
-    if (
-      allTasks[i]["title"].toLowerCase().includes(searchValue) ||
-      allTasks[i]["description"].toLowerCase().includes(searchValue) ||
-      allTasks[i]["category"].toLowerCase().includes(searchValue)
-    ) {
-      matchingTasks.push(allTasks[i]);
-    }
+  let searchValue = document.getElementById("searchInput").value.toLowerCase();
+  searchResults = [];
+
+  // Nur suchen, wenn der Suchwert nicht leer ist
+  if (searchValue.trim() !== "") {
+      for (let i = 0; i < allTasks.length; i++) {
+          if (allTasks[i].title.toLowerCase().includes(searchValue) ||
+              allTasks[i].description.toLowerCase().includes(searchValue) ||
+              allTasks[i].category.toLowerCase().includes(searchValue)) {
+              searchResults.push(allTasks[i]["task-id"]);
+          }
+      }
   }
-  console.log(matchingTasks);
-  return matchingTasks;
+
+  renderallTasks(); 
 }
+
+
 
 
 //Hilfsfunktionen und Event Listener

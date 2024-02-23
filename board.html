@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Board</title>
+    <script src="js/templates.js"></script>
+    <script src="js/logout.js"></script> 
     <script src="js/contacts.js"></script>
     <script src="js/storage.js"></script>
+    <script src="js/sidebar.js"></script> 
+    
     <script src="js/board.js"></script>
     <link rel="stylesheet" href="/css/board.css">
     <link rel="stylesheet" href="/css/sidebar.css">
@@ -14,7 +18,7 @@
     
     
 </head>
-<body onload="init() ">
+<body onload="init()">
 
 
         <!-- Modal Overlay -->
@@ -36,15 +40,14 @@
             <div class="boardSubhHader">
                 <h1 class="boardHeadline">Board</h1>
                 <div class="inputFieldAndAddTaskBtn">
-                    <form onchange="searchTasks()" class="inputField">
-                    
-                        <input type="text" class="input" placeholder="Find Task" id="searchInput">
-                            <div class="verticalLineAndGlassImg">
-                                <div class="verticalLine"></div>
-                                <img src="./img/search.png" alt="searchGlass">
-                            </div>
-                </div> 
-                    </form>
+                    <div class="inputField">
+                        <input type="text" class="input" placeholder="Find Task" id="searchInput" oninput="searchTasks()">
+                        <div class="verticalLineAndGlassImg">
+                            <div class="verticalLine"></div>
+                            <img src="./img/search.png" alt="searchGlass">
+                        </div>
+                    </div>
+                </div>
                 <a href="./addtask.html">
                         <button class="addTaskBtn"><div class="addTaskLetterin">Add task</div> <img class="addImg" src="./img/add.png" alt="" srcset=""></button>
                 </a>
@@ -77,8 +80,6 @@
             </div>
         </div>
     </div>
-    <script src="js/templates.js"></script>
-    <script src="js/sidebar.js"></script> 
-    <script src="./js/logout.js"></script> 
+    
     </body>
 </html>
