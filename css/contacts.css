@@ -716,7 +716,7 @@ form input::placeholder {
         height: 56px;
         border-radius: 28px;
         position: absolute;
-        top: 80vh;
+        bottom: 50px;
         left: 80vw;
         background: transparent;
     }
