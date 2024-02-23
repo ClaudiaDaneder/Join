@@ -143,6 +143,8 @@ function closePopup() {
   let back = document.getElementById('back');
   let formNewContact = document.getElementById('user');
   let popupTitle = document.getElementById('popupTitle');
+  let open = document.getElementById('logoutScreen');
+  open.style.display = 'none';
   if (addContact.style.transform == 'translateX(0px)') {
       addContact.style.transform = 'translateX(150vw)';
   }

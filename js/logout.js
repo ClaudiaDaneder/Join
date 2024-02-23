@@ -4,6 +4,7 @@ let yourId;
 async function initOnline() {
     await loadOnlineUsers();
     initals();
+    widthSize();
 }
 
 async function loadOnlineUsers() {
@@ -53,8 +54,6 @@ function initals() {
     }
 }
 
-
-
 function openUser() {
     let open = document.getElementById('logoutScreen');
     if (open.style.display == 'flex') {
@@ -72,3 +71,23 @@ function policy() {
     console.log('Policy');
 }
 
+async function widthSize(){
+    let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    let helpHeader = document.getElementById('helpHeader');
+    let subtitleHeader = document.getElementById('subtitleHeader');
+    if (width <= 850) {
+        helpHeader.style.display = 'none';
+        subtitleHeader.classList.remove('headerText');
+        subtitleHeader.classList.add('headerMobile');
+        subtitleHeader.innerHTML = '<img class="mobileLogo" src="./img/join_logo_dark.svg">';
+    } else {
+        helpHeader.style.display = 'flex';
+        subtitleHeader.classList.remove('headerMobile');
+        subtitleHeader.classList.add('headerText');
+        subtitleHeader.innerHTML = 'Kanban Project Management Tool';
+    }
+}
+
+window.addEventListener("resize", function () {
+    widthSize();
+});

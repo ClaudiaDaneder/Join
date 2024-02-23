@@ -1,13 +1,13 @@
 <header>
     <div id="logoutScreen">
-        <div class="logoutButton" onclick="notice()">Legal Notice</div>
-        <div class="logoutButton" onclick="policy()">Privacy Policy</div>
+        <a class="logoutButton" href="legal_notice.html">Legal Notice</a>
+        <a class="logoutButton" href="privacy_policy.html">Privacy Policy</a>
         <div class="logoutButton" id="logoutButton" onclick="logout('guest')">Logout</div>
     </div>
     <div class="headerText" id="subtitleHeader">Kanban Project Management Tool</div>
     <div class="headerRight" id="header_link">
-        <a href="../help.html"><img class="headerHelp" src="../img/question.svg"></a>
-        <div class="headerUser" onclick="openUser()">
+        <a href="../help.html" id="helpHeader"><img class="headerHelp" src="../img/question.svg"></a>
+        <div class="headerUser" onclick="notClose(event), openUser()">
             <p id="initals">G</p>
         </div>
     </div>

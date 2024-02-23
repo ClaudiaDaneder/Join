@@ -155,6 +155,7 @@ p {
     display: flex;
     align-items: center;
     flex-direction: column;
+    overflow-x: hidden;
     overflow-y: auto;
 }
 
@@ -628,4 +629,74 @@ form input::placeholder {
     z-index: 900;
     color: #FFFFFF;
     font-size: 20px;
+}
+
+@media (max-width: 1000px){
+    .contacts{
+        left: 200px;
+        width:350px;
+    }
+
+    .addContact{
+        width: 350px;
+    }
+
+    .addContactButton{
+        width: 250px;
+    }
+}
+
+@media (max-width: 850px){
+    .contacts{
+        left: 0;
+        width: 100%;
+        top: 80px;
+    }
+
+    .contactList{
+        margin-top: 10px;
+    }
+
+    .contactsView{
+        transform: translateX(100%);
+        transition: all 200ms ease-in-out;
+    }
+
+    .addContact{
+        display: none;
+    }
+
+    .letter{
+        width: 80% !important;
+    }
+
+    .line{
+        width: 80%;
+    }
+
+    .lineBorder{
+        width: unset;
+    }
+
+    .list{
+        width: 80vw !important;
+    }
+
+    .listEmail{
+        word-break: break-all;
+    }
+
+    .listVisited{
+        width: 80vw !important;
+    }
+}
+
+@media (max-width: 350px){
+    .list{
+        gap: 15px;
+    }
+
+    .listVisited{
+        gap: 15px;
+    }
 }
