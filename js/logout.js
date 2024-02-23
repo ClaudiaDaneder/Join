@@ -39,6 +39,7 @@ async function userOnline() {
 function initals() {
     let initial = document.getElementById('initals');
     let logout = document.getElementById('logoutButton');
+    let arrowBack = document.getElementById('arrowBack');
     if (yourId != null) {
         for (let i = 0; i < onlineUser.length; i++) {
             if (onlineUser[i]['email'] == yourId) {
@@ -46,6 +47,10 @@ function initals() {
                 let nameParts = names.split(" ");
                 initial.innerHTML = nameParts.map(part => part.charAt(0)).join("");
                 logout.setAttribute('onclick', `logout('${yourId}')`);
+                if(arrowBack){
+                    arrowBack.setAttribute('onclick', 'history.back()');
+                    navigation('show');
+                }
             }
         }
     } else {
