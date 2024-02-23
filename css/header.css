@@ -120,4 +120,8 @@ header {
     #logoutScreen{
         top: 80px;
     }
+
+    .headerText{
+        display: none;
+    }
 }

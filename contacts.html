@@ -19,13 +19,14 @@
 </head>
 
 <body onload="init()">
-    <div onclick="closePopup()">
+    <div class="settings" onclick="closePopup()">
         <div id="back"></div>
         <div w3-include-html="./templates/sidebar.html"></div>
         <div w3-include-html="./templates/header.html"></div>
         <div id="save_info"></div>
         <div id="addContactPopup" onclick="notClose(event)">
             <div class="popupLeft">
+                <div class="popupClosedMobile" onclick="closePopup()"><img src="./img/cancel_white.svg"></div>
                 <div class="leftContainer">
                     <img src="./img/join_logo.svg">
                     <div id="popupTitle"></div>
@@ -39,7 +40,7 @@
         <div class="contacts">
             <div class="addContact">
                 <button class="addContactButton" onclick="notClose(event), addContact()">
-                    <p>Add new contact</p>
+                    <p id="addButtonText">Add new contact</p>
                     <img src="./img/addContact.svg">
                 </button>
             </div>
