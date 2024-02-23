@@ -22,7 +22,8 @@ function greet() {
     };
 
     /*if (login name is "user") {
-        greet.replace(", ", '!')
+        greet.replace(", ", '!');
+        dont display name
     }
     */
 
@@ -30,6 +31,13 @@ function greet() {
     message.innerHTML = greet;
     let messageMobile = document.getElementById('greeting-time-mobile');
     messageMobile.innerHTML = greet;
+    hideMobileGreetingAfterTimeout();
+}
+
+function hideMobileGreetingAfterTimeout() {
+    setTimeout(function () {
+        document.getElementById('mobile-greeting').style = 'display: none';
+    }, 1600);
 }
 
 function changeFieldColor(field) {
