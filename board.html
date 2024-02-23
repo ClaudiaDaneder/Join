@@ -41,10 +41,10 @@
                 <h1 class="boardHeadline">Board</h1>
                 <div class="inputFieldAndAddTaskBtn">
                     <div class="inputField">
-                        <input type="text" class="input" placeholder="Find Task" id="searchInput" oninput="searchTasks()">
+                        <input type="text" class="input" placeholder="Find Task" id="searchInput" >
                         <div class="verticalLineAndGlassImg">
                             <div class="verticalLine"></div>
-                            <img src="./img/search.png" alt="searchGlass">
+                            <img src="./img/search.png" alt="searchGlass" onclick="searchTasks()">
                         </div>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                 <div class="tasksoverlay"></div>
                 <div class="tasksoverlay"></div>
             </div>
-            <div class="taskContainer">
+            <div class="taskContainer" onclick="endSearch()">
                 <section class="width-240px calc-height-248px" ondrop="drop(event)" ondragover="allowDrop(event)">
                     <div class="noTask" id="noTaskToDo" draggable="false"> No tasks To do</div>
                     <div id="toDo" class="taskColumn drag-area" ></div>

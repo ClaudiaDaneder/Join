@@ -461,7 +461,7 @@ async function upDateAllDate() {
 //Suchfunktion
 function searchTasks() {
   let searchValue = document.getElementById("searchInput").value.toLowerCase();
-  searchResults = [];
+  searchResults = []; // Zurücksetzen der Suchergebnisse
 
   // Nur suchen, wenn der Suchwert nicht leer ist
   if (searchValue.trim() !== "") {
@@ -478,6 +478,12 @@ function searchTasks() {
 }
 
 
+function endSearch() {
+  // Hier können Sie die Logik zum Beenden der Suche einfügen
+  document.getElementById("searchInput").value = "";
+  searchResults = [];
+  renderallTasks();
+}
 
 
 //Hilfsfunktionen und Event Listener
