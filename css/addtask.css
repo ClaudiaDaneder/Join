@@ -248,7 +248,7 @@ a:hover {
     max-height: 250px;
     font-size: 16px;
     color: #000;
-    margin-bottom: 64px
+    margin-bottom: 32px
 }
 
 .subtasklist-item {
@@ -614,7 +614,7 @@ a:hover {
     display: flex;
     gap: 6px;
     flex-wrap: wrap;
-    width: 100%;
+    width: calc(100% - 2*16px);
     padding: 0 16px;
 }
 
@@ -769,11 +769,16 @@ a:hover {
     }
 
     .add-task-headline {
-        font-size: 52px;
+        font-size: 47px;
     }
 
     .prio-button-container {
-        gap: 16px
+        gap: 16px;
+        margin-bottom: 24px
+    }
+
+    input, textarea, select, .dropdown {
+        margin-bottom: 16px
     }
 }
 
@@ -821,11 +826,9 @@ a:hover {
         display: none
     }
 
-}
-
-@media screen and (max-width: 600px) {
-    .add-task-headline {
-        font-size: 47px;
+    .selected-assignees-list {
+        padding: 0;
+        margin: -6px 0 16px 0
     }
 
     input,
@@ -833,6 +836,17 @@ a:hover {
     select,
     .dropdown {
         padding: 8px 12px;
+    }
+
+    .subtasklist {
+        margin-bottom: 64px
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+    .add-task-headline {
+        font-size: 47px;
     }
 }
 
@@ -859,6 +873,7 @@ a:hover {
         font-weight: 500;
         background-size: 21px;
     }
+
 }
 
 @media screen and (max-width: 360px) {

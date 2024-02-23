@@ -24,17 +24,7 @@ async function initAddTask() {
 }
 
 
-function addNewTask() {
-    defineTask(task);
-    disableCreateButton();
-    checkPriority(task);
-    saveToStorage(task);
-    resetForm();
-    showPopup();
-    redirectToBoard();
-}
-
-async function defineTask() {
+async function addNewTask() {
     let taskID = await identifyTaskId();
     let task = {
         'title': title.value,
@@ -47,7 +37,14 @@ async function defineTask() {
         'task-id': taskID,
         'status': 'toDos'
     };
+    disableCreateButton();
+    checkPriority(task);
+    saveToStorage(task);
+    resetForm();
+    showPopup();
+    redirectToBoard();
 }
+
 
 async function loadContactsFromStorage() {
     let allContactsAsString = await getItem('allContacts');
@@ -69,8 +66,8 @@ async function saveToStorage(task) {
 
 async function identifyTaskId() {
     let allSavedTasks = JSON.parse(await getItem('allTasks'));
-        lastID = allSavedTasks.length;
-        return lastID;
+    lastID = allSavedTasks.length;
+    return lastID;
 }
 
 
@@ -286,7 +283,12 @@ function disableCreateButton() {
 
 
 function showPopup() {
-    document.getElementById('popup-bg').classList.remove('hide')
+    let w = parseInt(window.innerWidth)
+    if (w < 850) {
+        document.getElementById('popup-bg-mobile').classList.remove('hide')
+    } else {
+        document.getElementById('popup-bg').classList.remove('hide')
+    }
 }
 
 
