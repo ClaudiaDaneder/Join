@@ -6,7 +6,7 @@ function enableNavigation() {
     })
 }
 
-async function navigation(show){
+async function navigation(){
     let navigation = document.getElementById('navigation_link');
     let header = document.getElementById('header_link');
         navigation.style.display = 'flex';

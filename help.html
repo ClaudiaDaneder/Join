@@ -10,13 +10,15 @@
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/sidebar.css">
     <link rel="stylesheet" href="css/fonts.css">
-    <script src="js/logout.js"></script>
-    <script src="js/templates.js" defer></script>
-    <script src="js/contacts.js" defer></script>
-    <script src="js/storage.js"></script>
+    <script src="./js/templates.js" defer></script>
+    <script src="js/sidebar.js" defer></script>
+    <script src="./js/storage.js"></script>
+    <script src="./js/help.js"></script>
+    <script src="./js/contacts.js"></script>
+    <script src="./js/logout.js"></script>
 </head>
 
-<body onload="includeHTML()">
+<body onload="helpInit()">
     <div w3-include-html="templates/sidebar.html"></div>
     <div w3-include-html="templates/header.html"></div>
     <div class="arrow-back" onclick="history.back()"><img src="./img/help_icon_arrow_back.svg"></div>

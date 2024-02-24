@@ -68,14 +68,6 @@ function openUser() {
     }
 }
 
-function notice() {
-    console.log('Notice');
-}
-
-function policy() {
-    console.log('Policy');
-}
-
 async function widthSize(){
     let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
     let helpHeader = document.getElementById('helpHeader');

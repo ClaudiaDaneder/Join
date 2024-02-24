@@ -7,10 +7,10 @@ body {
     height: 100vh;
     font-family: 'Inter';
     overflow-x: hidden;
+    position: relative;
 }
 
 .settings {
-    position: relative;
     width: 100%;
     overflow-x: hidden;
 }
@@ -655,80 +655,7 @@ form input::placeholder {
     font-size: 20px;
 }
 
-@media (max-width: 1000px){
-    .contacts{
-        left: 200px;
-        width:350px;
-    }
-
-    .addContact{
-        width: 350px;
-    }
-
-    .addContactButton{
-        width: 250px;
-    }
-}
-
-@media (max-width: 850px){
-    .contacts {
-        left: 0;
-        width: 100vw;
-        top: 80px;
-        height: calc(100vh - 80px - 70px);
-    }
-
-    .contactList{
-        margin-top: 10px;
-    }
-
-    .contactsView{
-        transform: translateX(100%);
-        transition: all 200ms ease-in-out;
-    }
-
-    .letter{
-        width: 80% !important;
-    }
-
-    .line{
-        width: 80%;
-    }
-
-    .lineBorder{
-        width: unset;
-    }
-
-    .list{
-        width: 80vw !important;
-    }
-
-    .listEmail{
-        word-break: break-all;
-    }
-
-    .listVisited{
-        width: 80vw !important;
-    }
-
-    .addContact{
-        width: 56px;
-        height: 56px;
-        border-radius: 28px;
-        position: absolute;
-        bottom: 50px;
-        left: 80vw;
-        background: transparent;
-    }
-
-    .addContactButton{
-        border-radius: 28px;
-    }
-
-    #addButtonText{
-        display: none;
-    }
-
+@media (max-width: 1050px){
     #addContactPopup {
         height: 760px;
         width: 90vw;
@@ -813,6 +740,81 @@ form input::placeholder {
     }
 }
 
+@media (max-width: 1000px){
+    .contacts{
+        left: 200px;
+        width:350px;
+    }
+
+    .addContact{
+        width: 350px;
+    }
+
+    .addContactButton{
+        width: 250px;
+    }
+}
+
+@media (max-width: 850px){
+    .contacts {
+        left: 0;
+        width: 100vw;
+        top: 80px;
+        height: calc(100vh - 80px - 70px);
+    }
+
+    .contactList{
+        margin-top: 10px;
+    }
+
+    .contactsView{
+        transform: translateX(100%);
+        transition: all 200ms ease-in-out;
+    }
+
+    .letter{
+        width: 80% !important;
+    }
+
+    .line{
+        width: 80%;
+    }
+
+    .lineBorder{
+        width: unset;
+    }
+
+    .list{
+        width: 80vw !important;
+    }
+
+    .listEmail{
+        word-break: break-all;
+    }
+
+    .listVisited{
+        width: 80vw !important;
+    }
+
+    .addContact{
+        width: 56px;
+        height: 56px;
+        border-radius: 28px;
+        position: absolute;
+        bottom: 2vh;
+        left: 80vw;
+        background: transparent;
+    }
+
+    .addContactButton{
+        border-radius: 28px;
+    }
+
+    #addButtonText{
+        display: none;
+    }
+}
+
 @media (max-width: 350px){
     .list{
         gap: 15px;
@@ -820,5 +822,14 @@ form input::placeholder {
 
     .listVisited{
         gap: 15px;
+    }
+}
+
+@media (max-height: 780px){
+    #addContactPopup {
+        bottom: unset;
+        margin: unset;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
