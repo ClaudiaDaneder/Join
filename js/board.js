@@ -21,7 +21,6 @@ let currentSubTasks = [];
 let subTask=[];
 let searchResults = [];
 
-
 // Datenladen und -verarbeiten
 async function loadTaskFromStorage() {
   let allTaskAsString = await getItem("allTasks");
@@ -77,21 +76,22 @@ function updateTaskElement(taskId, isHighlighted) {
   }
 }
 
+
 function renderToDo() {
   let toDoContainer = document.getElementById("toDo");
 
   // Aktualisieren bestehender Elemente
-  toDos.forEach(task => {
-    updateTaskElement(task["task-id"], searchResults.includes(task["task-id"]));
-  });
+  for (let i = 0; i < toDos.length; i++) {
+    updateTaskElement(toDos[i]["task-id"], searchResults.includes(toDos[i]["task-id"]));
+  }
 
   // Fügen Sie neue Aufgaben hinzu, falls welche fehlen
-  toDos.forEach(task => {
-    if (!document.getElementById(task["task-id"])) {
-      const taskHtml = createTaskHtml(task, task["task-id"], searchResults.includes(task["task-id"]));
+  for (let i = 0; i < toDos.length; i++) {
+    if (!document.getElementById(toDos[i]["task-id"])) {
+      const taskHtml = createTaskHtml(toDos[i], toDos[i]["task-id"], searchResults.includes(toDos[i]["task-id"]));
       toDoContainer.innerHTML += taskHtml;
     }
-  });
+  }
 }
 
 
@@ -179,22 +179,39 @@ function createProgressBar(subtaskPercentage, completedSubtasks, totalSubtasks) 
 }
 
 
+function contactsAndColor(){
+  for (let l = 0; l < allTasks.length; l++) {
+    const task = allTasks[l];
+    const assign = task["assignee-infos"];
+    for (let m = 0; m < assign.length; m++) {
+      const element = assign[m];
+      const name =element["name"]
+      const color = element["color"];
+      console.log(name+color)
+    }
+    
+  }
+}
+
+
 function createTaskHtml(task, taskId, isHighlighted) {
   let highlightClass = isHighlighted ? "highlight" : "";
   let categoryClass = getCategoryClass(task.category);
   let subtaskPercentage = calculateSubtaskProgress(task["subtasks"]);
   let progressBarHtml = createProgressBar(subtaskPercentage, task["subtasks"].filter(subtask => subtask.done).length, task["subtasks"].length);
-  
+  let assigneeInfo = createAssigneeHtml(task); 
 
   return `
-    <div class="task ${highlightClass}" onchange="openCurrentTask('${taskId}')" draggable="true" ondragstart="drag(event, '${taskId}')" id="${taskId}">
+    <div class="task ${highlightClass}" onclick="openCurrentTask('${taskId}')" draggable="true" ondragstart="drag(event, '${taskId}')" id="${taskId}">
       <div class="${categoryClass}">${task.category}</div>
       <div class="previewTitle">${task.title}</div>
       <div class="previewDescription">${task.description}</div>
       ${progressBarHtml}
+      ${assigneeInfo}
     </div>
   `;
 }
+
 
 
 
@@ -356,6 +373,7 @@ function drag(ev, id) {
   }
   ev.dataTransfer.setData("id", id);
   ev.dataTransfer.dropEffect = "move";
+  openAndCloseNoTask();
 }
 
 
