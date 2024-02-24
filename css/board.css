@@ -365,7 +365,11 @@ body{
 }
 .previewTitle{
     font-family: inter700;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .previewDescription{
     font-family: interRegular;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
