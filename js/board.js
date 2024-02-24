@@ -21,6 +21,13 @@ let currentSubTasks = [];
 let subTask = [];
 let searchResults = [];
 
+function openAddTask(inTask){
+ board = document.getElementById("boardSiteContainer");
+ addTaskContainer = document.getElementById("addTaskContainer");
+ board.style.display="none";
+ addTaskContainer.style.display="";
+}
+
 // Datenladen und -verarbeiten
 async function loadTaskFromStorage() {
   let allTaskAsString = await getItem("allTasks");

@@ -232,6 +232,9 @@ body{
     flex-grow: 1;
     min-height: 70vh;
 }
+.addTaskLink{
+    text-decoration: none;
+}
 .content{
     display: flex;
     flex-direction: column;

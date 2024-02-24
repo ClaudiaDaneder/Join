@@ -39,7 +39,7 @@
     <div id="addTaskContainer" class="addTask-container" style="display: none;">
         <div w3-include-html="templates/addtask-popup.html"></div>
     </div>
-    <div class="boardSiteContainer">
+    <div class="boardSiteContainer" id="boardSiteContainer">
         
         <div w3-include-html="./templates/header.html"></div>
         <div class="content">
@@ -55,16 +55,16 @@
                         </div>
                     </div>
                 </div>
-                <a href="./addtask.html">
+                <a class="addTaskLink" href="./addtask.html">
                         <button class="addTaskBtn"><div class="addTaskLetterin">Add task</div> <img class="addImg" src="./img/add.png" alt="" srcset=""></button>
                 </a>
                     
             </div>
             <div class="parrent-add-task-container">
-                <div class="header-container-to-add-current-task"><h4 class="added-task-txt">To do</h4><img onclick="" class="add-current-task" src="img/plus_button.png" alt="" srcset=""></div>
-                <div class="header-container-to-add-current-task"><h4 class="added-task-txt">In progress</h4><img class="add-current-task" src="img/plus_button.png" alt="" srcset=""></div>
-                <div class="header-container-to-add-current-task"><h4 class="added-task-txt">Await feedback</h4><img class="add-current-task" src="img/plus_button.png" alt="" srcset=""></div>
-                <div class="header-container-to-add-current-task"><h4 class="added-task-txt">Done</h4><img class="add-current-task" src="img/plus_button.png" alt="" srcset=""></div>
+                <div class="header-container-to-add-current-task"><h4 class="added-task-txt">To do</h4><img onclick="openAddTask(`toDo`)" class="add-current-task" src="img/plus_button.png" alt="" srcset=""></div>
+                <div class="header-container-to-add-current-task"><h4 class="added-task-txt">In progress</h4><img onclick="openAddTask(`inProgress`)"  class="add-current-task" src="img/plus_button.png" alt="" srcset=""></div>
+                <div class="header-container-to-add-current-task"><h4 class="added-task-txt">Await feedback</h4><img onclick="openAddTask(`awaitFeedback`)"  class="add-current-task" src="img/plus_button.png" alt="" srcset=""></div>
+                <div class="header-container-to-add-current-task"><h4 class="added-task-txt">Done</h4><img onclick="openAddTask(`done`)"  class="add-current-task" src="img/plus_button.png" alt="" srcset=""></div>
             </div>
             <div class="taskContainer" onclick="endSearch()">
                 <section class="width-240px flex-grow-1" ondrop="drop(event)" ondragover="allowDrop(event)">
