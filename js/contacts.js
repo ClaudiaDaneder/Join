@@ -90,9 +90,14 @@ function returnArray(idShow, name, email, phone, color) {
 }
 
 /**Search ID */
+
 function searchId() {
-    lastID = contacts.length;
-    if (lastID == null || lastID == '') lastID = 0;
+    lastID = user[user.length-1];
+    if (lastID == null || lastID == ''){
+        lastID = 0;
+    }else{
+        lastID = lastID['id'];
+    }
     return lastID + 1;
 }
 
