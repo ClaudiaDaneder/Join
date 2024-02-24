@@ -19,9 +19,13 @@ h1{
     margin: 0;
 }
 body{
+    font-family: 'Inter', sans-serif;
     margin: 0;
     background-color: #F0F0F0;
 }
+.hidden {
+    display: none;
+  }
 #modal-overlay {
     position: fixed;
     width: 100%;
@@ -42,14 +46,7 @@ body{
     transform-origin: left bottom; /* Drehpunkt auf die linke untere Ecke setzen */
     transform: rotate(8deg); /* Drehung um 35 Grad */
   }
-  .highlight {
-    box-shadow: 0px 4px 32px rgba(0, 0, 0, 0.25)!important;
-    transition: box-shadow 2.37s ease-in-out;
-     transform: scale(1.06);
-}
-
-  
-  .ProgressBar-container{
+.ProgressBar-container{
     display: flex;
     align-items: center;
     gap :10px
@@ -159,24 +156,6 @@ body{
 }
 .width-240px{
     width: 240px;
-}
-.orange{
-    background-color: #FF7A00;
-}
-.lightorange{
-    background-color: #FF7A00;
-}
-.blue{
-    background-color: #0038FF;
-}
-.pink{
-    background-color: #FF5EB3;
-}
-.lightpink {
-    background-color: #FC71FF;
-}
-.cyan{
-    background-color: #003E3E;
 }
 .current-task-headline{
     font-family: inter700;

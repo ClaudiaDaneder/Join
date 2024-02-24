@@ -1,6 +1,6 @@
 //Initialisierung
 async function init() {
-  includeHTML();
+  await includeHTML();
   await loadTaskFromStorage();
   fillTasks();
   renderallTasks();
@@ -64,55 +64,54 @@ function renderallTasks() {
     openAndCloseNoTask();
 }
 
-
 function renderToDo() {
   let toDoContainer = document.getElementById("toDo");
   toDoContainer.innerHTML = "";
   for (let i = 0; i < toDos.length; i++) {
-    if (!document.getElementById(toDos[i]["task-id"])) {
-      const taskHtml = createTaskHtml(toDos[i], toDos[i]["task-id"], searchResults.includes(toDos[i]["task-id"]));
+    let isHighlighted = searchResults.length === 0 || searchResults.includes(toDos[i]["task-id"]);
+    if (isHighlighted) {
+      const taskHtml = createTaskHtml(toDos[i], toDos[i]["task-id"], true);
       toDoContainer.innerHTML += taskHtml;
     }
   }
 }
 
 
-
 function renderInProgress() {
   let inProgressContainer = document.getElementById("inProgress");
   inProgressContainer.innerHTML = "";
-
   for (let i = 0; i < inProgress.length; i++) {
-    let isHighlighted = searchResults.includes(inProgress[i]["task-id"]);
-    const taskHtml = createTaskHtml(inProgress[i], inProgress[i]["task-id"], isHighlighted);
-    inProgressContainer.innerHTML += taskHtml;
+    let isHighlighted = searchResults.length === 0 || searchResults.includes(inProgress[i]["task-id"]);
+    if (isHighlighted) {
+      const taskHtml = createTaskHtml(inProgress[i], inProgress[i]["task-id"], true);
+      inProgressContainer.innerHTML += taskHtml;
+    }
   }
 }
-
-
 
 
 function renderAwaitFeedback() {
   let feedbackContainer = document.getElementById("awaitFeedback");
   feedbackContainer.innerHTML = "";
-
   for (let i = 0; i < awaitFeedback.length; i++) {
-    let isHighlighted = searchResults.includes(awaitFeedback[i]["task-id"]);
-    const taskHtml = createTaskHtml(awaitFeedback[i], awaitFeedback[i]["task-id"], isHighlighted);
-    feedbackContainer.innerHTML += taskHtml;
+    let isHighlighted = searchResults.length === 0 || searchResults.includes(awaitFeedback[i]["task-id"]);
+    if (isHighlighted) {
+      const taskHtml = createTaskHtml(awaitFeedback[i], awaitFeedback[i]["task-id"], true);
+      feedbackContainer.innerHTML += taskHtml;
+    }
   }
 }
-
 
 
 function renderDone() {
   let doneContainer = document.getElementById("done");
   doneContainer.innerHTML = "";
-
   for (let i = 0; i < done.length; i++) {
-    let isHighlighted = searchResults.includes(done[i]["task-id"]);
-    const taskHtml = createTaskHtml(done[i], done[i]["task-id"], isHighlighted);
-    doneContainer.innerHTML += taskHtml;
+    let isHighlighted = searchResults.length === 0 || searchResults.includes(done[i]["task-id"]);
+    if (isHighlighted) {
+      const taskHtml = createTaskHtml(done[i], done[i]["task-id"], true);
+      doneContainer.innerHTML += taskHtml;
+    }
   }
 }
 
@@ -182,7 +181,7 @@ function getAssigneeHtml(task) {
 
 
 function createTaskHtml(task, taskId, isHighlighted) {
-  let highlightClass = isHighlighted ? "highlight" : "";
+  let taskClass = isHighlighted ? "task highlight" : "task hidden";
   let categoryClass = getCategoryClass(task.category);
   let subtaskPercentage = calculateSubtaskProgress(task["subtasks"]);
   let progressBarHtml = createProgressBar(subtaskPercentage, task["subtasks"].filter(subtask => subtask.done).length, task["subtasks"].length);
@@ -191,7 +190,7 @@ function createTaskHtml(task, taskId, isHighlighted) {
   let assigneeHtml = getAssigneeHtml(task);
 
   return `
-    <div class="task ${highlightClass}" onclick="openCurrentTask('${taskId}')" draggable="true" ondragstart="drag(event, '${taskId}')" id="${taskId}">
+    <div class="task ${taskClass}" onclick="openCurrentTask('${taskId}')" draggable="true" ondragstart="drag(event, '${taskId}')" id="${taskId}">
       <div class="${categoryClass}">${task.category}</div>
       <div class="previewTitle">${task.title}</div>
       <div class="previewDescription">${task.description}</div>
