@@ -17,6 +17,7 @@ let hiddenContactsInput = document.getElementById('hidden-contacts-input')
 
 
 async function initAddTask() {
+    clearLocalStorage();
     await includeHTML();
     await initOnline();
     await enableNavigation();
@@ -93,6 +94,7 @@ document.addEventListener('click', function (event) {
         dropdown.classList.remove('active');
         hiddenContactsInput.classList.add('hide');
         hiddenContactsInput.value = '';
+        saveSelectedContacts();
     }
     if (dropdown.classList.contains('active')) {
         document.getElementById('assign-arrow').style.transform = 'rotate(180deg)';
@@ -111,6 +113,7 @@ async function toggleContactsDropdown(event) {
         await loadContactsFromStorage();
         dropdown.classList.toggle('active');
         enableContactsSearchField();
+        loadSelectedContacts();
     }
     if (dropdown.classList.contains('active')) {
         document.getElementById('assign-arrow').style.transform = 'rotate(180deg)';
@@ -141,6 +144,12 @@ function enableContactsSearchField() {
 async function filterContacts() {
     let search = hiddenContactsInput.value.toLowerCase();
     let filteredContacts = allContacts.filter(contact => contact['name'].toLowerCase().includes(search));
+    selectedContacts.forEach(selectedContact => {
+        let index = filteredContacts.findIndex(contact => contact.name === selectedContact.name && contact.color === selectedContact.color);
+        if (index === -1) {
+            filteredContacts.push(selectedContact);
+        }
+    });
     loadContactsIntoDropdown(filteredContacts);
 }
 
@@ -184,6 +193,40 @@ function generateSelectedAssigneesList() {
         selectedAssignees.innerHTML += `<div class="assignee-circle ${contactColor}" title="${contactName}">${initials}</div>`;
     }
 }
+
+
+function saveSelectedContacts() {
+    localStorage.setItem('selectedContacts', JSON.stringify(selectedContacts));
+}
+
+
+function loadSelectedContacts() {
+    let savedContacts = localStorage.getItem('selectedContacts');
+    if (savedContacts) {
+        savedContacts = JSON.parse(savedContacts);
+        savedContacts.forEach(contact => {
+            let index = allContacts.findIndex(c => c.name === contact.name && c.color === contact.color);
+            if (index !== -1) {
+                let checkboxOption = document.getElementById(`checkbox-option_${index}`);
+                checkboxOption && checkboxOption.classList.add('checkbox-option-selected');
+                let checkboxImage = document.getElementById(`checkbox_${index}`);
+                checkboxImage && (checkboxImage.src = './img/addtask_contacts_checkbox_checked.svg');
+            }
+        });
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function checkPriority(task) {
@@ -255,6 +298,7 @@ function resetForm() {
     resetCheckboxOptions();
     clearSubtaskField();
     clearSubtaskList();
+    clearLocalStorage();
 }
 
 
@@ -279,6 +323,10 @@ function resetCheckboxOptions() {
 function disableCreateButton() {
     document.querySelector('.create-button').disabled = true;
     document.getElementById('create-button').classList.add('blue-create-button');
+}
+
+function clearLocalStorage() {
+    localStorage.removeItem('selectedContacts');
 }
 
 
