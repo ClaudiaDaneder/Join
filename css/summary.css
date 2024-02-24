@@ -414,7 +414,7 @@ body {
 @media screen and (max-width: 700px) {
   
     .metrics-container {
-        gap: 16px;
+        gap: 24px;
     }
 
     .to-dos {
@@ -554,4 +554,63 @@ body {
         font-size: 16px;
     }
 
+    .metrics-container {
+        gap: 18px;
+    }
+
+    .to-dos {
+        gap: 18px;
+    }
+
+    .tasks-in-board {
+        gap: 18px;
+    }
+
+
+}
+
+@media screen and (max-width: 360px) {
+    .urgent {
+        gap: 12px
+    }
+
+    .todo-dark-bg,
+    .done-dark-bg,
+    .urgent-left img {
+        width: 36px;
+        height: 36px;
+        background-size: 40%;
+    }
+
+    .number {
+        font-size: 30px;
+    }
+
+    .metrics-container {
+        gap: 8px
+    }
+
+    .to-dos {
+        gap: 8px;
+    }
+
+    .tasks-in-board {
+        gap: 8px;
+    }
+
+    .header-container {
+        margin-bottom: 36px;
+    }
+
+    .deadline {
+        font-size: 15px;
+    }
+
+    .metrics-bubble {
+        gap: 8px
+    }
+
+    .urgent-left {
+        gap: 8px
+    }
 }

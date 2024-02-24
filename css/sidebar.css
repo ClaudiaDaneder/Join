@@ -180,12 +180,11 @@
 
 @media screen and (max-width: 435px) {
     .navigation-link-container {
-        gap: 15px;
+        gap: 6px;
         font-size: 12px;
     }
 
     .sidebar-container {
-        padding: 0 12px;
         height: 70px;
     }
 
@@ -206,13 +205,11 @@
 
 @media screen and (max-width: 360px) {
     .navigation-link-container {
-        gap: 8px;
         font-size: 11px;
-        ;
     }
 
     .sidebar-container {
-        padding: 0 6px;
+        padding: 0 12px;
         height: 60px;
     }
 
