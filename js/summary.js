@@ -7,33 +7,37 @@ async function initSummary() {
     navigation('show');
 }
 
+
 function greet() {
-    let today = new Date();
-    let time = today.getHours();
-    let greet;
-
-    if (time < 6) {
-        greet = 'Good night,&nbsp;';
-    } else if (time < 12) {
-        greet = 'Good morning,&nbsp;';
-    } else if (time < 18) {
-        greet = 'Good afternoon,&nbsp;';
-    } else if (time < 24) {
-        greet = 'Good evening,&nbsp;';
-    };
-
-    /*if (login name is "user") {
-        greet.replace(", &nbsp;", '!');
-        dont display name
-    }
-    */
+    let greeting = defineDayTime();
 
     let message = document.getElementById('greeting-time');
-    message.innerHTML = greet;
+    message.innerHTML = greeting;
+
     let messageMobile = document.getElementById('greeting-time-mobile');
-    messageMobile.innerHTML = greet;
+    messageMobile.innerHTML = greeting;
+
     hideMobileGreetingAfterTimeout();
 }
+
+
+function defineDayTime() {
+    let today = new Date();
+    let time = today.getHours();
+    let greeting;
+
+    if (time < 6) {
+        greeting = 'Good night,&nbsp;';
+    } else if (time < 12) {
+        greeting = 'Good morning,&nbsp;';
+    } else if (time < 18) {
+        greeting = 'Good afternoon,&nbsp;';
+    } else if (time < 24) {
+        greeting = 'Good evening,&nbsp;';
+    };
+    return greeting;
+}
+
 
 function hideMobileGreetingAfterTimeout() {
     setTimeout(function () {
@@ -41,27 +45,6 @@ function hideMobileGreetingAfterTimeout() {
     }, 1600);
 }
 
-function changeFieldColor(field) {
-    let circle = document.getElementById(`${field}`);
-    circle.style.backgroundColor = '#fff';
-    circle.style.backgroundImage = `url(./img/summary_${field}_dark.svg)`;
-}
-
-function resetFieldColor(field) {
-    let circle = document.getElementById(`${field}`);
-    circle.style.backgroundColor = '#2A3647';
-    circle.style.backgroundImage = `url(./img/summary_${field}_white.svg)`;
-}
-
-function changeNumberColor(field) {
-    let number = document.getElementById(`number_${field}`);
-    number.classList.add('white');
-}
-
-function resetNumberColor(field) {
-    let number = document.getElementById(`number_${field}`);
-    number.classList.remove('white');
-}
 
 async function showMetrics() {
     showUserName();
@@ -75,13 +58,15 @@ async function showMetrics() {
     showAwaitingFeedback();
 }
 
+
 async function getData() {
     await loadTaskFromStorage();
     await fillTasks();
 }
 
-function showUserName() {
-    let userName = onlineName[0];
+
+async function showUserName() {
+    let userName = await onlineName[0];
     document.getElementById('greeting-name').innerHTML = userName;
     document.getElementById('greeting-name-mobile').innerHTML = userName;
 }
@@ -113,9 +98,7 @@ function showAwaitingFeedback() {
 
 
 function getEarliestDate() {
-    let openTasks = allTasks.filter(function (task) {
-        return task.status !== 'done';
-    });
+    let openTasks = filterOpenTasks();
     if (openTasks.length === 0) {
         hideDeadlineSection()
     }
@@ -127,6 +110,13 @@ function getEarliestDate() {
         }
     }
     return formatDate(new Date(earliestDate));
+}
+
+
+function filterOpenTasks() {
+    return allTasks.filter(function (task) {
+        return task.status !== 'done';
+    });
 }
 
 
@@ -158,4 +148,30 @@ function showUrgentTasks() {
     });
     let number = urgentTasks.length;
     document.getElementById('number_urgent').innerHTML = number;
+}
+
+
+function changeFieldColor(field) {
+    let circle = document.getElementById(`${field}`);
+    circle.style.backgroundColor = '#fff';
+    circle.style.backgroundImage = `url(./img/summary_${field}_dark.svg)`;
+}
+
+
+function resetFieldColor(field) {
+    let circle = document.getElementById(`${field}`);
+    circle.style.backgroundColor = '#2A3647';
+    circle.style.backgroundImage = `url(./img/summary_${field}_white.svg)`;
+}
+
+
+function changeNumberColor(field) {
+    let number = document.getElementById(`number_${field}`);
+    number.classList.add('white');
+}
+
+
+function resetNumberColor(field) {
+    let number = document.getElementById(`number_${field}`);
+    number.classList.remove('white');
 }
