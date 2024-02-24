@@ -41,10 +41,10 @@ function loadNames(contactLetterLoad, i) {
 
 /**Create and Save the New Contact */
 async function createContact() {
-    let name = document.getElementById('name');
     let email = document.getElementById('email');
     if (contactExist(email.value) == false) {
         contactCreate();
+        closePopup();
     } else {
         savePopup('exist');
     }
@@ -64,7 +64,6 @@ async function contactCreate() {
     init();
     savePopup('create');
     slideContact(idShow);
-    closePopup();
 }
 
 /**Check Contact Exist */
@@ -195,7 +194,7 @@ function button(data) {
 }
 
 /**Shows the selected contact   */
-function showContact(id) {
+async function showContact(id) {
     let showContact = document.getElementById('showContact');
     removeClassList();
     addClassList(id);

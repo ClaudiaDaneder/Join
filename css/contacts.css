@@ -239,11 +239,11 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 42px;
-    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
     border: 2px solid white;
     color: white;
-    border-radius: 21px;
+    border-radius: 42px;
     font-size: 12px;
 }
 
@@ -279,6 +279,10 @@ p {
     height: 65px;
     border: 3px solid #29ABE2;
     border-radius: 3px;
+}
+
+.bottomCut{
+    display: none;
 }
 
 .contactsHeader {
@@ -486,7 +490,7 @@ p {
     cursor: pointer;
 }
 
-.popupClosedMobile{
+.popupClosedMobile {
     display: none;
     position: absolute;
     top: 24px;
@@ -499,7 +503,7 @@ p {
     cursor: pointer;
 }
 
-.popupClosedMobile img{
+.popupClosedMobile img {
     height: 24px;
     width: 24px;
 }
@@ -655,16 +659,50 @@ form input::placeholder {
     font-size: 20px;
 }
 
-.backToContacts{
+.backToContacts {
     display: none;
     width: 24px;
     height: 24px;
     position: absolute;
     top: 128px;
-    right: 30px;
+    right: 50px;
+    cursor: pointer;
 }
 
-.menueContacts{
+.menuePopup{
+    width: 116px;
+    height: 100px;
+    border-radius: 20px 20px 0 20px;
+    pad: 10px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 4px 0px #00000040;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    right: 70px;
+    bottom: 140px;
+    z-index: 3;
+    transform: translateX(100vw);
+    transition: all 200 ease-in-out;
+}
+
+.popupM{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+    cursor: pointer;
+}
+
+.popupM p{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.menueContacts {
     display: none;
     justify-content: center;
     align-items: center;
@@ -672,18 +710,19 @@ form input::placeholder {
     height: 56px;
     border-radius: 56px;
     background-color: #2A3647;
-    position: absolute;
-    bottom: 2vh;
-    left: 80vw;
+    position: fixed;
+    top: calc(100% - 80px - 70px);
+    right: 30px;
     cursor: pointer;
+    z-index: 2;
 }
 
-.menueContacts:hover{
+.menueContacts:hover {
     background: #29ABE2;
     box-shadow: 0px 4px 4px 0px #00000040;
 }
 
-@media (max-width: 1050px){
+@media (max-width: 1050px) {
     #addContactPopup {
         height: 760px;
         width: 90vw;
@@ -695,29 +734,30 @@ form input::placeholder {
         border-radius: 30px 30px 0 0;
     }
 
-    .form{
+    .form {
         display: flex;
         flex-direction: column;
         width: 90vw;
         height: 409px;
     }
 
-    .leftContainer{
+    .leftContainer {
         width: 90vw;
         height: 351px;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
+        padding-left: 24px;
     }
 
-    .leftContainer img{
+    .leftContainer img {
         display: none;
     }
 
-    .popupClosedMobile{
+    .popupClosedMobile {
         display: flex;
     }
 
-    .popupClosed{
+    .popupClosed {
         display: none;
     }
 
@@ -728,12 +768,17 @@ form input::placeholder {
         border-radius: 0 0 30px 30px;
     }
 
-    .clearContact{
+    .clearContact {
         position: absolute;
         top: 294px;
     }
 
-    .input{
+    .circleEdit {
+        position: absolute;
+        top: 294px;
+    }
+
+    .input {
         width: 85%;
         height: 41px;
     }
@@ -744,124 +789,198 @@ form input::placeholder {
         top: 444px;
     }
 
-    form input{
+    form input {
         width: calc(100% - 28px - 24px);
     }
 
-    .popupButton{
+    .popupButton {
         top: 220px;
         left: 0;
         justify-content: center;
         width: 100%;
     }
 
-    .cancel{
+    .cancel {
         display: none;
     }
 
-    .popupTop{
+    .popupTop {
         font-size: 47px;
     }
 
-    .popupBottom{
+    .popupBottom {
         font-size: 20px;
     }
 }
 
-@media (max-width: 1000px){
-    .contacts{
+@media (max-width: 1000px) {
+    .contacts {
         left: 200px;
-        width:350px;
-    }
-
-    .addContact{
         width: 350px;
     }
 
-    .addContactButton{
+    .addContact {
+        width: 350px;
+    }
+
+    .addContactButton {
         width: 250px;
     }
 }
 
-@media (max-width: 850px){
+@media (max-width: 850px) {
     .contacts {
         left: 0;
         width: 100vw;
         top: 80px;
         height: calc(100vh - 80px - 70px);
-    }
-
-    .contactList{
-        margin-top: 10px;
-    }
-
-    .contactsView{
-        transform: translateX(100%);
+        transform: translateX(0);
         transition: all 200ms ease-in-out;
     }
 
-    .letter{
+    #showContact {
+        width: 100%;
+        top: 300px;
+        height: unset;
+        left: 0;
+        transform: unset;
+    }
+
+    .contactsHeader {
+        width: 100%;
+        font-weight: 700;
+        font-size: 47px;
+    }
+
+    .contactsTitle {
+        width: 100%;
+        font-size: 20px;
+    }
+
+    .cHeader {
+        gap: 20px;
+        width: 100%;
+    }
+
+    .contactsInfo{
+        font-size: 20px;
+    }
+
+    .cwidth {
+        width: 80px !important;
+        height: 80px !important;
+        border-radius: 80px !important;
+        font-size: 27px;
+    }
+
+    .contactName{
+        height: unset;
+    }
+
+    .cName {
+        font-size: 25px;
+    }
+
+    .edit{
+        display: none;
+    }
+
+    .bottomCut{
+        display: flex;
+        width: 90px;
+        border: 3px solid #29ABE2;
+        border-radius: 8px;
+    }
+
+    .contactList {
+        margin-top: 10px;
+    }
+
+    .contactsView {
+        transform: translateX(100vw);
+        transition: all 200ms ease-in-out;
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        left: 16px;
+    }
+
+    .cut {
+        display: none;
+    }
+
+    .contactShow {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+        width: 80%;
+        top: 144px;
+        left: 0;
+    }
+
+    .letter {
         width: 80% !important;
     }
 
-    .line{
+    .line {
         width: 80%;
     }
 
-    .lineBorder{
+    .lineBorder {
         width: unset;
     }
 
-    .list{
+    .list {
         width: 80vw !important;
     }
 
-    .listEmail{
+    .listEmail {
         word-break: break-all;
     }
 
-    .listVisited{
+    .listVisited {
         width: 80vw !important;
     }
 
-    .addContact{
+    .addContact {
         width: 56px;
         height: 56px;
         border-radius: 28px;
         position: absolute;
-        bottom: 2vh;
-        left: 80vw;
+        top: calc(100% - 80px);
+        right: 20px;
         background: transparent;
     }
 
-    .addContactButton{
+    .addContactButton {
         border-radius: 28px;
     }
 
-    #addButtonText{
+    #addButtonText {
         display: none;
     }
 
-    .backToContacts{
+    .backToContacts {
         display: unset;
     }
 
-    .menueContacts{
+    .menuePopup{
         display: flex;
     }
 }
 
-@media (max-width: 350px){
-    .list{
+@media (max-width: 350px) {
+    .list {
         gap: 15px;
     }
 
-    .listVisited{
+    .listVisited {
         gap: 15px;
     }
 }
 
-@media (max-height: 780px){
+@media (max-height: 780px) {
     #addContactPopup {
         bottom: unset;
         margin: unset;

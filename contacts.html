@@ -37,7 +37,7 @@
                 <div id="user" class="form"></div>
             </div>
         </div>
-        <div class="contacts">
+        <div class="contacts" id="listAllContacts">
             <div class="addContact">
                 <button class="addContactButton" onclick="notClose(event), addContact()">
                     <p id="addButtonText">Add new contact</p>
@@ -46,13 +46,20 @@
             </div>
             <div class="contactList" id="contactLoad"></div>
         </div>
-        <div class="contactsView">
-            <img class="backToContacts" src="./img/backToContacts.svg">
-            <div class="menueContacts"><img src="./img/menueDots.svg"></div>
+        <div class="menueContacts" id="menueContacts" onclick="notClose(event), openMenue()"><img src="./img/menueDots.svg"></div>
+        <div class="menuePopup" id="menuePopup">
+            <div class="popupM">
+                <p id="mobileEdit" onclick="editContact(), openMenue()"><img src="./img/edit.svg">Edit</p>
+                <p id="mobileDelete" onclick="deleteContact()"><img src="./img/delete.svg">Delete</p>
+            </div>
+        </div>
+        <div class="contactsView" id="showContactsView">
+            <img class="backToContacts" src="./img/backToContacts.svg" onclick="backToContacts()">
             <div class="contactShow">
                 <p class="contactsHeader">Contacts</p>
                 <div class="cut"></div>
                 <p class="contactsTitle">Better with a team</p>
+                <div class="bottomCut"></div>
             </div>
             <div id="showContact"></div>
         </div>
