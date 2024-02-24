@@ -93,8 +93,8 @@ document.addEventListener('click', function (event) {
         dropdown.classList.remove('active');
         saveSelectedContacts();
         if (hiddenContactsInput) {
-        hiddenContactsInput.classList.add('hide');
-        hiddenContactsInput.value = '';
+            hiddenContactsInput.classList.add('hide');
+            hiddenContactsInput.value = '';
         }
     }
     if (dropdown.classList.contains('active')) {
@@ -185,13 +185,15 @@ function changeSelectedContactBackground(i) {
 
 
 function generateSelectedAssigneesList() {
-    selectedAssignees.innerHTML = '';
-    for (let c = 0; c < selectedContacts.length; c++) {
-        let selectedContact = selectedContacts[c];
-        let contactName = selectedContact.name;
-        let contactColor = selectedContact.color;
-        let initials = initialsLoad(contactName);
-        selectedAssignees.innerHTML += `<div class="assignee-circle ${contactColor}" title="${contactName}">${initials}</div>`;
+    if (selectedAssignees) {
+        selectedAssignees.innerHTML = '';
+        for (let c = 0; c < selectedContacts.length; c++) {
+            let selectedContact = selectedContacts[c];
+            let contactName = selectedContact.name;
+            let contactColor = selectedContact.color;
+            let initials = initialsLoad(contactName);
+            selectedAssignees.innerHTML += `<div class="assignee-circle ${contactColor}" title="${contactName}">${initials}</div>`;
+        }
     }
 }
 
