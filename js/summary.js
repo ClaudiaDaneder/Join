@@ -66,7 +66,7 @@ function resetNumberColor(field) {
 async function showMetrics() {
     showUserName();
     await getData();
-    //showDeadline();
+    showDeadline();
     showToDos();
     showDone();
     showUrgentTasks();
@@ -111,15 +111,44 @@ function showAwaitingFeedback() {
     document.getElementById('number_awaiting-feedback').innerHTML = number
 }
 
-function showDeadline() {
+function getEarliestDate() {
+    let openTasks = allTasks.filter(function(task) {
+        return task.status !== 'done';
+    });
+    if (openTasks.length === 0) {
+        document.getElementById('urgent-right').style = 'display: none';
+        document.getElementById('urgent-line').style = 'display: none';
+    }
 
-    document.getElementById('deadline').innerHTML = '';
+    let earliestDate = new Date(openTasks[0]['due-date'] + 'T00:00:00Z').getTime();
+    for (let i = 1; i < openTasks.length; i++) {
+        let date = new Date(openTasks[i]['due-date'] + 'T00:00:00Z').getTime();
+        if (date < earliestDate) {
+            earliestDate = date;
+        }  
+    }
+    earliestDate = new Date(earliestDate);
+    return formatDate(earliestDate);
 }
+
+function formatDate(date) {
+    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    let month = months[date.getMonth()];
+    let day = date.getDate();
+    let year = date.getFullYear();
+    let formattedDate = month + ' ' + day + ' ,' + year;
+    return formattedDate;
+}
+
+function showDeadline() {
+    let deadline = getEarliestDate();
+    document.getElementById('deadline').innerHTML = deadline;
+} 
 
 function showUrgentTasks() {
     let urgentTasks = allTasks.filter(function (task) {
         return task.prio === 'urgent' && task.status !== 'done';
     });
     let number = urgentTasks.length;
-    document.getElementById('number_urgent').innerHTML = number
+    document.getElementById('number_urgent').innerHTML = number;
 }
