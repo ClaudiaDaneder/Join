@@ -14,8 +14,8 @@ p {
 }
 
 button,
-input,
-textarea,
+.task-input,
+#description,
 select,
 .dropdown {
     border: unset;
@@ -23,8 +23,8 @@ select,
     box-sizing: border-box;
 }
 
-input,
-textarea,
+.task-input,
+#description,
 select,
 .dropdown {
     font-family: inherit;
@@ -34,20 +34,20 @@ select,
     margin-bottom: 24px;
 }
 
-input:focus,
-textarea:focus,
+.task-input:focus,
+#description:focus,
 select:focus,
 .dropdown:focus {
     border: 1px solid #29abe2;
     outline: none !important;
 }
 
-input::placeholder,
-textarea::placeholder {
+.task-input::placeholder,
+#description::placeholder {
     color: #D1D1D1;
 }
 
-textarea {
+#description {
     padding: 18px 16px;
     overflow: auto;
     resize: vertical;
@@ -58,26 +58,26 @@ textarea {
     background-size: 18.9px 18.9px;
 }
 
-textarea::-webkit-resizer {
+#description::-webkit-resizer {
     display: none;
 }
 
-textarea::-webkit-scrollbar {
+#description::-webkit-scrollbar {
     width: 16px;
 }
 
-textarea::-webkit-scrollbar-corner {
+#description::-webkit-scrollbar-corner {
     color: transparent
 }
 
-textarea::-webkit-scrollbar-thumb {
+#description::-webkit-scrollbar-thumb {
     background-color: #A8A8A8;
     border-radius: 20px;
     border: solid 4px white;
 }
 
 
-input,
+.task-input,
 select,
 .dropdown {
     padding: 12px 16px;
@@ -684,8 +684,8 @@ a:hover {
         padding-right: 35px;
     }
 
-    input,
-    textarea,
+    .task-input,
+    #description,
     select,
     .dropdown {
         font-size: 17px;
@@ -695,7 +695,7 @@ a:hover {
         font-size: 15px;
     }
 
-    textarea {
+    #description {
         background-size: 15px;
     }
 }
@@ -726,8 +726,8 @@ a:hover {
         padding-right: 32px;
     }
 
-    input,
-    textarea,
+    .task-input,
+    #description,
     select,
     .dropdown {
         font-size: 14px;
@@ -737,7 +737,7 @@ a:hover {
         font-size: 14px;
     }
 
-    textarea {
+    #description {
         background-size: 15px;
     }
 
@@ -807,8 +807,8 @@ a:hover {
         margin-bottom: 24px
     }
 
-    input,
-    textarea,
+    .task-input,
+    #description,
     select,
     .dropdown {
         margin-bottom: 16px
@@ -861,8 +861,8 @@ a:hover {
         margin: -6px 0 16px 0
     }
 
-    input,
-    textarea,
+    .task-input,
+    #description,
     select,
     .dropdown {
         padding: 8px 12px;
