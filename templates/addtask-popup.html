@@ -1,0 +1,62 @@
+<div class="main-container">
+    <h1 class="add-task-headline">Add Task</h1>
+    <form id="my-form" onsubmit="addNewTask(); return false" class="form">
+        <div class="form-container">
+            <div class="left">
+                <p class="task-label">Title<sup class="mandatory">*</sup></p>
+                <input type="text" placeholder="Enter a title" id="title" required>
+                <p class="task-label">Description</p>
+                <textarea placeholder="Enter a description" id="description" rows="4"></textarea>
+                <p class="task-label">Assigned to</p>
+                <div class="dropdown" id="contacts-dropdown" onclick="toggleContactsDropdown(event)">
+                    <p>Select contacts to assign</p>
+                    <input type="text" id="hidden-contacts-input" class="hide" oninput="filterContacts()">
+                    <img src="/img/addtask_icon_dropdown-menu.svg" id="assign-arrow">
+                    <div class="dropdown-content" id="assignee"></div>
+                </div>
+                <div class="selected-assignees-list" id="selected-assignees-list"></div>
+            </div>
+            <hr>
+            <div class="right">
+                <p class="task-label">Due date<sup class="mandatory">*</sup></p>
+                <input type="date" id="due-date" required placeholder="dd/mm/yyyy" value="" min="0">
+                <p class="task-label">Prio</p>
+                <div class="prio-button-container">
+                    <button type="button" class="button-prio-urgent" data-priority="urgent">Urgent </button>
+                    <button type="button" class="button-prio-medium selected" data-priority="medium">Medium</button>
+                    <button type="button" class="button-prio-low" data-priority="low">Low</button>
+                </div>
+                <p class="task-label">Category<sup class="mandatory">*</sup></p>
+                <div class="category-dropdown-container">
+                    <input type="text" required id="hidden-category-dropdown">
+                    <div class="dropdown" id="category-dropdown" onclick="toggleCategoryDropdown(event)">
+                        <p id="category-dropdown-text">Select task
+                            category</p><img src="/img/addtask_icon_dropdown-menu.svg" id="category-arrow">
+                        <div class="dropdown-content" id="category" required>
+                            <label class="checkbox-option category" onclick="selectCategory('User Story')">User
+                                Story</label>
+                            <label class="checkbox-option category"
+                                onclick="selectCategory('Technical Task')">Technical Task</label>
+                        </div>
+                    </div>
+                </div>
+                <p class="task-label">Subtasks</p>
+                <div class="styled-subtaskfield" id="styled-subtaskfield">
+                    <input class="subtaskfield" type="text" placeholder="Add new subtask" id="subtasks"
+                        oninput="updateSubtaskButtons()" onfocus="subtaskfieldFocus()" onblur="subtaskfieldBlur()">
+                    <div class="subtaskfield-button-container" id="subtaskfield-buttons">
+                        <button type="button" class="subtaskfield-button-general"><img src="/img/addtask_icon_subtaskfield_plus.svg"></button>
+                    </div>
+                </div>
+                <div id="subtasklist" class="subtasklist"></div>
+            </div>
+        </div>
+        <div class="task-bottom-container">
+            <p><sup class="mandatory">*</sup>This field is required</p>
+            <div class="task-submit-buttons">
+                <button class="reset-button" type="reset" onclick="resetForm()">Clear </button>
+                <button class="create-button" type="submit" id="create-button">Create Task </button>
+            </div>
+        </div>
+    </form>
+</div>
