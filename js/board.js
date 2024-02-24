@@ -544,14 +544,6 @@ function closeModal() {
 }
 
 
-document.addEventListener("DOMContentLoaded", (event) => {
-  const draggableElements = document.querySelectorAll(".draggable");
-  draggableElements.forEach((element) => {
-    element.addEventListener("dragend", function () {
-      this.classList.remove("rotating");
-    });
-  });
-});
 
 
 function findTaskById(taskId) {
