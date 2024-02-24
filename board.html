@@ -14,12 +14,14 @@
     <script src="/js/boardJS/generateHtml.js"></script>
     <script src="js/boardJS/taskInteraction.js"></script>
     <script src="js/boardJS/dragAndDrop.js"></script>
-    
+    <script src="js/addtask.js"></script>
+    <script src="js/addtask-subtask.js"></script>
     <link rel="stylesheet" href="/css/color.css">
     <link rel="stylesheet" href="/css/fonts.css">
     <link rel="stylesheet" href="/css/board.css">
     <link rel="stylesheet" href="/css/sidebar.css">
     <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="css/addtask.css">
     
     
     
@@ -34,6 +36,9 @@
 
 
     <div w3-include-html="templates/sidebar.html"></div>
+    <div id="addTaskContainer" class="addTask-container" style="display: none;">
+        <div w3-include-html="templates/addtask-popup.html"></div>
+    </div>
     <div class="boardSiteContainer">
         
         <div w3-include-html="./templates/header.html"></div>
@@ -43,7 +48,7 @@
                 <h1 class="boardHeadline">Board</h1>
                 <div class="inputFieldAndAddTaskBtn">
                     <div class="inputField">
-                        <input type="text" class="input" placeholder="Find Task" id="searchInput" >
+                        <input type="text" class="inputFindTask" placeholder="Find Task" id="searchInput" >
                         <div class="verticalLineAndGlassImg">
                             <div class="verticalLine"></div>
                             <img src="./img/search.png" alt="searchGlass" onclick="searchTasks()">

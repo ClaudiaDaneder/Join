@@ -16,7 +16,7 @@ let toDos = [];
 let inProgress = [];
 let awaitFeedback = [];
 let done = [];
-let allTasks = [];
+let allDownloadTasks = [];
 let currentSubTasks = [];
 let subTask = [];
 let searchResults = [];
@@ -24,7 +24,7 @@ let searchResults = [];
 // Datenladen und -verarbeiten
 async function loadTaskFromStorage() {
   let allTaskAsString = await getItem("allTasks");
-  allTasks = JSON.parse(allTaskAsString);
+  allDownloadTasks = JSON.parse(allTaskAsString);
 }
 
 function addTaskToCategory(task) {
@@ -53,8 +53,8 @@ function fillTasks() {
   awaitFeedback = [];
   done = [];
 
-  for (let i = 0; i < allTasks.length; i++) {
-    const task = allTasks[i];
+  for (let i = 0; i < allDownloadTasks.length; i++) {
+    const task = allDownloadTasks[i];
     subTask.push(task["subtasks"].length);
     addTaskToCategory(task);
   }
@@ -140,24 +140,24 @@ function openAndCloseNoTask() {
 
 
 async function upDateAllDate() {
-  allTasks = [];
+  allDownloadTasks = [];
   for (let i = 0; i < toDos.length; i++) {
     const element = toDos[i];
-    allTasks.push(element);
+    allDownloadTasks.push(element);
   }
   for (let i = 0; i < inProgress.length; i++) {
     const element = inProgress[i];
-    allTasks.push(element);
+    allDownloadTasks.push(element);
   }
   for (let i = 0; i < awaitFeedback.length; i++) {
     const element = awaitFeedback[i];
-    allTasks.push(element);
+    allDownloadTasks.push(element);
   }
   for (let i = 0; i < done.length; i++) {
     const element = done[i];
-    allTasks.push(element);
+    allDownloadTasks.push(element);
   }
-  await setItem("allTasks", allTasks);
+  await setItem("allTasks", allDownloadTasks);
 }
 
 
@@ -165,11 +165,11 @@ function searchTasks() {
   let searchValue = document.getElementById("searchInput").value.toLowerCase();
   searchResults = [];
   if (searchValue.trim() !== 0) {
-    for (let i = 0; i < allTasks.length; i++) {
-      if (allTasks[i].title.toLowerCase().includes(searchValue) ||
-        allTasks[i].description.toLowerCase().includes(searchValue) ||
-        allTasks[i].category.toLowerCase().includes(searchValue)) {
-        searchResults.push(allTasks[i]["task-id"]);
+    for (let i = 0; i < allDownloadTasks.length; i++) {
+      if (allDownloadTasks[i].title.toLowerCase().includes(searchValue) ||
+        allDownloadTasks[i].description.toLowerCase().includes(searchValue) ||
+        allDownloadTasks[i].category.toLowerCase().includes(searchValue)) {
+        searchResults.push(allDownloadTasks[i]["task-id"]);
       }
     }
   }
