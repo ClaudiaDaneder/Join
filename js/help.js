@@ -12,5 +12,4 @@ function linkLast(){
     if(html == 'help.html'){
         helpIcon.style.display = 'none';
     }
-    console.log(html);
 }

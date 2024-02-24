@@ -180,7 +180,7 @@ function sign_upStart() {
       <div id="wrong"></div>
       <div class="checkbox" id="checkbox">
         <img onclick="rememberMe(); notClose(event)" id="remeCheck" src="./img/unchecked.svg"> 
-        I accept the <a class="privacy" href="privacy_policy.html" target="_blank">Privacy policy</a>
+        I accept the <a class="privacy" href="privacy_policy.html?ext" target="_blank">Privacy policy</a>
       </div>
   </div>
   <div class="loginButton" id="disabled">
