@@ -2,6 +2,7 @@ async function initSummary() {
     greet();
     await includeHTML();
     await initOnline();
+    showMetrics()
     await enableNavigation();
     navigation('show');
 }
@@ -12,17 +13,17 @@ function greet() {
     let greet;
 
     if (time < 6) {
-        greet = 'Good night,';
+        greet = 'Good night,&nbsp;';
     } else if (time < 12) {
-        greet = 'Good morning,';
+        greet = 'Good morning,&nbsp;';
     } else if (time < 18) {
-        greet = 'Good afternoon,';
+        greet = 'Good afternoon,&nbsp;';
     } else if (time < 24) {
-        greet = 'Good evening,';
+        greet = 'Good evening,&nbsp;';
     };
 
     /*if (login name is "user") {
-        greet.replace(", ", '!');
+        greet.replace(", &nbsp;", '!');
         dont display name
     }
     */
@@ -62,3 +63,63 @@ function resetNumberColor(field) {
     number.classList.remove('white');
 }
 
+async function showMetrics() {
+    showUserName();
+    await getData();
+    //showDeadline();
+    showToDos();
+    showDone();
+    showUrgentTasks();
+    showTasksInBoard();
+    showTasksInProgress();
+    showAwaitingFeedback();
+}
+
+async function getData() {
+    await loadTaskFromStorage();
+    await fillTasks();
+}
+
+function showUserName() {
+    let userName = onlineName[0];
+    document.getElementById('greeting-name').innerHTML = userName;
+    document.getElementById('greeting-name-mobile').innerHTML = userName;
+}
+
+function showToDos() {
+    let number = toDos.length;
+    document.getElementById('number_todo').innerHTML = number;
+}
+
+function showDone() {
+    let number = done.length;
+    document.getElementById('number_done').innerHTML = number;
+}
+
+function showTasksInBoard() {
+    let number = allTasks.length;
+    document.getElementById('number_tasks-in-board').innerHTML = number;
+}
+
+function showTasksInProgress() {
+    let number = inProgress.length;
+    document.getElementById('number_tasks-in-progress').innerHTML = number;
+}
+
+function showAwaitingFeedback() {
+    let number = awaitFeedback.length;
+    document.getElementById('number_awaiting-feedback').innerHTML = number
+}
+
+function showDeadline() {
+
+    document.getElementById('deadline').innerHTML = '';
+}
+
+function showUrgentTasks() {
+    let urgentTasks = allTasks.filter(function (task) {
+        return task.prio === 'urgent' && task.status !== 'done';
+    });
+    let number = urgentTasks.length;
+    document.getElementById('number_urgent').innerHTML = number
+}

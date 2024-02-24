@@ -709,8 +709,9 @@ a:hover {
 
 @media screen and (max-width: 1000px) {
     .main-container {
-        left: 230px;
-        width: calc(100% - 230px - 16px);
+        top: 128px;
+        left: 260px;
+        width: calc(100% - 230px - 60px);
     }
 
     .prio-button-container {
@@ -720,7 +721,7 @@ a:hover {
     .button-prio-urgent,
     .button-prio-medium,
     .button-prio-low {
-        font-size: 16px;
+        font-size: 14px;
         background-size: 14px;
         padding-right: 32px;
     }
@@ -729,7 +730,7 @@ a:hover {
     textarea,
     select,
     .dropdown {
-        font-size: 16px;
+        font-size: 14px;
     }
 
     .task-label {
@@ -742,6 +743,18 @@ a:hover {
 
     .add-task-headline {
         font-size: 54px;
+    }
+
+    .form-container {
+        gap: 24px
+    }
+
+    .create-button, .reset-button {
+        font-size: 17px
+    }
+
+    .task-bottom-container p {
+        font-size: 14px;
     }
 }
 
@@ -785,14 +798,8 @@ a:hover {
     }
 
     .main-container {
-        top: 128px;
         left: 16px;
-        right: 16px;
         width: calc(100% - 2 * 16px)
-    }
-
-    .add-task-headline {
-        font-size: 47px;
     }
 
     .prio-button-container {
@@ -865,12 +872,10 @@ a:hover {
         margin-bottom: 64px
     }
 
-}
-
-@media screen and (max-width: 600px) {
     .add-task-headline {
         font-size: 47px;
     }
+
 }
 
 @media screen and (max-width: 470px) {
