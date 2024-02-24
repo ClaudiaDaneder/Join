@@ -250,7 +250,10 @@ function selectPriority(priority) {
     document.querySelectorAll('.prio-button-container button').forEach(button => {
         button.classList.remove('selected');
     });
-    document.querySelector(`.button-prio-${priority}`).classList.add('selected');
+    let prioButton = document.querySelector(`.button-prio-${priority}`);
+    if (prioButton) {
+        prioButton.classList.add('selected');
+    }
 }
 
 
