@@ -655,6 +655,34 @@ form input::placeholder {
     font-size: 20px;
 }
 
+.backToContacts{
+    display: none;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 128px;
+    right: 30px;
+}
+
+.menueContacts{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 56px;
+    background-color: #2A3647;
+    position: absolute;
+    bottom: 2vh;
+    left: 80vw;
+    cursor: pointer;
+}
+
+.menueContacts:hover{
+    background: #29ABE2;
+    box-shadow: 0px 4px 4px 0px #00000040;
+}
+
 @media (max-width: 1050px){
     #addContactPopup {
         height: 760px;
@@ -812,6 +840,14 @@ form input::placeholder {
 
     #addButtonText{
         display: none;
+    }
+
+    .backToContacts{
+        display: unset;
+    }
+
+    .menueContacts{
+        display: flex;
     }
 }
 
