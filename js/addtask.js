@@ -89,20 +89,20 @@ function loadContactsIntoDropdown(filteredContacts) {
 
 document.addEventListener('click', function (event) {
     let dropdown = document.getElementById('contacts-dropdown');
-    if (dropdown) {
-        if (!dropdown.contains(event.target)) {
-            dropdown.classList.remove('active');
-            hiddenContactsInput.classList.add('hide');
-            hiddenContactsInput.value = '';
-            saveSelectedContacts();
+    if (!dropdown.contains(event.target)) {
+        dropdown.classList.remove('active');
+        saveSelectedContacts();
+        if (hiddenContactsInput) {
+        hiddenContactsInput.classList.add('hide');
+        hiddenContactsInput.value = '';
         }
-        if (dropdown.classList.contains('active')) {
-            document.getElementById('assign-arrow').style.transform = 'rotate(180deg)';
-        } else {
-            document.getElementById('assign-arrow').style.transform = 'rotate(0deg)';
-        }
-        updateSelectedContacts();
     }
+    if (dropdown.classList.contains('active')) {
+        document.getElementById('assign-arrow').style.transform = 'rotate(180deg)';
+    } else {
+        document.getElementById('assign-arrow').style.transform = 'rotate(0deg)';
+    }
+    updateSelectedContacts();
 });
 
 
