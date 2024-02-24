@@ -121,11 +121,11 @@ body {
     align-items: center;
     gap: 18px;
     padding: 0 16px;
-    transition: 80ms ease-out
+    transition: 100ms ease-in-out;
+    box-shadow: 0px 4px 4px 0px #00000040;
 }
 
 .metrics-bubble:hover {
-    box-shadow: 0px 4px 4px 0px #00000040;
     background-color: #2A3647;
     color: #fff !important;
     transform: scale(1.04);

@@ -117,7 +117,6 @@ a:hover {
     left: 328px;
     top: 206px;
     width: calc(100% - 328px - 16px);
-    padding-bottom: 20px;
     box-sizing: border-box;
 }
 
@@ -248,7 +247,7 @@ a:hover {
     max-height: 250px;
     font-size: 16px;
     color: #000;
-    margin-bottom: 32px
+    margin-bottom: 64px
 }
 
 .subtasklist-item {
@@ -258,6 +257,7 @@ a:hover {
     align-items: center;
     justify-content: space-between;
     border-radius: 10px;
+    transition: 100ms ease-out;
 }
 
 .subtasklist-item:hover {
@@ -282,6 +282,7 @@ a:hover {
     font-size: 20px;
     justify-content: center;
     gap: 6px;
+    transition: 100ms ease-in-out;
 }
 
 .reset-button {
@@ -327,7 +328,7 @@ a:hover {
 }
 
 .task-bottom-container {
-    bottom: 32px;
+    margin-bottom: 32px;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -391,6 +392,7 @@ a:hover {
     background-repeat: no-repeat;
     background-position-y: 50%;
     background-position-x: 85%;
+    transition: 100ms ease-in-out;
 }
 
 .button-prio-medium {
@@ -408,6 +410,7 @@ a:hover {
     background-repeat: no-repeat;
     background-position-y: 50%;
     background-position-x: 85%;
+    transition: 100ms ease-in-out;
 }
 
 .button-prio-low {
@@ -425,6 +428,7 @@ a:hover {
     background-repeat: no-repeat;
     background-position-y: 50%;
     background-position-x: 85%;
+    transition: 100ms ease-in-out;
 }
 
 .button-prio-urgent.selected,
@@ -539,7 +543,7 @@ a:hover {
     background-color: #fff;
     box-sizing: border-box;
     width: 100%;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 14px 3px #0000000A;
     z-index: 1;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -561,7 +565,7 @@ a:hover {
     align-items: center;
     justify-content: space-between;
     cursor: unset;
-    transition: 0.1s;
+    transition: 100ms ease-out;
     padding: 8px 16px;
 }
 
