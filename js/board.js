@@ -18,7 +18,7 @@ let awaitFeedback = [];
 let done = [];
 let allTasks = [];
 let currentSubTasks = [];
-let subTask=[];
+let subTask = [];
 let searchResults = [];
 
 // Datenladen und -verarbeiten
@@ -29,35 +29,35 @@ async function loadTaskFromStorage() {
 
 
 function fillTasks() {
-  toDos = []; 
+  toDos = [];
   inProgress = [];
   awaitFeedback = [];
   done = [];
   for (let i = 0; i < allTasks.length; i++) {
-      const task = allTasks[i];
-      subTask.push(task["subtasks"].length);
-      if (task["status"] === "toDos") {
-        toDos.push(task);
+    const task = allTasks[i];
+    subTask.push(task["subtasks"].length);
+    if (task["status"] === "toDos") {
+      toDos.push(task);
+    } else {
+      if (task["status"] === "inProgress") {
+        inProgress.push(task);
       } else {
-        if (task["status"] === "inProgress") {
-          inProgress.push(task);
+        if (task["status"] === "awaitFeedback") {
+          awaitFeedback.push(task);
         } else {
-          if (task["status"] === "awaitFeedback") {
-            awaitFeedback.push(task);
+          if (task["status"] === "done") {
+            done.push(task);
           } else {
-            if (task["status"] === "done") {
-              done.push(task);
-            } else {
-            }
           }
         }
       }
     }
+  }
 }
 
 
 function renderallTasks() {
-    renderToDo(),
+  renderToDo(),
     renderInProgress(),
     renderAwaitFeedback(),
     renderDone(),
@@ -124,7 +124,7 @@ function openAndCloseNoTask() {
   let done = document.getElementById("done");
 
   document.getElementById("noTaskToDo").style.display =
-  toDo.children.length === 0 ? "" : "none";
+    toDo.children.length === 0 ? "" : "none";
   document.getElementById("noTaskInProgress").style.display =
     inProgress.children.length === 0 ? "" : "none";
   document.getElementById("noTaskAwaitFeedback").style.display =
@@ -343,7 +343,7 @@ async function deletThisArray(taskId) {
 }
 
 
-function editTask() {}
+function editTask() { }
 
 
 //Drag and Drop Logik
@@ -362,7 +362,7 @@ function drag(ev, id) {
   }
   ev.dataTransfer.setData("id", id);
   ev.dataTransfer.dropEffect = "move";
-  
+
 }
 
 
@@ -472,16 +472,16 @@ function searchTasks() {
 
   // Nur suchen, wenn der Suchwert nicht leer ist
   if (searchValue.trim() !== 0) {
-      for (let i = 0; i < allTasks.length; i++) {
-          if (allTasks[i].title.toLowerCase().includes(searchValue) ||
-              allTasks[i].description.toLowerCase().includes(searchValue) ||
-              allTasks[i].category.toLowerCase().includes(searchValue)) {
-              searchResults.push(allTasks[i]["task-id"]);
-          }
+    for (let i = 0; i < allTasks.length; i++) {
+      if (allTasks[i].title.toLowerCase().includes(searchValue) ||
+        allTasks[i].description.toLowerCase().includes(searchValue) ||
+        allTasks[i].category.toLowerCase().includes(searchValue)) {
+        searchResults.push(allTasks[i]["task-id"]);
       }
+    }
   }
 
-  renderallTasks(); 
+  renderallTasks();
 }
 
 
@@ -511,7 +511,7 @@ function initializeDomElements() {
 
 
 document.querySelectorAll('.current-task-headline').forEach(container => {
-  container.addEventListener('click', function() {
+  container.addEventListener('click', function () {
     if (this.style.whiteSpace === 'nowrap') {
       // Vollständigen Text anzeigen
       this.style.whiteSpace = 'normal';
@@ -529,11 +529,13 @@ document.querySelectorAll('.current-task-headline').forEach(container => {
 
 document.addEventListener("DOMContentLoaded", (event) => {
   let modalWindow = document.getElementById("modal-window");
-  // Event-Listener, der das Klick-Ereignis abfängt
-  modalWindow.addEventListener("click", function (event) {
-    // Verhindert, dass das Klick-Ereignis zum modal-overlay propagiert wird
-    event.stopPropagation();
-  });
+  if (modalWindow) {
+    // Event-Listener, der das Klick-Ereignis abfängt
+    modalWindow.addEventListener("click", function (event) {
+      // Verhindert, dass das Klick-Ereignis zum modal-overlay propagiert wird
+      event.stopPropagation();
+    });
+  }
 });
 
 
