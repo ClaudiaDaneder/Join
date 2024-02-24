@@ -27,31 +27,36 @@ async function loadTaskFromStorage() {
   allTasks = JSON.parse(allTaskAsString);
 }
 
+function addTaskToCategory(task) {
+  switch (task["status"]) {
+    case "toDos":
+      toDos.push(task);
+      break;
+    case "inProgress":
+      inProgress.push(task);
+      break;
+    case "awaitFeedback":
+      awaitFeedback.push(task);
+      break;
+    case "done":
+      done.push(task);
+      break;
+    default:
+      console.warn("Unbekannter Status:", task["status"]);
+  }
+}
+
 
 function fillTasks() {
   toDos = [];
   inProgress = [];
   awaitFeedback = [];
   done = [];
+
   for (let i = 0; i < allTasks.length; i++) {
     const task = allTasks[i];
     subTask.push(task["subtasks"].length);
-    if (task["status"] === "toDos") {
-      toDos.push(task);
-    } else {
-      if (task["status"] === "inProgress") {
-        inProgress.push(task);
-      } else {
-        if (task["status"] === "awaitFeedback") {
-          awaitFeedback.push(task);
-        } else {
-          if (task["status"] === "done") {
-            done.push(task);
-          } else {
-          }
-        }
-      }
-    }
+    addTaskToCategory(task);
   }
 }
 
@@ -63,6 +68,7 @@ function renderallTasks() {
     renderDone(),
     openAndCloseNoTask();
 }
+
 
 function renderToDo() {
   let toDoContainer = document.getElementById("toDo");
@@ -116,7 +122,6 @@ function renderDone() {
 }
 
 
-
 function openAndCloseNoTask() {
   let toDo = document.getElementById("toDo");
   let inProgress = document.getElementById("inProgress");
@@ -133,7 +138,7 @@ function openAndCloseNoTask() {
     done.children.length === 0 ? "" : "none";
 }
 
-//Task-Listen-Verwaltung
+
 async function upDateAllDate() {
   allTasks = [];
   for (let i = 0; i < toDos.length; i++) {
@@ -159,8 +164,6 @@ async function upDateAllDate() {
 function searchTasks() {
   let searchValue = document.getElementById("searchInput").value.toLowerCase();
   searchResults = [];
-
-  // Nur suchen, wenn der Suchwert nicht leer ist
   if (searchValue.trim() !== 0) {
     for (let i = 0; i < allTasks.length; i++) {
       if (allTasks[i].title.toLowerCase().includes(searchValue) ||

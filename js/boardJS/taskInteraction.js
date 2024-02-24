@@ -45,10 +45,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
     if (checkBox) {
       if (currentSubTasks[i].done) {
         checkBox.src = "./img/none-checked.png";
-        currentSubTasks[i].done = false; // Aktualisieren von done auf false
+        currentSubTasks[i].done = false;
       } else {
         checkBox.src = "./img/checked.png";
-        currentSubTasks[i].done = true; // Aktualisieren von done auf true
+        currentSubTasks[i].done = true;
       }
     }
     upDateAllDate();

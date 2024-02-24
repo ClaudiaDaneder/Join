@@ -51,28 +51,33 @@ function allowDrop(ev) {
   }
   
   
+  function moveTaskToContainer(task, containerId) {
+    switch (containerId) {
+      case "toDo":
+        task["status"] = "toDos";
+        toDos.push(task);
+        break;
+      case "inProgress":
+        task["status"] = "inProgress";
+        inProgress.push(task);
+        break;
+      case "awaitFeedback":
+        task["status"] = "awaitFeedback";
+        awaitFeedback.push(task);
+        break;
+      case "done":
+        task["status"] = "done";
+        done.push(task);
+        break;
+    }
+  }
+  
   function updateTaskList(taskId, containerId) {
     let taskToMove = findTaskById(taskId);
     if (!taskToMove) return;
+  
     removeTaskFromCurrentList(taskToMove);
-    switch (containerId) {
-      case "toDo":
-        taskToMove["status"] = "toDos";
-        toDos.push(taskToMove);
-        break;
-      case "inProgress":
-        taskToMove["status"] = "inProgress";
-        inProgress.push(taskToMove);
-        break;
-      case "awaitFeedback":
-        taskToMove["status"] = "awaitFeedback";
-        awaitFeedback.push(taskToMove);
-        break;
-      case "done":
-        taskToMove["status"] = "done";
-        done.push(taskToMove);
-        break;
-    }
+    moveTaskToContainer(taskToMove, containerId);
   }
   
   
@@ -82,7 +87,7 @@ function findTaskById(taskId) {
     );
   }
 
-  
+
   function removeTaskFromCurrentList(taskToRemove) {
     if (toDos.includes(taskToRemove)) {
       toDos = toDos.filter((task) => task["task-id"] !== taskToRemove["task-id"]);

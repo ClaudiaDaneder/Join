@@ -308,6 +308,19 @@ body{
     left: 118.7px;
     top: 14.67px;
 }
+.header-container-to-add-current-task{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 16px;
+    margin-right: 16px;
+    width: 242px;
+}
+.parrent-add-task-container{
+    display: flex;
+    justify-content: space-between;
+    
+}
 .taskContainer{
     display: flex;
     justify-content: space-around;
@@ -346,6 +359,7 @@ body{
     padding: 16px;
     gap: 10px;
     box-shadow: 3px 4px 4px 0px #0000001A;
+    background-color: white;
 }
 .technical{
     font-family: interRegular;
