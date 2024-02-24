@@ -117,7 +117,6 @@ a:hover {
     left: 328px;
     top: 206px;
     width: calc(100% - 328px - 16px);
-    padding-bottom: 20px;
     box-sizing: border-box;
 }
 
@@ -141,6 +140,7 @@ a:hover {
     display: flex;
     justify-content: space-between;
     gap: 32px;
+    margin-bottom: 50px;
 }
 
 .form-container .left {
@@ -248,7 +248,7 @@ a:hover {
     max-height: 250px;
     font-size: 16px;
     color: #000;
-    margin-bottom: 32px
+    margin-bottom: 64px
 }
 
 .subtasklist-item {
@@ -258,6 +258,7 @@ a:hover {
     align-items: center;
     justify-content: space-between;
     border-radius: 10px;
+    transition: 100ms ease-out;
 }
 
 .subtasklist-item:hover {
@@ -282,6 +283,7 @@ a:hover {
     font-size: 20px;
     justify-content: center;
     gap: 6px;
+    transition: 100ms ease-in-out;
 }
 
 .reset-button {
@@ -327,7 +329,7 @@ a:hover {
 }
 
 .task-bottom-container {
-    bottom: 32px;
+    margin-bottom: 32px;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -391,6 +393,7 @@ a:hover {
     background-repeat: no-repeat;
     background-position-y: 50%;
     background-position-x: 85%;
+    transition: 100ms ease-in-out;
 }
 
 .button-prio-medium {
@@ -408,6 +411,7 @@ a:hover {
     background-repeat: no-repeat;
     background-position-y: 50%;
     background-position-x: 85%;
+    transition: 100ms ease-in-out;
 }
 
 .button-prio-low {
@@ -425,6 +429,7 @@ a:hover {
     background-repeat: no-repeat;
     background-position-y: 50%;
     background-position-x: 85%;
+    transition: 100ms ease-in-out;
 }
 
 .button-prio-urgent.selected,
@@ -539,10 +544,11 @@ a:hover {
     background-color: #fff;
     box-sizing: border-box;
     width: 100%;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 14px 3px #0000000A;
     z-index: 1;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    overflow: auto;
 
 }
 
@@ -561,12 +567,28 @@ a:hover {
     align-items: center;
     justify-content: space-between;
     cursor: unset;
-    transition: 0.1s;
+    transition: 100ms ease-out;
     padding: 8px 16px;
 }
 
 .category {
     flex-direction: row;
+}
+
+#assignee {
+    height: 163px;
+    margin-bottom: 30px;
+}
+
+#assignee::-webkit-scrollbar {
+    width: 16px;
+}
+
+
+#assignee::-webkit-scrollbar-thumb {
+    background-color: #A8A8A8;
+    border-radius: 20px;
+    border: solid 4px white;
 }
 
 #hidden-contacts-input {
@@ -759,6 +781,7 @@ a:hover {
 
     .form-container hr {
         display: block;
+        height: 380px
     }
 
     .main-container {
@@ -777,8 +800,15 @@ a:hover {
         margin-bottom: 24px
     }
 
-    input, textarea, select, .dropdown {
+    input,
+    textarea,
+    select,
+    .dropdown {
         margin-bottom: 16px
+    }
+
+    .task-bottom-container {
+        margin-bottom: 110px;
     }
 }
 
@@ -792,6 +822,10 @@ a:hover {
     .button-prio-medium,
     .button-prio-low {
         font-size: 14px;
+    }
+
+    .form-container hr {
+        height: 370px
     }
 }
 
@@ -809,17 +843,6 @@ a:hover {
 
     .prio-button-container {
         gap: 32px
-    }
-
-    .task-bottom-container {
-        position: fixed;
-        bottom: 80px;
-        left: 0;
-        right: 0;
-        background-color: #F6F7F8;
-        z-index: 5;
-        padding: 16px;
-        align-items: center;
     }
 
     .reset-button {
