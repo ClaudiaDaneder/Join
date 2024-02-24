@@ -15,6 +15,7 @@ p {
 
 button,
 .task-input,
+#title,
 #description,
 select,
 .dropdown {
@@ -24,6 +25,7 @@ select,
 }
 
 .task-input,
+#title,
 #description,
 select,
 .dropdown {
@@ -35,6 +37,7 @@ select,
 }
 
 .task-input:focus,
+#title:focus,
 #description:focus,
 select:focus,
 .dropdown:focus {
@@ -43,6 +46,7 @@ select:focus,
 }
 
 .task-input::placeholder,
+#title::placeholder,
 #description::placeholder {
     color: #D1D1D1;
 }
@@ -78,6 +82,7 @@ select:focus,
 
 
 .task-input,
+#title,
 select,
 .dropdown {
     padding: 12px 16px;
@@ -99,6 +104,7 @@ select,
 }
 
 button:hover,
+#title,
 input[type="date"]:hover,
 select:hover,
 .dropdown:hover,
@@ -685,6 +691,7 @@ a:hover {
     }
 
     .task-input,
+    #title,
     #description,
     select,
     .dropdown {
@@ -727,6 +734,7 @@ a:hover {
     }
 
     .task-input,
+    #title,
     #description,
     select,
     .dropdown {
@@ -808,6 +816,7 @@ a:hover {
     }
 
     .task-input,
+    #title,
     #description,
     select,
     .dropdown {
@@ -862,6 +871,7 @@ a:hover {
     }
 
     .task-input,
+    #title,
     #description,
     select,
     .dropdown {
