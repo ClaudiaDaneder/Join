@@ -1,5 +1,6 @@
 let onlineUser = [];
 let yourId;
+let onlineName = [];
 
 async function initOnline() {
     await loadOnlineUsers();
@@ -44,6 +45,7 @@ function initals() {
         for (let i = 0; i < onlineUser.length; i++) {
             if (onlineUser[i]['email'] == yourId) {
                 names = onlineUser[i]['name'];
+                onlineName.push(names);
                 let nameParts = names.split(" ");
                 initial.innerHTML = nameParts.map(part => part.charAt(0)).join("");
                 logout.setAttribute('onclick', `logout('${yourId}')`);
