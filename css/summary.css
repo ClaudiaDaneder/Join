@@ -12,10 +12,9 @@ body {
     position: relative;
     left: 328px;
     top: 206px;
-    bottom: 127px;
     width: calc(100% - 328px - 16px);
     box-sizing: border-box;
-    padding-bottom: 100px;
+    padding-bottom: 60px;
     padding-right: 16px;
 }
 
@@ -65,7 +64,7 @@ body {
 
 .metrics-container {
     width: 560px;
-    height: 562px;
+    max-height: 562px;
     display: flex;
     flex-direction: column;
     gap: 32px;
@@ -146,7 +145,6 @@ body {
 .metric {
     font-size: 20px;
     text-align: center;
-    padding: 0 20px;
     text-align: center;
 }
 
@@ -260,6 +258,10 @@ body {
     .metrics-bubble {
         height: 140px;
     }
+
+    .number {
+        margin-bottom: 4px
+    }
 }
 
 @media screen and (max-width: 1000px) {
@@ -283,13 +285,24 @@ body {
         display: block;
     }
 
+    .greeting-name {
+        font-size: 36px
+    }
+
+    .greeting-time {
+        font-size: 30px;
+    }
+
+    .greeting {
+        margin-bottom: 20px
+    }
+
     .metrics-bubble {
         height: 120px;
     }
 
     .number {
         font-size: 52px;
-        margin-bottom: 4px
     }
 
     .todo-dark-bg,
@@ -314,7 +327,16 @@ body {
         top: 128px;
         left: 16px;
         right: 0x;
-        width: calc(100% - 16px)
+        width: calc(100% - 16px);
+        padding-bottom: 110px
+    }
+
+    .greeting {
+        display: none;
+    }
+
+    .greeting-mobile-bg {
+        display: flex;
     }
 
     .summary-container {
@@ -324,7 +346,7 @@ body {
     .metrics-container {
         width: 100%;
         height: 100%;
-        text-wrap: nowrap;
+        word-wrap: nowrap;
         gap: 24px;
     }
 
@@ -364,30 +386,10 @@ body {
     .tasks-in-board {
         gap: 24px;
     }
-
-    .greeting-name {
-        font-size: 36px
-    }
-
-    .greeting-time {
-        font-size: 30px;
-    }
-
-    .greeting {
-        margin-bottom: 20px
-    }
-
 }
 
 @media screen and (max-width: 700px) {
-    .greeting {
-        display: none;
-    }
-
-    .greeting-mobile-bg {
-        display: flex;
-    }
-    
+  
     .metrics-container {
         gap: 16px;
     }
@@ -403,6 +405,10 @@ body {
     .number {
         font-size: 47px;
         margin-bottom: 0;
+    }
+
+    .urgent-right {
+        gap: 8px
     }
 
     .header-title {
@@ -426,7 +432,7 @@ body {
     }
 
     .urgent {
-        gap: 20px;
+        gap: 30px;
     }
 
     .metrics-bubble {
@@ -447,11 +453,19 @@ body {
 
 @media screen and (max-width: 600px) {
     .metrics-bubble {
-        height: 90px
+        height: 90px;
+        padding: 4px
+    }
+
+    .main-container {
+        padding-bottom: 100px;
     }
 }
 
 @media screen and (max-width: 435px) {
+    .main-container {
+        padding-bottom: 90px
+    }
 
     .header-title {
         font-size: 38px;
@@ -472,7 +486,7 @@ body {
 
     .metric, .urgent-right {
         padding: 0;
-        font-size: 11px;
+        font-size: 12px;
     }
 
     .to-dos {
@@ -491,8 +505,12 @@ body {
         gap: 20px;
     }
 
+    .urgent-right {
+        gap: 6px
+    }
+
     .deadline {
-        font-size: 14px;
+        font-size: 16px;
     }
 
 }
