@@ -180,12 +180,12 @@ function getAssigneeHtml(task) {
 }
 
 
-function createTaskHtml(task, taskId, isHighlighted) {
+function createTaskHtml(task, taskId, isHighlighted,prio) {
   let taskClass = isHighlighted ? "task highlight" : "task hidden";
   let categoryClass = getCategoryClass(task.category);
   let subtaskPercentage = calculateSubtaskProgress(task["subtasks"]);
   let progressBarHtml = createProgressBar(subtaskPercentage, task["subtasks"].filter(subtask => subtask.done).length, task["subtasks"].length);
-
+  let prioHTML = createPrioContainer(task);
   // Rufen Sie die Hilfsfunktion auf, um die HTML-Zeichenfolge für die Beauftragten zu erhalten
   let assigneeHtml = getAssigneeHtml(task);
 
@@ -195,12 +195,33 @@ function createTaskHtml(task, taskId, isHighlighted) {
       <div class="previewTitle">${task.title}</div>
       <div class="previewDescription">${task.description}</div>
       ${progressBarHtml}
-      <div class="assignees">${assigneeHtml}</div>
+      <div class="icon-and-prio-container">
+        <div class="assignees">${assigneeHtml}</div>
+        <div class="prio"> ${prioHTML}</div>
+      </div>
     </div>
   `;
 }
 
 
+function createPrioContainer(prio) {
+  let currentPrio = prio["prio"];
+  console.log("currentPrio:" + currentPrio);
+  
+  let imagePath;
+  if (currentPrio === "low") {
+    imagePath = "../img/addtask_prio_low.svg";
+  } else if (currentPrio === "medium") {
+    imagePath = "../img/addtask_prio_medium.svg";
+  } else if (currentPrio === "urgent") {
+    imagePath = "../img/addtask_prio_urgent.svg";
+  } else {
+    // Standardbild oder Fehlerbehandlung, falls currentPrio keinen gültigen Wert hat
+    imagePath = "../img/default_image.svg"; // Pfad zu einem Standardbild
+  }
+
+  return `<img src="${imagePath}">`;
+}
 
 
 

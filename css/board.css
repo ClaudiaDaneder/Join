@@ -122,6 +122,11 @@ body{
     width: 32px;
     border-radius: 45px;
   }
+  .icon-and-prio-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 .initials{
     display: flex;
     justify-content: center;
