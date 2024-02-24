@@ -66,7 +66,7 @@ function resetNumberColor(field) {
 async function showMetrics() {
     showUserName();
     await getData();
-    showDeadline();
+    showUpcomingDeadline();
     showToDos();
     showDone();
     showUrgentTasks();
@@ -111,28 +111,33 @@ function showAwaitingFeedback() {
     document.getElementById('number_awaiting-feedback').innerHTML = number
 }
 
+
 function getEarliestDate() {
-    let openTasks = allTasks.filter(function(task) {
+    let openTasks = allTasks.filter(function (task) {
         return task.status !== 'done';
     });
     if (openTasks.length === 0) {
-        document.getElementById('urgent-right').style = 'display: none';
-        document.getElementById('urgent-line').style = 'display: none';
+        hideDeadlineSection()
     }
-
-    let earliestDate = new Date(openTasks[0]['due-date'] + 'T00:00:00Z').getTime();
+    let earliestDate = new Date(openTasks[0]['due-date']).getTime();
     for (let i = 1; i < openTasks.length; i++) {
-        let date = new Date(openTasks[i]['due-date'] + 'T00:00:00Z').getTime();
+        let date = new Date(openTasks[i]['due-date']).getTime();
         if (date < earliestDate) {
             earliestDate = date;
-        }  
+        }
     }
-    earliestDate = new Date(earliestDate);
-    return formatDate(earliestDate);
+    return formatDate(new Date(earliestDate));
 }
 
+
+function hideDeadlineSection() {
+    document.getElementById('urgent-right').style = 'display: none';
+    document.getElementById('urgent-line').style = 'display: none';
+}
+
+
 function formatDate(date) {
-    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     let month = months[date.getMonth()];
     let day = date.getDate();
     let year = date.getFullYear();
@@ -140,10 +145,12 @@ function formatDate(date) {
     return formattedDate;
 }
 
-function showDeadline() {
+
+function showUpcomingDeadline() {
     let deadline = getEarliestDate();
     document.getElementById('deadline').innerHTML = deadline;
-} 
+}
+
 
 function showUrgentTasks() {
     let urgentTasks = allTasks.filter(function (task) {
