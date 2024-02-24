@@ -92,7 +92,7 @@ function returnArray(idShow, name, email, phone, color) {
 /**Search ID */
 
 function searchId() {
-    lastID = user[user.length-1];
+    lastID = contacts[contacts.length-1];
     if (lastID == null || lastID == ''){
         lastID = 0;
     }else{
