@@ -265,7 +265,7 @@ body {
     }
 
     .number {
-        margin-bottom: 4px
+        margin-bottom: 0px
     }
 
     .greeting-name {
@@ -274,6 +274,10 @@ body {
 
     .greeting-time {
         font-size: 30px;
+    }
+
+    .grey-line {
+        height: 90px
     }
 
 }
@@ -328,6 +332,10 @@ body {
     .header-subtitle {
         font-size: 29px;
     }
+
+    .grey-line {
+        height: 76px
+    }
 }
 
 @media screen and (max-width: 850px) {
@@ -367,7 +375,7 @@ body {
     }
 
     .number {
-        font-size: 52px;
+        font-size: 47px;
         margin-bottom: 4px
     }
 
@@ -397,6 +405,10 @@ body {
     .tasks-in-board {
         gap: 24px;
     }
+
+    .grey-line {
+        height: 82px
+    }
 }
 
 @media screen and (max-width: 700px) {
@@ -414,7 +426,7 @@ body {
     }
 
     .number {
-        font-size: 47px;
+        font-size:42px;
         margin-bottom: 0;
     }
 
@@ -479,6 +491,15 @@ body {
     .header-subtitle {
         font-size: 24px;
     }
+
+    .number {
+        margin-bottom: -4px;
+        font-size: 32px;
+    }
+
+    .grey-line {
+        height: 62px
+    }
 }
 
 @media screen and (max-width: 435px) {
@@ -496,12 +517,12 @@ body {
     
     .number {
         font-size: 34px;
-        margin-bottom: 4px
+        margin-bottom: 0px
     }
 
     .metrics-bubble {
         gap: 10px;
-        height: 100px
+        height: 96px
     }
 
     .metric, .urgent-right {
