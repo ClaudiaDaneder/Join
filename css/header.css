@@ -112,6 +112,14 @@ header {
     background-color: #3e5068;
 }
 
+.helpM{
+    display: none;
+}
+
+.help{
+    display: flex;
+}
+
 @media (max-width: 850px){
     header {
         height: 80px;
@@ -123,5 +131,13 @@ header {
 
     .headerText{
         display: none;
+    }
+
+    .help{
+        display: none;
+    }
+
+    .helpM{
+        display: flex;
     }
 }

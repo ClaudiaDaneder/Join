@@ -99,7 +99,7 @@ function savePopup(saveInfo){
   }else if(saveInfo == 'delete'){
     savePopup.innerHTML = 'Contact deleted';
   }else if(saveInfo == 'exist'){
-    savePopup.innerHTML = 'Contact Exist';
+    savePopup.innerHTML = 'Contact Email Exist';
   }
   savePopup.style.transform = 'translatex(0)';
   setTimeout(() => {

@@ -43,7 +43,7 @@ function loadNames(contactLetterLoad, i) {
 async function createContact() {
     let name = document.getElementById('name');
     let email = document.getElementById('email');
-    if (contactExist(name.value, email.value) == false) {
+    if (contactExist(email.value) == false) {
         contactCreate();
     } else {
         savePopup('exist');
@@ -68,8 +68,8 @@ async function contactCreate() {
 }
 
 /**Check Contact Exist */
-function contactExist(name, email) {
-    if (contacts.find(user => user.name === name && user.email === email)) {
+function contactExist(email) {
+    if (contacts.find(user => user.email === email)) {
         return true;
     } else {
         return false;
