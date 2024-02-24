@@ -56,7 +56,6 @@ function fillTasks() {
 }
 
 
-//Rendering und UI Updates
 function renderallTasks() {
     renderToDo(),
     renderInProgress(),
@@ -65,23 +64,11 @@ function renderallTasks() {
     openAndCloseNoTask();
 }
 
-function updateTaskElement(taskId, isHighlighted) {
-  const taskElement = document.getElementById(taskId);
-  if (taskElement) {
-    if (isHighlighted) {
-      taskElement.classList.add('highlight');
-    } else {
-      taskElement.classList.remove('highlight');
-    }
-  }
-}
-
 
 function renderToDo() {
   let toDoContainer = document.getElementById("toDo");
-  
+  toDoContainer.innerHTML = "";
   for (let i = 0; i < toDos.length; i++) {
-    updateTaskElement(toDos[i]["task-id"], searchResults.includes(toDos[i]["task-id"]));
     if (!document.getElementById(toDos[i]["task-id"])) {
       const taskHtml = createTaskHtml(toDos[i], toDos[i]["task-id"], searchResults.includes(toDos[i]["task-id"]));
       toDoContainer.innerHTML += taskHtml;
@@ -93,37 +80,39 @@ function renderToDo() {
 
 function renderInProgress() {
   let inProgressContainer = document.getElementById("inProgress");
+  inProgressContainer.innerHTML = "";
 
   for (let i = 0; i < inProgress.length; i++) {
-    updateTaskElement(inProgress[i]["task-id"], searchResults.includes(inProgress[i]["task-id"]));
-    if (!document.getElementById(inProgress[i]["task-id"])) {
-      const taskHtml = createTaskHtml(inProgress[i], inProgress[i]["task-id"], searchResults.includes(inProgress[i]["task-id"]));
-      inProgressContainer.innerHTML += taskHtml;
-    }
+    let isHighlighted = searchResults.includes(inProgress[i]["task-id"]);
+    const taskHtml = createTaskHtml(inProgress[i], inProgress[i]["task-id"], isHighlighted);
+    inProgressContainer.innerHTML += taskHtml;
   }
 }
+
+
+
 
 function renderAwaitFeedback() {
   let feedbackContainer = document.getElementById("awaitFeedback");
+  feedbackContainer.innerHTML = "";
 
   for (let i = 0; i < awaitFeedback.length; i++) {
-    updateTaskElement(awaitFeedback[i]["task-id"], searchResults.includes(awaitFeedback[i]["task-id"]));
-    if (!document.getElementById(awaitFeedback[i]["task-id"])) {
-      const taskHtml = createTaskHtml(awaitFeedback[i], awaitFeedback[i]["task-id"], searchResults.includes(awaitFeedback[i]["task-id"]));
-      feedbackContainer.innerHTML += taskHtml;
-    }
+    let isHighlighted = searchResults.includes(awaitFeedback[i]["task-id"]);
+    const taskHtml = createTaskHtml(awaitFeedback[i], awaitFeedback[i]["task-id"], isHighlighted);
+    feedbackContainer.innerHTML += taskHtml;
   }
 }
 
+
+
 function renderDone() {
   let doneContainer = document.getElementById("done");
+  doneContainer.innerHTML = "";
 
   for (let i = 0; i < done.length; i++) {
-    updateTaskElement(done[i]["task-id"], searchResults.includes(done[i]["task-id"]));
-    if (!document.getElementById(done[i]["task-id"])) {
-      const taskHtml = createTaskHtml(done[i], done[i]["task-id"], searchResults.includes(done[i]["task-id"]));
-      doneContainer.innerHTML += taskHtml;
-    }
+    let isHighlighted = searchResults.includes(done[i]["task-id"]);
+    const taskHtml = createTaskHtml(done[i], done[i]["task-id"], isHighlighted);
+    doneContainer.innerHTML += taskHtml;
   }
 }
 
@@ -480,7 +469,7 @@ async function upDateAllDate() {
 //Suchfunktion
 function searchTasks() {
   let searchValue = document.getElementById("searchInput").value.toLowerCase();
-  searchResults = []; // Zurücksetzen der Suchergebnisse
+  searchResults = [];
 
   // Nur suchen, wenn der Suchwert nicht leer ist
   if (searchValue.trim() !== 0) {
@@ -519,11 +508,6 @@ function initializeDomElements() {
   const modalOverlay = document.getElementById("modal-overlay");
   const modulWindow = document.getElementById("modal-window");
   return { modalOverlay, modulWindow };
-}
-
-
-function handleNoTaskFound() {
-  // Logik für den Fall, dass kein Task gefunden wird
 }
 
 
