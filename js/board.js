@@ -79,14 +79,9 @@ function updateTaskElement(taskId, isHighlighted) {
 
 function renderToDo() {
   let toDoContainer = document.getElementById("toDo");
-
-  // Aktualisieren bestehender Elemente
+  
   for (let i = 0; i < toDos.length; i++) {
     updateTaskElement(toDos[i]["task-id"], searchResults.includes(toDos[i]["task-id"]));
-  }
-
-  // Fügen Sie neue Aufgaben hinzu, falls welche fehlen
-  for (let i = 0; i < toDos.length; i++) {
     if (!document.getElementById(toDos[i]["task-id"])) {
       const taskHtml = createTaskHtml(toDos[i], toDos[i]["task-id"], searchResults.includes(toDos[i]["task-id"]));
       toDoContainer.innerHTML += taskHtml;
@@ -98,39 +93,37 @@ function renderToDo() {
 
 function renderInProgress() {
   let inProgressContainer = document.getElementById("inProgress");
-  inProgressContainer.innerHTML = "";
 
   for (let i = 0; i < inProgress.length; i++) {
-    let isHighlighted = searchResults.includes(inProgress[i]["task-id"]);
-    const taskHtml = createTaskHtml(inProgress[i], inProgress[i]["task-id"], isHighlighted);
-    inProgressContainer.innerHTML += taskHtml;
+    updateTaskElement(inProgress[i]["task-id"], searchResults.includes(inProgress[i]["task-id"]));
+    if (!document.getElementById(inProgress[i]["task-id"])) {
+      const taskHtml = createTaskHtml(inProgress[i], inProgress[i]["task-id"], searchResults.includes(inProgress[i]["task-id"]));
+      inProgressContainer.innerHTML += taskHtml;
+    }
   }
 }
-
-
-
 
 function renderAwaitFeedback() {
   let feedbackContainer = document.getElementById("awaitFeedback");
-  feedbackContainer.innerHTML = "";
 
   for (let i = 0; i < awaitFeedback.length; i++) {
-    let isHighlighted = searchResults.includes(awaitFeedback[i]["task-id"]);
-    const taskHtml = createTaskHtml(awaitFeedback[i], awaitFeedback[i]["task-id"], isHighlighted);
-    feedbackContainer.innerHTML += taskHtml;
+    updateTaskElement(awaitFeedback[i]["task-id"], searchResults.includes(awaitFeedback[i]["task-id"]));
+    if (!document.getElementById(awaitFeedback[i]["task-id"])) {
+      const taskHtml = createTaskHtml(awaitFeedback[i], awaitFeedback[i]["task-id"], searchResults.includes(awaitFeedback[i]["task-id"]));
+      feedbackContainer.innerHTML += taskHtml;
+    }
   }
 }
 
-
-
 function renderDone() {
   let doneContainer = document.getElementById("done");
-  doneContainer.innerHTML = "";
 
   for (let i = 0; i < done.length; i++) {
-    let isHighlighted = searchResults.includes(done[i]["task-id"]);
-    const taskHtml = createTaskHtml(done[i], done[i]["task-id"], isHighlighted);
-    doneContainer.innerHTML += taskHtml;
+    updateTaskElement(done[i]["task-id"], searchResults.includes(done[i]["task-id"]));
+    if (!document.getElementById(done[i]["task-id"])) {
+      const taskHtml = createTaskHtml(done[i], done[i]["task-id"], searchResults.includes(done[i]["task-id"]));
+      doneContainer.innerHTML += taskHtml;
+    }
   }
 }
 
@@ -143,13 +136,13 @@ function openAndCloseNoTask() {
   let done = document.getElementById("done");
 
   document.getElementById("noTaskToDo").style.display =
-    toDo.innerHTML == "" ? "" : "none";
+  toDo.children.length === 0 ? "" : "none";
   document.getElementById("noTaskInProgress").style.display =
-    inProgress.innerHTML == "" ? "" : "none";
+    inProgress.children.length === 0 ? "" : "none";
   document.getElementById("noTaskAwaitFeedback").style.display =
-    awaitFeedback.innerHTML == "" ? "" : "none";
+    awaitFeedback.children.length === 0 ? "" : "none";
   document.getElementById("noTaskDone").style.display =
-    done.innerHTML == "" ? "" : "none";
+    done.children.length === 0 ? "" : "none";
 }
 
 
@@ -179,18 +172,23 @@ function createProgressBar(subtaskPercentage, completedSubtasks, totalSubtasks) 
 }
 
 
-function contactsAndColor(){
-  for (let l = 0; l < allTasks.length; l++) {
-    const task = allTasks[l];
-    const assign = task["assignee-infos"];
-    for (let m = 0; m < assign.length; m++) {
-      const element = assign[m];
-      const name =element["name"]
-      const color = element["color"];
-      console.log(name+color)
-    }
-    
+function getAssigneeHtml(task) {
+  let assigneeHtml = '';
+  const assign = task["assignee-infos"];
+  for (let m = 0; m < assign.length; m++) {
+    const element = assign[m];
+    const name = element["name"];
+    const color = element["color"];
+    const initials = name.split(' ').map(n => n[0]).join('');
+
+    assigneeHtml += `
+      <div class="initial-container-on-board-tasks">
+        <div class="color-initial-on-board-tasks ${color}">
+          <h3 class="initials-first-and-last-on-board-tasks">${initials}</h3>
+        </div>
+      </div>`;
   }
+  return assigneeHtml;
 }
 
 
@@ -199,7 +197,9 @@ function createTaskHtml(task, taskId, isHighlighted) {
   let categoryClass = getCategoryClass(task.category);
   let subtaskPercentage = calculateSubtaskProgress(task["subtasks"]);
   let progressBarHtml = createProgressBar(subtaskPercentage, task["subtasks"].filter(subtask => subtask.done).length, task["subtasks"].length);
-  let assigneeInfo = createAssigneeHtml(task); 
+
+  // Rufen Sie die Hilfsfunktion auf, um die HTML-Zeichenfolge für die Beauftragten zu erhalten
+  let assigneeHtml = getAssigneeHtml(task);
 
   return `
     <div class="task ${highlightClass}" onclick="openCurrentTask('${taskId}')" draggable="true" ondragstart="drag(event, '${taskId}')" id="${taskId}">
@@ -207,10 +207,11 @@ function createTaskHtml(task, taskId, isHighlighted) {
       <div class="previewTitle">${task.title}</div>
       <div class="previewDescription">${task.description}</div>
       ${progressBarHtml}
-      ${assigneeInfo}
+      <div class="assignees">${assigneeHtml}</div>
     </div>
   `;
 }
+
 
 
 
@@ -373,7 +374,7 @@ function drag(ev, id) {
   }
   ev.dataTransfer.setData("id", id);
   ev.dataTransfer.dropEffect = "move";
-  openAndCloseNoTask();
+  
 }
 
 
@@ -482,7 +483,7 @@ function searchTasks() {
   searchResults = []; // Zurücksetzen der Suchergebnisse
 
   // Nur suchen, wenn der Suchwert nicht leer ist
-  if (searchValue.trim() !== "") {
+  if (searchValue.trim() !== 0) {
       for (let i = 0; i < allTasks.length; i++) {
           if (allTasks[i].title.toLowerCase().includes(searchValue) ||
               allTasks[i].description.toLowerCase().includes(searchValue) ||

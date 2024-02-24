@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Board</title>
-    <script src="js/templates.js"></script>
-    <script src="js/logout.js"></script> 
-    <script src="js/contacts.js"></script>
-    <script src="js/storage.js"></script>
-    <script src="js/sidebar.js"></script> 
     
+    <script src="js/templates.js"></script>
+    <script src="js/logout.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/contacts.js"></script>
+    
+    <script src="js/sidebar.js"></script> 
     <script src="js/board.js"></script>
+    
     <link rel="stylesheet" href="/css/board.css">
     <link rel="stylesheet" href="/css/sidebar.css">
     <link rel="stylesheet" href="/css/header.css">
@@ -60,20 +62,20 @@
                 <div class="tasksoverlay"></div>
             </div>
             <div class="taskContainer" onclick="endSearch()">
-                <section class="width-240px calc-height-248px" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <section class="width-240px flex-grow-1" ondrop="drop(event)" ondragover="allowDrop(event)">
                     <div class="noTask" id="noTaskToDo" draggable="false"> No tasks To do</div>
                     <div id="toDo" class="taskColumn drag-area" ></div>
                 </section>
-                <section class="width-240px calc-height-248px" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <section class="width-240px flex-grow-1" ondrop="drop(event)" ondragover="allowDrop(event)">
                     <div class="noTask" id="noTaskInProgress" draggable="false"> No tasks in Progress</div>
                     <div id="inProgress"  class="taskColumn drag-area" ></div>
                 </section>
-                <section class="width-240px calc-height-248px" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <section class="width-240px flex-grow-1" ondrop="drop(event)" ondragover="allowDrop(event)">
                     <div class="noTask" id="noTaskAwaitFeedback" draggable="false"> No tasks await Feedback</div>
                     <div id="awaitFeedback"  class="taskColumn drag-area" ></div>
                 </section>
 
-                <section class="width-240px calc-height-248px" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <section class="width-240px flex-grow-1" ondrop="drop(event)" ondragover="allowDrop(event)">
                     <div class="noTask" id="noTaskDone" draggable="false"> No tasks done</div>
                     <div id="done" class="taskColumn drag-area" ></div>
                 </section>  
