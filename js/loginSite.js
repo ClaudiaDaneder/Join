@@ -1,5 +1,7 @@
 let loginData = [];
 let remoteLoginData = [];
+let daEmail = 'devAka@devAka.net';
+let daPass = '12345678';
 
 function userLogin() {
     if (checkEmaildata() == true) {
@@ -14,28 +16,52 @@ function userLogin() {
     }
 }
 
-function checkEmaildata() {
-    let userEmail = document.getElementById('userEmail');
+function daLogin(){
+    if (checkEmaildata(daEmail) == true) {
+        if (checkPassData(daEmail, daPass) == true) {
+            saveLogin();
+            window.open('summary.html', '_self');
+        } else {
+            wrongPassData();
+        }
+    } else {
+        wrongEmailData();
+    }
+}
 
+function checkEmaildata(email) {
+    let userEmail = document.getElementById('userEmail');
+    let checkValue = userEmail.value.toLowerCase();
+    if(email != undefined){
+        userEmail = email;
+        checkValue = userEmail.toLowerCase();
+    }
     for (let i = 0; i < user.length; i++) {
         let userMail = user[i]['email'];
 
-        if (userMail.toLowerCase() == userEmail.value.toLowerCase()) {
+        if (userMail.toLowerCase() == checkValue) {
             return true;
         }
     }
 }
 
-function checkPassData() {
+function checkPassData(email, pass) {
     let userEmail = document.getElementById('userEmail');
     let userPass = document.getElementById('passwordchangePW');
-
+    let checkValue = userEmail.value.toLowerCase();
+    let checkPassValue = userPass.value;
+    if(email != undefined && pass != undefined){
+        userEmail = email;
+        userPass = pass;
+        checkValue = userEmail.toLowerCase();
+        checkPassValue = pass;
+    }
     for (let i = 0; i < user.length; i++) {
         let userMail = user[i]['email'];
         let userPassword = user[i]['password'];
 
-        if (userMail.toLowerCase() == userEmail.value.toLowerCase()) {
-            if (userPassword == userPass.value) {
+        if (userMail.toLowerCase() == checkValue) {
+            if (userPassword == checkPassValue) {
                 userOnlinesave(i);
                 return true;
             }

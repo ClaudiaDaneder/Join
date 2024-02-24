@@ -162,7 +162,7 @@ function loginstart() {
   </div>
   <div class="loginButton">
       <button class="button" type="submit">Log in</button>
-      <a href="summary.html">Guest Log in</a>
+      <a href="javascript:void(0)" onclick="daLogin()">Guest Log in</a>
   </div>
   `;
 }
