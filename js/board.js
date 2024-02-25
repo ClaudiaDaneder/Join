@@ -18,7 +18,7 @@ let awaitFeedback = [];
 let done = [];
 let allDownloadTasks = [];
 let currentSubTasks = [];
-let subTask = [];
+let boardSubTask = [];
 let searchResults = [];
 
 function openAddTask(inTask){
@@ -54,6 +54,7 @@ function addTaskToCategory(task) {
 }
 
 
+
 function fillTasks() {
   toDos = [];
   inProgress = [];
@@ -62,7 +63,7 @@ function fillTasks() {
 
   for (let i = 0; i < allDownloadTasks.length; i++) {
     const task = allDownloadTasks[i];
-    subTask.push(task["subtasks"].length);
+    boardSubTask.push(task["subtasks"].length);
     addTaskToCategory(task);
   }
 }

@@ -24,7 +24,7 @@ function getCategoryClass(category) {
   
   
   function getAssigneeHtml(task) {
-    let assigneeHtml = '';
+    let assigneeHtmlBoard = '';
     const assign = task["assignee-infos"];
     for (let m = 0; m < assign.length; m++) {
       const element = assign[m];
@@ -32,14 +32,14 @@ function getCategoryClass(category) {
       const color = element["color"];
       const initials = name.split(' ').map(n => n[0]).join('');
   
-      assigneeHtml += `
+      assigneeHtmlBoard += `
         <div class="initial-container-on-board-tasks">
           <div class="color-initial-on-board-tasks ${color}">
             <h3 class="initials-first-and-last-on-board-tasks">${initials}</h3>
           </div>
         </div>`;
     }
-    return assigneeHtml;
+    return assigneeHtmlBoard;
   }
   
   
@@ -50,7 +50,7 @@ function getCategoryClass(category) {
     let progressBarHtml = createProgressBar(subtaskPercentage, task["subtasks"].filter(subtask => subtask.done).length, task["subtasks"].length);
     let prioHTML = createPrioContainer(task);
     // Rufen Sie die Hilfsfunktion auf, um die HTML-Zeichenfolge für die Beauftragten zu erhalten
-    let assigneeHtml = getAssigneeHtml(task);
+    let assigneeHtmlBoard = getAssigneeHtml(task);
   
     return `
       <div class="task ${taskClass}" onclick="openCurrentTask('${taskId}')" draggable="true" ondragstart="drag(event, '${taskId}')" id="${taskId}">
@@ -59,7 +59,7 @@ function getCategoryClass(category) {
         <div class="previewDescription">${task.description}</div>
         ${progressBarHtml}
         <div class="icon-and-prio-container">
-          <div class="assignees">${assigneeHtml}</div>
+          <div class="assignees">${assigneeHtmlBoard}</div>
           <div class="prio"> ${prioHTML}</div>
         </div>
       </div>
@@ -117,11 +117,47 @@ function getCategoryClass(category) {
     return initials.length > 1 ? initials : initials + " "; // Fügt ein Leerzeichen hinzu, falls nur ein Initial vorhanden ist
   }
   
-  
-  function generateTaskHtml(task, assigneeHtml, subTasksHtml) {
+  function formatDateToDDMMYYYY(dateString) {
+    const parts = dateString.split("-");
+    return `${parts[0]}-${parts[1]}-${parts[2]}`;
+}
+  function generateTaskHtml(task, assigneeHtmlBoard, subTasksHtml) {
     const firstPart = task.category.split(" ")[0].toLowerCase();
+    const originalDate = task["due-date"]; 
+    const formattedDate = formatDateToDDMMYYYY(originalDate); 
     return `
-        <div class="width-height-full-prozent">
+        <form class="editCurrentTask" id="editCurrentTask" style="display: none;">
+          <div class="editCurrentTitle">
+            <h3 class="sectionHeadInfos">Title<h3>
+            <input type="text" value="${task['title']}">
+          </div>
+          <div class="editCurrentDescription">
+            <h3 class="sectionHeadInfos">Description<h3>
+            <input type="text" value="${task['description']}">
+          </div>
+          <div class="editCurrentDueDate">
+            <h3 class="sectionHeadInfos">Due date<h3>
+            <input class="task-input" type="date" id="due-date" required="" value="${formattedDate}" min="0">
+          </div>
+          <div class="editCurrentPrio">
+            <h3 class="sectionHeadInfos">Priority<h3>
+            <div class="prio-button-container">
+                        <button type="button" class="button-prio-urgent" data-priority="urgent">Urgent </button>
+                        <button type="button" class="button-prio-medium selected" data-priority="medium">Medium</button>
+                        <button type="button" class="button-prio-low" data-priority="low">Low</button>
+                    </div>
+          </div>
+          <div class="editCurrentAssignedTo">
+            <h3 class="sectionHeadInfos">Assigned to<h3>
+            
+            ${assigneeHtmlBoard}
+          </div>
+          <div class="editCurrentSubtasks">
+            <div></div>
+            <div></div> 
+          </div>
+        </form>
+        <div class="width-height-full-prozent" id="currentOpenTask">
           <div class="overHeadline">
               <div class="${firstPart}"><h2 class="category-h2">${task["category"]}</h2></div>
               <div><img onclick="closeModal()" class="close-png" src="./img/close.png" alt=""></div>
@@ -132,7 +168,7 @@ function getCategoryClass(category) {
           <div class="current-prio"><h3 class="prio color-dar-blue">Priority:</h3><h3> ${task["prio"]} </h3></div>
           <div class="assigne-container" id="assigne">
               <h3 class="color-dar-blue">Assigned To: </h3>
-              ${assigneeHtml}
+              ${assigneeHtmlBoard}
           </div>
             <h3 class="current-subtask">Subtask:</h3>
             <div class="subtasks">
@@ -146,9 +182,9 @@ function getCategoryClass(category) {
                 <div class=""><h4 class="delet-string">Delete</h4></div>
               </div>
               <img src="./img/delet-edit-line.png">
-              <div onclick="editTask()" class="edit-box">
+              <div  class="edit-box" onclick="editTask(${task["task-id"]})">
                 <div class=""><img class="edit-svg" src="./img/edit.svg"></div>
-                <div class=""  ><h4 class="edit-string">Edit</h4></div>
+                <div class="" ><h4 class="edit-string">Edit</h4></div>
               </div>
             </div>
           </div>
@@ -156,6 +192,18 @@ function getCategoryClass(category) {
         `;
   }
 
+  async function editTask(taskId) {
+    let currentOpenTask=document.getElementById("currentOpenTask");
+    let toEditTask = document.getElementById("editCurrentTask");
+  
+    currentOpenTask.style.display="none";
+    toEditTask.style.display="";
+    console.log(taskId)
+  
+    
+     }
+  
+  
 
 function createSubtasksHtml(subTasks) {
     let subTaskhtml = "";
