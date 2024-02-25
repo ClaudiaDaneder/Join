@@ -91,11 +91,11 @@ document.addEventListener('click', function (event) {
     let dropdown = document.getElementById('contacts-dropdown');
     if (!dropdown.contains(event.target)) {
         dropdown.classList.remove('active');
-        saveSelectedContacts();
         if (hiddenContactsInput) {
             hiddenContactsInput.classList.add('hide');
             hiddenContactsInput.value = '';
         }
+        saveSelectedContacts();
     }
     if (dropdown.classList.contains('active')) {
         document.getElementById('assign-arrow').style.transform = 'rotate(180deg)';
@@ -108,7 +108,7 @@ document.addEventListener('click', function (event) {
 
 async function toggleContactsDropdown(event) {
     let dropdown = document.getElementById('contacts-dropdown');
-    let dropdownContent = dropdown.querySelector('.dropdown-content');
+    let dropdownContent = assignee;
 
     if (!dropdownContent.contains(event.target)) {
         await loadContactsFromStorage();
@@ -185,15 +185,13 @@ function changeSelectedContactBackground(i) {
 
 
 function generateSelectedAssigneesList() {
-    if (selectedAssignees) {
-        selectedAssignees.innerHTML = '';
-        for (let c = 0; c < selectedContacts.length; c++) {
-            let selectedContact = selectedContacts[c];
-            let contactName = selectedContact.name;
-            let contactColor = selectedContact.color;
-            let initials = initialsLoad(contactName);
-            selectedAssignees.innerHTML += `<div class="assignee-circle ${contactColor}" title="${contactName}">${initials}</div>`;
-        }
+    selectedAssignees.innerHTML = '';
+    for (let c = 0; c < selectedContacts.length; c++) {
+        let selectedContact = selectedContacts[c];
+        let contactName = selectedContact.name;
+        let contactColor = selectedContact.color;
+        let initials = initialsLoad(contactName);
+        selectedAssignees.innerHTML += `<div class="assignee-circle ${contactColor}" title="${contactName}">${initials}</div>`;
     }
 }
 
@@ -242,9 +240,7 @@ function selectPriority(priority) {
         button.classList.remove('selected');
     });
     let prioButton = document.querySelector(`.button-prio-${priority}`);
-    if (prioButton) {
-        prioButton.classList.add('selected');
-    }
+    prioButton.classList.add('selected');
 }
 
 
