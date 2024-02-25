@@ -22,6 +22,10 @@ body {
     padding-bottom: 32px;
 }
 
+.titleDS{
+    word-break: break-all;
+}
+
 h1 {
     font-size: 61px;
     font-weight: 700;
