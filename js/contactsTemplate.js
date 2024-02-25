@@ -99,11 +99,13 @@ function popupTempForm(nameShow, emailShow, phoneShow, button, color, id, i) {
     let sidecontacts = document.getElementById('listAllContacts');
     let showContactsView = document.getElementById('showContactsView');
     let menueContacts = document.getElementById('menueContacts');
+    let showContact = document.getElementById('showContact');
     sidecontacts.style.transform = 'translatex(0)';
     showContactsView.style.transform = 'translatex(100vw)';
     setTimeout(() => {
       menueContacts.style.display = 'none';
     }, 150);
+    showContact.innerHTML = '';
     init();
     location.assign('#');
   }

@@ -1,0 +1,336 @@
+@media (max-width: 1330px){
+
+    .contactShow {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+        top: 160px;
+    }
+
+    .cut{
+        display: none;
+    }
+
+    .bottomCut{
+        display: flex;
+        width: 90px;
+        border: 3px solid #29ABE2;
+        border-radius: 8px;
+    }
+
+    #showContact {
+        top: 330px;
+    }
+
+}
+
+@media (max-width: 1210px){
+    .cHeader{
+        gap: 27px;
+    }
+
+    .cwidth{
+        height: 70px !important;
+        width: 70px !important;
+        border-radius: 70px !important;
+        font-size: 30px !important;
+    }
+
+    .cName{
+        font-size: 27px;
+    }
+
+    #showContact {
+        left: 710px;
+    }
+
+    .contactShow {
+        left: 710px;
+    }
+
+    .cHeader{
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 1050px) {
+    #addContactPopup {
+        height: 760px;
+        width: 90vw;
+        flex-direction: column;
+    }
+
+    .popupLeft {
+        width: 90vw;
+        border-radius: 30px 30px 0 0;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        width: 90vw;
+        height: 409px;
+    }
+
+    .leftContainer {
+        width: 90vw;
+        height: 351px;
+        justify-content: center;
+        align-items: flex-start;
+        padding-left: 24px;
+    }
+
+    .leftContainer img {
+        display: none;
+    }
+
+    .popupClosedMobile {
+        display: flex;
+    }
+
+    .popupClosed {
+        display: none;
+    }
+
+    .popupRight {
+        width: unset;
+        height: 409px;
+        background-color: #ffffff;
+        border-radius: 0 0 30px 30px;
+    }
+
+    .clearContact {
+        position: absolute;
+        top: 294px;
+    }
+
+    .circleEdit {
+        position: absolute;
+        top: 294px;
+    }
+
+    .input {
+        width: 85%;
+        height: 41px;
+    }
+
+    form {
+        width: 90vw;
+        position: absolute;
+        top: 444px;
+    }
+
+    form input {
+        width: calc(100% - 28px - 24px);
+    }
+
+    .popupButton {
+        top: 220px;
+        left: 0;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .cancel {
+        display: none;
+    }
+
+    .popupTop {
+        font-size: 47px;
+    }
+
+    .popupBottom {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .contacts {
+        left: 200px;
+        width: 350px;
+    }
+
+    .addContact {
+        width: 350px;
+    }
+
+    .addContactButton {
+        width: 250px;
+    }
+
+    #showContact {
+        left: 580px;
+    }
+
+    .contactShow {
+        left: 580px;
+    }
+
+    .contactsHeader{
+        font-size: 55px;
+    }
+
+    .contactsTitle{
+        font-size: 23px;
+    }
+}
+
+@media (max-width: 850px) {
+    .contacts {
+        left: 0;
+        width: 100vw;
+        top: 80px;
+        height: calc(100vh - 80px - 70px);
+        transform: translateX(0);
+        transition: all 200ms ease-in-out;
+    }
+
+    #showContact {
+        width: 100%;
+        top: 300px;
+        height: unset;
+        left: 0;
+        transform: unset;
+    }
+
+    .contactsHeader {
+        width: 100%;
+        font-weight: 700;
+        font-size: 47px;
+    }
+
+    .contactsTitle {
+        width: 100%;
+        font-size: 20px;
+    }
+
+    .cHeader {
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+    }
+
+    .contactsInfo{
+        font-size: 20px;
+    }
+
+    .cwidth {
+        width: 80px !important;
+        height: 80px !important;
+        border-radius: 80px !important;
+        font-size: 27px;
+    }
+
+    .contactName{
+        height: unset;
+    }
+
+    .cName {
+        font-size: 25px;
+    }
+
+    .edit{
+        display: none;
+    }
+
+    .contactList {
+        margin-top: 10px;
+    }
+
+    .contactsView {
+        transform: translateX(100vw);
+        transition: all 200ms ease-in-out;
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        left: 16px;
+    }
+
+    .cut {
+        display: none;
+    }
+
+    .contactShow {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+        width: 80%;
+        top: 144px;
+        left: 0;
+    }
+
+    .letter {
+        width: 80% !important;
+    }
+
+    .line {
+        width: 80%;
+    }
+
+    .lineBorder {
+        width: unset;
+    }
+
+    .list {
+        width: 80vw !important;
+    }
+
+    .listEmail {
+        word-break: break-all;
+    }
+
+    .listVisited {
+        width: 80vw !important;
+    }
+
+    .addContact {
+        width: 56px;
+        height: 56px;
+        border-radius: 28px;
+        position: absolute;
+        top: calc(100% - 80px);
+        right: 20px;
+        background: transparent;
+    }
+
+    .addContactButton {
+        border-radius: 28px;
+    }
+
+    #addButtonText {
+        display: none;
+    }
+
+    .backToContacts {
+        display: unset;
+    }
+
+    .menuePopup{
+        display: flex;
+    }
+}
+
+@media (max-width: 350px) {
+    .list {
+        gap: 15px;
+    }
+
+    .listVisited {
+        gap: 15px;
+    }
+}
+
+@media (max-height: 780px) {
+    #addContactPopup {
+        bottom: unset;
+        margin: unset;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

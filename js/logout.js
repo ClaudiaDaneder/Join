@@ -85,3 +85,7 @@ async function widthSize() {
 window.addEventListener("resize", function () {
     widthSize();
 });
+
+function notClose(event) {
+    event.stopPropagation();
+  }
