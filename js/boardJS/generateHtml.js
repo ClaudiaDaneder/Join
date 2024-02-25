@@ -54,7 +54,7 @@ function getCategoryClass(category) {
   
     return `
       <div class="task ${taskClass}" onclick="openCurrentTask('${taskId}')" draggable="true" ondragstart="drag(event, '${taskId}')" id="${taskId}">
-        <div class="${categoryClass}">${task.category}</div>
+        <div class="${categoryClass}"><h4 class="categoryHeadlineBoard">${task.category}</h4></div>
         <div class="previewTitle">${task.title}</div>
         <div class="previewDescription">${task.description}</div>
         ${progressBarHtml}

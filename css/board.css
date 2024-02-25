@@ -6,6 +6,123 @@
     font-family: 'interRegular';
     src: url('/fonts/inter-v13-latin-regular.woff2');
 }
+@media(max-width:1250px){
+    .header-container-to-add-current-task {
+        width: auto;
+    }
+    .task {
+        width: 180px;
+    }
+    .noTask {
+        width: 180px;
+    }
+    .addTaskLinkMobile{
+        display: none;
+    }
+}
+@media(max-width:1160px){
+    .header-container-to-add-current-task {
+        width: auto;
+    }
+    .task {
+        width: 140px;
+    }
+    .noTask {
+        width: 140px;
+    }
+    .width-240px {
+        width: auto;
+    }
+}
+@media(max-width:1180px){
+    .added-task-txt{
+        font-size: 16px;
+    }
+    .technical {
+        margin-right: 16px;
+        width: 65%;
+    }
+    .user{
+        margin-right: 16px;
+        width: 40%;
+    }
+}
+@media(max-width:1050px){
+    .header-container-to-add-current-task {
+        width: auto;
+    }
+    .task {
+        width: 100px;
+    }
+    .noTask {
+        width: 100px;
+    }
+    .width-240px {
+        width: auto;
+    }
+    .technical {
+        width: 100%;
+        padding: 4px 4px 4px 4px!important;
+    }
+    .user{
+        margin-right: 16px;
+        width: 50%;
+    }
+    .task {
+        padding: 12px;
+    }
+}
+@media(max-width:428px){
+    .boardSiteContainer {
+        padding-left: 0!important; 
+        padding-right: 0!important; 
+    }
+    .boardSubhHader{
+        display: flex;
+        flex-direction: column;
+    }
+    .addTaskLetterin{
+        display: none;
+    }
+    .addTaskLink {
+        display: none;
+    }
+    .addTaskLinkMobile{
+        display: block;
+    }
+    .space-between{
+        justify-content: space-between;
+    }
+}
+
+.addTaskLinkMobile{
+
+}
+.addTaskBtnMobile{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+    border: 1px solid rgba(42, 54, 71, 1);
+    padding: 8px 16px 8px 16px;
+    gap: 4px;
+    background: rgba(42, 54, 71, 1);
+}
+.display-flex{
+    display: flex;
+    width: 100%;
+}
+.align-center{
+    align-items: center;
+}
+.justify-center{
+    justify-content: center;
+}
+.revert{
+    flex-direction: column-reverse;
+}
 h4{
     margin: 0;
 }

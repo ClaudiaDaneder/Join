@@ -44,19 +44,30 @@
         <div class="content">
             
             <div class="boardSubhHader">
-                <h1 class="boardHeadline">Board</h1>
-                <div class="inputFieldAndAddTaskBtn">
-                    <div class="inputField">
-                        <input type="text" class="inputFindTask" placeholder="Find Task" id="searchInput" >
-                        <div class="verticalLineAndGlassImg">
-                            <div class="verticalLine"></div>
-                            <img src="./img/search.png" alt="searchGlass" onclick="searchTasks()">
-                        </div>
-                    </div>
+                <div class="display-flex align-center space-between">
+                    <h1 class="boardHeadline">Board</h1>
+                    <a class="addTaskLinkMobile" href="./addtask.html">
+                        <button class="addTaskBtnMobile">
+                            <img class="addImg" src="./img/add.png" alt="" srcset="">
+                        </button>
+                    <a>
                 </div>
-                <a class="addTaskLink" href="./addtask.html">
-                        <button class="addTaskBtn"><div class="addTaskLetterin">Add task</div> <img class="addImg" src="./img/add.png" alt="" srcset=""></button>
-                </a>
+                <div class="inputFieldAndAddTaskBtn">
+                        <div class="inputField">
+                            <input type="text" class="inputFindTask" placeholder="Find Task" id="searchInput" >
+                            <div class="verticalLineAndGlassImg">
+                                <div class="verticalLine"></div>
+                                <img src="./img/search.png" alt="searchGlass" onclick="searchTasks()">
+                            </div>
+                        </div>
+                        <a class="addTaskLink" href="./addtask.html">
+                                <button class="addTaskBtn">
+                                    <div class="addTaskLetterin">Add task</div> 
+                                    <img class="addImg" src="./img/add.png" alt="" srcset="">
+                                </button>
+                        </a>
+                    </div>
+                
                     
             </div>
             <div class="parrent-add-task-container">
