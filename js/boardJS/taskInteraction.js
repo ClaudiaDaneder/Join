@@ -79,8 +79,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
     closeCurrentTask();
     await init();
   }
-  
-  
-  function editTask() { }
+ 
   
   
