@@ -82,7 +82,7 @@ function showDone() {
 }
 
 function showTasksInBoard() {
-    let number = allTasks.length;
+    let number = allDownloadTasks.length;
     document.getElementById('number_tasks-in-board').innerHTML = number;
 }
 
@@ -94,6 +94,14 @@ function showTasksInProgress() {
 function showAwaitingFeedback() {
     let number = awaitFeedback.length;
     document.getElementById('number_awaiting-feedback').innerHTML = number
+}
+
+function showUrgentTasks() {
+    let urgentTasks = allDownloadTasks.filter(function (task) {
+        return task.prio === 'urgent' && task.status !== 'done';
+    });
+    let number = urgentTasks.length;
+    document.getElementById('number_urgent').innerHTML = number;
 }
 
 
@@ -114,7 +122,7 @@ function getEarliestDate() {
 
 
 function filterOpenTasks() {
-    return allTasks.filter(function (task) {
+    return allDownloadTasks.filter(function (task) {
         return task.status !== 'done';
     });
 }
@@ -131,7 +139,7 @@ function formatDate(date) {
     let month = months[date.getMonth()];
     let day = date.getDate();
     let year = date.getFullYear();
-    let formattedDate = month + ' ' + day + ' ,' + year;
+    let formattedDate = month + ' ' + day + ', ' + year;
     return formattedDate;
 }
 
@@ -139,15 +147,6 @@ function formatDate(date) {
 function showUpcomingDeadline() {
     let deadline = getEarliestDate();
     document.getElementById('deadline').innerHTML = deadline;
-}
-
-
-function showUrgentTasks() {
-    let urgentTasks = allTasks.filter(function (task) {
-        return task.prio === 'urgent' && task.status !== 'done';
-    });
-    let number = urgentTasks.length;
-    document.getElementById('number_urgent').innerHTML = number;
 }
 
 
