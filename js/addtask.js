@@ -87,13 +87,13 @@ document.addEventListener('click', function (event) {
         hiddenContactsInput.classList.add('hide');
         hiddenContactsInput.value = '';
         saveSelectedContacts();
-        updateSelectedContacts();
     }
     if (dropdown.classList.contains('active')) {
         document.getElementById('assign-arrow').style.transform = 'rotate(180deg)';
     } else {
         document.getElementById('assign-arrow').style.transform = 'rotate(0deg)';
     }
+    updateSelectedContacts();
 });
 
 
@@ -275,13 +275,16 @@ function selectCategory(category) {
     categoryField.innerHTML = category;
     toggleCategoryDropdown();
     hiddenCategoryDropdown.value = category;
+    if (hiddenCategoryDropdown.value) {
+        document.getElementById('category-arrow').classList.add('hide')
+    }
 }
 
 
 function resetForm() {
     document.getElementById('my-form').reset();
     document.querySelector('.create-button').disabled = false;
-    document.getElementById('category-dropdown-text').innerHTML = 'Select task category';
+    resetCategoryField();
     resetPrioButtons();
     resetCheckboxOptions();
     clearSubtaskField();
@@ -292,6 +295,11 @@ function resetForm() {
 
 function resetPrioButtons() {
     selectPriority('medium');
+}
+
+function resetCategoryField() {
+    document.getElementById('category-arrow').classList.remove('hide')
+    document.getElementById('category-dropdown-text').innerHTML = 'Select task category';
 }
 
 

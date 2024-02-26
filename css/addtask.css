@@ -86,6 +86,7 @@ select:focus,
 select,
 .dropdown {
     padding: 12px 16px;
+    height: 48px
 
 }
 
@@ -146,7 +147,7 @@ a:hover {
     display: flex;
     justify-content: space-between;
     gap: 32px;
-    margin-bottom: 50px;
+
 }
 
 .form-container .left {
@@ -213,7 +214,7 @@ a:hover {
 .subtaskfield {
     border: unset;
     background: transparent;
-    margin-bottom: 0;
+    margin-bottom: 0 !important;
 }
 
 .subtaskfield:focus {
@@ -336,7 +337,8 @@ a:hover {
 }
 
 .task-bottom-container {
-    margin-bottom: 32px;
+    padding-bottom: 48px;
+    padding-top: 36px;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -603,6 +605,7 @@ a:hover {
     left: 0;
     width: calc(100% - 60px);
     border: none;
+    height: 46px;
 }
 
 #hidden-contacts-input.focus {
