@@ -7,17 +7,55 @@
     src: url('/fonts/inter-v13-latin-regular.woff2');
 }
 @media(max-width:1250px){
-    .header-container-to-add-current-task {
-        width: auto;
-    }
-    .task {
-        width: 180px;
-    }
-    .noTask {
-        width: 180px;
-    }
+    
     .addTaskLinkMobile{
         display: none;
+    }
+    .header-container-to-add-current-task{
+        margin-right: 60px;
+    }
+    .previewTitle{
+        font-size: 16px;
+    }
+    .header-container-to-add-current-task {
+        margin-left: 0!important;
+        margin-right: 0!important;
+        width: 252px;
+    }
+    .task{
+        width: 240px!important;
+    }
+    
+}
+@media(min-width:1250px){
+    
+    .addTaskLinkMobile{
+        display: none;
+    }
+    .width-240px {
+        width: 222px!important;
+    }
+    .header-container-to-add-current-task{
+        margin-bottom: 16px;
+        width: 222px!important;
+    }
+    .categoryHeadlineBoard{
+        font-size: 16px;
+    }
+    .previewTitle{
+        font-size: 16px!important;
+    }
+    .previewDescription{
+        font-size: 16px!important;
+    }
+    .header-container-to-add-current-task {
+        margin-left: 0!important; 
+        margin-right: 0!important;
+        width: 200px;
+    }
+    .added-task-txt{
+        font-size: 16px;
+        
     }
 }
 @media(max-width:1160px){
@@ -92,6 +130,56 @@
     }
     .space-between{
         justify-content: space-between;
+    }
+    .boardHeadline{
+        font-size: 47px;
+    }
+    .taskContainer{
+        flex-direction: column;
+    }
+    .task {
+        width: 252px;
+    }
+    .added-task-txt{
+        margin: ;
+    }
+    .noTask {
+        width: 90%!important;
+        margin-right: 20px;
+        margin-left: 20px;
+    }
+    .header-container-to-add-current-task{
+        width: auto!important;
+        margin-bottom: 16px;
+        margin-top: 16px;
+    }
+    .added-task-txt{
+        font-size: 27px;
+    }
+    .flex-grow-1 {
+        min-height: auto!important;
+    }
+    .width-240px{
+        width: 90%!important;
+        margin-left: 16px;
+        
+    }
+    .boardSiteContainer{
+        padding-top: 80px!important;
+        padding-bottom: 96px;
+    }
+    .mobileHeaderAndAddTaskBtn{
+        width: 90%!important;
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-bottom: 40px;
+        margin-top: 40px;
+    }
+    .inputFieldAndAddTaskBtn{
+        width: 90%!important;
+    }
+    .inputField{
+        width: 100%!important;
     }
 }
 
@@ -438,13 +526,13 @@ body{
 }
 .parrent-add-task-container{
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     
 }
 .taskContainer{
     display: flex;
     justify-content: space-around;
-    gap: 24px;
 }
 .taskColumn{
     display: flex;
@@ -479,6 +567,7 @@ body{
     gap: 10px;
     box-shadow: 3px 4px 4px 0px #0000001A;
     background-color: white;
+    max-width: 252px;
 }
 .technical{
     font-family: interRegular;

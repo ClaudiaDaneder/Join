@@ -1,5 +1,5 @@
 function findTaskById(taskId) {
-    return allTasks.find(
+    return allDownloadTasks.find(
       (element) => parseInt(element["task-id"]) === parseInt(taskId)
     );
   }
@@ -63,15 +63,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
   
   async function deletThisArray(taskId) {
     let foundIndex = -1;
-    for (let i = 0; i < allTasks.length; i++) {
-      if (allTasks[i]["task-id"] === taskId) {
+    for (let i = 0; i < allDownloadTasks.length; i++) {
+      if (allDownloadTasks[i]["task-id"] === taskId) {
         foundIndex = i;
         break;
       }
     }
     if (foundIndex !== -1) {
-      allTasks.splice(foundIndex, 1);
-      await setItem("allTasks", allTasks);
+      allDownloadTasks.splice(foundIndex, 1);
+      await setItem("allTasks", allDownloadTasks);
       console.log(`Task mit ID ${taskId} wurde gelöscht.`);
     } else {
       console.log(`Task mit ID ${taskId} nicht gefunden.`);

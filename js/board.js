@@ -2,7 +2,7 @@
 async function init() {
   await includeHTML();
   await loadTaskFromStorage();
-  fillTasks();
+  await fillTasks();
   renderallTasks();
   initOnline();
   enableNavigation();
@@ -21,11 +21,14 @@ let currentSubTasks = [];
 let boardSubTask = [];
 let searchResults = [];
 
-function openAddTask(inTask){
+async function openAddTask(status){
+  
  board = document.getElementById("boardSiteContainer");
  addTaskContainer = document.getElementById("addTaskContainer");
  board.style.display="none";
  addTaskContainer.style.display="";
+ document.getElementById('my-form').value = status;
+ 
 }
 
 // Datenladen und -verarbeiten
@@ -35,6 +38,7 @@ async function loadTaskFromStorage() {
 }
 
 function addTaskToCategory(task) {
+  console.log(task["status"])
   switch (task["status"]) {
     case "toDos":
       toDos.push(task);
@@ -55,7 +59,7 @@ function addTaskToCategory(task) {
 
 
 
-function fillTasks() {
+async function fillTasks() {
   toDos = [];
   inProgress = [];
   awaitFeedback = [];

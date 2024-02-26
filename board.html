@@ -10,8 +10,9 @@
     <script src="js/storage.js"></script>
     <script src="js/contacts.js"></script>
     <script src="js/sidebar.js"></script> 
-    <script src="js/board.js"></script>
     <script src="/js/boardJS/generateHtml.js"></script>
+    <script src="js/board.js"></script>
+    
     <script src="js/boardJS/taskInteraction.js"></script>
     <script src="js/boardJS/dragAndDrop.js"></script>
     
@@ -44,13 +45,13 @@
         <div class="content">
             
             <div class="boardSubhHader">
-                <div class="display-flex align-center space-between">
+                <div class="display-flex align-center space-between mobileHeaderAndAddTaskBtn">
                     <h1 class="boardHeadline">Board</h1>
                     <a class="addTaskLinkMobile" href="./addtask.html">
                         <button class="addTaskBtnMobile">
                             <img class="addImg" src="./img/add.png" alt="" srcset="">
                         </button>
-                    <a>
+                    </a>
                 </div>
                 <div class="inputFieldAndAddTaskBtn">
                         <div class="inputField">
@@ -60,40 +61,58 @@
                                 <img src="./img/search.png" alt="searchGlass" onclick="searchTasks()">
                             </div>
                         </div>
-                        <a class="addTaskLink" href="./addtask.html">
+                        
+                </div>
+                
+                    <a class="addTaskLink" href="./addtask.html">
                                 <button class="addTaskBtn">
                                     <div class="addTaskLetterin">Add task</div> 
                                     <img class="addImg" src="./img/add.png" alt="" srcset="">
                                 </button>
                         </a>
-                    </div>
-                
-                    
             </div>
-            <div class="parrent-add-task-container">
-                <div class="header-container-to-add-current-task"><h4 class="added-task-txt">To do</h4><img onclick="openAddTask(`toDo`)" class="add-current-task" src="img/plus_button.png" alt="" srcset=""></div>
-                <div class="header-container-to-add-current-task"><h4 class="added-task-txt">In progress</h4><img onclick="openAddTask(`inProgress`)"  class="add-current-task" src="img/plus_button.png" alt="" srcset=""></div>
-                <div class="header-container-to-add-current-task"><h4 class="added-task-txt">Await feedback</h4><img onclick="openAddTask(`awaitFeedback`)"  class="add-current-task" src="img/plus_button.png" alt="" srcset=""></div>
-                <div class="header-container-to-add-current-task"><h4 class="added-task-txt">Done</h4><img onclick="openAddTask(`done`)"  class="add-current-task" src="img/plus_button.png" alt="" srcset=""></div>
-            </div>
+
             <div class="taskContainer" onclick="endSearch()">
-                <section class="width-240px flex-grow-1" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    <div class="noTask" id="noTaskToDo" draggable="false"> No tasks To do</div>
-                    <div id="toDo" class="taskColumn drag-area" ></div>
-                </section>
-                <section class="width-240px flex-grow-1" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <div class="parrent-add-task-container">
+                    <div class="header-container-to-add-current-task">
+                        <h4 class="added-task-txt">To do</h4>
+                        <img onclick="openAddTask(`toDo`)" class="add-current-task" src="img/plus_button.png" alt="" srcset="">
+                    </div>
+                    <section class="width-240px flex-grow-1" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div class="noTask" id="noTaskToDo" draggable="false"> No tasks To do</div>
+                        <div id="toDo" class="taskColumn drag-area" ></div>
+                    </section>
+                </div>
+                <div class="parrent-add-task-container">
+                    <div class="header-container-to-add-current-task">
+                    <h4 class="added-task-txt">In progress</h4>
+                    <img onclick="openAddTask(`inProgress`)"  class="add-current-task" src="img/plus_button.png" alt="" srcset="">
+                                    </div>
+                                    <section class="width-240px flex-grow-1" ondrop="drop(event)" ondragover="allowDrop(event)">
                     <div class="noTask" id="noTaskInProgress" draggable="false"> No tasks in Progress</div>
                     <div id="inProgress"  class="taskColumn drag-area" ></div>
-                </section>
-                <section class="width-240px flex-grow-1" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                    </section>
+                </div>
+                <div class="parrent-add-task-container">
+                    <div class="header-container-to-add-current-task">
+                        <h4 class="added-task-txt">Await feedback</h4>
+                        <img onclick="openAddTask(`awaitFeedback`)"  class="add-current-task" src="img/plus_button.png" alt="" srcset="">
+                    </div>
+                    <section class="width-240px flex-grow-1" ondrop="drop(event)" ondragover="allowDrop(event)">
                     <div class="noTask" id="noTaskAwaitFeedback" draggable="false"> No tasks await Feedback</div>
                     <div id="awaitFeedback"  class="taskColumn drag-area" ></div>
-                </section>
-
-                <section class="width-240px flex-grow-1" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    <div class="noTask" id="noTaskDone" draggable="false"> No tasks done</div>
-                    <div id="done" class="taskColumn drag-area" ></div>
-                </section>  
+                    </section>
+                </div>
+                <div class="parrent-add-task-container">
+                    <div class="header-container-to-add-current-task">
+                        <h4 class="added-task-txt">Done</h4>
+                        <img onclick="openAddTask(`done`)"  class="add-current-task" src="img/plus_button.png" alt="" srcset="">
+                    </div>
+                    <section class="width-240px flex-grow-1" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div class="noTask" id="noTaskDone" draggable="false"> No tasks done</div>
+                        <div id="done" class="taskColumn drag-area" ></div>
+                    </section>
+                </div>
             </div>
         </div>
     </div>

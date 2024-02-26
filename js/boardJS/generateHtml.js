@@ -142,19 +142,22 @@ function getCategoryClass(category) {
           <div class="editCurrentPrio">
             <h3 class="sectionHeadInfos">Priority<h3>
             <div class="prio-button-container">
-                        <button type="button" class="button-prio-urgent" data-priority="urgent">Urgent </button>
-                        <button type="button" class="button-prio-medium selected" data-priority="medium">Medium</button>
-                        <button type="button" class="button-prio-low" data-priority="low">Low</button>
-                    </div>
+              <button type="button" class="button-prio-urgent" data-priority="urgent">Urgent </button>
+              <button type="button" class="button-prio-medium selected" data-priority="medium">Medium</button>
+              <button type="button" class="button-prio-low" data-priority="low">Low</button>
+            </div>
           </div>
           <div class="editCurrentAssignedTo">
             <h3 class="sectionHeadInfos">Assigned to<h3>
-            
             ${assigneeHtmlBoard}
           </div>
-          <div class="editCurrentSubtasks">
-            <div></div>
-            <div></div> 
+          <div class="styled-subtaskfield" id="styled-subtaskfield">
+                        <input class="task-input subtaskfield" type="text" placeholder="Add new subtask" id="subtasks" oninput="updateSubtaskButtons()" onfocus="subtaskfieldFocus()" onblur="subtaskfieldBlur()">
+                        <div class="subtaskfield-button-container" id="subtaskfield-buttons">
+                            <button type="button" class="subtaskfield-button-general"><img src="/img/addtask_icon_subtaskfield_plus.svg"></button>
+                        </div>
+                    </div>
+          <div class="editCurrentSubtasks" id="editCurrentSubtasks">
           </div>
         </form>
         <div class="width-height-full-prozent" id="currentOpenTask">
@@ -192,14 +195,14 @@ function getCategoryClass(category) {
         `;
   }
 
-  async function editTask(taskId) {
+  async function editTask(status) {
     let currentOpenTask=document.getElementById("currentOpenTask");
     let toEditTask = document.getElementById("editCurrentTask");
   
     currentOpenTask.style.display="none";
     toEditTask.style.display="";
-    console.log(taskId)
-  
+    console.log(status)
+    
     
      }
   

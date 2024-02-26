@@ -30,7 +30,9 @@ async function initAddTask() {
 
 async function addNewTask(status) {
     let taskID = await identifyTaskId();
+    let state = document.getElementById('my-form').value;
     let task = {
+        
         'title': document.getElementById('title').value,
         'description': document.getElementById('description').value,
         'assignee-infos': selectedContacts,
@@ -39,7 +41,7 @@ async function addNewTask(status) {
         'category': document.getElementById('hidden-category-dropdown').value,
         'subtasks': subtasks,
         'task-id': taskID,
-        'status': status
+        'status': state
     };
     disableCreateButton();
     checkPriority(task);
