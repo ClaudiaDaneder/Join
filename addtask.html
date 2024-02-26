@@ -33,7 +33,7 @@
 
     <div class="main-container">
         <h1 class="add-task-headline">Add Task</h1>
-        <form id="my-form" onsubmit="addNewTask('toDos'); return false" class="form">
+        <form id="my-form" onsubmit="addNewTask(); return false" class="form">
             <div class="form-container">
                 <div class="left">
                     <p class="task-label">Title<sup class="mandatory">*</sup></p>
@@ -58,7 +58,7 @@
                     <p class="task-label">Prio</p>
                     <div class="prio-button-container">
                         <button type="button" class="button-prio-urgent" data-priority="urgent">Urgent </button>
-                        <button type="button" class="button-prio-medium selected" data-priority="medium">Medium</button>
+                        <button type="button" class="button-prio-medium" data-priority="medium">Medium</button>
                         <button type="button" class="button-prio-low" data-priority="low">Low</button>
                     </div>
                     <p class="task-label">Category<sup class="mandatory">*</sup></p>

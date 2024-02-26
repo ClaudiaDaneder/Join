@@ -1,22 +1,7 @@
 let allTasks = [];
 let subtasks = [];
 let selectedContacts = [];
-
-let selectedPriority = 'medium';
-
-/*
-let title = document.getElementById('title');
-let description = document.getElementById('description');
-let assignee = document.getElementById('assignee');
-let selectedAssignees = document.getElementById('selected-assignees-list');
-let dueDate = document.getElementById('due-date');
-let categoryField = document.getElementById('category-dropdown-text');
-let subtaskField = document.getElementById('subtasks');
-let subtaskList = document.getElementById('subtasklist');
-let hiddenCategoryDropdown = document.getElementById('hidden-category-dropdown');
-let hiddenContactsInput = document.getElementById('hidden-contacts-input');
-let addTaskSite = document.getElementById('addTaskContainer');
-*/
+let selectedPriority;
 
 
 async function initAddTask() {
@@ -28,11 +13,13 @@ async function initAddTask() {
 }
 
 
-async function addNewTask(status) {
+async function addNewTask() {
     let taskID = await identifyTaskId();
     let state = document.getElementById('my-form').value;
+    if (state === undefined) {
+        state = 'toDos';
+    }
     let task = {
-        
         'title': document.getElementById('title').value,
         'description': document.getElementById('description').value,
         'assignee-infos': selectedContacts,
@@ -225,18 +212,13 @@ function loadSelectedContacts() {
 }
 
 
-function checkPriority(task) {
-    task.prio = selectedPriority;
-}
-
-
 document.addEventListener('DOMContentLoaded', function () {
     selectPriority('medium');
 
-    document.querySelectorAll('.prio-button-container button').forEach(button => {
-        button.addEventListener('click', function () {
-            selectPriority(button.dataset.priority);
-        });
+    document.addEventListener('click', function (event) {
+        if (event.target.closest('.prio-button-container button')) {
+            selectPriority(event.target.dataset.priority);
+        }
     });
 });
 
@@ -250,6 +232,11 @@ function selectPriority(priority) {
     if (prioButton) {
         prioButton.classList.add('selected');
     }
+}
+
+
+function checkPriority(task) {
+    task.prio = selectedPriority;
 }
 
 
