@@ -4,6 +4,7 @@ let selectedContacts = [];
 
 let selectedPriority = 'medium';
 
+/*
 let title = document.getElementById('title');
 let description = document.getElementById('description');
 let assignee = document.getElementById('assignee');
@@ -13,7 +14,9 @@ let categoryField = document.getElementById('category-dropdown-text');
 let subtaskField = document.getElementById('subtasks');
 let subtaskList = document.getElementById('subtasklist');
 let hiddenCategoryDropdown = document.getElementById('hidden-category-dropdown');
-let hiddenContactsInput = document.getElementById('hidden-contacts-input')
+let hiddenContactsInput = document.getElementById('hidden-contacts-input');
+let addTaskSite = document.getElementById('addTaskContainer');
+*/
 
 
 async function initAddTask() {
@@ -28,12 +31,12 @@ async function initAddTask() {
 async function addNewTask() {
     let taskID = await identifyTaskId();
     let task = {
-        'title': title.value,
-        'description': description.value,
+        'title': document.getElementById('title').value,
+        'description': document.getElementById('description').value,
         'assignee-infos': selectedContacts,
-        'due-date': dueDate.value,
+        'due-date': document.getElementById('due-date').value,
         'prio': selectedPriority,
-        'category': hiddenCategoryDropdown.value,
+        'category': document.getElementById('hidden-category-dropdown').value,
         'subtasks': subtasks,
         'task-id': taskID,
         'status': 'toDos'
@@ -45,7 +48,6 @@ async function addNewTask() {
     showPopup();
     redirectToBoard();
 }
-
 
 async function loadContactsFromStorage() {
     let allContactsAsString = await getItem('allContacts');
@@ -73,6 +75,7 @@ async function identifyTaskId() {
 
 
 function loadContactsIntoDropdown(filteredContacts) {
+    let assignee = document.getElementById('assignee');
     assignee.innerHTML = '';
     if (filteredContacts?.length < 1) {
         assignee.innerHTML = noContactsToShow();
@@ -89,26 +92,25 @@ function loadContactsIntoDropdown(filteredContacts) {
 
 document.addEventListener('click', function (event) {
     let dropdown = document.getElementById('contacts-dropdown');
+    let hiddenContactsInput = document.getElementById('hidden-contacts-input');
     if (!dropdown.contains(event.target)) {
         dropdown.classList.remove('active');
-        if (hiddenContactsInput) {
-            hiddenContactsInput.classList.add('hide');
-            hiddenContactsInput.value = '';
-        }
+        hiddenContactsInput.classList.add('hide');
+        hiddenContactsInput.value = '';
         saveSelectedContacts();
+        updateSelectedContacts();
     }
     if (dropdown.classList.contains('active')) {
         document.getElementById('assign-arrow').style.transform = 'rotate(180deg)';
     } else {
         document.getElementById('assign-arrow').style.transform = 'rotate(0deg)';
     }
-    updateSelectedContacts();
 });
 
 
 async function toggleContactsDropdown(event) {
     let dropdown = document.getElementById('contacts-dropdown');
-    let dropdownContent = assignee;
+    let dropdownContent = document.getElementById('assignee');
 
     if (!dropdownContent.contains(event.target)) {
         await loadContactsFromStorage();
@@ -137,12 +139,14 @@ function renderContacts(contactName, contactColor, initials, i) {
 
 
 function enableContactsSearchField() {
+    let hiddenContactsInput = document.getElementById('hidden-contacts-input');
     hiddenContactsInput.classList.remove('hide');
     moveCursorToEnd(hiddenContactsInput);
 }
 
 
 async function filterContacts() {
+    let hiddenContactsInput = document.getElementById('hidden-contacts-input');
     let search = hiddenContactsInput.value.toLowerCase();
     let filteredContacts = allContacts.filter(contact => contact['name'].toLowerCase().includes(search));
     selectedContacts.forEach(selectedContact => {
@@ -185,6 +189,7 @@ function changeSelectedContactBackground(i) {
 
 
 function generateSelectedAssigneesList() {
+    let selectedAssignees = document.getElementById('selected-assignees-list');
     selectedAssignees.innerHTML = '';
     for (let c = 0; c < selectedContacts.length; c++) {
         let selectedContact = selectedContacts[c];
@@ -240,7 +245,9 @@ function selectPriority(priority) {
         button.classList.remove('selected');
     });
     let prioButton = document.querySelector(`.button-prio-${priority}`);
-    prioButton.classList.add('selected');
+    if (prioButton) {
+        prioButton.classList.add('selected');
+    }
 }
 
 
@@ -274,6 +281,8 @@ function toggleCategoryDropdown() {
 
 
 function selectCategory(category) {
+    let categoryField = document.getElementById('category-dropdown-text');
+    let hiddenCategoryDropdown = document.getElementById('hidden-category-dropdown');
     categoryField.innerHTML = category;
     toggleCategoryDropdown();
     hiddenCategoryDropdown.value = category;
@@ -283,7 +292,7 @@ function selectCategory(category) {
 function resetForm() {
     document.getElementById('my-form').reset();
     document.querySelector('.create-button').disabled = false;
-    categoryField.innerHTML = 'Select task category';
+    document.getElementById('category-dropdown-text').innerHTML = 'Select task category';
     resetPrioButtons();
     resetCheckboxOptions();
     clearSubtaskField();

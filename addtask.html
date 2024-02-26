@@ -20,7 +20,7 @@
     <script src="js/storage.js"></script>
 </head>
 
-<body onload="initAddTask()">
+<body onload="initAddTask()" id="addTaskContainer">
     <div id="popup-bg" class="popup-bg hide">
         <div class="popup">Task added to board <img src="/img/sidebar_icon_board_white.svg"></div>
     </div>
@@ -43,7 +43,8 @@
                     <p class="task-label">Assigned to</p>
                     <div class="dropdown" id="contacts-dropdown" onclick="toggleContactsDropdown(event)">
                         <p>Select contacts to assign</p>
-                        <input class="task-input hide" type="text" id="hidden-contacts-input" oninput="filterContacts()">
+                        <input class="task-input hide" type="text" id="hidden-contacts-input"
+                            oninput="filterContacts()">
                         <img src="/img/addtask_icon_dropdown-menu.svg" id="assign-arrow">
                         <div class="dropdown-content" id="assignee"></div>
                     </div>
@@ -52,7 +53,8 @@
                 <hr>
                 <div class="right">
                     <p class="task-label">Due date<sup class="mandatory">*</sup></p>
-                    <input class="task-input" type="date" id="due-date" required placeholder="dd/mm/yyyy" value="" min="0">
+                    <input class="task-input" type="date" id="due-date" required placeholder="dd/mm/yyyy" value=""
+                        min="0">
                     <p class="task-label">Prio</p>
                     <div class="prio-button-container">
                         <button type="button" class="button-prio-urgent" data-priority="urgent">Urgent </button>
@@ -78,7 +80,8 @@
                         <input class="task-input subtaskfield" type="text" placeholder="Add new subtask" id="subtasks"
                             oninput="updateSubtaskButtons()" onfocus="subtaskfieldFocus()" onblur="subtaskfieldBlur()">
                         <div class="subtaskfield-button-container" id="subtaskfield-buttons">
-                            <button type="button" class="subtaskfield-button-general"><img src="/img/addtask_icon_subtaskfield_plus.svg"></button>
+                            <button type="button" class="subtaskfield-button-general"><img
+                                    src="/img/addtask_icon_subtaskfield_plus.svg"></button>
                         </div>
                     </div>
                     <div id="subtasklist" class="subtasklist"></div>
@@ -92,6 +95,7 @@
                 </div>
             </div>
         </form>
+    </div>
     </div>
 </body>
 

@@ -1,4 +1,5 @@
 function updateSubtaskButtons() {
+    let subtaskField = document.getElementById('subtasks');
     if (subtaskField.value === '') {
         document.getElementById('subtaskfield-buttons').innerHTML = showPlusButton();
 
@@ -17,6 +18,7 @@ function showClearOrAddButtons() {
 
 
 function addToSubtasks() {
+    let subtaskField = document.getElementById('subtasks');
     let subtaskContent = subtaskField.value.trim();
     if (!subtaskContent) {
         return;
@@ -28,6 +30,7 @@ function addToSubtasks() {
 
 
 function generateSubtasklist() {
+    let subtaskList = document.getElementById('subtasklist');
     subtaskList.innerHTML = '';
     for (let i = 0; i < subtasks.length; i++) {
         let subtask = subtasks[i].subtasktext;
@@ -107,11 +110,13 @@ function updateSubtasklistItem(s) {
 
 
 function clearSubtaskField() {
+    let subtaskField = document.getElementById('subtasks');
     subtaskField.value = '';
     updateSubtaskButtons()
 }
 
 
 function clearSubtaskList() {
+    let subtaskList = document.getElementById('subtasklist');
     subtaskList.innerHTML = '';
 }
