@@ -30,12 +30,7 @@ function daLogin(){
 }
 
 function checkEmaildata(email) {
-    let userEmail = document.getElementById('userEmail');
-    let checkValue = userEmail.value.toLowerCase();
-    if(email != undefined){
-        userEmail = email;
-        checkValue = userEmail.toLowerCase();
-    }
+    let checkValue = checkValueEmail(email);
     for (let i = 0; i < user.length; i++) {
         let userMail = user[i]['email'];
 
@@ -46,20 +41,11 @@ function checkEmaildata(email) {
 }
 
 function checkPassData(email, pass) {
-    let userEmail = document.getElementById('userEmail');
-    let userPass = document.getElementById('passwordchangePW');
-    let checkValue = userEmail.value.toLowerCase();
-    let checkPassValue = userPass.value;
-    if(email != undefined && pass != undefined){
-        userEmail = email;
-        userPass = pass;
-        checkValue = userEmail.toLowerCase();
-        checkPassValue = pass;
-    }
+    let checkValue = checkValueEmail(email);
+    let checkPassValue = checkValuePass(pass);
     for (let i = 0; i < user.length; i++) {
         let userMail = user[i]['email'];
         let userPassword = user[i]['password'];
-
         if (userMail.toLowerCase() == checkValue) {
             if (userPassword == checkPassValue) {
                 userOnlinesave(i);
@@ -67,6 +53,26 @@ function checkPassData(email, pass) {
             }
         }
     }
+}
+
+function checkValueEmail(email){
+    let readEmail = document.getElementById('userEmail');
+    let userEmail = readEmail.value;
+    if(email != undefined){
+        userEmail = email;
+    }
+
+    return userEmail.toLowerCase();
+}
+
+function checkValuePass(pass){
+    let password = document.getElementById('passwordchangePW');
+    let userPass = password.value;
+    if(pass != undefined){
+        userPass = pass;
+    }
+
+    return userPass;
 }
 
 async function userOnlinesave(i){

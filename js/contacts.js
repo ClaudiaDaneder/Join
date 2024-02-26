@@ -51,7 +51,6 @@ async function createContact() {
 
 }
 
-
 /**Finaly Create Contact */
 async function contactCreate() {
     let name = document.getElementById('name');
@@ -89,12 +88,11 @@ function returnArray(idShow, name, email, phone, color) {
 }
 
 /**Search ID */
-
 function searchId() {
-    lastID = contacts[contacts.length-1];
-    if (lastID == null || lastID == ''){
+    lastID = contacts[contacts.length - 1];
+    if (lastID == null || lastID == '') {
         lastID = 0;
-    }else{
+    } else {
         lastID = lastID['id'];
     }
     return lastID + 1;
@@ -156,6 +154,7 @@ async function deleteContact(id) {
     showContact.innerHTML = '';
     init();
     savePopup('delete');
+    checkBackSlide();
 }
 
 /**Show Popup Form*/
@@ -169,14 +168,11 @@ async function loadNewContact(name, email, phone, color, id, i) {
     let array = await searchData(i);
     formNewContact.innerHTML = popupTempForm(nameShow, emailShow, phoneShow, buttonShow, colorShow, id, array);
     let createEdit = document.getElementById('createEdit');
-    if (buttonShow == 'Save') {
-        createEdit.setAttribute('onsubmit', `saveContact(${i}, ${id}); return false`);
-    } else {
-        createEdit.setAttribute('onsubmit', 'createContact(); return false');
-    }
+    await buttenCreate(buttonShow, createEdit, i, id);
     loadCircle(id, color, 'circleEdit');
 }
 
+/**search Contact Data */
 function searchData(data) {
     if (!data || data == undefined) {
         return '';
@@ -185,11 +181,21 @@ function searchData(data) {
     }
 }
 
+/**Name of Button */
 function button(data) {
     if (!data) {
         return 'Create';
     } else {
         return 'Save';
+    }
+}
+
+/**Create Button */
+async function buttenCreate(buttonShow, createEdit, i, id) {
+    if (buttonShow == 'Save') {
+        createEdit.setAttribute('onsubmit', `saveContact(${i}, ${id}); return false`);
+    } else {
+        createEdit.setAttribute('onsubmit', 'createContact(); return false');
     }
 }
 
@@ -227,8 +233,10 @@ function loadCircle(id, color, circleName) {
 /**add Classlist in Contactlist  */
 function addClassList(id) {
     let userId = document.getElementById(`cID${id}`);
-    userId.classList.remove('list');
-    userId.classList.add('listVisited');
+    if (userId) {
+        userId.classList.remove('list');
+        userId.classList.add('listVisited');
+    }
 }
 
 /**Remove Classlist of all Contacts in Contactlist  */
@@ -236,25 +244,12 @@ function removeClassList() {
     for (let i = 0; i < contacts.length; i++) {
         let id = contacts[i]['id'];
         let userId = document.getElementById(`cID${id}`);
-        if (userId.className === 'listVisited') {
-            userId.classList.remove('listVisited');
-            userId.classList.add('list');
+        if (userId) {
+            if (userId.className === 'listVisited') {
+                userId.classList.remove('listVisited');
+                userId.classList.add('list');
+            }
         }
-    }
-}
-
-/**Save Remote Storage */
-async function saveRemote(user) {
-    contacts.push(user);
-    await setItem(`${contactsKey}`, JSON.stringify(contacts));
-}
-
-/**Load Remote Storage */
-async function loadRemote() {
-    let users = JSON.parse(await getItem(`${contactsKey}`));
-    if (Array.isArray(users)) {
-        // Stellen Sie sicher, dass jeder Benutzer in 'users' ein gültiges 'name'-Attribut hat
-        contacts = users.filter(user => user && user['name']);
     }
 }
 
@@ -287,5 +282,20 @@ function loadLetter() {
                 firstLetter.push(saveLetter);
             }
         }
+    }
+}
+
+/**Save Remote Storage */
+async function saveRemote(user) {
+    contacts.push(user);
+    await setItem(`${contactsKey}`, JSON.stringify(contacts));
+}
+
+/**Load Remote Storage */
+async function loadRemote() {
+    let users = JSON.parse(await getItem(`${contactsKey}`));
+    if (Array.isArray(users)) {
+        // Stellen Sie sicher, dass jeder Benutzer in 'users' ein gültiges 'name'-Attribut hat
+        contacts = users.filter(user => user && user['name']);
     }
 }

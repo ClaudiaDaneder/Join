@@ -1,4 +1,4 @@
-/*Login and Sign up Templates*/
+/**Login Template*/
 function loginstart() {
     return /*html*/`
     <div class="loginHeader">Log in
@@ -19,6 +19,7 @@ function loginstart() {
     `;
 }
 
+/**Sign Up Template */
 function sign_upStart() {
     return /*html*/`
     <div class="loginHeader"><img onclick="loginSite(); notClose(event)" class="backTo" src="./img/backTo.svg">Sign Up
@@ -40,4 +41,3 @@ function sign_upStart() {
     </div>
     `;
 }
-/*Login and Sign up Templates*/

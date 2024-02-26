@@ -1,12 +1,11 @@
-/*Contacts Templates*/
-
+/**Create Popup Template for Create and Edit Popup */
 function popupTempForm(nameShow, emailShow, phoneShow, button, color, id, i) {
-    let ini = initialsLoad(nameShow);
-    let img = /*html*/`<div class="circleEdit" id="circleEdit${id}">${ini}</div>`;
-    if (!color) {
-      img = '<img class="clearContact" src="./img/clearcontackt.svg">';
-    }
-    return /*html*/`
+  let ini = initialsLoad(nameShow);
+  let img = /*html*/`<div class="circleEdit" id="circleEdit${id}">${ini}</div>`;
+  if (!color) {
+    img = '<img class="clearContact" src="./img/clearcontackt.svg">';
+  }
+  return /*html*/`
           ${img}
           <form action="#" id="createEdit" onsubmit="createContact(); return false">
               <div class="input"><input type="text" id="name" value="${nameShow}" placeholder="Name" required><img src="./img/personContact.svg"></div>
@@ -17,14 +16,15 @@ function popupTempForm(nameShow, emailShow, phoneShow, button, color, id, i) {
                   <button type="submit">${button} contact <img src="./img/addtask_icon_check.svg"></button>
               </div>
           </form>`;
-  }
-  
-  function loadContactShow(id, initials, name, email, phone, i) {
-    let mobileEdit = document.getElementById('mobileEdit');
-    let mobileDelete = document.getElementById('mobileDelete');
-    mobileEdit.setAttribute('onclick', `notClose(event), editContact(${id})`);
-    mobileDelete.setAttribute('onclick', `deleteContact(${i})`);
-    return /*html*/`
+}
+
+/**Load Contact Data of Show Contacts */
+function loadContactShow(id, initials, name, email, phone, i) {
+  let mobileEdit = document.getElementById('mobileEdit');
+  let mobileDelete = document.getElementById('mobileDelete');
+  mobileEdit.setAttribute('onclick', `notClose(event), editContact(${id})`);
+  mobileDelete.setAttribute('onclick', `deleteContact(${i})`);
+  return /*html*/`
     <div class="cHeader">
         <div class="circle cwidth" id="circle${id}">${initials}</div>
         <div class="contactName">
@@ -43,20 +43,23 @@ function popupTempForm(nameShow, emailShow, phoneShow, button, color, id, i) {
         <p class="phone">${phone}</p>
     </div>
     `
-  }
-  
-  function letterTemp(contactLetterLoad, i) {
-    return /*html*/`
+}
+
+
+/**Letter Template */
+function letterTemp(contactLetterLoad, i) {
+  return /*html*/`
           <div class="letter">${contactLetterLoad}</div>
           <div class="line">
               <div class="lineBorder"></div>
           </div>
           <div id="contactShow${i}"></div>
           `;
-  }
-  
-  function contactListTemp(id, initials, name, email) {
-    return /*html*/`
+}
+
+/**Contactlist Template */
+function contactListTemp(id, initials, name, email) {
+  return /*html*/`
     <div class="list" id="cID${id}" onclick="slideContact(${id})">
             <div class="circle" id="listCircle${id}">${initials}</div>
             <div class="contactNameList">
@@ -65,140 +68,161 @@ function popupTempForm(nameShow, emailShow, phoneShow, button, color, id, i) {
             </div>
         </div>
     `;
+}
+
+/**Slidefunction for Show Contacts */
+function slideContact(id) {
+  if (widthContactSize() == false) {
+    noResponsiv(id);
+  } else {
+    slideResponsiv(id);
   }
-  
-  function slideContact(id) {
-    let divContacts = document.getElementById('showContact');
-    let sidecontacts = document.getElementById('listAllContacts');
-    let showContactsView = document.getElementById('showContactsView');
-    let menueContacts = document.getElementById('menueContacts');
-    if (widthContactSize() == false) {
-      if (divContacts.style.transform == 'translatex(150vw)') {
-        divContacts.style.transform = 'translatex(0)';
-        showContact(id);
-      } else {
-        divContacts.style.transform = 'translatex(150vw)';
-        setTimeout(() => {
-          divContacts.style.transform = 'translatex(0)';
-          showContact(id);
-        }, 250);
-      }
-    } else {
-      if (showContactsView.style.transform != 'translatex(0px)') {
-        sidecontacts.style.transform = 'translatex(-100vw)';
-        showContactsView.style.transform = 'translatex(0)';
-        setTimeout(() => {
-          menueContacts.style.display = 'flex';
-        }, 150);
-        showContact(id);
-      }
-    }
-  }
-  
-  function backToContacts() {
-    let sidecontacts = document.getElementById('listAllContacts');
-    let showContactsView = document.getElementById('showContactsView');
-    let menueContacts = document.getElementById('menueContacts');
-    let showContact = document.getElementById('showContact');
-    sidecontacts.style.transform = 'translatex(0)';
-    showContactsView.style.transform = 'translatex(100vw)';
+}
+
+/**Slide no Responsiv */
+function noResponsiv(id){
+  let divContacts = document.getElementById('showContact');
+  if (divContacts.style.transform == 'translatex(150vw)') {
+    divContacts.style.transform = 'translatex(0)';
+    showContact(id);
+  } else {
+    divContacts.style.transform = 'translatex(150vw)';
     setTimeout(() => {
-      menueContacts.style.display = 'none';
+      divContacts.style.transform = 'translatex(0)';
+      showContact(id);
+    }, 250);
+  }
+}
+
+/**Slide Responsiv */
+function slideResponsiv(id){
+  let sidecontacts = document.getElementById('listAllContacts');
+  let showContactsView = document.getElementById('showContactsView');
+  let menueContacts = document.getElementById('menueContacts');
+  if (showContactsView.style.transform != 'translatex(0px)') {
+    sidecontacts.style.transform = 'translatex(-100vw)';
+    showContactsView.style.transform = 'translatex(0)';
+    setTimeout(() => {
+      menueContacts.style.display = 'flex';
     }, 150);
-    showContact.innerHTML = '';
-    init();
-    location.assign('#');
+    showContact(id);
   }
-  
-  function openMenue() {
-    let menuePopup = document.getElementById('menuePopup');
-    if (menuePopup.style.transform != 'translateX(0px)') {
-      menuePopup.style.transform = 'translatex(0)';
-    } else {
-      menuePopup.style.transform = 'translatex(100vw)';
-    }
+}
+
+/**Back to Contactlist in Responsiv mode */
+function backToContacts() {
+  let sidecontacts = document.getElementById('listAllContacts');
+  let showContactsView = document.getElementById('showContactsView');
+  let menueContacts = document.getElementById('menueContacts');
+  let showContact = document.getElementById('showContact');
+  sidecontacts.style.transform = 'translatex(0)';
+  showContactsView.style.transform = 'translatex(100vw)';
+  setTimeout(() => {
+    menueContacts.style.display = 'none';
+  }, 150);
+  showContact.innerHTML = '';
+  init();
+  location.assign('#');
+}
+
+/**Responsiv Slide Back to Contactlist after delete */
+function checkBackSlide(){
+  if(widthContactSize() == true){
+    backToContacts();
   }
-  
-  function widthContactSize() {
-    let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    if (width <= 850) {
-      return true;
-    } else {
-      return false;
-    }
+}
+
+/**Menu for Responsiv mode in Show Contacts */
+function openMenue() {
+  let menuePopup = document.getElementById('menuePopup');
+  if (menuePopup.style.transform != 'translateX(0px)') {
+    menuePopup.style.transform = 'translatex(0)';
+  } else {
+    menuePopup.style.transform = 'translatex(100vw)';
   }
-  
-  window.addEventListener("resize", function () {
-    let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    let sidecontacts = document.getElementById('listAllContacts');
-    let showContactsView = document.getElementById('showContactsView');
-    if (width <= 850) {
-      if (sidecontacts.style.transform != 'translatex(0px)') {
-        sidecontacts.style.transform = 'translatex(0)';
-        showContactsView.style.transform = 'translatex(100vw)';
-        backToContacts();
-      }
-    } else {
-      sidecontacts.style.transform = 'unset';
-      showContactsView.style.transform = 'unset';
-    }
-  });
-  
-  function savePopup(saveInfo) {
-    let savePopup = document.getElementById('save_info');
-    savePopup.innerHTML = 'Contact succesfully created'
-    if (saveInfo == 'edit') {
-      savePopup.innerHTML = 'Contact succesfully saved';
-    } else if (saveInfo == 'delete') {
-      savePopup.innerHTML = 'Contact deleted';
-    } else if (saveInfo == 'exist') {
-      savePopup.innerHTML = 'Contact Email Exist';
-    }
-    savePopup.style.transform = 'translatex(0)';
-    setTimeout(() => {
-      savePopup.style.transform = 'translatex(150vw)';
-    }, 1500);
+}
+
+/**Width function for Contacts */
+function widthContactSize() {
+  let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+  if (width <= 850) {
+    return true;
+  } else {
+    return false;
   }
-  
-  
-  function popupNames(contactAdd) {
-    if (contactAdd == 'add') {
-      return /*html*/`
+}
+
+/**EventListener for Responsiv */
+window.addEventListener("resize", function () {
+  let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+  let sidecontacts = document.getElementById('listAllContacts');
+  let showContactsView = document.getElementById('showContactsView');
+  if (width <= 850) {
+    if (sidecontacts.style.transform != 'translatex(0px)') {
+      sidecontacts.style.transform = 'translatex(0)';
+      showContactsView.style.transform = 'translatex(100vw)';
+      backToContacts();
+    }
+  } else {
+    sidecontacts.style.transform = 'unset';
+    showContactsView.style.transform = 'unset';
+  }
+});
+
+/**Popup function for show Info Popup */
+function savePopup(saveInfo) {
+  let savePopup = document.getElementById('save_info');
+  savePopup.innerHTML = 'Contact succesfully created'
+  if (saveInfo == 'edit') {
+    savePopup.innerHTML = 'Contact succesfully saved';
+  } else if (saveInfo == 'delete') {
+    savePopup.innerHTML = 'Contact deleted';
+  } else if (saveInfo == 'exist') {
+    savePopup.innerHTML = 'Contact Email Exist';
+  }
+  savePopup.style.transform = 'translatex(0)';
+  setTimeout(() => {
+    savePopup.style.transform = 'translatex(150vw)';
+  }, 1500);
+}
+
+/**Popup Title */
+function popupNames(contactAdd) {
+  if (contactAdd == 'add') {
+    return /*html*/`
         <p class="popupTop">Add contact</p>
         <p class="popupBottom">Tasks are better with a team!</p>
         <div class="popupBottomLine"></div>
     `;
-    } else {
-      return /*html*/`
+  } else {
+    return /*html*/`
         <p class="popupTop">Edit contact</p>
         <div class="popupBottomLine"></div>
     `;
-    }
   }
-  
-  /**Closing Popup for Create or Edit Contact */
-  function closePopup() {
-    let addContact = document.getElementById('addContactPopup');
-    let back = document.getElementById('back');
-    let formNewContact = document.getElementById('user');
-    let popupTitle = document.getElementById('popupTitle');
-    let open = document.getElementById('logoutScreen');
-    let openMenue = document.getElementById('menuePopup');
-    open.style.display = 'none';
-    if (addContact.style.transform == 'translateX(0px)') {
-      addContact.style.transform = 'translateX(150vw)';
-    }
-    if (openMenue) {
-      openMenue.style.transform = 'translatex(100vw)';
-    }
-    formNewContact.innerHTML = '';
-    popupTitle.innerHTML = '';
-    back.classList.remove('back');
+}
+
+/**Closing Popup for Create or Edit Contact */
+function closePopup() {
+  let addContact = document.getElementById('addContactPopup');
+  let back = document.getElementById('back');
+  let formNewContact = document.getElementById('user');
+  let popupTitle = document.getElementById('popupTitle');
+  let open = document.getElementById('logoutScreen');
+  let openMenue = document.getElementById('menuePopup');
+  open.style.display = 'none';
+  if (addContact.style.transform == 'translateX(0px)') {
+    addContact.style.transform = 'translateX(150vw)';
   }
-  
-  /**Not Closing event for Popup with onclick function */
-  function notClose(event) {
-    event.stopPropagation();
+  if (openMenue) {
+    openMenue.style.transform = 'translatex(100vw)';
   }
-  
-  /*Contacts Templates*/
+  formNewContact.innerHTML = '';
+  popupTitle.innerHTML = '';
+  back.classList.remove('back');
+}
+
+/**Not Closing event for Popup with onclick function */
+function notClose(event) {
+  event.stopPropagation();
+}
