@@ -192,7 +192,7 @@ a:hover {
 .subtaskitem-edit-input {
     border: none;
     padding: 4px 16px;
-    width: 360px;
+    width: calc(100% - 60px);
     height: 32px;
     border-radius: 0;
     background-color: transparent;
@@ -202,6 +202,7 @@ a:hover {
 
 .subtaskitem-edit-input:focus {
     border: none;
+    outline: none;
 }
 
 
