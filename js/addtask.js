@@ -28,7 +28,7 @@ async function initAddTask() {
 }
 
 
-async function addNewTask() {
+async function addNewTask(status) {
     let taskID = await identifyTaskId();
     let task = {
         'title': document.getElementById('title').value,
@@ -39,7 +39,7 @@ async function addNewTask() {
         'category': document.getElementById('hidden-category-dropdown').value,
         'subtasks': subtasks,
         'task-id': taskID,
-        'status': 'toDos'
+        'status': status
     };
     disableCreateButton();
     checkPriority(task);
