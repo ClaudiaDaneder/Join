@@ -156,7 +156,9 @@ function getCategoryClass(category) {
                         <div class="subtaskfield-button-container" id="subtaskfield-buttons">
                             <button type="button" class="subtaskfield-button-general"><img src="/img/addtask_icon_subtaskfield_plus.svg"></button>
                         </div>
+                        
                     </div>
+                    <div id="subtasklist" class="subtasklist"></div>
           <div class="editCurrentSubtasks" id="editCurrentSubtasks">
           </div>
         </form>
