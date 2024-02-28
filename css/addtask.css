@@ -139,8 +139,8 @@ a:hover {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 100%;
-    margin-bottom: 30px;
+    max-width: calc(2*440px + 2*32px + 1px);
+
 }
 
 .form-container {
@@ -719,7 +719,6 @@ a:hover {
 
 @media screen and (max-width: 1000px) {
     .main-container {
-        top: 128px;
         left: 260px;
         width: calc(100% - 230px - 60px);
     }
@@ -850,6 +849,10 @@ a:hover {
 
 
 @media screen and (max-width: 700px) {
+
+.main-container {
+    top: 128px;
+}
 
     .form-container {
         flex-direction: column;
