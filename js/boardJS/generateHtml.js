@@ -4,9 +4,9 @@ function getCategoryClass(category) {
   }
   
   
-  function calculateSubtaskProgress(subtasks) {
-    let completedSubtasks = subtasks.filter(subtask => subtask.done).length;
-    let percentage = subtasks.length > 0 ? Math.round((completedSubtasks / subtasks.length) * 100) : 0;
+  function calculateSubtaskProgress(allSubtasks) {
+    let completedSubtasks = allSubtasks.filter(subtask => subtask.done).length;
+    let percentage = allSubtasks.length > 0 ? Math.round((completedSubtasks / allSubtasks.length) * 100) : 0;
     return percentage + "%";
   }
   
@@ -43,7 +43,7 @@ function getCategoryClass(category) {
   }
   
   
-  function createTaskHtml(task, taskId, isHighlighted,prio) {
+  function createTaskHtml(task, taskId, isHighlighted) {
     let taskClass = isHighlighted ? "task highlight" : "task hidden";
     let categoryClass = getCategoryClass(task.category);
     let subtaskPercentage = calculateSubtaskProgress(task["subtasks"]);
@@ -107,6 +107,27 @@ function getCategoryClass(category) {
   
     return html;
   }
+
+  function editAssignee(assignees) {
+    if (!Array.isArray(assignees)) {
+      return "";
+    }
+  
+    let html = "";
+    for (let i = 0; i < assignees.length; i++) {
+      let assigneeObj = assignees[i];
+      let assigneeName = assigneeObj.name;
+      let initials = getInitials(assigneeName);
+      html += `
+          <div class="initial-container-on-board-tasks">
+              <div class="color-initial-on-board-tasks ${assigneeObj.color}">
+                  <h3 class="initials-first-and-last-on-board-tasks">${initials}</h3>
+              </div>
+          </div>`;
+    }
+  
+    return html;
+  }
   
   
   function getInitials(name) {
@@ -121,80 +142,122 @@ function getCategoryClass(category) {
     const parts = dateString.split("-");
     return `${parts[0]}-${parts[1]}-${parts[2]}`;
 }
-  function generateTaskHtml(task, assigneeHtmlBoard, subTasksHtml) {
+
+
+function generateSubTasksHtml(allSubtasks) {
+  let editSubTasksHtml = '';
+  console.log(allSubtasks);
+  for (let j = 0; j < allSubtasks.length; j++) {
+      const element = allSubtasks[j];
+      subtasks = element;
+      
+      const subTaskText = element["subtasktext"];
+      editSubTasksHtml += `<div class="subtasklist-item" id="subtasklist-item_${j}" ondblclick="editSubtasklistItem(${j})" onmouseenter="showEditButtons(${j})" onmouseleave="showEditButtons(${j})">
+                          <div class="subtasklist-infos"><div class="subtasklist-marker">•</div>${subTaskText}</div>
+                          <div id="edit-buttons_${j}" class="subtaskfield-button-container hide">
+                              <button class="subtaskfield-button-general" type="button" onclick="editSubtasklistItem(${j})"><img src="/img/addtask_icon_subtask_edit.svg"></button>
+                              <hr>
+                              <button class="subtaskfield-button-general" type="button" onclick="deleteSubtasklistItem(${j})"><img src="/img/addtask_icon_subtask_delete.svg"></button>
+                          </div>
+                       </div>`;
+  }
+  return editSubTasksHtml;
+}
+
+
+function editCurrentTask(){
+
+}
+
+
+
+
+  function generateTaskHtml(task, assigneeHtmlBoard, subTasksHtml,editAssigneeHtml) {
     const firstPart = task.category.split(" ")[0].toLowerCase();
     const originalDate = task["due-date"]; 
     const formattedDate = formatDateToDDMMYYYY(originalDate); 
+    const subTasks = generateSubTasksHtml(task["subtasks"]);
     return `
-        <form class="editCurrentTask" id="editCurrentTask" style="display: none;">
-          <div class="editCurrentTitle">
-            <h3 class="sectionHeadInfos">Title<h3>
-            <input type="text" value="${task['title']}">
-          </div>
-          <div class="editCurrentDescription">
-            <h3 class="sectionHeadInfos">Description<h3>
-            <input type="text" value="${task['description']}">
-          </div>
-          <div class="editCurrentDueDate">
-            <h3 class="sectionHeadInfos">Due date<h3>
-            <input class="task-input" type="date" id="due-date" required="" value="${formattedDate}" min="0">
-          </div>
-          <div class="editCurrentPrio">
-            <h3 class="sectionHeadInfos">Priority<h3>
-            <div class="prio-button-container">
-              <button type="button" class="button-prio-urgent" data-priority="urgent">Urgent </button>
-              <button type="button" class="button-prio-medium selected" data-priority="medium">Medium</button>
-              <button type="button" class="button-prio-low" data-priority="low">Low</button>
-            </div>
-          </div>
-          <div class="editCurrentAssignedTo">
-            <h3 class="sectionHeadInfos">Assigned to<h3>
+    <form onsubmit="editCurrentTask()" class="editCurrentTask" id="editCurrentTask" style="display: none;">
+    <div class="editCurrentTitle">
+      <h3 class="sectionHeadInfos">Title<h3>
+      <input type="text" placeholder="Enter a Title" value="${task['title']}">
+    </div>
+    <div class="editCurrentDescription">
+      <h3 class="sectionHeadInfos">Description<h3>
+      <input type="text" placeholder="Enter a Description" value="${task['description']}">
+    </div>
+    <div class="editCurrentDueDate">
+      <h3 class="sectionHeadInfos">Due date<h3>
+      <input class="task-input" type="date" id="due-date" required="" value="${formattedDate}" min="0">
+    </div>
+    <div class="editCurrentPrio">
+      <h3 class="sectionHeadInfos">Priority<h3>
+      <div class="prio-button-container">
+          <button type="button" class="button-prio-urgent" data-priority="urgent">Urgent </button>
+          <button type="button" class="button-prio-medium selected" data-priority="medium">Medium</button>
+          <button type="button" class="button-prio-low" data-priority="low">Low</button>
+      </div>
+    </div>
+    <div class="editCurrentAssignedTo">
+      <h3 class="sectionHeadInfos">Assigned to</h3>
+
+      <div class="dropdown" id="contacts-dropdown" onclick="toggleContactsDropdown(event)">
+        <p>Select contacts to assign</p>
+        <input class="task-input hide" type="text" id="hidden-contacts-input" oninput="filterContacts()">
+        <img src="/img/addtask_icon_dropdown-menu.svg" id="assign-arrow">
+        <div class="dropdown-content" id="assignee"></div>
+      </div>
+      <div class="icon-and-prio-container">
+        <div class="assignees">${editAssigneeHtml}</div>
+      </div>
+    </div>
+    <div class="styled-subtaskfield" id="styled-subtaskfield">
+        <input class="task-input subtaskfield" type="text" placeholder="Add new subtask" id="subtasks" oninput="updateSubtaskButtons()" onfocus="subtaskfieldFocus()" onblur="subtaskfieldBlur()">
+        <div class="subtaskfield-button-container" id="subtaskfield-buttons">
+          <button type="button" class="subtaskfield-button-general">
+            <img src="/img/addtask_icon_subtaskfield_plus.svg">
+          </button>
+        </div>
+    </div>
+    ${subTasks}
+    <div class="editCurrentSubtasks" id="editCurrentSubtasks"> </div>
+    <button>Ok</button>
+  </form>
+
+
+  <div class="width-height-full-prozent" id="currentOpenTask">
+        <div class="overHeadline">
+            <div class="${firstPart}"><h2 class="category-h2">${task["category"]}</h2></div>
+            <div><img onclick="closeModal()" class="close-png" src="./img/close.png" alt=""></div>
+        </div>
+        <div class="Headline"><h1 class="current-task-headline">${task["title"]} </h1></div>
+        <div class="description"><h3 class="current-task-description">${task["description"]} </h3></div>
+        <div class="due-date"><h3 class="color-dar-blue">Due date: </h3><h3>${task["due-date"].replace(/-/g, "/")}</h3></div>
+        <div class="current-prio"><h3 class="prio color-dar-blue">Priority:</h3><h3> ${task["prio"]} </h3></div>
+        <div class="assigne-container" id="assigne">
+            <h3 class="color-dar-blue">Assigned To: </h3>
             ${assigneeHtmlBoard}
-          </div>
-          <div class="styled-subtaskfield" id="styled-subtaskfield">
-                        <input class="task-input subtaskfield" type="text" placeholder="Add new subtask" id="subtasks" oninput="updateSubtaskButtons()" onfocus="subtaskfieldFocus()" onblur="subtaskfieldBlur()">
-                        <div class="subtaskfield-button-container" id="subtaskfield-buttons">
-                            <button type="button" class="subtaskfield-button-general"><img src="/img/addtask_icon_subtaskfield_plus.svg"></button>
-                        </div>
-                        
-                    </div>
-                    <div id="subtasklist" class="subtasklist"></div>
-          <div class="editCurrentSubtasks" id="editCurrentSubtasks">
-          </div>
-        </form>
-        <div class="width-height-full-prozent" id="currentOpenTask">
-          <div class="overHeadline">
-              <div class="${firstPart}"><h2 class="category-h2">${task["category"]}</h2></div>
-              <div><img onclick="closeModal()" class="close-png" src="./img/close.png" alt=""></div>
-          </div>
-          <div class="Headline"><h1 class="current-task-headline">${task["title"]} </h1></div>
-          <div class="description"><h3 class="current-task-description">${task["description"]} </h3></div>
-          <div class="due-date"><h3 class="color-dar-blue">Due date: </h3><h3>${task["due-date"].replace(/-/g, "/")}</h3></div>
-          <div class="current-prio"><h3 class="prio color-dar-blue">Priority:</h3><h3> ${task["prio"]} </h3></div>
-          <div class="assigne-container" id="assigne">
-              <h3 class="color-dar-blue">Assigned To: </h3>
-              ${assigneeHtmlBoard}
-          </div>
-            <h3 class="current-subtask">Subtask:</h3>
-            <div class="subtasks">
-            ${subTasksHtml}
-          </div>
-          <div class="delet-edit-container">
+        </div>
+        <h3 class="current-subtask">Subtask:</h3>
+        <div class="subtasks">
+        ${subTasksHtml}
+        </div>
+        <div class="delet-edit-container">
             <div></div>
             <div class="delet-edit-box">
-              <div class="delete-box" onclick="deletThisArray(${task["task-id"]})">
+                <div class="delete-box" onclick="deletThisArray(${task["task-id"]})">
                 <div class=""><img class="delete-svg" src="./img/delete.svg"></div>
                 <div class=""><h4 class="delet-string">Delete</h4></div>
-              </div>
-              <img src="./img/delet-edit-line.png">
-              <div  class="edit-box" onclick="editTask(${task["task-id"]})">
+                </div>
+                <img src="./img/delet-edit-line.png">
+                <div  class="edit-box" onclick="editTask(${task["task-id"]})">
                 <div class=""><img class="edit-svg" src="./img/edit.svg"></div>
                 <div class="" ><h4 class="edit-string">Edit</h4></div>
-              </div>
+                </div>
             </div>
-          </div>
         </div>
-        `;
+  </div>`;
   }
 
   async function editTask(status) {
@@ -203,18 +266,15 @@ function getCategoryClass(category) {
   
     currentOpenTask.style.display="none";
     toEditTask.style.display="";
-    console.log(status)
     
     
      }
-  
-  
 
 function createSubtasksHtml(subTasks) {
     let subTaskhtml = "";
     for (let i = 0; i < subTasks.length; i++) {
       let subTask = subTasks[i]["subtasktext"];
-      let imgSrc = subTasks[i].done ? "./img/checked.png" : "./img/none-checked.png"; // Bestimmen des Bildpfads basierend auf dem done-Status
+      let imgSrc = subTasks[i].done ? "./img/checked.png" : "./img/none-checked.png";
       subTaskhtml += `<div class="subtask-current-box"><img id="checkBox_${i}" onclick="changeSubBox(${i})" src=${imgSrc}><h4 class="subtask-font">${subTask}</h4></div>`;
     }
     return subTaskhtml;

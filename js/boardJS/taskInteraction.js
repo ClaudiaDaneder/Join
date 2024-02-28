@@ -18,7 +18,8 @@ function findTaskById(taskId) {
     currentSubTasks = task["subtasks"];
     const subTasksHtml = createSubtasksHtml(task["subtasks"]);
     const assigneeHtml = createAssigneeHtml(task["assignee-infos"]);
-    modulWindow.innerHTML = generateTaskHtml(task, assigneeHtml, subTasksHtml);
+    const editAssigneeHtml= editAssignee(task["assignee-infos"]);
+    modulWindow.innerHTML = generateTaskHtml(task, assigneeHtml, subTasksHtml,editAssigneeHtml);
   }
   
   function initializeDomElements() {
