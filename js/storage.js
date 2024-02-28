@@ -17,3 +17,7 @@ async function getItem(key) {
         } throw `Could not find data with key "${key}".`;
     });
 }
+
+function doc(html){
+    return document.getElementById(`${html}`);
+  }

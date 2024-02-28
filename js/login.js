@@ -30,15 +30,10 @@ async function loadUsers() {
  * 
  * */
 async function logoSize() {
-    let login = document.getElementById('login');
-    let logoIMG = document.getElementById('logoIMG');
-    let sign_up = document.getElementById('sign_up');
-    let footer = document.getElementById('footer');
-    let backgroundLogin = document.getElementById('backgroundLogin');
     setTimeout(() => {
-        startJoin(logoIMG, backgroundLogin, login, sign_up, footer);
+        startJoin(doc('logoIMG'), doc('backgroundLogin'), doc('login'), doc('sign_up'), doc('footer'));
     }, 1000);
-    login.innerHTML = loginstart();
+    doc('login').innerHTML = loginstart();
     loadRememberMe();
 }
 
@@ -67,15 +62,13 @@ function startJoin(logoIMG, backgroundLogin, login, sign_up, footer) {
  * */
 function loginSite() {
     document.title = 'Join Log in';
-    let login = document.getElementById('login');
-    login.classList.remove('signUpSite');
-    login.classList.add('login');
-    login.innerHTML = '';
-    login.innerHTML = loginstart();
+    doc('login').classList.remove('signUpSite');
+    doc('login').classList.add('login');
+    doc('login').innerHTML = '';
+    doc('login').innerHTML = loginstart();
     signUpStyle('animated_Ou', 'fadeOut', 'animated', 'fadeIn');
     loginFormStyle('196px', '20px', 'flex-start', '39px');
-    let form = document.getElementById('logSign');
-    form.setAttribute('onsubmit', 'userLogin(); return false');
+    doc('logSign').setAttribute('onsubmit', 'userLogin(); return false');
     remeChecked = [];
     loadRememberMe();
 }
@@ -88,25 +81,22 @@ function loginSite() {
  * */
 function sign_up() {
     document.title = 'Join Sign Up';
-    let login = document.getElementById('login');
-    login.classList.remove('login');
-    login.classList.add('signUpSite');
-    login.innerHTML = '';
-    login.innerHTML = sign_upStart();
+    doc('login').classList.remove('login');
+    doc('login').classList.add('signUpSite');
+    doc('login').innerHTML = '';
+    doc('login').innerHTML = sign_upStart();
     signUpStyle('animated', 'fadeIn', 'animated_Out', 'fadeOut');
     loginFormStyle('326px', '16px', 'center', 'unset');
-    let form = document.getElementById('logSign');
-    form.setAttribute('onsubmit', 'checkPasswords(); return false');
+    doc('logSign').setAttribute('onsubmit', 'checkPasswords(); return false');
     remeChecked = [];
 }
 
 /**Sign Up Fade Out Animation */
 function signUpStyle(animated, fadeIn, animated_Out, fadeOut) {
-    let sign_up = document.getElementById('sign_up');
-    sign_up.classList.remove(`${animated}`);
-    sign_up.classList.remove(`${fadeIn}`);
-    sign_up.classList.add(`${animated_Out}`);
-    sign_up.classList.add(`${fadeOut}`);
+    doc('sign_up').classList.remove(`${animated}`);
+    doc('sign_up').classList.remove(`${fadeIn}`);
+    doc('sign_up').classList.add(`${animated_Out}`);
+    doc('sign_up').classList.add(`${fadeOut}`);
 }
 
 /**
@@ -116,12 +106,10 @@ function signUpStyle(animated, fadeIn, animated_Out, fadeOut) {
  * 
  * */
 function loginFormStyle(height, gap, justifyContent, left) {
-    let loginform = document.getElementById("loginForm");
-    let checkbox = document.getElementById("checkbox");
-    loginform.style.height = height;
-    loginform.style.gap = gap;
-    checkbox.style.justifyContent = justifyContent;
-    checkbox.style.left = left;
+    doc('loginForm').style.height = height;
+    doc('loginForm').style.gap = gap;
+    doc('checkbox').style.justifyContent = justifyContent;
+    doc('checkbox').style.left = left;
 }
 
 /**
@@ -136,17 +124,15 @@ function loginFormStyle(height, gap, justifyContent, left) {
  * 
  * */
 function rememberMe(save) {
-    let img = document.getElementById('reme');
-    let remeCheck = document.getElementById('remeCheck');
-    if (remeCheck || save == 1) {
-        remeCheck.src = './img/checked.svg';
+    if (doc('remeCheck') || save == 1) {
+        doc('remeCheck').src = './img/checked.svg';
         remeChecked = [1];
-        remeCheck.id = 'reme';
+        doc('remeCheck').id = 'reme';
         anable('1');
-    } else if (img) {
-        img.src = './img/unchecked.svg';
+    } else if (doc('reme')) {
+        doc('reme').src = './img/unchecked.svg';
         remeChecked = [0];
-        img.id = 'remeCheck';
+        doc('reme').id = 'remeCheck';
         anable('0');
     }
 }
@@ -160,10 +146,9 @@ function rememberMe(save) {
  * 
  * */
 function changePWImg(id) {
-    let img = document.getElementById(`${id}`);
-    img.src = './img/password_dont.svg';
-    img.setAttribute('onclick', `changeShow('${id}'); notClose(event)`);
-    img.style.cursor = 'pointer';
+    doc(`${id}`).src = './img/password_dont.svg';
+    doc(`${id}`).setAttribute('onclick', `changeShow('${id}'); notClose(event)`);
+    doc(`${id}`).style.cursor = 'pointer';
 }
 
 /**
@@ -175,16 +160,14 @@ function changePWImg(id) {
  * 
  * */
 function changeShow(id) {
-    let pwInput = document.getElementById(`password${id}`);
-    let img = document.getElementById(`${id}`);
-    if (pwInput.type == 'password') {
-        pwInput.setAttribute('type', 'text');
-        img.src = './img/password_show.svg';
-        img.style.cursor = 'pointer';
+    if (doc(`password${id}`).type == 'password') {
+        doc(`password${id}`).setAttribute('type', 'text');
+        doc(`${id}`).src = './img/password_show.svg';
+        doc(`${id}`).style.cursor = 'pointer';
     } else {
-        pwInput.setAttribute('type', 'password');
-        img.src = './img/password_dont.svg';
-        img.style.cursor = 'pointer';
+        doc(`password${id}`).setAttribute('type', 'password');
+        doc(`${id}`).src = './img/password_dont.svg';
+        doc(`${id}`).style.cursor = 'pointer';
     }
 }
 
@@ -195,11 +178,9 @@ function changeShow(id) {
  * 
  * */
 function restoreIMG() {
-    let img = document.getElementById("changePW");
-    let pwInput = document.getElementById("passwordchangePW");
-    pwInput.setAttribute('type', 'password');
-    img.src = './img/password.svg';
-    img.style.cursor = 'default';
+    doc('passwordchangePW').setAttribute('type', 'password');
+    doc('changePW').src = './img/password.svg';
+    doc('changePW').style.cursor = 'default';
 }
 
 /**
@@ -209,16 +190,12 @@ function restoreIMG() {
  * 
  * */
 function restoreIMGSignUp() {
-    let img = document.getElementById("changePWsign");
-    let imgC = document.getElementById("changePWsignC");
-    let pwInput = document.getElementById("passwordchangePWsign");
-    let pwInputC = document.getElementById("passwordchangePWsignC");
-    pwInput.setAttribute('type', 'password');
-    pwInputC.setAttribute('type', 'password');
-    img.src = './img/password.svg';
-    img.style.cursor = 'default';
-    imgC.src = './img/password.svg';
-    imgC.style.cursor = 'default';
+    doc('passwordchangePWsign').setAttribute('type', 'password');
+    doc('passwordchangePWsignC').setAttribute('type', 'password');
+    doc('changePWsign').src = './img/password.svg';
+    doc('changePWsign').style.cursor = 'default';
+    doc('changePWsignC').src = './img/password.svg';
+    doc('changePWsignC').style.cursor = 'default';
 }
 
 /**
@@ -228,8 +205,7 @@ function restoreIMGSignUp() {
  * 
  * */
 function pwIdInfo() {
-    let pwLogin = document.getElementById("passwordchangePW");
-    if (pwLogin == null) {
+    if (doc('passwordchangePW') == null) {
         restoreIMGSignUp();
     } else {
         restoreIMG();
@@ -245,8 +221,7 @@ function pwIdInfo() {
  * 
  * */
 function anable(activ) {
-    let button = document.getElementById('anable');
-    if (button != null) {
+    if (doc('anable') != null) {
         if (activ == '1') {
             buttonStyle(false, 'buttonDisabled', 'button');
         } else {
@@ -266,10 +241,9 @@ function anable(activ) {
  * 
  * */
 function buttonStyle(disabledButton, anabledStyle, disabledSytle) {
-    let button = document.getElementById('anable');
-    button.disabled = disabledButton;
-    button.classList.remove(`${anabledStyle}`);
-    button.classList.add(`${disabledSytle}`);
+    doc('anable').disabled = disabledButton;
+    doc('anable').classList.remove(`${anabledStyle}`);
+    doc('anable').classList.add(`${disabledSytle}`);
 }
 
 /**
@@ -293,16 +267,14 @@ function notClose(event) {
  * */
 async function widthSize(goToMobile) {
     let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    let backgroundLogin = document.getElementById('backgroundLogin');
-    let logoIMG = document.getElementById('logoIMG');
     if (width <= 850) {
-        backgroundLogin.classList.remove('backgroundLogin');
-        backgroundLogin.classList.add('backgroundLoginMobile');
-        if (goToMobile != 'goToMobile') { logoIMG.src = './img/join_logo.svg'; } else { logoIMG.src = './img/join_logo_dark.svg'; }
+        doc('backgroundLogin').classList.remove('backgroundLogin');
+        doc('backgroundLogin').classList.add('backgroundLoginMobile');
+        if (goToMobile != 'goToMobile') { doc('logoIMG').src = './img/join_logo.svg'; } else { doc('logoIMG').src = './img/join_logo_dark.svg'; }
     } else {
-        backgroundLogin.classList.remove('backgroundLoginMobile');
-        backgroundLogin.classList.add('backgroundLogin');
-        logoIMG.src = './img/join_logo_dark.svg';
+        doc('backgroundLogin').classList.remove('backgroundLoginMobile');
+        doc('backgroundLogin').classList.add('backgroundLogin');
+        doc('logoIMG').src = './img/join_logo_dark.svg';
     }
 }
 

@@ -1,18 +1,14 @@
 function checkPasswords() {
-    let password = document.getElementById('passwordchangePWsign');
-    let passwordC = document.getElementById('passwordchangePWsignC');
-    let pwwrong = document.getElementById('pwwrong');
-    let wrong = document.getElementById('wrong');
-    if (password.value == passwordC.value) {
+    if (doc('passwordchangePWsign').value == doc('passwordchangePWsignC').value) {
         checkEmail();
     } else {
-        pwwrong.style.border = '1px solid red';
-        wrong.innerHTML = 'Ups! your password don’t match';
+        doc('pwwrong').style.border = '1px solid red';
+        doc('wrong').innerHTML = 'Ups! your password don’t match';
         setTimeout(() => {
-            pwwrong.style.border = '1px solid #D1D1D1';
-            wrong.innerHTML = '';
-            password.value = '';
-            passwordC.value = '';
+            doc('pwwrong').style.border = '1px solid #D1D1D1';
+            doc('wrong').innerHTML = '';
+            doc('passwordchangePWsign').value = '';
+            doc('passwordchangePWsignC').value = '';
         }, 2000);
     }
 }
@@ -26,8 +22,7 @@ function checkEmail() {
 }
 
 function checkEmailExist() {
-    let email = document.getElementById('email');
-    let emailLow = email.value.toLowerCase();
+    let emailLow = doc('email').value.toLowerCase();
     for (let i = 0; i < user.length; i++) {
         let emailExist = user[i]['email'];
         if (emailExist.toLowerCase() === emailLow) {
@@ -37,34 +32,27 @@ function checkEmailExist() {
 }
 
 function emailExist() {
-    let email = document.getElementById('email');
-    let emailwrong = document.getElementById('emailwrong');
-    let wrong = document.getElementById('wrong');
-    emailwrong.style.border = '1px solid red';
-    wrong.innerHTML = 'Ups! email already exists';
+    doc('emailwrong').style.border = '1px solid red';
+    doc('wrong').innerHTML = 'Ups! email already exists';
     setTimeout(() => {
-        emailwrong.style.border = '1px solid #D1D1D1';
-        wrong.innerHTML = '';
-        email.value = '';
+        doc('emailwrong').style.border = '1px solid #D1D1D1';
+        doc('wrong').innerHTML = '';
+        doc('email').value = '';
     }, 2000);
 }
 
 async function register() {
-    let registerBtn = document.getElementById('disabled');
-    registerBtn.disabled = true;
+    doc('disabled').disabled = true;
     let idShow = searchId();
-    let name = document.getElementById('name');
-    let email = document.getElementById('email');
     let colorCreate = getColor(1, 9);
-    let password = document.getElementById('passwordchangePWsign');
     user.push({
         'id': idShow,
-        'name': name.value,
-        'email': email.value,
+        'name': doc('name').value,
+        'email': doc('email').value,
         'phone': '',
         'color': colorCreate,
         'online': false,
-        'password': password.value,
+        'password': doc('passwordchangePWsign').value,
     });
     await setItem(`${contactsKey}`, JSON.stringify(user));
     resetForm();
@@ -99,24 +87,18 @@ function searchColor(color) {
 }
 
 function savePopupSign() {
-    let savePopup = document.getElementById('secSign');
-    savePopup.style.transform = 'translatex(0)';
+    doc('secSign').style.transform = 'translatex(0)';
     setTimeout(() => {
-        savePopup.style.transform = 'translatex(150vw)';
-        loginstart();
+        doc('secSign').style.transform = 'translatex(150vw)';
+        loginSite();
     }, 1500);
 }
 
 function resetForm() {
     savePopupSign();
-    let registerBtn = document.getElementById('disabled');
-    let name = document.getElementById('name');
-    let email = document.getElementById('email');
-    let password = document.getElementById('passwordchangePWsign');
-    let passwordC = document.getElementById('passwordchangePWsignC');
-    name.value = '';
-    email.value = '';
-    password.value = '';
-    passwordC.value = '';
-    registerBtn.disabled = false;
+    doc('name').value = '';
+    doc('email').value = '';
+    doc('passwordchangePWsign').value = '';
+    doc('passwordchangePWsignC').value = '';
+    doc('disabled').disabled = false;
 }

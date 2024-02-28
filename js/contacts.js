@@ -14,26 +14,24 @@ async function init() {
 
 /**Load Letters of the Contactlist*/
 function loadContacts() {
-    let contactLoad = document.getElementById('contactLoad');
-    contactLoad.innerHTML = '';
+    doc('contactLoad').innerHTML = '';
     let loadFirstLetter = firstLetter.sort();
 
     for (let i = 0; i < loadFirstLetter.length; i++) {
         let contactLetterLoad = loadFirstLetter[i];
-        contactLoad.innerHTML += letterTemp(contactLetterLoad, i);
+        doc('contactLoad').innerHTML += letterTemp(contactLetterLoad, i);
         loadNames(contactLetterLoad, i);
     }
 }
 
 /**Load Names of the Contactlist*/
 function loadNames(contactLetterLoad, i) {
-    let contactShow = document.getElementById(`contactShow${i}`);
     for (let c = 0; c < contacts.length; c++) {
         let saveLetter = contacts[c]['name'].charAt(0);
         if (contactLetterLoad.includes(saveLetter)) {
             let contact = contacts[c];
             let initials = initialsLoad(contact['name'])
-            contactShow.innerHTML += contactListTemp(contact['id'], initials, contact['name'], contact['email']);
+            doc(`contactShow${i}`).innerHTML += contactListTemp(contact['id'], initials, contact['name'], contact['email']);
             loadCircle(contact['id'], contact['color'], 'listCircle');
         }
     }
@@ -41,8 +39,7 @@ function loadNames(contactLetterLoad, i) {
 
 /**Create and Save the New Contact */
 async function createContact() {
-    let email = document.getElementById('email');
-    if (contactExist(email.value) == false) {
+    if (contactExist(doc('email').value) == false) {
         contactCreate();
         closePopup();
     } else {
@@ -53,12 +50,9 @@ async function createContact() {
 
 /**Finaly Create Contact */
 async function contactCreate() {
-    let name = document.getElementById('name');
-    let email = document.getElementById('email');
-    let phone = document.getElementById('phone');
     let color = getColor(1, 9);
     let idShow = searchId();
-    let dataContact = returnArray(idShow, name, email, phone, color);
+    let dataContact = returnArray(idShow, doc('name'), doc('email'), doc('phone'), color);
     await saveRemote(dataContact);
     init();
     savePopup('create');
@@ -100,24 +94,18 @@ function searchId() {
 
 /**Add Contact Popup*/
 function addContact() {
-    let addContact = document.getElementById('addContactPopup');
-    let popupTitle = document.getElementById('popupTitle');
-    let back = document.getElementById('back');
-    addContact.style.transform = 'translateX(0)';
-    popupTitle.innerHTML = popupNames('add');
+    doc('addContactPopup').style.transform = 'translateX(0)';
+    doc('popupTitle').innerHTML = popupNames('add');
     loadNewContact();
-    back.classList.add('back');
+    doc('back').classList.add('back');
 }
 
 /**Edit Contact Popup*/
 function editContact(id) {
-    let addContact = document.getElementById('addContactPopup');
-    let popupTitle = document.getElementById('popupTitle');
-    let back = document.getElementById('back');
-    addContact.style.transform = 'translateX(0)';
-    popupTitle.innerHTML = popupNames('edit');
+    doc('addContactPopup').style.transform = 'translateX(0)';
+    doc('popupTitle').innerHTML = popupNames('edit');
     loadEditContact(id);
-    back.classList.add('back');
+    doc('back').classList.add('back');
 }
 
 /**Edit Search Data*/
@@ -132,12 +120,9 @@ function loadEditContact(id) {
 
 /**Edit Save Data */
 async function saveContact(i, id) {
-    let nameEdit = document.getElementById('name').value;
-    let emailEdit = document.getElementById('email').value;
-    let phoneEdit = document.getElementById('phone').value;
-    contacts[i]['name'] = nameEdit;
-    contacts[i]['email'] = emailEdit;
-    contacts[i]['phone'] = phoneEdit;
+    contacts[i]['name'] = doc('name').value;
+    contacts[i]['email'] = doc('email').value;
+    contacts[i]['phone'] = doc('phone').value;
     await setItem(`${contactsKey}`, JSON.stringify(contacts));
     showContact(id);
     init();
@@ -150,8 +135,7 @@ async function deleteContact(id) {
     contacts.splice(id, 1);
     await setItem(`${contactsKey}`, JSON.stringify(contacts));
     firstLetter = [];
-    let showContact = document.getElementById('showContact');
-    showContact.innerHTML = '';
+    doc('showContact').innerHTML = '';
     init();
     savePopup('delete');
     checkBackSlide();
@@ -159,16 +143,14 @@ async function deleteContact(id) {
 
 /**Show Popup Form*/
 async function loadNewContact(name, email, phone, color, id, i) {
-    let formNewContact = document.getElementById('user');
     let nameShow = await searchData(name);
     let emailShow = await searchData(email);
     let phoneShow = await searchData(phone);
     let buttonShow = button(name);
     let colorShow = await searchData(color);
     let array = await searchData(i);
-    formNewContact.innerHTML = popupTempForm(nameShow, emailShow, phoneShow, buttonShow, colorShow, id, array);
-    let createEdit = document.getElementById('createEdit');
-    await buttenCreate(buttonShow, createEdit, i, id);
+    doc('user').innerHTML = popupTempForm(nameShow, emailShow, phoneShow, buttonShow, colorShow, id, array);    
+    await buttenCreate(buttonShow, doc('createEdit'), i, id);
     loadCircle(id, color, 'circleEdit');
 }
 
@@ -201,16 +183,15 @@ async function buttenCreate(buttonShow, createEdit, i, id) {
 
 /**Shows the selected contact   */
 async function showContact(id) {
-    let showContact = document.getElementById('showContact');
     removeClassList();
     addClassList(id);
     location.assign(`#cID${id}`);
-    showContact.innerHTML = '';
+    doc('showContact').innerHTML = '';
     for (let i = 0; i < contacts.length; i++) {
         let contactData = contacts[i];
         if (contactData['id'] == id) {
             let initials = initialsLoad(contactData['name']);
-            showContact.innerHTML = loadContactShow(id, initials, contactData['name'], contactData['email'], contactData['phone'], i);
+            doc('showContact').innerHTML = loadContactShow(id, initials, contactData['name'], contactData['email'], contactData['phone'], i);
             loadCircle(id, contactData['color'], 'circle');
         }
     }
@@ -224,18 +205,16 @@ function initialsLoad(name) {
 
 /**Give Circle with initals the color  */
 function loadCircle(id, color, circleName) {
-    if (id != null && color != null && circleName != null) {
-        let circle = document.getElementById(`${circleName}${id}`);
-        circle.classList.add(color);
+    if (id != null && color != null && circleName != null) {        
+        doc(`${circleName}${id}`).classList.add(color);
     }
 }
 
 /**add Classlist in Contactlist  */
 function addClassList(id) {
-    let userId = document.getElementById(`cID${id}`);
-    if (userId) {
-        userId.classList.remove('list');
-        userId.classList.add('listVisited');
+    if (doc(`cID${id}`)) {
+        doc(`cID${id}`).classList.remove('list');
+        doc(`cID${id}`).classList.add('listVisited');
     }
 }
 
@@ -243,11 +222,11 @@ function addClassList(id) {
 function removeClassList() {
     for (let i = 0; i < contacts.length; i++) {
         let id = contacts[i]['id'];
-        let userId = document.getElementById(`cID${id}`);
-        if (userId) {
-            if (userId.className === 'listVisited') {
-                userId.classList.remove('listVisited');
-                userId.classList.add('list');
+        doc(`cID${id}`)
+        if (doc(`cID${id}`)) {
+            if (doc(`cID${id}`).className === 'listVisited') {
+                doc(`cID${id}`).classList.remove('listVisited');
+                doc(`cID${id}`).classList.add('list');
             }
         }
     }

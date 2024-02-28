@@ -20,10 +20,8 @@ function popupTempForm(nameShow, emailShow, phoneShow, button, color, id, i) {
 
 /**Load Contact Data of Show Contacts */
 function loadContactShow(id, initials, name, email, phone, i) {
-  let mobileEdit = document.getElementById('mobileEdit');
-  let mobileDelete = document.getElementById('mobileDelete');
-  mobileEdit.setAttribute('onclick', `notClose(event), editContact(${id})`);
-  mobileDelete.setAttribute('onclick', `deleteContact(${i})`);
+  doc('mobileEdit').setAttribute('onclick', `notClose(event), editContact(${id})`);
+  doc('mobileDelete').setAttribute('onclick', `deleteContact(${i})`);
   return /*html*/`
     <div class="cHeader">
         <div class="circle cwidth" id="circle${id}">${initials}</div>
@@ -44,7 +42,6 @@ function loadContactShow(id, initials, name, email, phone, i) {
     </div>
     `
 }
-
 
 /**Letter Template */
 function letterTemp(contactLetterLoad, i) {
@@ -81,14 +78,13 @@ function slideContact(id) {
 
 /**Slide no Responsiv */
 function noResponsiv(id){
-  let divContacts = document.getElementById('showContact');
-  if (divContacts.style.transform == 'translatex(150vw)') {
-    divContacts.style.transform = 'translatex(0)';
+  if (doc('showContact').style.transform == 'translatex(150vw)') {
+    doc('showContact').style.transform = 'translatex(0)';
     showContact(id);
   } else {
-    divContacts.style.transform = 'translatex(150vw)';
+    doc('showContact').style.transform = 'translatex(150vw)';
     setTimeout(() => {
-      divContacts.style.transform = 'translatex(0)';
+      doc('showContact').style.transform = 'translatex(0)';
       showContact(id);
     }, 250);
   }
@@ -96,14 +92,11 @@ function noResponsiv(id){
 
 /**Slide Responsiv */
 function slideResponsiv(id){
-  let sidecontacts = document.getElementById('listAllContacts');
-  let showContactsView = document.getElementById('showContactsView');
-  let menueContacts = document.getElementById('menueContacts');
-  if (showContactsView.style.transform != 'translatex(0px)') {
-    sidecontacts.style.transform = 'translatex(-100vw)';
-    showContactsView.style.transform = 'translatex(0)';
+  if (doc('showContactsView').style.transform != 'translatex(0px)') {
+    doc('listAllContacts').style.transform = 'translatex(-100vw)';
+    doc('showContactsView').style.transform = 'translatex(0)';
     setTimeout(() => {
-      menueContacts.style.display = 'flex';
+      doc('menueContacts').style.display = 'flex';
     }, 150);
     showContact(id);
   }
@@ -111,16 +104,12 @@ function slideResponsiv(id){
 
 /**Back to Contactlist in Responsiv mode */
 function backToContacts() {
-  let sidecontacts = document.getElementById('listAllContacts');
-  let showContactsView = document.getElementById('showContactsView');
-  let menueContacts = document.getElementById('menueContacts');
-  let showContact = document.getElementById('showContact');
-  sidecontacts.style.transform = 'translatex(0)';
-  showContactsView.style.transform = 'translatex(100vw)';
+  doc('listAllContacts').style.transform = 'translatex(0)';
+  doc('showContactsView').style.transform = 'translatex(100vw)';
   setTimeout(() => {
-    menueContacts.style.display = 'none';
+    doc('menueContacts').style.display = 'none';
   }, 150);
-  showContact.innerHTML = '';
+  doc('showContact').innerHTML = '';
   init();
   location.assign('#');
 }
@@ -134,11 +123,10 @@ function checkBackSlide(){
 
 /**Menu for Responsiv mode in Show Contacts */
 function openMenue() {
-  let menuePopup = document.getElementById('menuePopup');
-  if (menuePopup.style.transform != 'translateX(0px)') {
-    menuePopup.style.transform = 'translatex(0)';
+  if (doc('menuePopup').style.transform != 'translateX(0px)') {
+    doc('menuePopup').style.transform = 'translatex(0)';
   } else {
-    menuePopup.style.transform = 'translatex(100vw)';
+    doc('menuePopup').style.transform = 'translatex(100vw)';
   }
 }
 
@@ -155,34 +143,31 @@ function widthContactSize() {
 /**EventListener for Responsiv */
 window.addEventListener("resize", function () {
   let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-  let sidecontacts = document.getElementById('listAllContacts');
-  let showContactsView = document.getElementById('showContactsView');
   if (width <= 850) {
-    if (sidecontacts.style.transform != 'translatex(0px)') {
-      sidecontacts.style.transform = 'translatex(0)';
-      showContactsView.style.transform = 'translatex(100vw)';
+    if (doc('listAllContacts').style.transform != 'translatex(0px)') {
+      doc('listAllContacts').style.transform = 'translatex(0)';
+      doc('showContactsView').style.transform = 'translatex(100vw)';
       backToContacts();
     }
   } else {
-    sidecontacts.style.transform = 'unset';
-    showContactsView.style.transform = 'unset';
+    doc('listAllContacts').style.transform = 'unset';
+    doc('showContactsView').style.transform = 'unset';
   }
 });
 
 /**Popup function for show Info Popup */
 function savePopup(saveInfo) {
-  let savePopup = document.getElementById('save_info');
-  savePopup.innerHTML = 'Contact succesfully created'
+  doc('save_info').innerHTML = 'Contact succesfully created'
   if (saveInfo == 'edit') {
-    savePopup.innerHTML = 'Contact succesfully saved';
+    doc('save_info').innerHTML = 'Contact succesfully saved';
   } else if (saveInfo == 'delete') {
-    savePopup.innerHTML = 'Contact deleted';
+    doc('save_info').innerHTML = 'Contact deleted';
   } else if (saveInfo == 'exist') {
-    savePopup.innerHTML = 'Contact Email Exist';
+    doc('save_info').innerHTML = 'Contact Email Exist';
   }
-  savePopup.style.transform = 'translatex(0)';
+  doc('save_info').style.transform = 'translatex(0)';
   setTimeout(() => {
-    savePopup.style.transform = 'translatex(150vw)';
+    doc('save_info').style.transform = 'translatex(150vw)';
   }, 1500);
 }
 
@@ -204,22 +189,16 @@ function popupNames(contactAdd) {
 
 /**Closing Popup for Create or Edit Contact */
 function closePopup() {
-  let addContact = document.getElementById('addContactPopup');
-  let back = document.getElementById('back');
-  let formNewContact = document.getElementById('user');
-  let popupTitle = document.getElementById('popupTitle');
-  let open = document.getElementById('logoutScreen');
-  let openMenue = document.getElementById('menuePopup');
-  open.style.display = 'none';
-  if (addContact.style.transform == 'translateX(0px)') {
-    addContact.style.transform = 'translateX(150vw)';
+  doc('logoutScreen').style.display = 'none';
+  if (doc('addContactPopup').style.transform == 'translateX(0px)') {
+    doc('addContactPopup').style.transform = 'translateX(150vw)';
   }
-  if (openMenue) {
-    openMenue.style.transform = 'translatex(100vw)';
+  if (doc('menuePopup')) {
+    doc('menuePopup').style.transform = 'translatex(100vw)';
   }
-  formNewContact.innerHTML = '';
-  popupTitle.innerHTML = '';
-  back.classList.remove('back');
+  doc('user').innerHTML = '';
+  doc('popupTitle').innerHTML = '';
+  doc('back').classList.remove('back');
 }
 
 /**Not Closing event for Popup with onclick function */

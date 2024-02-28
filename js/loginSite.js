@@ -3,6 +3,9 @@ let remoteLoginData = [];
 let daEmail = 'devAka@devAka.net';
 let daPass = '12345678';
 
+/**
+ * This function checks the login data for accuracy 
+ */
 function userLogin() {
     if (checkEmaildata() == true) {
         if (checkPassData() == true) {
@@ -16,6 +19,9 @@ function userLogin() {
     }
 }
 
+/**
+ * This function passes the login data from the user DA 
+ */
 function daLogin(){
     if (checkEmaildata(daEmail) == true) {
         if (checkPassData(daEmail, daPass) == true) {
@@ -29,6 +35,13 @@ function daLogin(){
     }
 }
 
+/**
+ * This function compares the email address entered or that from the DA to see if it exists
+ * 
+ * @param {string} email - This variable passes the email address of the DA user
+ * @returns - and returns true if correct
+ * 
+ */
 function checkEmaildata(email) {
     let checkValue = checkValueEmail(email);
     for (let i = 0; i < user.length; i++) {
@@ -40,6 +53,14 @@ function checkEmaildata(email) {
     }
 }
 
+/**
+ * This function compares the email address and password for accuracy in the user data
+ * 
+ * @param {string} email - This variable passes the email address of the DA user
+ * @param {string} pass - This variable passes the password of the DA user
+ * @returns - and returns true if correct
+ * 
+ */
 function checkPassData(email, pass) {
     let checkValue = checkValueEmail(email);
     let checkPassValue = checkValuePass(pass);
@@ -55,9 +76,15 @@ function checkPassData(email, pass) {
     }
 }
 
+/**
+ * This function checks whether the entered or the DA email address is used
+ * 
+ * @param {string} email - This variable passes the email address of the DA user
+ * @returns - and returns the emailadress
+ * 
+ */
 function checkValueEmail(email){
-    let readEmail = document.getElementById('userEmail');
-    let userEmail = readEmail.value;
+    let userEmail = doc('userEmail').value;
     if(email != undefined){
         userEmail = email;
     }
@@ -65,9 +92,15 @@ function checkValueEmail(email){
     return userEmail.toLowerCase();
 }
 
+/**
+ * This function checks whether the entered password or the DA password is used
+ * 
+ * @param {*} pass - This variable passes the password of the DA user
+ * @returns - and returns the password
+ * 
+ */
 function checkValuePass(pass){
-    let password = document.getElementById('passwordchangePW');
-    let userPass = password.value;
+    let userPass = doc('passwordchangePW').value;
     if(pass != undefined){
         userPass = pass;
     }
@@ -75,42 +108,57 @@ function checkValuePass(pass){
     return userPass;
 }
 
+/**
+ * This function saves the data when you log in in Onlinestorage and send to localstorage save function 
+ * 
+ * @param {number} i - is the location in the array passed by checkPassData
+ * 
+ */
 async function userOnlinesave(i){
     await saveOnline(i);
     await setItem(`${contactsKey}`, JSON.stringify(user));
 }
 
+/**
+ * diese funktion speichert die daten im localstorage
+ * 
+ * @param {number} i - is the location in the array passed by checkPassData
+ * 
+ */
 async function saveOnline(i){
     user[i]['online'] = true;
     localStorage.setItem('userOnline', JSON.stringify(user[i]['email']));
 }
 
+/**
+ * This function prints the error message for the wrong email address and changes the design to red
+ */
 function wrongEmailData() {
-    let emailData = document.getElementById('userEmail');
-    let div = document.getElementById('wrongUserEmail');
-    let wrong = document.getElementById('wrong');
-    div.style.border = '1px solid red';
-    wrong.innerHTML = `Ups! Email wrong, Try again!`;
+    doc('wrongUserEmail').style.border = '1px solid red';
+    doc('wrong').innerHTML = `Ups! Email wrong, Try again!`;
     setTimeout(() => {
-        div.style.border = '1px solid #D1D1D1';
-        wrong.innerHTML = '';
-        emailData.value = '';
+        doc('wrongUserEmail').style.border = '1px solid #D1D1D1';
+        doc('wrong').innerHTML = '';
+        doc('userEmail').value = '';
     }, 2000);
 }
 
+/**
+ * This function prints the error message for the wrong password and changes the design to red
+ */
 function wrongPassData() {
-    let passData = document.getElementById('passwordchangePW');
-    let div = document.getElementById('wrongUserPass');
-    let wrong = document.getElementById('wrong');
-    div.style.border = '1px solid red';
-    wrong.innerHTML = `Ups! Passwort wrong, Try again!`;
+    doc('wrongUserPass').style.border = '1px solid red';
+    doc('wrong').innerHTML = `Ups! Passwort wrong, Try again!`;
     setTimeout(() => {
-        div.style.border = '1px solid #D1D1D1';
-        wrong.innerHTML = '';
-        passData.value = '';
+        doc('wrongUserPass').style.border = '1px solid #D1D1D1';
+        doc('wrong').innerHTML = '';
+        doc('passwordchangePW').value = '';
     }, 2000);
 }
 
+/**
+ * This function checks whether the login data has been saved
+ */
 function saveLogin(){
     if (remeChecked == 1){
         saveLoginData();
@@ -119,22 +167,29 @@ function saveLogin(){
     }
 }
 
+/**
+ * This function saves the login data in local storage
+ */
 function saveLoginData(){
-    let email = document.getElementById('userEmail');
-    let password = document.getElementById('passwordchangePW');
     let data = [{
-        'email': email.value,
-        'password': password.value,
+        'email': doc('userEmail').value,
+        'password': doc('passwordchangePW').value,
     }];
     loginData = data;
     localStorage.setItem('loginData', JSON.stringify(loginData));
 }
 
+/**
+ * This function deletes the login data in local storage
+ */
 function deleteLoginData(){
     loginData = null;
     localStorage.setItem('loginData', JSON.stringify(loginData));
 }
 
+/**
+ * This function checks whether data is stored in local storage and passes it on to the rememberMe function
+ */
 function loadRememberMe(){
     load = JSON.parse(localStorage.getItem('loginData'));
     loginData = load;
@@ -144,16 +199,20 @@ function loadRememberMe(){
     }
 }
 
+/**
+ * This function loads the login data into the login field if it has been saved and passes the email on to the directLogin function
+ */
 function loadLoginData(){
-    let email = document.getElementById('userEmail');
-    let password = document.getElementById('passwordchangePW');
     for (let i = 0; i < loginData.length; i++){
-        email.value = loginData[i]['email'];
-        password.value = loginData[i]['password'];
+        doc('userEmail').value = loginData[i]['email'];
+        doc('passwordchangePW').value = loginData[i]['password'];
         directLogin(loginData[i]['email']);
     }
 }
 
+/**
+ * This function checks whether the user is logged in and logs him in again directly
+ */
 function directLogin(email){
     for(let i = 0; i < user.length; i++){
         let userEmail = user[i]['email'];

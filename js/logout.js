@@ -8,7 +8,13 @@ async function initOnline() {
     widthSize();
 }
 
-/**Load All User as Online Storage and Online Status as Local Storage */
+/**
+ * Load All User as Online Storage and Online Status as Local Storage 
+ * 
+ * @param {string} contactsKey - This is the variable of the key in the online storage
+ * 
+ * @param {array} onlineUser - This is the JSON Araay into which the data from the online storage is pushed
+ */
 async function loadOnlineUsers() {
     try {
         onlineUser = JSON.parse(await getItem(`${contactsKey}`));
@@ -18,7 +24,12 @@ async function loadOnlineUsers() {
     }
 }
 
-/**Find Log Status */
+/**
+ * This function find Log Status 
+ * 
+ * @param {string} userFind - This is the variable to find the User are Online
+ * 
+ * */
 function logout(userFind) {
     if (userFind != 'guest') {
         userOnline();
@@ -27,7 +38,12 @@ function logout(userFind) {
     }
 }
 
-/**Log User out and clear Data Online- and Localstorage */
+/**
+ * This function Log User out and clear Data Online- and Localstorage 
+ * 
+ * @param {string} yourId - User ID are saved in Localstorage an delete this
+ * 
+ * */
 async function userOnline() {
     for (let i = 0; i < onlineUser.length; i++) {
         let userID = onlineUser[i]['email'];
@@ -40,45 +56,54 @@ async function userOnline() {
     }
 }
 
-/**Set Initals in Header button */
+/**
+ * This function Set Initals in Header button 
+ * */
 async function initals() {
-    let initial = document.getElementById('initals');
-    let logout = document.getElementById('logoutButton');
-
     if (yourId != null) {
         await setUserData();
     } else {
-        initial.innerHTML = 'G';
-        logout.setAttribute('onclick', `logout('guest')`);
+        doc('initals').innerHTML = 'G';
+        doc('logoutButton').setAttribute('onclick', `logout('guest')`);
     }
 }
 
-/**Save User Name in onlineName, Split name to Initails and and Set Attribute from logout Button*/
+/**
+ * This function Save User Name in onlineName, Split name to Initails and and Set Attribute from logout Button
+ * 
+ * @param {string} names.split - Splits the first and last name to create 2 strings
+ * @param {string} nameParts.map - keeps only the first letter and removes the rest
+ * 
+ * */
 async function setUserData(){
-    let initial = document.getElementById('initals');
-    let logout = document.getElementById('logoutButton');
     for (let i = 0; i < onlineUser.length; i++) {
         if (onlineUser[i]['email'] == yourId) {
             names = onlineUser[i]['name'];
             onlineName.push(names);
             let nameParts = names.split(" ");
-            initial.innerHTML = nameParts.map(part => part.charAt(0)).join("");
-            logout.setAttribute('onclick', `logout('${yourId}')`);
+            doc('initals').innerHTML = nameParts.map(part => part.charAt(0)).join("");
+            doc('logoutButton').setAttribute('onclick', `logout('${yourId}')`);
         }
     }
 }
 
-/**Function for show Screen of Logout, Privacy Policy and Legal Notice */
+/**
+ * Function for show Screen of Logout, Privacy Policy and Legal Notice 
+ * */
 function openUser() {
-    let open = document.getElementById('logoutScreen');
-    if (open.style.display == 'flex') {
-        open.style.display = 'none';
+    if (doc('logoutScreen').style.display == 'flex') {
+        doc('logoutScreen').style.display = 'none';
     } else {
-        open.style.display = 'flex';
+        doc('logoutScreen').style.display = 'flex';
     }
 }
 
-/**Check Width Size for Responsiv */
+/**
+ * Check Width Size for Responsiv
+ *
+ *  @param clientWidth - the size of the user screen
+ *
+ * */
 async function widthSize() {
     let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
     if (width <= 850) {
@@ -88,32 +113,44 @@ async function widthSize() {
     }
 }
 
-/**Set Responsiv as Header Title and Logo */
+/**
+ * Set Responsiv as Header Title and Logo 
+ * */
 function subtitleMobile(){
-    let subtitleHeader = document.getElementById('subtitleHeader');
-    if (subtitleHeader) {
-        subtitleHeader.classList.remove('headerText');
-        subtitleHeader.classList.add('headerMobile');
-        subtitleHeader.innerHTML = '<img class="mobileLogo" src="./img/join_logo_dark.svg">';
+    if (doc('subtitleHeader')) {
+        doc('subtitleHeader').classList.remove('headerText');
+        doc('subtitleHeader').classList.add('headerMobile');
+        doc('subtitleHeader').innerHTML = '<img class="mobileLogo" src="./img/join_logo_dark.svg">';
     }
 }
 
-/**Set Header Title */
+/**
+ * Set Header Title 
+ * */
 function subtitle(){
-    let subtitleHeader = document.getElementById('subtitleHeader');
-    if (subtitleHeader) {
-        subtitleHeader.classList.remove('headerMobile');
-        subtitleHeader.classList.add('headerText');
-        subtitleHeader.innerHTML = 'Kanban Project Management Tool';
+    if (doc('subtitleHeader')) {
+        doc('subtitleHeader').classList.remove('headerMobile');
+        doc('subtitleHeader').classList.add('headerText');
+        doc('subtitleHeader').innerHTML = 'Kanban Project Management Tool';
     }
 }
 
-/**Event Listener for automate Width Size */
+/**
+ * Event Listener for automate Width Size
+ * 
+ * This event listener triggers the function for widthSize and sends the string goToMobile 
+ * 
+ * */
 window.addEventListener("resize", function () {
     widthSize();
 });
 
-/**Function doesn't close when body is clicked */
+/**
+ * Not close Event 
+ * 
+ * This function prevents closing a popup when clicking on certain levels
+ * 
+*/
 function notClose(event) {
     event.stopPropagation();
   }

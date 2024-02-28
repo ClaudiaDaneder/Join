@@ -8,8 +8,7 @@ async function helpInit(){
 function linkLast(){
     let site = window.location;
     let html = site.href.substring(site.href.lastIndexOf('/') + 1);
-    let helpIcon = document.getElementById('helpHeader');
     if(html == 'help.html'){
-        helpIcon.style.display = 'none';
+        doc('helpHeader').style.display = 'none';
     }
 }
