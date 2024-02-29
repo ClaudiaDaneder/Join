@@ -104,7 +104,7 @@
     
 
     
-    <h4 class="name" id="addNewTask"><span class="type-signature"></span>addNewTask<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="checkEmail"><span class="type-signature"></span>checkEmail<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -112,7 +112,7 @@
 
 
 <div class="description">
-    This function defines all elements of a task that will later be stored in an array.
+    This function checks whether the email address entered exists
 </div>
 
 
@@ -156,7 +156,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="addtask.js.html">addtask.js</a>, <a href="addtask.js.html#line18">line 18</a>
+        <a href="signup.js.html">signup.js</a>, <a href="signup.js.html#line23">line 23</a>
     </li></ul></dd>
     
 
@@ -192,7 +192,7 @@
     
 
     
-    <h4 class="name" id="addToSubtaskList"><span class="type-signature"></span>addToSubtaskList<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="checkEmailExist"><span class="type-signature"></span>checkEmailExist<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -200,7 +200,7 @@
 
 
 <div class="description">
-    This function is used to generate a list of subtasks, if any were entered in the subtaskField.
+    This function returns true if the email exists
 </div>
 
 
@@ -244,7 +244,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="addtask.js.html">addtask.js</a>, <a href="addtask.js.html#line70">line 70</a>
+        <a href="signup.js.html">signup.js</a>, <a href="signup.js.html#line34">line 34</a>
     </li></ul></dd>
     
 
@@ -280,7 +280,7 @@
     
 
     
-    <h4 class="name" id="checkPriority"><span class="type-signature"></span>checkPriority<span class="signature">(task)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="checkPasswords"><span class="type-signature"></span>checkPasswords<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -288,7 +288,186 @@
 
 
 <div class="description">
-    This function is used to check if one of the 3 priority buttons has been activated. If so, the chosen priority is set as 'prio' for the current task.
+    This function checks whether the passwords entered are identical
+If an error occurs, the input fields that affect it will be marked red
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="signup.js.html">signup.js</a>, <a href="signup.js.html#line5">line 5</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="emailExist"><span class="type-signature"></span>emailExist<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This function changes the input field to red for an existing email address
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="signup.js.html">signup.js</a>, <a href="signup.js.html#line47">line 47</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getColor"><span class="type-signature"></span>getColor<span class="signature">(floor, random, math)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This function outputs a random number from 1 - 9 
+(in this case the min value 1 and max value 9 are passed from the register function) to the searchColor function
+and then gives it back
 </div>
 
 
@@ -324,15 +503,10 @@
 
         <tr>
             
-                <td class="name"><code>task</code></td>
+                <td class="name"><code>floor</code></td>
             
 
             <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
             
             </td>
 
@@ -340,7 +514,43 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">floor rounds the number</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>random</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">function for random</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>math</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">function for numbers</td>
         </tr>
 
     
@@ -381,7 +591,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="addtask.js.html">addtask.js</a>, <a href="addtask.js.html#line181">line 181</a>
+        <a href="signup.js.html">signup.js</a>, <a href="signup.js.html#line100">line 100</a>
     </li></ul></dd>
     
 
@@ -417,7 +627,7 @@
     
 
     
-    <h4 class="name" id="clearSubtaskList"><span class="type-signature"></span>clearSubtaskList<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="register"><span class="type-signature">(async) </span>register<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -425,7 +635,7 @@
 
 
 <div class="description">
-    This function is used to clear the list of subtasks again, either when the 'clear' button has been pressed, or a new task has been created.
+    This function pushes the data into a json array and then stores it in remote storage, spears the sign up button and empties the form
 </div>
 
 
@@ -469,1001 +679,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="addtask.js.html">addtask.js</a>, <a href="addtask.js.html#line91">line 91</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="disableCreateButton"><span class="type-signature"></span>disableCreateButton<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    This function is used to disable and change the color of the Create-button while the current task is being saved.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="addtask.js.html">addtask.js</a>, <a href="addtask.js.html#line319">line 319</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="generateSelectedAssigneesList"><span class="type-signature"></span>generateSelectedAssigneesList<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    This function is used to generate colored circles with the initials of the contacts that have been picked from the contacts-dropdown (i.e. have been pushed into the array 'selectedContacts').
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="addtask.js.html">addtask.js</a>, <a href="addtask.js.html#line164">line 164</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="identifyTaskId"><span class="type-signature"></span>identifyTaskId<span class="signature">()</span><span class="type-signature"> &rarr; {number}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    This function identifies which task-id should be assigned to the current task. Tasks are assigned consecutive numbers, starting at 0.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="addtask.js.html">addtask.js</a>, <a href="addtask.js.html#line59">line 59</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    The task-id assigned to our current task
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">number</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="loadContactsFromStorage"><span class="type-signature">(async) </span>loadContactsFromStorage<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    This function is used to get all available contacts from the remote storage under the key 'allContacts'.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="addtask.js.html">addtask.js</a>, <a href="addtask.js.html#line98">line 98</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="loadContactsIntoDropdown"><span class="type-signature"></span>loadContactsIntoDropdown<span class="signature">(allContacts)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    This function checks if contacts are available to load into the Contacts-Dropdown. If no contacts are available, a message is shown. If there are contacts to be displayed, they will be shown in the contacts-dropdown.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>allContacts</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">All available contacts, as previously fetched from the remote storage</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="addtask.js.html">addtask.js</a>, <a href="addtask.js.html#line109">line 109</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="noContactsToShow"><span class="type-signature"></span>noContactsToShow<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    This function generates a message, in case no contacts are availbale to chose from in the contacts- dropdown.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="addtask.js.html">addtask.js</a>, <a href="addtask.js.html#line128">line 128</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="redirectToBoard"><span class="type-signature"></span>redirectToBoard<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    This function redirects to the board-overview after a short delay of 220ms.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="addtask.js.html">addtask.js</a>, <a href="addtask.js.html#line334">line 334</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="renderContacts"><span class="type-signature"></span>renderContacts<span class="signature">(contactName, contactColor, initials)</span><span class="type-signature"> &rarr; {string}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    This function returns a list of available contacts to assign the task to. For each contact, their name, initials in a colored circle, and a checkbox is generated.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>contactName</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Name of the contact</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>contactColor</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Color that has been assigned to the contact randomly upon creation</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>initials</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Initials of the contact</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="addtask.js.html">addtask.js</a>, <a href="addtask.js.html#line140">line 140</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="resetCheckboxOptions"><span class="type-signature"></span>resetCheckboxOptions<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    This function is used to reset all checkboxes within the contacts-dropdown after either the 'clear' button has been pressed or a new task has been created.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="addtask.js.html">addtask.js</a>, <a href="addtask.js.html#line308">line 308</a>
+        <a href="signup.js.html">signup.js</a>, <a href="signup.js.html#line60">line 60</a>
     </li></ul></dd>
     
 
@@ -1507,7 +723,7 @@
 
 
 <div class="description">
-    This function resets the form and all inputs, buttons, lists etc. to their initial state, either when the 'clear' button is pressed or a new task has been created.
+    This function empties the form of the sign up page
 </div>
 
 
@@ -1551,7 +767,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="addtask.js.html">addtask.js</a>, <a href="addtask.js.html#line214">line 214</a>
+        <a href="signup.js.html">signup.js</a>, <a href="signup.js.html#line139">line 139</a>
     </li></ul></dd>
     
 
@@ -1587,7 +803,7 @@
     
 
     
-    <h4 class="name" id="resetPrioButtons"><span class="type-signature"></span>resetPrioButtons<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="savePopupSign"><span class="type-signature"></span>savePopupSign<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -1595,7 +811,7 @@
 
 
 <div class="description">
-    This function resets the priority buttons to their initial state (=none is selected). This function is being triggered by the function resetForm()
+    This function changes the style value and loads the login page
 </div>
 
 
@@ -1639,7 +855,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="addtask.js.html">addtask.js</a>, <a href="addtask.js.html#line226">line 226</a>
+        <a href="signup.js.html">signup.js</a>, <a href="signup.js.html#line128">line 128</a>
     </li></ul></dd>
     
 
@@ -1675,7 +891,7 @@
     
 
     
-    <h4 class="name" id="saveToStorage"><span class="type-signature">(async) </span>saveToStorage<span class="signature">(task)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="searchColor"><span class="type-signature"></span>searchColor<span class="signature">(color)</span><span class="type-signature"></span></h4>
     
 
     
@@ -1683,7 +899,7 @@
 
 
 <div class="description">
-    This function pulls the existing tasks from the remote storage, updates it with the current task, and saves everything to the remote storage under the key 'allTasks'.
+    This function compares the numbers and returns the appropriate color
 </div>
 
 
@@ -1719,13 +935,13 @@
 
         <tr>
             
-                <td class="name"><code>task</code></td>
+                <td class="name"><code>color</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">number</span>
 
 
             
@@ -1735,7 +951,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">number passed by getColor</td>
         </tr>
 
     
@@ -1776,7 +992,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="addtask.js.html">addtask.js</a>, <a href="addtask.js.html#line44">line 44</a>
+        <a href="signup.js.html">signup.js</a>, <a href="signup.js.html#line113">line 113</a>
     </li></ul></dd>
     
 
@@ -1801,143 +1017,16 @@
 
 
 
-
-
-
-
+<h5>Returns:</h5>
 
         
-            
-
-    
-
-    
-    <h4 class="name" id="selectCategory"><span class="type-signature"></span>selectCategory<span class="signature">(category)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    This function is used to update the value of the category-dropdown and close the dropdown once a category has been chosen.
+<div class="param-desc">
+    - names of the colors in the css class
 </div>
 
 
 
-
-
-
-
-
-
-    <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>category</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Category of the task, either 'User Story' or 'Technical Task'</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="addtask.js.html">addtask.js</a>, <a href="addtask.js.html#line299">line 299</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1949,7 +1038,7 @@
     
 
     
-    <h4 class="name" id="selectPriority"><span class="type-signature"></span>selectPriority<span class="signature">(priority)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="searchId"><span class="type-signature"></span>searchId<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -1957,144 +1046,7 @@
 
 
 <div class="description">
-    This function updates the global variable 'selectedPriority' to the priority of the chosen button and marks it as selected. Once the user clicks on a different priority button, the selection is removed and added to the current button.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>priority</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The chosen priority as string ('urgent', 'medium' or 'low')</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="addtask.js.html">addtask.js</a>, <a href="addtask.js.html#line203">line 203</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="showPopup"><span class="type-signature"></span>showPopup<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    This function is used to show the popup that tells the user that the new task has been created and added to the board of tasks.
+    This function looks for the id in the last array and adds 1 to it to create the next id
 </div>
 
 
@@ -2138,408 +1090,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="addtask.js.html">addtask.js</a>, <a href="addtask.js.html#line327">line 327</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="storeSubtasks"><span class="type-signature"></span>storeSubtasks<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    This function is used to store the list of subtasks into an array 'subtasks'.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="addtask.js.html">addtask.js</a>, <a href="addtask.js.html#line80">line 80</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="toggleCategoryDropdown"><span class="type-signature"></span>toggleCategoryDropdown<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    This function either opens or closes the category-dropdown.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="addtask.js.html">addtask.js</a>, <a href="addtask.js.html#line284">line 284</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="toggleContactsDropdown"><span class="type-signature"></span>toggleContactsDropdown<span class="signature">(event)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    This function is used to either open or close the contacts-dropdown, depending on whether the click event happened inside or outside of the dropdown-content.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>event</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Event</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Event that triggers the function (= click)</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="addtask.js.html">addtask.js</a>, <a href="addtask.js.html#line253">line 253</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="updateSelectedContacts"><span class="type-signature"></span>updateSelectedContacts<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    This function is used to record all checked checkboxes within the contacts-dropdown and push the values into the array 'selectedContacts'.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="addtask.js.html">addtask.js</a>, <a href="addtask.js.html#line149">line 149</a>
+        <a href="signup.js.html">signup.js</a>, <a href="signup.js.html#line80">line 80</a>
     </li></ul></dd>
     
 
@@ -2585,13 +1136,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addNewTask">addNewTask</a></li><li><a href="global.html#addToSubtaskList">addToSubtaskList</a></li><li><a href="global.html#checkPriority">checkPriority</a></li><li><a href="global.html#clearSubtaskList">clearSubtaskList</a></li><li><a href="global.html#disableCreateButton">disableCreateButton</a></li><li><a href="global.html#generateSelectedAssigneesList">generateSelectedAssigneesList</a></li><li><a href="global.html#identifyTaskId">identifyTaskId</a></li><li><a href="global.html#loadContactsFromStorage">loadContactsFromStorage</a></li><li><a href="global.html#loadContactsIntoDropdown">loadContactsIntoDropdown</a></li><li><a href="global.html#noContactsToShow">noContactsToShow</a></li><li><a href="global.html#redirectToBoard">redirectToBoard</a></li><li><a href="global.html#renderContacts">renderContacts</a></li><li><a href="global.html#resetCheckboxOptions">resetCheckboxOptions</a></li><li><a href="global.html#resetForm">resetForm</a></li><li><a href="global.html#resetPrioButtons">resetPrioButtons</a></li><li><a href="global.html#saveToStorage">saveToStorage</a></li><li><a href="global.html#selectCategory">selectCategory</a></li><li><a href="global.html#selectPriority">selectPriority</a></li><li><a href="global.html#showPopup">showPopup</a></li><li><a href="global.html#storeSubtasks">storeSubtasks</a></li><li><a href="global.html#toggleCategoryDropdown">toggleCategoryDropdown</a></li><li><a href="global.html#toggleContactsDropdown">toggleContactsDropdown</a></li><li><a href="global.html#updateSelectedContacts">updateSelectedContacts</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#checkEmail">checkEmail</a></li><li><a href="global.html#checkEmailExist">checkEmailExist</a></li><li><a href="global.html#checkPasswords">checkPasswords</a></li><li><a href="global.html#emailExist">emailExist</a></li><li><a href="global.html#getColor">getColor</a></li><li><a href="global.html#register">register</a></li><li><a href="global.html#resetForm">resetForm</a></li><li><a href="global.html#savePopupSign">savePopupSign</a></li><li><a href="global.html#searchColor">searchColor</a></li><li><a href="global.html#searchId">searchId</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Feb 15 2024 19:59:26 GMT+0100 (Mitteleuropäische Normalzeit)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Feb 29 2024 21:10:41 GMT+0100 (Mitteleuropäische Normalzeit)
 </footer>
 
 <script> prettyPrint(); </script>
