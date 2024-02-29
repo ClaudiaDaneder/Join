@@ -75,7 +75,7 @@ async function initals() {
  * @param {string} nameParts.map - keeps only the first letter and removes the rest
  * 
  * */
-async function setUserData(){
+async function setUserData() {
     for (let i = 0; i < onlineUser.length; i++) {
         if (onlineUser[i]['email'] == yourId) {
             names = onlineUser[i]['name'];
@@ -116,7 +116,7 @@ async function widthSize() {
 /**
  * Set Responsiv as Header Title and Logo 
  * */
-function subtitleMobile(){
+function subtitleMobile() {
     if (doc('subtitleHeader')) {
         doc('subtitleHeader').classList.remove('headerText');
         doc('subtitleHeader').classList.add('headerMobile');
@@ -127,7 +127,7 @@ function subtitleMobile(){
 /**
  * Set Header Title 
  * */
-function subtitle(){
+function subtitle() {
     if (doc('subtitleHeader')) {
         doc('subtitleHeader').classList.remove('headerMobile');
         doc('subtitleHeader').classList.add('headerText');
@@ -153,4 +153,4 @@ window.addEventListener("resize", function () {
 */
 function notClose(event) {
     event.stopPropagation();
-  }
+}

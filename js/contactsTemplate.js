@@ -1,5 +1,7 @@
-/**Create Popup Template for Create and Edit Popup */
-function popupTempForm(nameShow, emailShow, phoneShow, button, color, id, i) {
+/**
+ * Create Popup Template for Create and Edit Contact 
+ * */
+function popupTempForm(nameShow, emailShow, phoneShow, button, color, id) {
   let ini = initialsLoad(nameShow);
   let img = /*html*/`<div class="circleEdit" id="circleEdit${id}">${ini}</div>`;
   if (!color) {
@@ -18,7 +20,9 @@ function popupTempForm(nameShow, emailShow, phoneShow, button, color, id, i) {
           </form>`;
 }
 
-/**Load Contact Data of Show Contacts */
+/**
+ * Load Contact Data of Show Contacts 
+ * */
 function loadContactShow(id, initials, name, email, phone, i) {
   doc('mobileEdit').setAttribute('onclick', `notClose(event), editContact(${id})`);
   doc('mobileDelete').setAttribute('onclick', `deleteContact(${i})`);
@@ -43,7 +47,9 @@ function loadContactShow(id, initials, name, email, phone, i) {
     `
 }
 
-/**Letter Template */
+/**
+ * Letter Template 
+ * */
 function letterTemp(contactLetterLoad, i) {
   return /*html*/`
           <div class="letter">${contactLetterLoad}</div>
@@ -54,7 +60,9 @@ function letterTemp(contactLetterLoad, i) {
           `;
 }
 
-/**Contactlist Template */
+/**
+ * Contactlist Template 
+ * */
 function contactListTemp(id, initials, name, email) {
   return /*html*/`
     <div class="list" id="cID${id}" onclick="slideContact(${id})">
@@ -67,7 +75,9 @@ function contactListTemp(id, initials, name, email) {
     `;
 }
 
-/**Slidefunction for Show Contacts */
+/**
+ * Slidefunction for Show Contacts 
+ * */
 function slideContact(id) {
   if (widthContactSize() == false) {
     noResponsiv(id);
@@ -76,8 +86,10 @@ function slideContact(id) {
   }
 }
 
-/**Slide no Responsiv */
-function noResponsiv(id){
+/**
+ * Slide no Responsiv 
+ * */
+function noResponsiv(id) {
   if (doc('showContact').style.transform == 'translatex(150vw)') {
     doc('showContact').style.transform = 'translatex(0)';
     showContact(id);
@@ -90,8 +102,10 @@ function noResponsiv(id){
   }
 }
 
-/**Slide Responsiv */
-function slideResponsiv(id){
+/**
+ * Slide Responsiv 
+ * */
+function slideResponsiv(id) {
   if (doc('showContactsView').style.transform != 'translatex(0px)') {
     doc('listAllContacts').style.transform = 'translatex(-100vw)';
     doc('showContactsView').style.transform = 'translatex(0)';
@@ -102,7 +116,9 @@ function slideResponsiv(id){
   }
 }
 
-/**Back to Contactlist in Responsiv mode */
+/**
+ * Back to Contactlist in Responsiv mode 
+ * */
 function backToContacts() {
   doc('listAllContacts').style.transform = 'translatex(0)';
   doc('showContactsView').style.transform = 'translatex(100vw)';
@@ -114,14 +130,18 @@ function backToContacts() {
   location.assign('#');
 }
 
-/**Responsiv Slide Back to Contactlist after delete */
-function checkBackSlide(){
-  if(widthContactSize() == true){
+/**
+ * Responsiv Slide Back to Contactlist after delete 
+ * */
+function checkBackSlide() {
+  if (widthContactSize() == true) {
     backToContacts();
   }
 }
 
-/**Menu for Responsiv mode in Show Contacts */
+/**
+ * Menu for Responsiv mode in Show Contacts 
+ * */
 function openMenue() {
   if (doc('menuePopup').style.transform != 'translateX(0px)') {
     doc('menuePopup').style.transform = 'translatex(0)';
@@ -130,7 +150,9 @@ function openMenue() {
   }
 }
 
-/**Width function for Contacts */
+/**
+ * Width function for Contacts 
+ * */
 function widthContactSize() {
   let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
   if (width <= 850) {
@@ -140,7 +162,9 @@ function widthContactSize() {
   }
 }
 
-/**EventListener for Responsiv */
+/**
+ * EventListener for Responsiv 
+ * */
 window.addEventListener("resize", function () {
   let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
   if (width <= 850) {
@@ -155,7 +179,9 @@ window.addEventListener("resize", function () {
   }
 });
 
-/**Popup function for show Info Popup */
+/**
+ * Popup function for show Info Popup 
+ * */
 function savePopup(saveInfo) {
   doc('save_info').innerHTML = 'Contact succesfully created'
   if (saveInfo == 'edit') {
@@ -171,7 +197,9 @@ function savePopup(saveInfo) {
   }, 1500);
 }
 
-/**Popup Title */
+/**
+ * Popup Title 
+ * */
 function popupNames(contactAdd) {
   if (contactAdd == 'add') {
     return /*html*/`
@@ -187,7 +215,9 @@ function popupNames(contactAdd) {
   }
 }
 
-/**Closing Popup for Create or Edit Contact */
+/**
+ * Closing Popup for Create or Edit Contact 
+ * */
 function closePopup() {
   doc('logoutScreen').style.display = 'none';
   if (doc('addContactPopup').style.transform == 'translateX(0px)') {
@@ -201,7 +231,9 @@ function closePopup() {
   doc('back').classList.remove('back');
 }
 
-/**Not Closing event for Popup with onclick function */
+/**
+ * Not Closing event for Popup with onclick function 
+ * */
 function notClose(event) {
   event.stopPropagation();
 }

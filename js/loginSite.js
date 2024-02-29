@@ -22,7 +22,7 @@ function userLogin() {
 /**
  * This function passes the login data from the user DA 
  */
-function daLogin(){
+function daLogin() {
     if (checkEmaildata(daEmail) == true) {
         if (checkPassData(daEmail, daPass) == true) {
             saveLogin();
@@ -83,9 +83,9 @@ function checkPassData(email, pass) {
  * @returns - and returns the emailadress
  * 
  */
-function checkValueEmail(email){
+function checkValueEmail(email) {
     let userEmail = doc('userEmail').value;
-    if(email != undefined){
+    if (email != undefined) {
         userEmail = email;
     }
 
@@ -99,9 +99,9 @@ function checkValueEmail(email){
  * @returns - and returns the password
  * 
  */
-function checkValuePass(pass){
+function checkValuePass(pass) {
     let userPass = doc('passwordchangePW').value;
-    if(pass != undefined){
+    if (pass != undefined) {
         userPass = pass;
     }
 
@@ -114,7 +114,7 @@ function checkValuePass(pass){
  * @param {number} i - is the location in the array passed by checkPassData
  * 
  */
-async function userOnlinesave(i){
+async function userOnlinesave(i) {
     await saveOnline(i);
     await setItem(`${contactsKey}`, JSON.stringify(user));
 }
@@ -125,7 +125,7 @@ async function userOnlinesave(i){
  * @param {number} i - is the location in the array passed by checkPassData
  * 
  */
-async function saveOnline(i){
+async function saveOnline(i) {
     user[i]['online'] = true;
     localStorage.setItem('userOnline', JSON.stringify(user[i]['email']));
 }
@@ -159,10 +159,10 @@ function wrongPassData() {
 /**
  * This function checks whether the login data has been saved
  */
-function saveLogin(){
-    if (remeChecked == 1){
+function saveLogin() {
+    if (remeChecked == 1) {
         saveLoginData();
-    }else{
+    } else {
         deleteLoginData();
     }
 }
@@ -170,7 +170,7 @@ function saveLogin(){
 /**
  * This function saves the login data in local storage
  */
-function saveLoginData(){
+function saveLoginData() {
     let data = [{
         'email': doc('userEmail').value,
         'password': doc('passwordchangePW').value,
@@ -182,7 +182,7 @@ function saveLoginData(){
 /**
  * This function deletes the login data in local storage
  */
-function deleteLoginData(){
+function deleteLoginData() {
     loginData = null;
     localStorage.setItem('loginData', JSON.stringify(loginData));
 }
@@ -190,10 +190,10 @@ function deleteLoginData(){
 /**
  * This function checks whether data is stored in local storage and passes it on to the rememberMe function
  */
-function loadRememberMe(){
+function loadRememberMe() {
     load = JSON.parse(localStorage.getItem('loginData'));
     loginData = load;
-    if(loginData != null){
+    if (loginData != null) {
         loadLoginData();
         rememberMe(1);
     }
@@ -202,8 +202,8 @@ function loadRememberMe(){
 /**
  * This function loads the login data into the login field if it has been saved and passes the email on to the directLogin function
  */
-function loadLoginData(){
-    for (let i = 0; i < loginData.length; i++){
+function loadLoginData() {
+    for (let i = 0; i < loginData.length; i++) {
         doc('userEmail').value = loginData[i]['email'];
         doc('passwordchangePW').value = loginData[i]['password'];
         directLogin(loginData[i]['email']);
@@ -213,12 +213,12 @@ function loadLoginData(){
 /**
  * This function checks whether the user is logged in and logs him in again directly
  */
-function directLogin(email){
-    for(let i = 0; i < user.length; i++){
+function directLogin(email) {
+    for (let i = 0; i < user.length; i++) {
         let userEmail = user[i]['email'];
         let userOnline = user[i]['online'];
-        if(userEmail == email){
-            if(userOnline == true){
+        if (userEmail == email) {
+            if (userOnline == true) {
                 localStorage.setItem('userOnline', JSON.stringify(userEmail));
                 window.open('summary.html', '_self');
             }
