@@ -174,3 +174,9 @@ function resetNumberColor(field) {
     let number = document.getElementById(`number_${field}`);
     number.classList.remove('white');
 }
+
+function closePopup() {
+    if (doc('logoutScreen').style.display == 'flex') {
+        doc('logoutScreen').style.display = 'none';
+    }
+}
