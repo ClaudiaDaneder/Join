@@ -74,13 +74,15 @@ function editSubtasklistItem(s, id, j) {
 
 function showSubtaskItemEditField(subtaskText, s, id) {
     let updatebutton = `updateSubtasklistItem(${s})`;
+    let deletebutton = `deleteSubtasklistItem(${s})`;
     if(id){
         updatebutton =  `updateEditPopup(${s}, ${id})`;
+        deletebutton =  `deleteEditPopup(${s}, ${id})`;
     }
     return `<div class="styled-subtaskitem-edit-input">
         <input class="subtaskitem-edit-input" type="text" id="editfield" value="${subtaskText}">
         <div class="subtaskfield-button-container">
-            <button type="button" class="subtaskfield-button-general" id="deleteButton" onclick="deleteSubtasklistItem(${s}, ${id})"><img src="/img/addtask_icon_subtask_delete.svg"></button>
+            <button type="button" class="subtaskfield-button-general" id="deleteButton" onclick="${deletebutton}"><img src="/img/addtask_icon_subtask_delete.svg"></button>
             <button type="button" class="subtaskfield-button-general" id="updateButton" onclick="${updatebutton}"><img src="/img/addtask_icon_subtaskfield_check.svg"></button>
         </div>
     </div>`;
