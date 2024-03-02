@@ -246,6 +246,9 @@ function checkPriority(task) {
 
 
 document.addEventListener('click', function (event) {
+    if (doc('logoutScreen').style.display == 'flex') {
+        openUser();
+    }
     let dropdown = document.getElementById('category-dropdown');
     let dropdownContent = document.getElementById('category');
     if (!dropdownContent) {

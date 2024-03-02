@@ -4,3 +4,9 @@ async function initLegalNotice() {
     await enableNavigation();
     navigation('show');
 }
+
+function closePopup() {
+    if (doc('logoutScreen').style.display == 'flex') {
+        doc('logoutScreen').style.display = 'none';
+    }
+}
