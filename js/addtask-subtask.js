@@ -77,7 +77,7 @@ function showSubtaskItemEditField(subtaskText, s, id) {
     let deletebutton = `deleteSubtasklistItem(${s})`;
     if(id){
         updatebutton =  `updateEditPopup(${s}, ${id})`;
-        deletebutton =  `deleteEditPopup(${s}, ${id})`;
+        deletebutton =  `deleteSubtasklist(${s}, ${id})`;
     }
     return `<div class="styled-subtaskitem-edit-input">
         <input class="subtaskitem-edit-input" type="text" id="editfield" value="${subtaskText}">
