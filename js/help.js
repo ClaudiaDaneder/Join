@@ -15,3 +15,9 @@ function linkLast() {
         doc('helpHeader').style.display = 'none';
     }
 }
+
+function closePopup() {
+    if (doc('logoutScreen').style.display == 'flex') {
+        doc('logoutScreen').style.display = 'none';
+    }
+}
