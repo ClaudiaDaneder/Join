@@ -1,10 +1,10 @@
-function updateSubtaskButtons() {
+function updateSubtaskButtons(id) {
     let subtaskField = document.getElementById('subtasks');
     if (subtaskField.value === '') {
         document.getElementById('subtaskfield-buttons').innerHTML = showPlusButton();
 
     } else {
-        document.getElementById('subtaskfield-buttons').innerHTML = showClearOrAddButtons();
+        document.getElementById('subtaskfield-buttons').innerHTML = showClearOrAddButtons(id);
     }
 }
 
@@ -12,8 +12,12 @@ function showPlusButton() {
     return `<button type="button" class="subtaskfield-button-general"><img src="/img/addtask_icon_subtaskfield_plus.svg"></button>`;
 }
 
-function showClearOrAddButtons() {
-    return `<button type="button" class="subtaskfield-button-general" onclick="clearSubtaskField()"><img src="/img/addtask_icon_subtaskfield_cancel.svg"></button><hr><button type="button" class="subtaskfield-button-general" onclick="addToSubtasks()"><img src="/img/addtask_icon_subtaskfield_check.svg"></button></div>`;
+function showClearOrAddButtons(id) {
+    let saveSubtask = 'addToSubtasks()';
+    if(id){
+        saveSubtask = `setNewSubTask(${id})`;
+    }
+    return `<button type="button" class="subtaskfield-button-general" onclick="clearSubtaskField()"><img src="/img/addtask_icon_subtaskfield_cancel.svg"></button><hr><button type="button" class="subtaskfield-button-general" onclick="${saveSubtask}"><img src="/img/addtask_icon_subtaskfield_check.svg"></button></div>`;
 }
 
 
