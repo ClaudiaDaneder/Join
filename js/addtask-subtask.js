@@ -57,13 +57,13 @@ function showEditButtons(i) {
 }
 
 
-function editSubtasklistItem(s) {
+function editSubtasklistItem(s, id, j) {
     let listItem = document.getElementById(`subtasklist-item_${s}`);
-
+    
     if (subtasks[s]) {
         let subtaskText = subtasks[s].subtasktext;
 
-        let newHTML = showSubtaskItemEditField(subtaskText, s);
+        let newHTML = showSubtaskItemEditField(subtaskText, s, id, j);
         listItem.innerHTML = newHTML;
         let editField = document.getElementById('editfield');
         if (editField) {
@@ -72,12 +72,16 @@ function editSubtasklistItem(s) {
     }
 }
 
-function showSubtaskItemEditField(subtaskText, s) {
+function showSubtaskItemEditField(subtaskText, s, id) {
+    let updatebutton = `updateSubtasklistItem(${s})`;
+    if(id){
+        updatebutton =  `updateEditPopup(${s}, ${id})`;
+    }
     return `<div class="styled-subtaskitem-edit-input">
         <input class="subtaskitem-edit-input" type="text" id="editfield" value="${subtaskText}">
         <div class="subtaskfield-button-container">
-            <button type="button" class="subtaskfield-button-general" onclick="deleteSubtasklistItem(${s})"><img src="/img/addtask_icon_subtask_delete.svg"></button>
-            <button type="button" class="subtaskfield-button-general" onclick="updateSubtasklistItem(${s})"><img src="/img/addtask_icon_subtaskfield_check.svg"></button>
+            <button type="button" class="subtaskfield-button-general" id="deleteButton" onclick="deleteSubtasklistItem(${s}, ${id})"><img src="/img/addtask_icon_subtask_delete.svg"></button>
+            <button type="button" class="subtaskfield-button-general" id="updateButton" onclick="${updatebutton}"><img src="/img/addtask_icon_subtaskfield_check.svg"></button>
         </div>
     </div>`;
 }
@@ -101,7 +105,7 @@ function deleteSubtasklistItem(s) {
 
 function updateSubtasklistItem(s) {
     let editField = document.getElementById('editfield');
-
+    
     subtasks[s].subtasktext = editField.value;
     setTimeout(() => {
         generateSubtasklist();

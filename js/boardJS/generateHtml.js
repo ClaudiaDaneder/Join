@@ -144,39 +144,56 @@ function getCategoryClass(category) {
 }
 
 
-function generateSubTasksHtml(allSubtasks) {
+function generateSubTasksHtml(allSubtasks, id) {
   let editSubTasksHtml = '';
   console.log(allSubtasks);
+  subtasks = [];
   for (let j = 0; j < allSubtasks.length; j++) {
       const element = allSubtasks[j];
-      subtasks = element;
+      subtasks.push(element);
       
       const subTaskText = element["subtasktext"];
-      editSubTasksHtml += `<div class="subtasklist-item" id="subtasklist-item_${j}" ondblclick="editSubtasklistItem(${j})" onmouseenter="showEditButtons(${j})" onmouseleave="showEditButtons(${j})">
+      editSubTasksHtml += `<div class="subtasklist-item" id="subtasklist-item_${j}" ondblclick="editSubtasklistItem(${j}, ${id})" onmouseenter="showEditButtons(${j})" onmouseleave="showEditButtons(${j})">
                           <div class="subtasklist-infos"><div class="subtasklist-marker">•</div>${subTaskText}</div>
                           <div id="edit-buttons_${j}" class="subtaskfield-button-container hide">
-                              <button class="subtaskfield-button-general" type="button" onclick="editSubtasklistItem(${j})"><img src="/img/addtask_icon_subtask_edit.svg"></button>
+                              <button class="subtaskfield-button-general" type="button" onclick="editSubtasklistItem(${j}, ${id})"><img src="/img/addtask_icon_subtask_edit.svg"></button>
                               <hr>
-                              <button class="subtaskfield-button-general" type="button" onclick="deleteSubtasklistItem(${j})"><img src="/img/addtask_icon_subtask_delete.svg"></button>
+                              <button class="subtaskfield-button-general" type="button" onclick="deleteSubtasklist(${j}, ${id})"><img src="/img/addtask_icon_subtask_delete.svg"></button>
                           </div>
                        </div>`;
   }
   return editSubTasksHtml;
 }
 
-
-function editCurrentTask(){
-
+function deleteSubtasklist(j, taskId){
+  subtasks.splice(j, 1);
+  for (let i = 0; i < allDownloadTasks.length; i++){
+    if(allDownloadTasks[i]['task-id'] == taskId){
+      allDownloadTasks[i]['subtasks'] = subtasks;
+    }
+  }
+  setItem('allTasks', allDownloadTasks);
+  openCurrentTask(taskId);
+  editTask();
 }
 
-
-
+function updateEditPopup(j, id){
+  let subtext = document.getElementById('editfield');
+  for (let i = 0; i < allDownloadTasks.length; i++){
+    if(allDownloadTasks[i]['task-id'] == id){
+      allDownloadTasks[i]['subtasks'][j]['subtasktext'] = subtext.value;
+    }
+  }
+  setItem('allTasks', allDownloadTasks);
+    openCurrentTask(id);
+    editTask();
+}
 
   function generateTaskHtml(task, assigneeHtmlBoard, subTasksHtml,editAssigneeHtml) {
     const firstPart = task.category.split(" ")[0].toLowerCase();
     const originalDate = task["due-date"]; 
     const formattedDate = formatDateToDDMMYYYY(originalDate); 
-    const subTasks = generateSubTasksHtml(task["subtasks"]);
+    const subTasks = generateSubTasksHtml(task["subtasks"], task["task-id"]);
     return `
     <form onsubmit="editCurrentTask()" class="editCurrentTask" id="editCurrentTask" style="display: none;">
     <div class="editCurrentTitle">
@@ -199,15 +216,7 @@ function editCurrentTask(){
           <button type="button" class="button-prio-low" data-priority="low">Low</button>
       </div>
     </div>
-    <div class="editCurrentAssignedTo">
-      <h3 class="sectionHeadInfos">Assigned to</h3>
-
-      <div class="dropdown" id="contacts-dropdown" onclick="toggleContactsDropdown(event)">
-        <p>Select contacts to assign</p>
-        <input class="task-input hide" type="text" id="hidden-contacts-input" oninput="filterContacts()">
-        <img src="/img/addtask_icon_dropdown-menu.svg" id="assign-arrow">
-        <div class="dropdown-content" id="assignee"></div>
-      </div>
+    <div class="editCurrentAssigncloseMo
       <div class="icon-and-prio-container">
         <div class="assignees">${editAssigneeHtml}</div>
       </div>
