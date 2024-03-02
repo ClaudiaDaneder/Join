@@ -58,8 +58,13 @@ async function saveToStorage(task) {
 
 async function identifyTaskId() {
     let allSavedTasks = JSON.parse(await getItem('allTasks'));
-    lastID = allSavedTasks.length;
-    return lastID;
+    lastID = allSavedTasks[allSavedTasks.length - 1];
+    if (lastID == null || lastID == '') {
+        lastID = 0;
+    } else {
+        lastID = lastID['task-id'];
+    }
+    return lastID + 1;
 }
 
 
