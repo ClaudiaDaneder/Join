@@ -189,6 +189,18 @@ function updateEditPopup(j, id){
     editTask();
 }
 
+function setNewSubTask(id){
+  let subtext = document.getElementById('subtasks');
+  for (let i = 0; i < allDownloadTasks.length; i++){
+    if(allDownloadTasks[i]['task-id'] == id){
+      allDownloadTasks[i]['subtasks'].push({ 'subtasktext': subtext.value, 'done': false });
+    }
+  }
+    setItem('allTasks', allDownloadTasks);
+    openCurrentTask(id);
+    editTask();
+}
+
   function generateTaskHtml(task, assigneeHtmlBoard, subTasksHtml,editAssigneeHtml) {
     const firstPart = task.category.split(" ")[0].toLowerCase();
     const originalDate = task["due-date"]; 
@@ -222,7 +234,7 @@ function updateEditPopup(j, id){
       </div>
     </div>
     <div class="styled-subtaskfield" id="styled-subtaskfield">
-        <input class="task-input subtaskfield" type="text" placeholder="Add new subtask" id="subtasks" oninput="updateSubtaskButtons()" onfocus="subtaskfieldFocus()" onblur="subtaskfieldBlur()">
+        <input class="task-input subtaskfield" type="text" placeholder="Add new subtask" id="subtasks" oninput="updateSubtaskButtons(${task["task-id"]})" onfocus="subtaskfieldFocus()" onblur="subtaskfieldBlur()">
         <div class="subtaskfield-button-container" id="subtaskfield-buttons">
           <button type="button" class="subtaskfield-button-general">
             <img src="/img/addtask_icon_subtaskfield_plus.svg">
