@@ -20,8 +20,14 @@ function findTaskById(taskId) {
     const assigneeHtml = createAssigneeHtml(task["assignee-infos"]);
     const editAssigneeHtml= editAssignee(task["assignee-infos"]);
     modulWindow.innerHTML = generateTaskHtml(task, assigneeHtml, subTasksHtml,editAssigneeHtml);
+    modulWindow.innerHTML = generateTaskHtml(task, assigneeHtml, subTasksHtml, editAssigneeHtml);
+
+    document.getElementById('urgent').addEventListener('click', () => updatePriority('urgent', task));
+    document.getElementById('medium').addEventListener('click', () => updatePriority('medium', task));
+    document.getElementById('low').addEventListener('click', () => updatePriority('low', task));
   }
   
+
   function initializeDomElements() {
     const modalOverlay = document.getElementById("modal-overlay");
     const modulWindow = document.getElementById("modal-window");
@@ -32,9 +38,7 @@ function findTaskById(taskId) {
 document.addEventListener("DOMContentLoaded", (event) => {
   let modalWindow = document.getElementById("modal-window");
   if (modalWindow) {
-    // Event-Listener, der das Klick-Ereignis abfängt
     modalWindow.addEventListener("click", function (event) {
-      // Verhindert, dass das Klick-Ereignis zum modal-overlay propagiert wird
       event.stopPropagation();
     });
   }

@@ -108,6 +108,7 @@ function getCategoryClass(category) {
     return html;
   }
 
+
   function editAssignee(assignees) {
     if (!Array.isArray(assignees)) {
       return "";
@@ -138,6 +139,7 @@ function getCategoryClass(category) {
     return initials.length > 1 ? initials : initials + " "; // Fügt ein Leerzeichen hinzu, falls nur ein Initial vorhanden ist
   }
   
+
   function formatDateToDDMMYYYY(dateString) {
     const parts = dateString.split("-");
     return `${parts[0]}-${parts[1]}-${parts[2]}`;
@@ -165,6 +167,7 @@ function generateSubTasksHtml(allSubtasks, id) {
   return editSubTasksHtml;
 }
 
+
 function deleteSubtasklist(j, taskId){
   subtasks.splice(j, 1);
   for (let i = 0; i < allDownloadTasks.length; i++){
@@ -177,6 +180,7 @@ function deleteSubtasklist(j, taskId){
   editTask();
 }
 
+
 function updateEditPopup(j, id){
   let subtext = document.getElementById('editfield');
   for (let i = 0; i < allDownloadTasks.length; i++){
@@ -188,13 +192,24 @@ function updateEditPopup(j, id){
     openCurrentTask(id);
     editTask();
 }
+function updateTaskPriority(taskId, newPriority) {
+  for (let i = 0; i < allDownloadTasks.length; i++) {
+    if (allDownloadTasks[i]['task-id'] == taskId) {
+      allDownloadTasks[i]['prio'] = newPriority;
+      break;
+    }
+  }
+  setItem('allTasks', allDownloadTasks);
+  openCurrentTask(taskId);
+}
 
-  function generateTaskHtml(task, assigneeHtmlBoard, subTasksHtml,editAssigneeHtml) {
-    const firstPart = task.category.split(" ")[0].toLowerCase();
-    const originalDate = task["due-date"]; 
-    const formattedDate = formatDateToDDMMYYYY(originalDate); 
-    const subTasks = generateSubTasksHtml(task["subtasks"], task["task-id"]);
-    return `
+
+function generateTaskHtml(task, assigneeHtmlBoard, subTasksHtml,editAssigneeHtml) {
+  const firstPart = task.category.split(" ")[0].toLowerCase();
+  const originalDate = task["due-date"]; 
+  const formattedDate = formatDateToDDMMYYYY(originalDate); 
+  const subTasks = generateSubTasksHtml(task["subtasks"], task["task-id"]);
+  return `
     <form onsubmit="editCurrentTask()" class="editCurrentTask" id="editCurrentTask" style="display: none;">
     <div class="editCurrentTitle">
       <h3 class="sectionHeadInfos">Title<h3>
@@ -211,9 +226,10 @@ function updateEditPopup(j, id){
     <div class="editCurrentPrio">
       <h3 class="sectionHeadInfos">Priority<h3>
       <div class="prio-button-container">
-          <button type="button" class="button-prio-urgent" data-priority="urgent">Urgent </button>
-          <button type="button" class="button-prio-medium selected" data-priority="medium">Medium</button>
-          <button type="button" class="button-prio-low" data-priority="low">Low</button>
+      <button type="button" class="button-prio-urgent ${task['prio'] === 'urgent' ? 'selected' : ''}" data-priority="urgent" id="urgent">Urgent</button>
+      <button type="button" class="button-prio-medium ${task['prio'] === 'medium' ? 'selected' : ''}" data-priority="medium" id="medium">Medium</button>
+      <button type="button" class="button-prio-low ${task['prio'] === 'low' ? 'selected' : ''}" data-priority="low" id="low">Low</button>
+      
       </div>
     </div>
     <div class="editCurrentAssigncloseMo
@@ -268,6 +284,33 @@ function updateEditPopup(j, id){
         </div>
   </div>`;
   }
+
+  function updatePriority(priority, task) {
+    const selectedButton = document.getElementById(priority);
+    const isSelected = selectedButton.classList.contains('selected');
+    const priorities = ['urgent', 'medium', 'low'];
+    priorities.forEach(prio => {
+      const button = document.getElementById(prio);
+      button.classList.remove('selected');
+    });
+  
+    if (!isSelected) {
+      selectedButton.classList.add('selected');
+      task['prio'] = priority;
+    } else {
+      task['prio'] = '';
+    }
+    for (let i = 0; i < allDownloadTasks.length; i++) {
+      if (allDownloadTasks[i]['task-id'] === task['task-id']) {
+        allDownloadTasks[i]['prio'] = task['prio'];
+        break;
+      }
+    }
+    
+    setItem('allTasks', allDownloadTasks);
+  }
+  
+  
 
   async function editTask(status) {
     let currentOpenTask=document.getElementById("currentOpenTask");

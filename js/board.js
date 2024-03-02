@@ -38,7 +38,6 @@ async function loadTaskFromStorage() {
 }
 
 function addTaskToCategory(task) {
-  console.log(task["status"])
   switch (task["status"]) {
     case "toDos":
       toDos.push(task);
