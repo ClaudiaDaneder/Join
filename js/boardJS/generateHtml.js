@@ -148,7 +148,6 @@ function getCategoryClass(category) {
 
 function generateSubTasksHtml(allSubtasks, id) {
   let editSubTasksHtml = '';
-  console.log(allSubtasks);
   subtasks = [];
   for (let j = 0; j < allSubtasks.length; j++) {
       const element = allSubtasks[j];
