@@ -113,7 +113,7 @@ function getCategoryClass(category) {
     if (!Array.isArray(assignees)) {
       return "";
     }
-  
+    selectedContacts=[];
     let html = "";
     for (let i = 0; i < assignees.length; i++) {
       let assigneeObj = assignees[i];
@@ -192,6 +192,8 @@ function updateEditPopup(j, id){
     openCurrentTask(id);
     editTask();
 }
+
+
 function updateTaskPriority(taskId, newPriority) {
   for (let i = 0; i < allDownloadTasks.length; i++) {
     if (allDownloadTasks[i]['task-id'] == taskId) {
