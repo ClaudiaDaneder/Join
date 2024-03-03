@@ -1,13 +1,13 @@
 /**
  * This function is used to display different icons on the subtask input based on the value. as sson as an input is made, the buttons to either clear or add a subtask are displayed. 
  */
-function updateSubtaskButtons() {
+function updateSubtaskButtons(id) {
     let subtaskField = document.getElementById('subtasks');
     if (subtaskField.value === '') {
         document.getElementById('subtaskfield-buttons').innerHTML = showPlusButton();
 
     } else {
-        document.getElementById('subtaskfield-buttons').innerHTML = showClearOrAddButtons();
+        document.getElementById('subtaskfield-buttons').innerHTML = showClearOrAddButtons(id);
     }
 }
 
@@ -27,8 +27,12 @@ function showPlusButton() {
  * 
  * @returns string
  */
-function showClearOrAddButtons() {
-    return `<button type="button" class="subtaskfield-button-general" onclick="clearSubtaskField()"><img src="/img/addtask_icon_subtaskfield_cancel.svg"></button><hr><button type="button" class="subtaskfield-button-general" onclick="addToSubtasks()"><img src="/img/addtask_icon_subtaskfield_check.svg"></button></div>`;
+function showClearOrAddButtons(id) {
+    let button = `addToSubtasks()`;
+    if(id){
+        button = `setNewSubTask(${id})`;
+    }
+    return `<button type="button" class="subtaskfield-button-general" onclick="clearSubtaskField()"><img src="/img/addtask_icon_subtaskfield_cancel.svg"></button><hr><button type="button" class="subtaskfield-button-general" onclick="${button}"><img src="/img/addtask_icon_subtaskfield_check.svg"></button></div>`;
 }
 
 

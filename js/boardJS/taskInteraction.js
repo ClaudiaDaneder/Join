@@ -5,7 +5,7 @@ function findTaskById(taskId) {
   }
   
   
-  function openCurrentTask(taskId) {
+  async function openCurrentTask(taskId) {
     const { modalOverlay, modulWindow } = initializeDomElements();
     modalOverlay.style.display = "block";
     modulWindow.innerHTML = "";
@@ -19,7 +19,8 @@ function findTaskById(taskId) {
     const subTasksHtml = createSubtasksHtml(task["subtasks"]);
     const assigneeHtml = createAssigneeHtml(task["assignee-infos"]);
     const editAssigneeHtml= editAssignee(task["assignee-infos"]);
-    modulWindow.innerHTML = generateTaskHtml(task, assigneeHtml, subTasksHtml,editAssigneeHtml);
+    modulWindow.innerHTML = await generateTaskHtml(task, assigneeHtml, subTasksHtml,editAssigneeHtml);
+    
 
     document.getElementById('urgent').addEventListener('click', () => updatePriority('urgent', task));
     document.getElementById('medium').addEventListener('click', () => updatePriority('medium', task));

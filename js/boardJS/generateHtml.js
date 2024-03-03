@@ -147,15 +147,18 @@ function getCategoryClass(category) {
 }
 
 
-function generateSubTasksHtml(allSubtasks, id) {
-  let editSubTasksHtml = '';
+function generateSubTasksHtml(id) {
+  let editSubTasksHtml = document.getElementById('renderSubTasks');
+  editSubTasksHtml.innerHTML = '';
   subtasks = [];
-  for (let j = 0; j < allSubtasks.length; j++) {
-      const element = allSubtasks[j];
+  for (let i = 0; i < allDownloadTasks.length; i++){
+    if(allDownloadTasks[i]['task-id']==id){  
+  for (let j = 0; j < allDownloadTasks[i]['subtasks'].length; j++) {
+      const element = allDownloadTasks[i]['subtasks'][j];
       subtasks.push(element);
       
       const subTaskText = element["subtasktext"];
-      editSubTasksHtml += `<div class="subtasklist-item" id="subtasklist-item_${j}" ondblclick="editSubtasklistItem(${j}, ${id})" onmouseenter="showEditButtons(${j})" onmouseleave="showEditButtons(${j})">
+      editSubTasksHtml.innerHTML += `<div class="subtasklist-item" id="subtasklist-item_${j}" ondblclick="editSubtasklistItem(${j}, ${id})" onmouseenter="showEditButtons(${j})" onmouseleave="showEditButtons(${j})">
                           <div class="subtasklist-infos"><div class="subtasklist-marker">•</div>${subTaskText}</div>
                           <div id="edit-buttons_${j}" class="subtaskfield-button-container hide">
                               <button class="subtaskfield-button-general" type="button" onclick="editSubtasklistItem(${j}, ${id})"><img src="/img/addtask_icon_subtask_edit.svg"></button>
@@ -164,16 +167,15 @@ function generateSubTasksHtml(allSubtasks, id) {
                           </div>
                        </div>`;
   }
-  return editSubTasksHtml;
+   
+}
+}
 }
 
 
 function deleteSubtasklist(j, taskId){
   subtasks.splice(j, 1);
-  for (let i = 0; i < allDownloadTasks.length; i++){
-    if(allDownloadTasks[i]['task-id'] == taskId){
-      allDownloadTasks[i]['subtasks'] = subtasks;
-    }
+  for (let i = 0; i < allDownloadTasks.length; i++){allSubtasks
   }
   setItem('allTasks', allDownloadTasks);
   openCurrentTask(taskId);
@@ -189,7 +191,7 @@ function updateEditPopup(j, id){
     }
   }
   setItem('allTasks', allDownloadTasks);
-    openCurrentTask(id);
+  generateSubTasksHtml(id)
     editTask();
 }
 
@@ -214,8 +216,8 @@ function setNewSubTask(id){
     }
   }
     setItem('allTasks', allDownloadTasks);
-    openCurrentTask(id);
-    
+    generateSubTasksHtml(id)
+    clearSubtaskField();
 }
 
 
@@ -230,6 +232,7 @@ function editCurrentTask(id) {
       allDownloadTasks[i]["description"]=description;
       allDownloadTasks[i]["due-date"]=dueDate;
       allDownloadTasks[i]["assignee-infos"] = selectedContacts;
+      console.log(selectedContacts);
     }
     
   }
@@ -256,11 +259,10 @@ function updateSelectedContacts() {
 
 
 
-function generateTaskHtml(task, assigneeHtmlBoard, subTasksHtml,editAssigneeHtml) {
+async function generateTaskHtml(task, assigneeHtmlBoard, subTasksHtml,editAssigneeHtml) {
   const firstPart = task.category.split(" ")[0].toLowerCase();
   const originalDate = task["due-date"]; 
   const formattedDate = formatDateToDDMMYYYY(originalDate); 
-  const subTasks = generateSubTasksHtml(task["subtasks"], task["task-id"]);
   return `
     <section  class="editCurrentTask" id="editCurrentTask" style="display: none;">
     <div class="editCurrentTitle">
@@ -305,7 +307,8 @@ function generateTaskHtml(task, assigneeHtmlBoard, subTasksHtml,editAssigneeHtml
           </button>
         </div>
     </div>
-    ${subTasks}
+    <div id="renderSubTasks"></div>
+    
     <div class="editCurrentSubtasks" id="editCurrentSubtasks"> </div>
     <button onclick="editCurrentTask(${task["task-id"]})">Ok</button>
   </section>
@@ -336,7 +339,7 @@ function generateTaskHtml(task, assigneeHtmlBoard, subTasksHtml,editAssigneeHtml
                 <div class=""><h4 class="delet-string">Delete</h4></div>
                 </div>
                 <img src="./img/delet-edit-line.png">
-                <div  class="edit-box" onclick="editTask(${task["task-id"]})">
+                <div  class="edit-box" onclick="editTask(${task["task-id"]}), generateSubTasksHtml(${task["task-id"]})">
                 <div class=""><img class="edit-svg" src="./img/edit.svg"></div>
                 <div class="" ><h4 class="edit-string">Edit</h4></div>
                 </div>
