@@ -49,7 +49,6 @@ function getCategoryClass(category) {
     let subtaskPercentage = calculateSubtaskProgress(task["subtasks"]);
     let progressBarHtml = createProgressBar(subtaskPercentage, task["subtasks"].filter(subtask => subtask.done).length, task["subtasks"].length);
     let prioHTML = createPrioContainer(task);
-    // Rufen Sie die Hilfsfunktion auf, um die HTML-Zeichenfolge für die Beauftragten zu erhalten
     let assigneeHtmlBoard = getAssigneeHtml(task);
   
     return `
@@ -110,6 +109,7 @@ function getCategoryClass(category) {
 
 
   function editAssignee(assignees) {
+    console.log("Number of assignees:", assignees.length);
     if (!Array.isArray(assignees)) {
       return "";
     }
@@ -117,6 +117,7 @@ function getCategoryClass(category) {
     let html = "";
     for (let i = 0; i < assignees.length; i++) {
       let assigneeObj = assignees[i];
+      selectedContacts.push(assigneeObj);
       let assigneeName = assigneeObj.name;
       let initials = getInitials(assigneeName);
       html += `
@@ -136,7 +137,7 @@ function getCategoryClass(category) {
       .split(" ")
       .map((part) => part.charAt(0).toUpperCase())
       .join("");
-    return initials.length > 1 ? initials : initials + " "; // Fügt ein Leerzeichen hinzu, falls nur ein Initial vorhanden ist
+    return initials.length > 1 ? initials : initials + " ";
   }
   
 
@@ -212,7 +213,7 @@ function setNewSubTask(id){
   }
     setItem('allTasks', allDownloadTasks);
     openCurrentTask(id);
-    editTask();
+    
 }
 
 
@@ -221,24 +222,34 @@ function editCurrentTask(id) {
   let title = document.getElementById("titleEditValue").value;
   let description = document.getElementById("descriptionEditValue").value;
   let dueDate =document.getElementById("due-date").value;
-  console.log(dueDate)
   for (let i = 0; i < allDownloadTasks.length; i++) {
     if(allDownloadTasks[i]["task-id"]==id){
       allDownloadTasks[i]["title"]=title;
       allDownloadTasks[i]["description"]=description;
       allDownloadTasks[i]["due-date"]=dueDate;
-      allDownloadTasks[i]["assignee-infos"] = allContacts;
-      console.log(allDownloadTasks[i]["title"])
-    };
+      allDownloadTasks[i]["assignee-infos"] = selectedContacts;
+    }
     
   }
-  setNewSubTask(id);
+  
   setItem('allTasks', allDownloadTasks);
   renderallTasks();
   openCurrentTask(id);
 }
 
+function updateSelectedContacts() {
+  let selectedContacts = []; 
+  const checkboxes = document.querySelectorAll('#assignee .checkbox-option');
 
+  for (let i = 0; i < checkboxes.length; i++) {
+    const checkbox = checkboxes[i];
+    const img = checkbox.querySelector('img');
+    if (img && img.src.includes('addtask_contacts_checkbox_checked.svg')) {
+        selectedContacts.push(checkbox);
+    }
+  }
+  return selectedContacts;
+}
 
 
 
@@ -249,7 +260,7 @@ function generateTaskHtml(task, assigneeHtmlBoard, subTasksHtml,editAssigneeHtml
   const formattedDate = formatDateToDDMMYYYY(originalDate); 
   const subTasks = generateSubTasksHtml(task["subtasks"], task["task-id"]);
   return `
-    <form onsubmit="editCurrentTask(${task["task-id"]})" class="editCurrentTask" id="editCurrentTask" style="display: none;">
+    <section  class="editCurrentTask" id="editCurrentTask" style="display: none;">
     <div class="editCurrentTitle">
       <h3 class="sectionHeadInfos">Title<h3>
       <input type="text" id="titleEditValue" placeholder="Enter a Title" value="${task['title']}">
@@ -276,7 +287,7 @@ function generateTaskHtml(task, assigneeHtmlBoard, subTasksHtml,editAssigneeHtml
       <p>Select contacts to assign</p>
       <input class="task-input hide" type="text" id="hidden-contacts-input" oninput="filterContacts()">
       <img src="/img/addtask_icon_dropdown-menu.svg" id="assign-arrow">
-      <div class="dropdown-content" id="assignee"></div>
+      <div class="dropdown-content" id="assignee"  onclick="updateSelectedContacts()"></div>
     </div>
 
     <div class="editCurrentAssigncloseModal>
@@ -294,8 +305,8 @@ function generateTaskHtml(task, assigneeHtmlBoard, subTasksHtml,editAssigneeHtml
     </div>
     ${subTasks}
     <div class="editCurrentSubtasks" id="editCurrentSubtasks"> </div>
-    <button>Ok</button>
-  </form>
+    <button onclick="editCurrentTask(${task["task-id"]})">Ok</button>
+  </section>
 
 
   <div class="width-height-full-prozent" id="currentOpenTask">

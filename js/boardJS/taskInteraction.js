@@ -20,7 +20,6 @@ function findTaskById(taskId) {
     const assigneeHtml = createAssigneeHtml(task["assignee-infos"]);
     const editAssigneeHtml= editAssignee(task["assignee-infos"]);
     modulWindow.innerHTML = generateTaskHtml(task, assigneeHtml, subTasksHtml,editAssigneeHtml);
-    modulWindow.innerHTML = generateTaskHtml(task, assigneeHtml, subTasksHtml, editAssigneeHtml);
 
     document.getElementById('urgent').addEventListener('click', () => updatePriority('urgent', task));
     document.getElementById('medium').addEventListener('click', () => updatePriority('medium', task));
