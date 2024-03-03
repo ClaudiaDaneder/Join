@@ -214,7 +214,10 @@ function setNewSubTask(id){
     openCurrentTask(id);
     editTask();
 }
+
+
 function editCurrentTask(id) {
+  
   let title = document.getElementById("titleEditValue").value;
   let description = document.getElementById("descriptionEditValue").value;
   let dueDate =document.getElementById("due-date").value;
@@ -224,10 +227,12 @@ function editCurrentTask(id) {
       allDownloadTasks[i]["title"]=title;
       allDownloadTasks[i]["description"]=description;
       allDownloadTasks[i]["due-date"]=dueDate;
+      allDownloadTasks[i]["assignee-infos"] = allContacts;
       console.log(allDownloadTasks[i]["title"])
     };
     
   }
+  setNewSubTask(id);
   setItem('allTasks', allDownloadTasks);
   renderallTasks();
   openCurrentTask(id);
