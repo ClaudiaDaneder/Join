@@ -215,6 +215,28 @@ function setNewSubTask(id){
     openCurrentTask(id);
     editTask();
 }
+function editCurrentTask(id) {
+  let title = document.getElementById("titleEditValue").value;
+  let description = document.getElementById("descriptionEditValue").value;
+  let dueDate =document.getElementById("due-date").value;
+  console.log(dueDate)
+  for (let i = 0; i < allDownloadTasks.length; i++) {
+    if(allDownloadTasks[i]["task-id"]==id){
+      allDownloadTasks[i]["title"]=title;
+      allDownloadTasks[i]["description"]=description;
+      allDownloadTasks[i]["due-date"]=dueDate;
+      console.log(allDownloadTasks[i]["title"])
+    };
+    
+  }
+  setItem('allTasks', allDownloadTasks);
+  renderallTasks();
+  openCurrentTask(id);
+}
+
+
+
+
 
 
 function generateTaskHtml(task, assigneeHtmlBoard, subTasksHtml,editAssigneeHtml) {
@@ -223,14 +245,14 @@ function generateTaskHtml(task, assigneeHtmlBoard, subTasksHtml,editAssigneeHtml
   const formattedDate = formatDateToDDMMYYYY(originalDate); 
   const subTasks = generateSubTasksHtml(task["subtasks"], task["task-id"]);
   return `
-    <form onsubmit="editCurrentTask()" class="editCurrentTask" id="editCurrentTask" style="display: none;">
+    <form onsubmit="editCurrentTask(${task["task-id"]})" class="editCurrentTask" id="editCurrentTask" style="display: none;">
     <div class="editCurrentTitle">
       <h3 class="sectionHeadInfos">Title<h3>
-      <input type="text" placeholder="Enter a Title" value="${task['title']}">
+      <input type="text" id="titleEditValue" placeholder="Enter a Title" value="${task['title']}">
     </div>
     <div class="editCurrentDescription">
       <h3 class="sectionHeadInfos">Description<h3>
-      <input type="text" placeholder="Enter a Description" value="${task['description']}">
+      <input type="text" id="descriptionEditValue" placeholder="Enter a Description" value="${task['description']}">
     </div>
     <div class="editCurrentDueDate">
       <h3 class="sectionHeadInfos">Due date<h3>
@@ -245,7 +267,15 @@ function generateTaskHtml(task, assigneeHtmlBoard, subTasksHtml,editAssigneeHtml
       
       </div>
     </div>
-    <div class="editCurrentAssigncloseMo
+
+    <div class="dropdown" id="contacts-dropdown" onclick="toggleContactsDropdown(event)">
+      <p>Select contacts to assign</p>
+      <input class="task-input hide" type="text" id="hidden-contacts-input" oninput="filterContacts()">
+      <img src="/img/addtask_icon_dropdown-menu.svg" id="assign-arrow">
+      <div class="dropdown-content" id="assignee"></div>
+    </div>
+
+    <div class="editCurrentAssigncloseModal>
       <div class="icon-and-prio-container">
         <div class="assignees">${editAssigneeHtml}</div>
       </div>
