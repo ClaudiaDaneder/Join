@@ -338,6 +338,7 @@ button {
 
 .delet-edit-box button {
     font-size: 16px;
+    transition: ease-out 100ms;
 }
 
 .delet-edit-box button:hover {
@@ -352,11 +353,19 @@ button {
     width: 80px
 }
 
+.edit-box:hover img {
+    content: url(/img/edit_blue.svg);
+}
+
 .delete-box {
     display: flex;
     align-items: center;
     gap: 8px;
     width: 80px;
+}
+
+.delete-box:hover img {
+    content: url(/img/delete_blue.svg);
 }
 
 .delet-edit-container {
@@ -438,6 +447,11 @@ button {
     border-radius: 100%;
     background-color: #eee;
     cursor: pointer;
+}
+
+.verticalLineAndGlassImg:active img {
+    content: url(/img/search_blue.svg);
+    background-color: unset;
 }
 
 .verticalLine {
@@ -573,7 +587,16 @@ button {
     justify-content: space-between;
     gap: 26px;
     max-width: 1080px
+}
 
+.taskContainer button {
+    transition: ease-out 300ms;
+}
+
+.taskContainer button:hover img {
+    content: url(/img/plus_button_blue.svg);
+    width: 25px;
+    height: 25px;
 }
 
 .taskColumn {

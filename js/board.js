@@ -219,7 +219,15 @@ function closeModal() {
 
 }
 
+function searchfieldFocus() {
+  document.getElementById('inputField').classList.toggle('subtaskfield-focus')
+}
 
+function searchfieldBlur() {
+  document.getElementById('inputField').classList.remove('subtaskfield-focus')
+}
 
-
+function showBluePlusButton() {
+  
+}
 
