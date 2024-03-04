@@ -465,7 +465,7 @@ function showPopup() {
 function redirectToBoard() {
     setTimeout(function () {
         window.location.href = 'board.html';
-    }, 2200);
+    }, 900);
 }
 
 

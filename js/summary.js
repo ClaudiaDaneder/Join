@@ -110,14 +110,17 @@ function getEarliestDate() {
     if (openTasks.length === 0) {
         hideDeadlineSection()
     }
-    let earliestDate = new Date(openTasks[0]['due-date']).getTime();
-    for (let i = 1; i < openTasks.length; i++) {
-        let date = new Date(openTasks[i]['due-date']).getTime();
-        if (date < earliestDate) {
-            earliestDate = date;
+    if (openTasks.length > 0) {
+        let earliestDate = new Date(openTasks[0]['due-date']).getTime();
+        for (let i = 1; i < openTasks.length; i++) {
+            let date = new Date(openTasks[i]['due-date']).getTime();
+            if (date < earliestDate) {
+                earliestDate = date;
+            }
         }
+        return formatDate(new Date(earliestDate));
     }
-    return formatDate(new Date(earliestDate));
+
 }
 
 
@@ -179,4 +182,10 @@ function closePopup() {
     if (doc('logoutScreen').style.display == 'flex') {
         doc('logoutScreen').style.display = 'none';
     }
+}
+
+function redirectToBoard() {
+    setTimeout(function () {
+        window.location.href = 'board.html';
+    }, 100);
 }

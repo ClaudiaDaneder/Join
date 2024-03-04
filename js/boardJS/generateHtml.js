@@ -263,11 +263,12 @@ async function generateTaskHtml(task, assigneeHtmlBoard, subTasksHtml,editAssign
   const firstPart = task.category.split(" ")[0].toLowerCase();
   const originalDate = task["due-date"]; 
   const formattedDate = formatDateToDDMMYYYY(originalDate); 
-  return `
-    <section  class="editCurrentTask" id="editCurrentTask" style="display: none;">
+  return /*html*/`
+  
+    <section class="editCurrentTask" id="editCurrentTask" style="display: none;">
     <div class="editCurrentTitle">
-      <h3 class="sectionHeadInfos">Title<h3>
-      <input type="text" id="titleEditValue" placeholder="Enter a Title" value="${task['title']}">
+    <p class="task-label">Title</p>
+      <input type="text" id="titleEditValue" placeholder="Enter a Title" value="${task['title']}" required>
     </div>
     <div class="editCurrentDescription">
       <h3 class="sectionHeadInfos">Description<h3>

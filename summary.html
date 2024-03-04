@@ -43,7 +43,7 @@
             <div class="metrics-container">
                 <div class="to-dos">
                     <div class="metrics-bubble" onmouseenter="changeFieldColor('todo'), changeNumberColor('todo')"
-                        onmouseleave="resetFieldColor('todo'), resetNumberColor('todo')">
+                        onmouseleave="resetFieldColor('todo'), resetNumberColor('todo')" onclick="redirectToBoard()">
                         <div class="todo-dark-bg" id="todo"></div>
                         <div>
                             <div class="number" id="number_todo"></div>
@@ -51,7 +51,7 @@
                         </div>
                     </div>
                     <div class="metrics-bubble" onmouseenter="changeFieldColor('done'), changeNumberColor('done')"
-                        onmouseleave="resetFieldColor('done'), resetNumberColor('done')">
+                        onmouseleave="resetFieldColor('done'), resetNumberColor('done')" onclick="redirectToBoard()">
                         <div class="done-dark-bg" id="done"></div>
                         <div>
                             <div class="number" id="number_done"></div>
@@ -61,7 +61,7 @@
                 </div>
                 <div class="urgent">
                     <div class="metrics-bubble" onmouseenter="changeNumberColor('urgent')"
-                        onmouseleave="resetNumberColor('urgent')">
+                        onmouseleave="resetNumberColor('urgent')" onclick="redirectToBoard()">
                         <div class="urgent">
                             <div class="urgent-left"><img src="img/summary_urgent.svg">
                                 <div>
@@ -79,21 +79,21 @@
                 </div>
                 <div class="tasks-in-board">
                     <div class="metrics-bubble" onmouseenter="changeNumberColor('tasks-in-board')"
-                        onmouseleave="resetNumberColor('tasks-in-board')">
+                        onmouseleave="resetNumberColor('tasks-in-board')" onclick="redirectToBoard()">
                         <div>
                             <div class="number" id="number_tasks-in-board"></div>
                             <div class="metric">Tasks In <br>Board</div>
                         </div>
                     </div>
                     <div class="metrics-bubble" onmouseenter="changeNumberColor('tasks-in-progress')"
-                        onmouseleave="resetNumberColor('tasks-in-progress')">
+                        onmouseleave="resetNumberColor('tasks-in-progress')" onclick="redirectToBoard()">
                         <div>
                             <div class="number" id="number_tasks-in-progress"></div>
                             <div class="metric">Tasks In <br>Progress</div>
                         </div>
                     </div>
                     <div class="metrics-bubble" onmouseenter="changeNumberColor('awaiting-feedback')"
-                        onmouseleave="resetNumberColor('awaiting-feedback')">
+                        onmouseleave="resetNumberColor('awaiting-feedback')" onclick="redirectToBoard()">
                         <div>
                             <div class="number" id="number_awaiting-feedback"></div>
                             <div class="metric">Awaiting <br>Feedback</div>

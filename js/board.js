@@ -21,15 +21,27 @@ let currentSubTasks = [];
 let boardSubTask = [];
 let searchResults = [];
 
-async function openAddTask(status){
-  
- board = document.getElementById("boardSiteContainer");
- addTaskContainer = document.getElementById("addTaskContainer");
- board.style.display="none";
- addTaskContainer.style.display="";
- document.getElementById('my-form').value = status;
- 
+function openAddTask(status) {
+  document.getElementById('my-form').value = status;
+  document.getElementById("addTaskContainerBG").classList.remove('hide');
+  document.getElementById('addTaskContainer').classList.remove('animate-slide-out');
+  setTimeout(function () {
+    document.getElementById("addTaskContainer").classList.remove('hide');
+    document.getElementById('addTaskContainer').classList.add('animate-slide-in');
+  }, 100)
 }
+
+function closeAddTask() {
+  document.getElementById('my-form').value = '';
+  document.getElementById('addTaskContainer').classList.remove('animate-slide-in');
+  document.getElementById('addTaskContainer').classList.add('animate-slide-out');
+  setTimeout(function () {
+    document.getElementById("addTaskContainer").classList.add('hide');
+    document.getElementById("addTaskContainerBG").classList.add('hide');
+  }, 500);
+
+}
+
 
 // Datenladen und -verarbeiten
 async function loadTaskFromStorage() {
@@ -55,7 +67,6 @@ function addTaskToCategory(task) {
       console.warn("Unbekannter Status:", task["status"]);
   }
 }
-
 
 
 async function fillTasks() {

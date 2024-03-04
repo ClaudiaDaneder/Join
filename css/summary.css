@@ -126,6 +126,7 @@ body {
     background-color: #2A3647;
     color: #fff !important;
     transform: scale(1.04);
+    cursor: pointer;
 }
 
 .number {
@@ -251,6 +252,7 @@ body {
         align-items: flex-start;
         gap: 36px;
     }
+
 
 
     .metrics-container {

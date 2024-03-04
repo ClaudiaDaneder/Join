@@ -23,8 +23,9 @@ function showPlusButton() {
 
 
 /**
- * This function returns the html code to display the buttons to either clear or add a subtask.
+ * This function returns the html code to display the buttons to either clear or add a subtask. Depending on whether the function is used on the site "addtask" or "board", the button triggers a different function. 
  * 
+ * @param {number} id 
  * @returns string
  */
 function showClearOrAddButtons(id) {
