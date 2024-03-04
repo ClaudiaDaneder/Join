@@ -73,7 +73,6 @@ button {
 .width-height-full-prozent {
     display: flex;
     flex-direction: column;
-    padding: 48px 40px 48px 40px;
     justify-content: space-between;
     gap: 24px;
     box-sizing: border-box;
@@ -128,9 +127,42 @@ button {
 
 #modal-window {
     position: fixed;
-    max-width: 525px;
+    width: 525px;
     background-color: white;
     border-radius: 30px;
+    padding: 48px 40px 48px 40px;
+    right: -525px;
+}
+
+.animation-slide-in {
+    animation: modalWindowSlideIn 400ms ease-in-out;
+    animation-fill-mode: forwards;
+    animation-direction: normal;
+}
+
+.animation-slide-out {
+    animation: modalWindowSlideOut 400ms ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes modalWindowSlideIn {
+    0% {
+        right: -525px;
+    }
+
+    100% {
+        right: calc(50% - 262.5px)
+    }
+}
+
+@keyframes modalWindowSlideOut {
+    0% {
+        right: calc(50% - 262.5px)
+    }
+
+    100% {
+        right: -525px;
+    }
 }
 
 .overHeadline {

@@ -207,13 +207,17 @@ function endSearch() {
 }
 
 
+
 function closeModal() {
   renderallTasks();
-  document.getElementById("modal-overlay").style.display = "none";
+  document.getElementById('modal-window').classList.remove('animation-slide-in');
+  document.getElementById('modal-window').classList.add('animation-slide-out');
+  setTimeout(function () {
+    document.getElementById('modal-window').classList.add('hide');
+    document.getElementById('modal-overlay').classList.add('hide')
+  }, 500);
+
 }
-
-
-
 
 
 
