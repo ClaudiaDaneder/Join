@@ -79,9 +79,9 @@ async function determineTaskId() {
     if (lastID == null || lastID == '') {
         lastID = 0;
     } else {
-        lastID = lastID['task-id'];
+        lastID = lastID['task-id'] + 1;
     }
-    return lastID + 1;
+    return lastID;
 }
 
 

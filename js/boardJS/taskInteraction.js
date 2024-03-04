@@ -7,7 +7,7 @@ function findTaskById(taskId) {
   
   async function openCurrentTask(taskId) {
     const { modalOverlay, modulWindow } = initializeDomElements();
-    modalOverlay.style.display = "block";
+    modalOverlay.style.display = "flex";
     modulWindow.innerHTML = "";
   
     const task = findTaskById(taskId);

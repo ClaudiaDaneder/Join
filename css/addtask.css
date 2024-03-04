@@ -43,6 +43,7 @@ select:focus,
 .dropdown:focus {
     border: 1px solid #29abe2;
     outline: none !important;
+    cursor: text;
 }
 
 .task-input::placeholder,
