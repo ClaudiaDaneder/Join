@@ -132,6 +132,36 @@ button {
     border-radius: 30px;
     padding: 48px 40px 48px 40px;
     right: -525px;
+    max-height: 600px;
+    box-sizing: content-box;
+}
+
+.editCurrentTask {
+    overflow-y: scroll;
+    max-height: 600px;
+    padding-right: 36px;
+}
+
+#modal-window textarea {
+    min-height: 80px;
+}
+
+.editCurrentTask::-webkit-resizer {
+    display: none;
+}
+
+.editCurrentTask::-webkit-scrollbar {
+    width: 16px;
+}
+
+.editCurrentTask::-webkit-scrollbar-corner {
+    color: transparent
+}
+
+.editCurrentTask::-webkit-scrollbar-thumb {
+    background-color: #A8A8A8;
+    border-radius: 20px;
+    border: solid 4px white;
 }
 
 .animation-slide-in {

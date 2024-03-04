@@ -16,7 +16,7 @@ p {
 button,
 .task-input,
 #title,
-#description,
+textarea,
 select,
 .dropdown {
     border: unset;
@@ -26,7 +26,7 @@ select,
 
 .task-input,
 #title,
-#description,
+textarea,
 select,
 .dropdown {
     font-family: inherit;
@@ -38,7 +38,7 @@ select,
 
 .task-input:focus,
 #title:focus,
-#description:focus,
+textarea:focus,
 select:focus,
 .dropdown:focus {
     border: 1px solid #29abe2;
@@ -48,11 +48,11 @@ select:focus,
 
 .task-input::placeholder,
 #title::placeholder,
-#description::placeholder {
+textarea::placeholder {
     color: #D1D1D1;
 }
 
-#description {
+textarea {
     padding: 18px 16px;
     overflow: auto;
     resize: vertical;
@@ -63,19 +63,19 @@ select:focus,
     background-size: 18.9px 18.9px;
 }
 
-#description::-webkit-resizer {
+textarea::-webkit-resizer {
     display: none;
 }
 
-#description::-webkit-scrollbar {
+textarea::-webkit-scrollbar {
     width: 16px;
 }
 
-#description::-webkit-scrollbar-corner {
+textarea::-webkit-scrollbar-corner {
     color: transparent
 }
 
-#description::-webkit-scrollbar-thumb {
+textarea::-webkit-scrollbar-thumb {
     background-color: #A8A8A8;
     border-radius: 20px;
     border: solid 4px white;
@@ -696,7 +696,7 @@ a:hover {
 
     .task-input,
     #title,
-    #description,
+    textarea,
     select,
     .dropdown {
         font-size: 17px;
@@ -706,7 +706,7 @@ a:hover {
         font-size: 15px;
     }
 
-    #description {
+    textarea {
         background-size: 15px;
     }
 }
@@ -738,7 +738,7 @@ a:hover {
 
     .task-input,
     #title,
-    #description,
+    textarea,
     select,
     .dropdown {
         font-size: 14px;
@@ -748,7 +748,7 @@ a:hover {
         font-size: 14px;
     }
 
-    #description {
+    textarea {
         background-size: 15px;
     }
 
@@ -820,7 +820,7 @@ a:hover {
 
     .task-input,
     #title,
-    #description,
+    textarea,
     select,
     .dropdown {
         margin-bottom: 16px
@@ -879,7 +879,7 @@ a:hover {
 
     .task-input,
     #title,
-    #description,
+    textarea,
     select,
     .dropdown {
         padding: 8px 12px;

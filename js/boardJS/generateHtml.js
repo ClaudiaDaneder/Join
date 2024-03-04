@@ -273,18 +273,18 @@ async function generateTaskHtml(task, assigneeHtmlBoard, subTasksHtml, editAssig
     <section class="editCurrentTask" id="editCurrentTask" style="display: none;">
     <div class="editCurrentTitle">
     <p class="task-label">Title</p>
-      <input type="text" id="titleEditValue" placeholder="Enter a Title" value="${task['title']}" required>
+      <input class="task-input" type="text" id="titleEditValue" placeholder="Enter a Title" value="${task['title']}" required>
     </div>
     <div class="editCurrentDescription">
-      <h3 class="sectionHeadInfos">Description<h3>
-      <input type="text" id="descriptionEditValue" placeholder="Enter a Description" value="${task['description']}">
+    <p class="task-label">Description</p>
+      <textarea class="task-input" type="text" id="descriptionEditValue" placeholder="Enter a Description" rows="2">${task['description']}</textarea>
     </div>
     <div class="editCurrentDueDate">
-      <h3 class="sectionHeadInfos">Due date<h3>
+    <p class="task-label">Due date</p>
       <input class="task-input" type="date" id="due-date" required="" value="${formattedDate}" min="0">
     </div>
     <div class="editCurrentPrio">
-      <h3 class="sectionHeadInfos">Priority<h3>
+    <p class="task-label">Priority</p>
       <div class="prio-button-container">
       <button type="button" class="button-prio-urgent ${task['prio'] === 'urgent' ? 'selected' : ''}" data-priority="urgent" id="urgent">Urgent</button>
       <button type="button" class="button-prio-medium ${task['prio'] === 'medium' ? 'selected' : ''}" data-priority="medium" id="medium">Medium</button>
