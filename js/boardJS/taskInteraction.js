@@ -54,10 +54,10 @@ function changeSubBox(i) {
   var checkBox = document.getElementById("checkBox_" + i);
   if (checkBox) {
     if (currentSubTasks[i].done) {
-      checkBox.src = "./img/none-checked.png";
+      checkBox.src = "./img/none-checked.svg";
       currentSubTasks[i].done = false;
     } else {
-      checkBox.src = "./img/checked.png";
+      checkBox.src = "./img/checked_box.svg";
       currentSubTasks[i].done = true;
     }
   }

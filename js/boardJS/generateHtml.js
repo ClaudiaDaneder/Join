@@ -12,7 +12,7 @@ function calculateSubtaskProgress(allSubtasks) {
 
 
 function createProgressBar(subtaskPercentage, completedSubtasks, totalSubtasks) {
-  if (totalSubtasks.length > 0) {
+  if (totalSubtasks > 0) {
     return `
       <div class="ProgressBar-container">
         <div class="ProgressBarBox">
@@ -22,7 +22,7 @@ function createProgressBar(subtaskPercentage, completedSubtasks, totalSubtasks) 
       </div>
     `;
   } else {
-    return ''
+    return '';
   }
 }
 
