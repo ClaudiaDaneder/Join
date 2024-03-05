@@ -216,8 +216,8 @@ function closeModal() {
   setTimeout(function () {
     document.getElementById('modal-window').classList.add('hide');
     document.getElementById('modal-overlay').classList.add('hide')
+    document.getElementById('modal-window').innerHTML = '';
   }, 500);
-
 }
 
 function searchfieldFocus() {
@@ -228,3 +228,13 @@ function searchfieldBlur() {
   document.getElementById('inputField').classList.remove('subtaskfield-focus')
 }
 
+function closeInput() {
+  if (doc('contacts-dropdown').classList.contains('active')) {
+    doc('contacts-dropdown').classList.remove('active');
+        document.getElementById('assign-arrow').style.transform = 'rotate(0deg)';
+    }
+}
+
+function notClose(event) {
+  event.stopPropagation();
+}

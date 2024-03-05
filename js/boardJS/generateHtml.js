@@ -249,14 +249,14 @@ function editCurrentTask(id) {
 }
 
 function updateSelectedContacts() {
-  let selectedContacts = [];
+  let selectedContacts = []; 
   const checkboxes = document.querySelectorAll('#assignee .checkbox-option');
 
   for (let i = 0; i < checkboxes.length; i++) {
     const checkbox = checkboxes[i];
     const img = checkbox.querySelector('img');
     if (img && img.src.includes('addtask_contacts_checkbox_checked.svg')) {
-      selectedContacts.push(checkbox);
+        selectedContacts.push(checkbox);
     }
   }
   return selectedContacts;
@@ -296,7 +296,7 @@ async function generateTaskHtml(task, assigneeHtmlBoard, subTasksHtml, editAssig
       </div>
     </div>
     <p class="task-label">Assigned to:</p>
-    <div class="dropdown" id="contacts-dropdown" onclick="toggleContactsDropdown(event)">
+    <div class="dropdown" id="contacts-dropdown" onclick="notClose(event), toggleContactsDropdown(event)">
       <p>Select contacts to assign</p>
       <input class="task-input hide" type="text" id="hidden-contacts-input" oninput="filterContacts()">
       <img src="/img/addtask_icon_dropdown-menu.svg" id="assign-arrow">
