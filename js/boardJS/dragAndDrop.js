@@ -13,6 +13,7 @@ function drag(ev, id) {
   }
   ev.dataTransfer.setData("id", id);
   ev.dataTransfer.dropEffect = "move";
+
 }
 
 
@@ -41,6 +42,7 @@ function determineTargetElement(ev) {
   while (targetElement && !targetElement.classList.contains("taskColumn")) {
     targetElement = targetElement.parentElement;
   }
+  return targetElement;
 }
 
 
@@ -101,4 +103,3 @@ function removeTaskFromCurrentList(taskToRemove) {
     done = done.filter((task) => task["task-id"] !== taskToRemove["task-id"]);
   }
 }
-
