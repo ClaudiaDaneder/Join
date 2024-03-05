@@ -21,7 +21,9 @@ let currentSubTasks = [];
 let boardSubTask = [];
 let searchResults = [];
 
+
 function openAddTask(status) {
+  resetForm();
   document.getElementById('my-form').value = status;
   document.getElementById("addTaskContainerBG").classList.remove('hide');
   document.getElementById('addTaskContainer').classList.remove('animate-slide-out');
@@ -39,7 +41,6 @@ function closeAddTask() {
     document.getElementById("addTaskContainer").classList.add('hide');
     document.getElementById("addTaskContainerBG").classList.add('hide');
   }, 500);
-  resetForm();
 }
 
 
