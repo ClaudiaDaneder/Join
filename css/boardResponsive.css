@@ -1,0 +1,118 @@
+@media screen and (max-width: 1250px) {
+    .taskContainer {
+        gap: 16px;
+    }
+}
+
+
+@media screen and (max-width: 1200px) {
+    .inputField {
+        width: 290px;
+    }
+
+    .verticalLineAndGlassImg {
+        gap: 8px;
+    }
+
+    .inputFieldAndAddTaskBtn {
+        gap: 16px;
+    }
+
+    .boardSiteContainer {
+        height: 100vh;
+    }
+
+    .taskContainer {
+        flex-direction: column;
+    }
+
+    .parrent-add-task-container {
+        width: 100%
+    }
+
+    .task {
+        max-width: 252px;
+    }
+
+    .added-task-txt {
+        font-size: 27px;
+    }
+}
+
+
+@media screen and (max-width: 1100px) {
+    .inputField {
+        width: 290px;
+    }
+
+    .addTaskBtn {
+        width: 48px;
+        height: 48px;
+        padding: 0px;
+    }
+
+    .addTaskBtn p {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .boardSiteContainer {
+        left: 200px;
+        width: calc(100% - 190px);
+        padding: 0 48px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .inputField {
+        width: 270px;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .boardSiteContainer {
+        left: 0;
+        width: 100%;
+    }
+
+}
+
+@media screen and (max-width: 700px) {
+    .boardSiteContainer {
+        top: 128px;
+        padding: 0 16px
+    }
+
+    .boardHeadline {
+        font-size: 47px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .inputFieldAndAddTaskBtn {
+        flex-direction: column-reverse;
+        justify-content: space-between;
+        position: absolute;
+        top: 4px;
+        left: 16px;
+        right: 13px;
+    }
+
+    .inputField {
+        align-self: flex-start;
+    }
+
+    .boardSubhHader {
+        flex-direction: column;
+        margin-bottom: 100px;
+    }
+
+    .addTaskBtn {
+        align-self: flex-end;
+    }
+
+    .boardHeadline {
+        align-self: flex-start;
+    }
+}

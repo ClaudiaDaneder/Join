@@ -130,6 +130,7 @@ button {
 .ProgressBar-container {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 10px
 }
 
@@ -441,8 +442,10 @@ button {
     position: relative;
     left: 232px;
     top: 176px;
+    bottom: 30px;
     width: calc(100% - 232px);
     box-sizing: border-box;
+    padding: 0 64px;
 }
 
 
@@ -450,7 +453,6 @@ button {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 0 64px;
 }
 
 .boardSubhHader {
@@ -472,7 +474,6 @@ button {
     border-radius: 10px;
     display: flex;
     justify-content: space-between;
-    gap: 10px;
     align-items: center;
     background-color: #FFFFFF;
     box-sizing: border-box;
@@ -480,6 +481,7 @@ button {
 
 .inputFieldAndAddTaskBtn {
     display: flex;
+    align-items: center;
     gap: 32px;
 }
 
@@ -489,8 +491,6 @@ button {
     font-family: inherit;
     width: 90%
 }
-
-
 
 .inputFindTask:focus {
     border: none;
@@ -650,7 +650,7 @@ button {
     justify-content: space-between;
     gap: 26px;
     max-width: 1080px;
-    height: 70vh;
+    min-height: 65vh;
 }
 
 .taskContainer button {
@@ -674,6 +674,7 @@ section{
     overflow-y: auto;
     overflow-x: hidden;
     padding: 9px;
+    height: 100%;
 }
 
 .taskContent {
@@ -719,6 +720,7 @@ section{
     max-width: 144px;
     text-align: center;
     font-size: 16px;
+    box-sizing: border-box;
 }
 
 .user {
@@ -732,6 +734,7 @@ section{
     display: flex;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
 }
 
 .previewTitle {
@@ -746,199 +749,5 @@ section{
     -webkit-box-orient: vertical;
     overflow: hidden;
     color: #A8A8A8;
-}
-
-
-
-
-
-
-@media(max-width:1250px) {
-
-    .addTaskLinkMobile {
-        display: none;
-    }
-
-    .header-container-to-add-current-task {
-        margin-right: 60px;
-    }
-
-    .previewTitle {
-        font-size: 16px;
-    }
-
-    .header-container-to-add-current-task {
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        width: 252px;
-    }
-
-    .task {
-        width: 240px !important;
-    }
-
-}
-
-@media(min-width:1250px) {
-
-    .addTaskLinkMobile {
-        display: none;
-    }
-
-
-    .previewTitle {
-        font-size: 16px !important;
-    }
-
-    .previewDescription {
-        font-size: 16px !important;
-    }
-
-}
-
-@media(max-width:1160px) {
-    .header-container-to-add-current-task {
-        width: auto;
-    }
-
-    .task {
-        width: 140px;
-    }
-
-    .noTask {
-        width: 140px;
-    }
-
-    .width-240px {
-        width: auto;
-    }
-}
-
-@media(max-width:1180px) {
-
-    .technical {
-        margin-right: 16px;
-        width: 65%;
-    }
-
-    .user {
-        margin-right: 16px;
-        width: 40%;
-    }
-}
-
-@media(max-width:1050px) {
-    .header-container-to-add-current-task {
-        width: auto;
-    }
-
-    .task {
-        width: 100px;
-    }
-
-    .noTask {
-        width: 100px;
-    }
-
-    .width-240px {
-        width: auto;
-    }
-
-    .technical {
-        width: 100%;
-        padding: 4px 4px 4px 4px !important;
-    }
-
-    .user {
-        margin-right: 16px;
-        width: 50%;
-    }
-
-    .task {
-        padding: 12px;
-    }
-}
-
-@media(max-width:428px) {
-
-
-    .boardSubhHader {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .addTaskLetterin {
-        display: none;
-    }
-
-    .addTaskLink {
-        display: none;
-    }
-
-    .addTaskLinkMobile {
-        display: block;
-    }
-
-    .space-between {
-        justify-content: space-between;
-    }
-
-    .boardHeadline {
-        font-size: 47px;
-    }
-
-    .taskContainer {
-        flex-direction: column;
-    }
-
-    .task {
-        width: 252px;
-    }
-
-    .noTask {
-        width: 90% !important;
-        margin-right: 20px;
-        margin-left: 20px;
-    }
-
-    .header-container-to-add-current-task {
-        width: auto !important;
-        margin-bottom: 16px;
-        margin-top: 16px;
-    }
-
-    .added-task-txt {
-        font-size: 27px;
-    }
-
-    .flex-grow-1 {
-        min-height: auto !important;
-    }
-
-    .width-240px {
-        width: 90% !important;
-        margin-left: 16px;
-
-    }
-
-    .boardSiteContainer {
-        padding-top: 80px !important;
-        padding-bottom: 96px;
-    }
-
-    .mobileHeaderAndAddTaskBtn {
-        width: 90% !important;
-        margin-left: 20px;
-        margin-right: 20px;
-        margin-bottom: 40px;
-        margin-top: 40px;
-    }
-
-    .inputFieldAndAddTaskBtn {
-        width: 90% !important;
-    }
-
-    .inputField {
-        width: 100% !important;
-    }
+    font-size: 16px;
 }
