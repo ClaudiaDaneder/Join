@@ -39,7 +39,7 @@ function closeAddTask() {
     document.getElementById("addTaskContainer").classList.add('hide');
     document.getElementById("addTaskContainerBG").classList.add('hide');
   }, 500);
-
+  resetForm();
 }
 
 
@@ -225,9 +225,5 @@ function searchfieldFocus() {
 
 function searchfieldBlur() {
   document.getElementById('inputField').classList.remove('subtaskfield-focus')
-}
-
-function showBluePlusButton() {
-  
 }
 

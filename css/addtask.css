@@ -93,6 +93,7 @@ select,
 
 input[type="date"]::-webkit-calendar-picker-indicator {
     background-image: url(/img/addtask_icon_datepicker.svg);
+    cursor: pointer;
 }
 
 select,
@@ -392,7 +393,7 @@ a:hover {
     background-image: url(/img/addtask_prio_urgent.svg);
     background-repeat: no-repeat;
     background-position-y: 50%;
-    background-position-x: 85%;
+    background-position-x: 87%;
 }
 
 .button-prio-urgent:focus,
@@ -402,7 +403,7 @@ a:hover {
     background-image: url(/img/addtask_prio_urgent_white.svg);
     background-repeat: no-repeat;
     background-position-y: 50%;
-    background-position-x: 85%;
+    background-position-x: 87%;
     transition: 100ms ease-in-out;
 }
 
@@ -410,7 +411,7 @@ a:hover {
     background-image: url(/img/addtask_prio_medium.svg);
     background-repeat: no-repeat;
     background-position-y: 50%;
-    background-position-x: 85%;
+    background-position-x: 90%;
 }
 
 .button-prio-medium:focus,
@@ -420,7 +421,7 @@ a:hover {
     background-image: url(/img/addtask_prio_medium_white.svg);
     background-repeat: no-repeat;
     background-position-y: 50%;
-    background-position-x: 85%;
+    background-position-x: 90%;
     transition: 100ms ease-in-out;
 }
 
@@ -428,7 +429,7 @@ a:hover {
     background-image: url(/img/addtask_prio_low.svg);
     background-repeat: no-repeat;
     background-position-y: 50%;
-    background-position-x: 85%;
+    background-position-x: 80%;
 }
 
 .button-prio-low:focus,
@@ -438,12 +439,13 @@ a:hover {
     background-image: url(/img/addtask_prio_low_white.svg);
     background-repeat: no-repeat;
     background-position-y: 50%;
-    background-position-x: 85%;
+    background-position-x: 80%;
     transition: 100ms ease-in-out;
 }
 
 .button-prio-urgent.selected,
 .button-prio-urgent.selected:hover,
+.button-prio-urgent.selected:focus,
 .button-prio-medium.selected,
 .button-prio-medium.selected:hover,
 .button-prio-low.selected,
@@ -657,8 +659,8 @@ a:hover {
 }
 
 .assignee-circle {
-    width: 35px;
-    height: 35px;
+    width: 42px;
+    height: 42px;
     border-radius: 100%;
     display: flex;
     align-items: center;
@@ -666,6 +668,7 @@ a:hover {
     color: #fff;
     font-size: 14px;
     border: 2px solid #fff;
+    box-sizing: border-box;
 }
 
 .assignee-circle:hover {

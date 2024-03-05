@@ -113,7 +113,6 @@ function createAssigneeHtml(assignees) {
 
 
 function editAssignee(assignees) {
-  console.log("Number of assignees:", assignees.length);
   if (!Array.isArray(assignees)) {
     return "";
   }
@@ -125,9 +124,9 @@ function editAssignee(assignees) {
     let assigneeName = assigneeObj.name;
     let initials = getInitials(assigneeName);
     html += `
-          <div class="initial-container-on-board-tasks">
-              <div class="color-initial-on-board-tasks ${assigneeObj.color}">
-                  <div class="initials-first-and-last-on-board-tasks">${initials}</div>
+          <div class="initial-and-name">
+              <div class="initials ${assigneeObj.color}">
+                  <div class="initials-first-and-last">${initials}</div>
               </div>
           </div>`;
   }
@@ -150,6 +149,9 @@ function formatDateToDDMMYYYY(dateString) {
   return `${parts[0]}-${parts[1]}-${parts[2]}`;
 }
 
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 function generateSubTasksHtml(id) {
   let editSubTasksHtml = document.getElementById('renderSubTasks');
@@ -237,7 +239,6 @@ function editCurrentTask(id) {
       allDownloadTasks[i]["description"] = description;
       allDownloadTasks[i]["due-date"] = dueDate;
       allDownloadTasks[i]["assignee-infos"] = selectedContacts;
-      console.log(selectedContacts);
     }
 
   }
@@ -268,8 +269,11 @@ async function generateTaskHtml(task, assigneeHtmlBoard, subTasksHtml, editAssig
   const firstPart = task.category.split(" ")[0].toLowerCase();
   const originalDate = task["due-date"];
   const formattedDate = formatDateToDDMMYYYY(originalDate);
+  let Prio = capitalizeFirstLetter(task["prio"]);
+  let prioimage = createPrioContainer(task)
+
   return /*html*/`
-  
+    <button onclick="closeModal()" type="button"><img class="close-png" src="./img/close.png"></button>
     <section class="editCurrentTask" id="editCurrentTask" style="display: none;">
     <div class="editCurrentTitle">
     <p class="task-label">Title</p>
@@ -281,30 +285,25 @@ async function generateTaskHtml(task, assigneeHtmlBoard, subTasksHtml, editAssig
     </div>
     <div class="editCurrentDueDate">
     <p class="task-label">Due date</p>
-      <input class="task-input" type="date" id="due-date" required="" value="${formattedDate}" min="0">
+      <input class="task-input" type="date" id="due-date" required value="${formattedDate}" min="0">
     </div>
     <div class="editCurrentPrio">
-    <p class="task-label">Priority</p>
+      <p class="task-label">Priority</p>
       <div class="prio-button-container">
-      <button type="button" class="button-prio-urgent ${task['prio'] === 'urgent' ? 'selected' : ''}" data-priority="urgent" id="urgent">Urgent</button>
-      <button type="button" class="button-prio-medium ${task['prio'] === 'medium' ? 'selected' : ''}" data-priority="medium" id="medium">Medium</button>
-      <button type="button" class="button-prio-low ${task['prio'] === 'low' ? 'selected' : ''}" data-priority="low" id="low">Low</button>
-      
+        <button type="button" class="button-prio-urgent ${task['prio'] === 'urgent' ? 'selected' : ''}" data-priority="urgent" id="urgent">Urgent</button>
+        <button type="button" class="button-prio-medium ${task['prio'] === 'medium' ? 'selected' : ''}" data-priority="medium" id="medium">Medium</button>
+        <button type="button" class="button-prio-low ${task['prio'] === 'low' ? 'selected' : ''}" data-priority="low" id="low">Low</button>
       </div>
     </div>
-
+    <p class="task-label">Assigned to:</p>
     <div class="dropdown" id="contacts-dropdown" onclick="toggleContactsDropdown(event)">
       <p>Select contacts to assign</p>
       <input class="task-input hide" type="text" id="hidden-contacts-input" oninput="filterContacts()">
       <img src="/img/addtask_icon_dropdown-menu.svg" id="assign-arrow">
       <div class="dropdown-content" id="assignee"  onclick="updateSelectedContacts()"></div>
     </div>
-
-    <div class="editCurrentAssigncloseModal>
-      <div class="icon-and-prio-container">
-        <div class="assignees">${editAssigneeHtml}</div>
-      </div>
-    </div>
+    <div class="icon-and-prio-container">${editAssigneeHtml}</div>
+    <p class="task-label">Subtasks:</p>
     <div class="styled-subtaskfield" id="styled-subtaskfield">
         <input class="task-input subtaskfield" type="text" placeholder="Add new subtask" id="subtasks" oninput="updateSubtaskButtons(${task["task-id"]})" onfocus="subtaskfieldFocus()" onblur="subtaskfieldBlur()">
         <div class="subtaskfield-button-container" id="subtaskfield-buttons">
@@ -315,20 +314,19 @@ async function generateTaskHtml(task, assigneeHtmlBoard, subTasksHtml, editAssig
     </div>
     <div id="renderSubTasks"></div>
     
-    <div class="editCurrentSubtasks" id="editCurrentSubtasks"> </div>
-    <button onclick="editCurrentTask(${task["task-id"]})">Ok</button>
+    <div class="editCurrentSubtasks" id="editCurrentSubtasks"></div>
+    <button class="create-button right" onclick="editCurrentTask(${task["task-id"]})">Ok</button>
   </section>
 
 
   <div class="width-height-full-prozent" id="currentOpenTask">
         <div class="overHeadline">
             <div class="${firstPart}">${task["category"]}</div>
-            <div><img onclick="closeModal()" class="close-png" src="./img/close.png" alt=""></div>
         </div>
         <div class="Headline"><h1 class="current-task-headline">${task["title"]}</h1></div>
         <div class="description"><p class="current-task-description">${task["description"]}</p></div>
-        <div class="due-date">Due date: <p>${task["due-date"].replace(/-/g, "/")}</p></div>
-        <div class="current-prio">Priority: <p>${task["prio"]}</p></div>
+        <div class="due-date">Due date: <p>${formattedDate}</p></div>
+        <div class="current-prio">Priority: <p>${Prio}</p> ${prioimage}</div>
         <div class="assigne-container" id="assigne">
             Assigned To: 
             ${assigneeHtmlBoard}
@@ -394,7 +392,7 @@ function createSubtasksHtml(subTasks) {
   let subTaskhtml = "";
   for (let i = 0; i < subTasks.length; i++) {
     let subTask = subTasks[i]["subtasktext"];
-    let imgSrc = subTasks[i].done ? "./img/checked.png" : "./img/none-checked.png";
+    let imgSrc = subTasks[i].done ? "./img/checked_box.svg" : "./img/none-checked.svg";
     subTaskhtml += `<div class="subtask-current-box"><img id="checkBox_${i}" onclick="changeSubBox(${i})" src=${imgSrc}>${subTask}</div>`;
   }
   return subTaskhtml;

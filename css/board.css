@@ -50,6 +50,14 @@ h1 {
     display: none;
 }
 
+.create-button {
+    align-self: flex-end;
+}
+
+#renderSubTasks {
+    padding-bottom: 20px
+}
+
 button {
     border: unset;
     background-color: unset;
@@ -131,15 +139,17 @@ button {
     background-color: white;
     border-radius: 30px;
     padding: 48px 40px 48px 40px;
-    right: -525px;
-    max-height: 600px;
+    right: -100%;
+    max-height: 80vh;
     box-sizing: content-box;
 }
 
 .editCurrentTask {
     overflow-y: scroll;
-    max-height: 600px;
-    padding-right: 36px;
+    max-height: calc(80vh - 80px);
+    padding-right: 16px;
+    display: flex;
+    flex-direction: column;
 }
 
 #modal-window textarea {
@@ -165,19 +175,19 @@ button {
 }
 
 .animation-slide-in {
-    animation: modalWindowSlideIn 400ms ease-in-out;
+    animation: modalWindowSlideIn 300ms ease-in-out;
     animation-fill-mode: forwards;
     animation-direction: normal;
 }
 
 .animation-slide-out {
-    animation: modalWindowSlideOut 400ms ease-in-out;
+    animation: modalWindowSlideOut 300ms ease-in-out;
     animation-fill-mode: forwards;
 }
 
 @keyframes modalWindowSlideIn {
     0% {
-        right: -525px;
+        right: -100%;
     }
 
     100% {
@@ -191,7 +201,7 @@ button {
     }
 
     100% {
-        right: -525px;
+        right: -100%;
     }
 }
 
@@ -202,8 +212,18 @@ button {
 }
 
 .close-png {
-    color: black;
+    border-radius: 100%;
+    transition: ease-out 100ms;
+    position: absolute;
+    right: 40px;
+    top: 40px;
 }
+
+.close-png:hover {
+    background-color: #EEEEEE;
+}
+
+
 
 .color-dar-blue {
     color: #2A3647;
@@ -221,9 +241,6 @@ button {
     padding-left: 8px;
 }
 
-.assignees {
-    display: flex;
-}
 
 .initial-container-on-board-tasks {
     display: inline-block;
@@ -247,6 +264,14 @@ button {
     align-items: center;
 }
 
+.editCurrentTask .icon-and-prio-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -12px;
+    padding-bottom: 24px
+}
+
 .initials {
     display: flex;
     justify-content: center;
@@ -255,6 +280,7 @@ button {
     width: 42px;
     border-radius: 45px;
     border: 2px solid #fff;
+    box-sizing: border-box;
 }
 
 .initials-first-and-last-on-board-tasks {
@@ -302,6 +328,11 @@ button {
 .current-prio {
     display: flex;
     gap: 25px;
+    align-items: center;
+}
+
+.current-prio img {
+    margin-left: -20px;
 }
 
 .subtasks {
@@ -322,8 +353,14 @@ button {
 }
 
 .subtask-current-box:hover {
-    cursor: pointer;
+    cursor: default;
     background-color: #eee;
+}
+
+.subtask-current-box:hover img {
+    cursor: pointer;
+    border-radius: 100%;
+    background-color: #D1D1D1;
 }
 
 .delet-edit-box {
@@ -508,17 +545,17 @@ button {
     align-items: center;
     padding: 64px;
     position: fixed;
-    right: -1116px;
+    right: -100%;
 }
 
 .animate-slide-in {
-    animation: addTaskContainerSlideIn 400ms ease-in-out;
+    animation: addTaskContainerSlideIn 300ms ease-in-out;
     animation-fill-mode: forwards;
     animation-direction: normal;
 }
 
 .animate-slide-out {
-    animation: addTaskContainerSlideOut 400ms ease-in-out;
+    animation: addTaskContainerSlideOut 300ms ease-in-out;
     animation-fill-mode: forwards;
 }
 
@@ -534,7 +571,7 @@ button {
 
 @keyframes addTaskContainerSlideIn {
     0% {
-        right: -1116px;
+        right: -100%;
     }
 
     100% {
@@ -548,7 +585,7 @@ button {
     }
 
     100% {
-        right: -1116px;
+        right: -100%;
     }
 }
 
@@ -635,6 +672,11 @@ button {
     box-shadow: 0px 0px 10px 3px #00000014;
     background-color: white;
 }
+
+.task:hover {
+    cursor: pointer;
+}
+
 
 .technical {
     border-radius: 8px;
