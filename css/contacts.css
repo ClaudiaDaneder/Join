@@ -39,33 +39,6 @@ body {
     background-clip: padding-box;
 }
 
-::-webkit-scrollbar-button:single-button {
-    background-color: white;
-    display: block;
-    border-style: solid;
-    height: 6px;
-    width: 16px;
-}
-
-::-webkit-scrollbar-button:single-button:vertical:decrement {
-    border-width: 8px;
-    border-color: transparent transparent #A8A8A8 transparent;
-}
-
-::-webkit-scrollbar-button:single-button:vertical:decrement:hover {
-    border-color: transparent transparent #c6c6c6 transparent;
-}
-
-/* Down */
-::-webkit-scrollbar-button:single-button:vertical:increment {
-    border-width: 8px;
-    border-color: #A8A8A8 transparent transparent transparent;
-}
-
-::-webkit-scrollbar-button:vertical:single-button:increment:hover {
-    border-color: #c6c6c6 transparent transparent transparent;
-}
-
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
