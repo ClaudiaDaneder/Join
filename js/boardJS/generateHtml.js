@@ -354,7 +354,7 @@ async function generateTaskHtml(task, assigneeHtmlBoard, subTasksHtml, editAssig
                 <img class="delete-svg" src="./img/delete.svg">
                 Delete
                 </button>
-                <img src="./img/delet-edit-line.png">
+                <img id="delet-edit-line" src="./img/delet-edit-line.png">
                 <button class="edit-box" onclick="editTask(${task["task-id"]}), generateSubTasksHtml(${task["task-id"]})">
                 <img class="edit-svg" src="./img/edit.svg">
                 Edit

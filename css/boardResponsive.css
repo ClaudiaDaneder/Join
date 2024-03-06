@@ -352,6 +352,22 @@
     .editCurrentTask .prio-button-container {
         gap: 6px
     }
+
+    .close-png {
+        position: absolute;
+        right: 24px;
+        top: 32px;
+    }
+
+    .delet-edit-box {
+        flex-direction: column-reverse;
+        justify-content: flex-end;
+        gap: 12px
+    }
+
+    #delet-edit-line {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 500px) {
@@ -411,5 +427,20 @@
     .button-prio-low.selected {
         background-position-x: 58% !important;
     
+    }
+
+    .editCurrentTask .subtasklist-item {
+        gap: 10px;
+        height: unset
+    }
+
+    .editCurrentTask .subtasklist-item:hover, .subtasklist-item:focus {
+        background-color: transparent;
+    }
+
+    .editCurrentTask .subtasklist-infos {
+        font-size: 16px;
+        width: 80%;
+        text-wrap: wrap;
     }
 }
