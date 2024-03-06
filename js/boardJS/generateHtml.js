@@ -164,14 +164,27 @@ function generateSubTasksHtml(id) {
         subtasks.push(element);
 
         const subTaskText = element["subtasktext"];
+
+        let w = parseInt(window.innerWidth)
+        if (w > 500) {
         editSubTasksHtml.innerHTML += `<div class="subtasklist-item" id="subtasklist-item_${j}" ondblclick="editSubtasklistItem(${j}, ${id})" onmouseenter="showEditButtons(${j})" onmouseleave="showEditButtons(${j})">
                           <div class="subtasklist-infos"><div class="subtasklist-marker">•</div>${subTaskText}</div>
                           <div id="edit-buttons_${j}" class="subtaskfield-button-container hide">
                               <button class="subtaskfield-button-general" type="button" onclick="editSubtasklistItem(${j}, ${id})"><img src="/img/addtask_icon_subtask_edit.svg"></button>
-                              <hr>
+                              <img src="/img/delet-edit-line.png">
                               <button class="subtaskfield-button-general" type="button" onclick="deleteSubtasklist(${j}, ${id})"><img src="/img/addtask_icon_subtask_delete.svg"></button>
                           </div>
                        </div>`;
+        } else {
+          editSubTasksHtml.innerHTML += `<div class="subtasklist-item" id="subtasklist-item_${j}" ondblclick="editSubtasklistItem(${j}, ${id})">
+                          <div class="subtasklist-infos"><div class="subtasklist-marker">•</div>${subTaskText}</div>
+                          <div id="edit-buttons_${j}" class="subtaskfield-button-container">
+                              <button class="subtaskfield-button-general" type="button" onclick="editSubtasklistItem(${j}, ${id})"><img src="/img/addtask_icon_subtask_edit.svg"></button>
+                              <img src="/img/delet-edit-line.png">
+                              <button class="subtaskfield-button-general" type="button" onclick="deleteSubtasklist(${j}, ${id})"><img src="/img/addtask_icon_subtask_delete.svg"></button>
+                          </div>
+                       </div>`;
+        }
       }
 
     }

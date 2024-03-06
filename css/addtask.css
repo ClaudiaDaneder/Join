@@ -898,6 +898,24 @@ a:hover {
 
 }
 
+@media screen and (max-width: 500px) {
+    .subtasklist-item {
+        gap: 10px;
+        height: unset
+    }
+
+    .subtasklist-item:hover, .subtasklist-item:focus {
+        background-color: transparent;
+    }
+
+    .subtasklist-infos {
+        font-size: 16px;
+        width: 80%;
+        text-wrap: wrap;
+    }
+
+}
+
 @media screen and (max-width: 470px) {
     .prio-button-container {
         gap: 10px

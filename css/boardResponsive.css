@@ -126,7 +126,7 @@
         width: 100%;
     }
 
-    section {
+    .boardSiteContainer section {
         overflow-y: hidden;
         overflow-x: scroll;
         width: 100%;
@@ -190,10 +190,12 @@
         font-size: 17px !important
     }
 
-    .button-prio-urgent, .button-prio-medium, .button-prio-low {
+    .button-prio-urgent,
+    .button-prio-medium,
+    .button-prio-low {
         font-size: 17px !important;
         background-size: 22px !important;
-}
+    }
 }
 
 
@@ -345,5 +347,69 @@
     #modal-window {
         width: 90%;
         left: 5%
+    }
+
+    .editCurrentTask .prio-button-container {
+        gap: 6px
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .width-height-full-prozent{
+        font-size: 16px !important;
+    }
+
+    .editCurrentTask .prio-button-container {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    #modal-window {
+        padding: 32px 24px
+    }
+
+    .editCurrentTask .task-input,
+    #title,
+    textarea,
+    select,
+    .dropdown {
+        font-size: 14px !important
+    }
+
+    .editCurrentTask .button-prio-urgent,
+    .button-prio-medium,
+    .button-prio-low {
+        font-size: 14px !important;
+
+    }
+
+    .editCurrentTask .button-prio-urgent {
+        background-position-x: 60% !important;
+    }
+    
+    .editCurrentTask .button-prio-urgent:focus,
+    .button-prio-urgent.selected {
+        background-position-x: 60% !important;
+
+    }
+    
+    .editCurrentTask .button-prio-medium {
+        background-position-x: 62% !important;
+    }
+    
+    .editCurrentTask .button-prio-medium:focus,
+    .button-prio-medium.selected {
+        background-position-x: 62% !important;
+
+    }
+    
+    .editCurrentTask .button-prio-low {
+        background-position-x: 58% !important;
+    }
+    
+    .editCurrentTask .button-prio-low:focus,
+    .button-prio-low.selected {
+        background-position-x: 58% !important;
+    
     }
 }

@@ -30,10 +30,10 @@ function showPlusButton() {
  */
 function showClearOrAddButtons(id) {
     let button = `addToSubtasks()`;
-    if(id){
+    if (id) {
         button = `setNewSubTask(${id})`;
     }
-    return `<button type="button" class="subtaskfield-button-general" onclick="clearSubtaskField()"><img src="/img/addtask_icon_subtaskfield_cancel.svg"></button><hr><button type="button" class="subtaskfield-button-general" onclick="${button}"><img src="/img/addtask_icon_subtaskfield_check.svg"></button></div>`;
+    return `<button type="button" class="subtaskfield-button-general" onclick="clearSubtaskField()"><img src="/img/addtask_icon_subtaskfield_cancel.svg"></button><img src="/img/delet-edit-line.png"><button type="button" class="subtaskfield-button-general" onclick="${button}"><img src="/img/addtask_icon_subtaskfield_check.svg"></button></div>`;
 }
 
 
@@ -73,15 +73,25 @@ function generateSubtasklist() {
  * @returns string
  */
 function showSubtaskItem(i, subtask) {
-    return `<div class="subtasklist-item" id="subtasklist-item_${i}" ondblclick="editSubtasklistItem(${i})" onmouseenter="showEditButtons(${i})" onmouseleave="showEditButtons(${i})">
+    let w = parseInt(window.innerWidth)
+    if (w > 500) {
+        return `<div class="subtasklist-item" id="subtasklist-item_${i}" ondblclick="editSubtasklistItem(${i})" onmouseenter="showEditButtons(${i})" onmouseleave="showEditButtons(${i})">
     <div class="subtasklist-infos"><div class="subtasklist-marker">•</div>${subtask}</div>
     <div id="edit-buttons_${i}" class="subtaskfield-button-container hide">
         <button class="subtaskfield-button-general" type="button" onclick="editSubtasklistItem(${i})"><img src="/img/addtask_icon_subtask_edit.svg"></button>
-        <hr>
+        <img src="/img/delet-edit-line.png">
         <button class="subtaskfield-button-general" type="button" onclick="deleteSubtasklistItem(${i})"><img src="/img/addtask_icon_subtask_delete.svg"></button>
     </div>`;
-}
+    } else { return `<div class="subtasklist-item" id="subtasklist-item_${i}" ondblclick="editSubtasklistItem(${i})">
+    <div class="subtasklist-infos"><div class="subtasklist-marker">•</div>${subtask}</div>
+    <div id="edit-buttons_${i}" class="subtaskfield-button-container">
+        <button class="subtaskfield-button-general" type="button" onclick="editSubtasklistItem(${i})"><img src="/img/addtask_icon_subtask_edit.svg"></button>
+        <img src="/img/delet-edit-line.png">
+        <button class="subtaskfield-button-general" type="button" onclick="deleteSubtasklistItem(${i})"><img src="/img/addtask_icon_subtask_delete.svg"></button>
+    </div>`;
 
+    }
+}
 
 /**
  * This function is used to show or hide the buttons used to either edit or delete an item from the subtask list when hovering over the respective item.
@@ -105,7 +115,7 @@ function showEditButtons(i) {
  */
 function editSubtasklistItem(s, id, j) {
     let listItem = document.getElementById(`subtasklist-item_${s}`);
-    
+
     if (subtasks[s]) {
         let subtaskText = subtasks[s].subtasktext;
 
@@ -130,9 +140,9 @@ function editSubtasklistItem(s, id, j) {
 function showSubtaskItemEditField(subtaskText, s, id) {
     let updatebutton = `updateSubtasklistItem(${s})`;
     let deletebutton = `deleteSubtasklistItem(${s})`;
-    if(id){
-        updatebutton =  `updateEditPopup(${s}, ${id})`;
-        deletebutton =  `deleteSubtasklist(${s}, ${id})`;
+    if (id) {
+        updatebutton = `updateEditPopup(${s}, ${id})`;
+        deletebutton = `deleteSubtasklist(${s}, ${id})`;
     }
     return `<div class="styled-subtaskitem-edit-input">
         <input class="subtaskitem-edit-input" type="text" id="editfield" value="${subtaskText}">
@@ -178,7 +188,7 @@ function deleteSubtasklistItem(s) {
  */
 function updateSubtasklistItem(s) {
     let editField = document.getElementById('editfield');
-    
+
     subtasks[s].subtasktext = editField.value;
     setTimeout(() => {
         generateSubtasklist();
