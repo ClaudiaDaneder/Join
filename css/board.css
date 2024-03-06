@@ -168,8 +168,8 @@ button {
     border-radius: 30px;
     padding: 48px 40px 48px 40px;
     right: -100%;
-    max-height: 80vh;
-    box-sizing: content-box;
+    max-height: 80%;
+    box-sizing: border-box;
 }
 
 .editCurrentTask {
@@ -294,7 +294,7 @@ button {
 
 .editCurrentTask .icon-and-prio-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     margin-top: -12px;
     padding-bottom: 24px
@@ -562,8 +562,8 @@ button {
 }
 
 .addTask-container {
-    max-width: 1116px;
-    max-height: 870px;
+    width: 1116px;
+    height: 870px;
     background-color: #fff;
     border-radius: 30px;
     box-shadow: 0px 0px 4px 0px #0000001A;
@@ -573,6 +573,7 @@ button {
     padding: 64px;
     position: fixed;
     right: -100%;
+    box-sizing: border-box;
 }
 
 .animate-slide-in {
@@ -589,7 +590,10 @@ button {
 .addTask-container-close {
     align-self: flex-start;
     padding: 3px 4px 1px 4px;
-    border-radius: 50%
+    border-radius: 50%;
+    margin-left: -32px;
+    margin-top: 36px;
+    z-index: 2;
 }
 
 .addTask-container-close:hover {

@@ -23,14 +23,21 @@ let searchResults = [];
 
 
 function openAddTask(status) {
-  resetForm();
-  document.getElementById('my-form').value = status;
-  document.getElementById("addTaskContainerBG").classList.remove('hide');
-  document.getElementById('addTaskContainer').classList.remove('animate-slide-out');
-  setTimeout(function () {
-    document.getElementById("addTaskContainer").classList.remove('hide');
-    document.getElementById('addTaskContainer').classList.add('animate-slide-in');
-  }, 100)
+  let w = parseInt(window.innerWidth)
+  if (w > 850) {
+    resetForm();
+    document.getElementById('my-form').value = status;
+    document.getElementById("addTaskContainerBG").classList.remove('hide');
+    document.getElementById('addTaskContainer').classList.remove('animate-slide-out');
+    setTimeout(function () {
+      document.getElementById("addTaskContainer").classList.remove('hide');
+      document.getElementById('addTaskContainer').classList.add('animate-slide-in');
+    }, 100)
+  } else {
+    setTimeout(function () {
+      window.location.href = 'addtask.html';
+  }, 900);
+  }
 }
 
 function closeAddTask() {
@@ -231,8 +238,8 @@ function searchfieldBlur() {
 function closeInput() {
   if (doc('contacts-dropdown').classList.contains('active')) {
     doc('contacts-dropdown').classList.remove('active');
-        document.getElementById('assign-arrow').style.transform = 'rotate(0deg)';
-    }
+    document.getElementById('assign-arrow').style.transform = 'rotate(0deg)';
+  }
 }
 
 function notClose(event) {

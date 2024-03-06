@@ -28,13 +28,13 @@ header {
     align-items: center;
 }
 
-.mobileLogo{
+.mobileLogo {
     height: 39.02px;
     width: 32px;
     padding-left: 40px;
 }
 
-.headerRight{
+.headerRight {
     display: none;
     justify-content: center;
     align-items: center;
@@ -42,7 +42,7 @@ header {
     padding-right: 40px;
 }
 
-.headerHelp{
+.headerHelp {
     display: flex;
     justify-content: center;
     cursor: pointer;
@@ -52,11 +52,11 @@ header {
     transform: scale(1);
 }
 
-.headerHelp:hover{
+.headerHelp:hover {
     transform: scale(1.2);
 }
 
-.headerUser{
+.headerUser {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -65,19 +65,21 @@ header {
     border: 3px solid #2A3647;
     border-radius: 32px;
     background-color: white;
-    font-size: 24px;
+    font-size: 20px;
+    font-weight: 700;
     color: #29ABE2;
     transition: all 100ms ease-in-out;
     cursor: pointer;
+    box-sizing: border-box;
 }
 
-.headerUser:hover{
+.headerUser:hover {
     background: linear-gradient(0deg, rgba(12, 46, 98, 0.12), rgba(12, 46, 98, 0.12)),
-    linear-gradient(0deg, #FFFFFF, #FFFFFF);    
+        linear-gradient(0deg, #FFFFFF, #FFFFFF);
 }
 
 
-#logoutScreen{
+#logoutScreen {
     width: 150px;
     display: none;
     justify-content: center;
@@ -93,7 +95,7 @@ header {
     box-shadow: 0px 0px 4px 0px #0000001A;
 }
 
-.logoutButton{
+.logoutButton {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -108,36 +110,80 @@ header {
     cursor: pointer;
 }
 
-.logoutButton:hover{
+.logoutButton:hover {
     background-color: #3e5068;
 }
 
-.helpM{
+.helpM {
     display: none;
 }
 
-.help{
+.help {
     display: flex;
 }
 
-@media (max-width: 850px){
+@media (max-width: 850px) {
     header {
         height: 80px;
     }
 
-    #logoutScreen{
+    #logoutScreen {
         top: 80px;
     }
 
-    .headerText{
+    .headerText {
         display: none;
     }
 
-    .help{
+    .help {
         display: none;
     }
 
-    .helpM{
+    .helpM {
         display: flex;
     }
+
+    .headerUser {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        border: 2px solid #2A3647;
+        border-radius: 32px;
+        background-color: white;
+        font-size: 12px;
+        color: #29ABE2;
+        transition: all 100ms ease-in-out;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+        .mobileLogo {
+            padding-left: 64px;
+        }
+    
+        .headerRight {
+            padding-right: 64px;
+        }
 }
+
+@media (max-width: 600px) {
+    .mobileLogo {
+        padding-left: 32px;
+    }
+
+    .headerRight {
+        padding-right: 32px;
+    }
+}
+
+@media (max-width: 360px) {
+    .mobileLogo {
+        padding-left: 16px;
+    }
+
+    .headerRight {
+        padding-right: 16px;
+    }
+}
+
