@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: logout.js</title>
+    <title>JSDoc: Source: contactsTemplate.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: logout.js</h1>
+    <h1 class="page-title">Source: contactsTemplate.js</h1>
 
     
 
@@ -26,161 +26,244 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>let onlineUser = [];
-let yourId;
-let onlineName = [];
-
-async function initOnline() {
-    await loadOnlineUsers();
-    initals();
-    widthSize();
-}
-
-/**
- * Load All User as Online Storage and Online Status as Local Storage 
- * 
- * @param {string} contactsKey - This is the variable of the key in the online storage
- * 
- * @param {array} onlineUser - This is the JSON Araay into which the data from the online storage is pushed
- */
-async function loadOnlineUsers() {
-    try {
-        onlineUser = JSON.parse(await getItem(`${contactsKey}`));
-        yourId = await JSON.parse(localStorage.getItem('userOnline'));
-    } catch (e) {
-        console.error('Loading error:', e);
-    }
-}
-
-/**
- * This function find Log Status 
- * 
- * @param {string} userFind - This is the variable to find the User are Online
- * 
+            <pre class="prettyprint source linenums"><code>/**
+ * Create Popup Template for Create and Edit Contact 
  * */
-function logout(userFind) {
-    if (userFind != 'guest') {
-        userOnline();
-    } else {
-        window.open('index.html', '_self');
-    }
+function popupTempForm(nameShow, emailShow, phoneShow, button, color, id) {
+  let ini = initialsLoad(nameShow);
+  let img = /*html*/`&lt;div class="circleEdit" id="circleEdit${id}">${ini}&lt;/div>`;
+  if (!color) {
+    img = '&lt;img class="clearContact" src="./img/clearcontackt.svg">';
+  }
+  return /*html*/`
+          ${img}
+          &lt;form action="#" id="createEdit" onsubmit="createContact(); return false">
+              &lt;div class="input">&lt;input type="text" id="name" value="${nameShow}" placeholder="Name" required>&lt;img src="./img/personContact.svg">&lt;/div>
+              &lt;div class="input">&lt;input type="email" id="email" value="${emailShow}" placeholder="E-Mail" required>&lt;img src="./img/emailContact.svg">&lt;/div>
+              &lt;div class="input">&lt;input type="number" id="phone" value="${phoneShow}" placeholder="Phone" required>&lt;img src="./img/phoneContact.svg">&lt;/div>
+              &lt;div class="popupButton">
+                  &lt;div class="cancel" onclick="closePopup()">Cancel &lt;img src="./img/addtask_icon_cancel_dark.svg">&lt;/div>
+                  &lt;button type="submit">${button} contact &lt;img src="./img/addtask_icon_check.svg">&lt;/button>
+              &lt;/div>
+          &lt;/form>`;
 }
 
 /**
- * This function Log User out and clear Data Online- and Localstorage 
- * 
- * @param {string} yourId - User ID are saved in Localstorage an delete this
- * 
+ * Load Contact Data of Show Contacts 
  * */
-async function userOnline() {
-    for (let i = 0; i &lt; onlineUser.length; i++) {
-        let userID = onlineUser[i]['email'];
-        if (yourId == userID) {
-            onlineUser[i]['online'] = false;
-            await setItem('allContacts', JSON.stringify(onlineUser));
-            localStorage.setItem('userOnline', JSON.stringify(null));
-            window.open('index.html', '_self');
-        }
-    }
+function loadContactShow(id, initials, name, email, phone, i) {
+  doc('mobileEdit').setAttribute('onclick', `notClose(event), editContact(${id})`);
+  doc('mobileDelete').setAttribute('onclick', `deleteContact(${i})`);
+  return /*html*/`
+    &lt;div class="cHeader">
+        &lt;div class="circle cwidth" id="circle${id}">${initials}&lt;/div>
+        &lt;div class="contactName">
+            &lt;p class="cName">${name}&lt;/p>
+            &lt;div class="edit">
+                &lt;p onclick="notClose(event), editContact(${id})">&lt;img src="./img/edit.svg">Edit&lt;/p>
+                &lt;p onclick="deleteContact(${i})">&lt;img src="./img/delete.svg">Delete&lt;/p>
+            &lt;/div>
+        &lt;/div>
+    &lt;/div>
+    &lt;p class="contactsInfo">Contact Information&lt;/p>
+    &lt;div class="cInfo">
+        &lt;p>Email&lt;/p>
+        &lt;p class="email">${email}&lt;/p>
+        &lt;p>Phone&lt;/p>
+        &lt;p class="phone">${phone}&lt;/p>
+    &lt;/div>
+    `
 }
 
 /**
- * This function Set Initals in Header button 
+ * Letter Template 
  * */
-async function initals() {
-    if (yourId != null) {
-        await setUserData();
-    } else {
-        doc('initals').innerHTML = 'G';
-        doc('logoutButton').setAttribute('onclick', `logout('guest')`);
-    }
+function letterTemp(contactLetterLoad, i) {
+  return /*html*/`
+          &lt;div class="letter">${contactLetterLoad}&lt;/div>
+          &lt;div class="line">
+              &lt;div class="lineBorder">&lt;/div>
+          &lt;/div>
+          &lt;div id="contactShow${i}">&lt;/div>
+          `;
 }
 
 /**
- * This function Save User Name in onlineName, Split name to Initails and and Set Attribute from logout Button
- * 
- * @param {string} names.split - Splits the first and last name to create 2 strings
- * @param {string} nameParts.map - keeps only the first letter and removes the rest
- * 
+ * Contactlist Template 
  * */
-async function setUserData() {
-    for (let i = 0; i &lt; onlineUser.length; i++) {
-        if (onlineUser[i]['email'] == yourId) {
-            names = onlineUser[i]['name'];
-            onlineName.push(names);
-            let nameParts = names.split(" ");
-            doc('initals').innerHTML = nameParts.map(part => part.charAt(0)).join("");
-            doc('logoutButton').setAttribute('onclick', `logout('${yourId}')`);
-        }
-    }
+function contactListTemp(id, initials, name, email) {
+  return /*html*/`
+    &lt;div class="list" id="cID${id}" onclick="slideContact(${id})">
+            &lt;div class="circle" id="listCircle${id}">${initials}&lt;/div>
+            &lt;div class="contactNameList">
+                &lt;p class="listName">${name}&lt;/p>
+                &lt;p class="listEmail">${email}&lt;/p>
+            &lt;/div>
+        &lt;/div>
+    `;
 }
 
 /**
- * Function for show Screen of Logout, Privacy Policy and Legal Notice 
+ * Slidefunction for Show Contacts 
  * */
-function openUser() {
-    if (doc('logoutScreen').style.display == 'flex') {
-        doc('logoutScreen').style.display = 'none';
-    } else {
-        doc('logoutScreen').style.display = 'flex';
-    }
+function slideContact(id) {
+  if (widthContactSize() == false) {
+    noResponsiv(id);
+  } else {
+    slideResponsiv(id);
+  }
 }
 
 /**
- * Check Width Size for Responsiv
- *
- *  @param clientWidth - the size of the user screen
- *
+ * Slide no Responsiv 
  * */
-async function widthSize() {
-    let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    if (width &lt;= 850) {
-        subtitleMobile();
-    } else {
-        subtitle();
-    }
+function noResponsiv(id) {
+  if (doc('showContact').style.transform == 'translatex(150vw)') {
+    doc('showContact').style.transform = 'translatex(0)';
+    showContact(id);
+  } else {
+    doc('showContact').style.transform = 'translatex(150vw)';
+    setTimeout(() => {
+      doc('showContact').style.transform = 'translatex(0)';
+      showContact(id);
+    }, 250);
+  }
 }
 
 /**
- * Set Responsiv as Header Title and Logo 
+ * Slide Responsiv 
  * */
-function subtitleMobile() {
-    if (doc('subtitleHeader')) {
-        doc('subtitleHeader').classList.remove('headerText');
-        doc('subtitleHeader').classList.add('headerMobile');
-        doc('subtitleHeader').innerHTML = '&lt;img class="mobileLogo" src="./img/join_logo_dark.svg">';
-    }
+function slideResponsiv(id) {
+  if (doc('showContactsView').style.transform != 'translatex(0px)') {
+    doc('listAllContacts').style.transform = 'translatex(-100vw)';
+    doc('showContactsView').style.transform = 'translatex(0)';
+    setTimeout(() => {
+      doc('menueContacts').style.display = 'flex';
+    }, 150);
+    showContact(id);
+  }
 }
 
 /**
- * Set Header Title 
+ * Back to Contactlist in Responsiv mode 
  * */
-function subtitle() {
-    if (doc('subtitleHeader')) {
-        doc('subtitleHeader').classList.remove('headerMobile');
-        doc('subtitleHeader').classList.add('headerText');
-        doc('subtitleHeader').innerHTML = 'Kanban Project Management Tool';
-    }
+function backToContacts() {
+  doc('listAllContacts').style.transform = 'translatex(0)';
+  doc('showContactsView').style.transform = 'translatex(100vw)';
+  setTimeout(() => {
+    doc('menueContacts').style.display = 'none';
+  }, 150);
+  doc('showContact').innerHTML = '';
+  init();
+  location.assign('#');
 }
 
 /**
- * Event Listener for automate Width Size
- * 
- * This event listener triggers the function for widthSize and sends the string goToMobile 
- * 
+ * Responsiv Slide Back to Contactlist after delete 
+ * */
+function checkBackSlide() {
+  if (widthContactSize() == true) {
+    backToContacts();
+  }
+}
+
+/**
+ * Menu for Responsiv mode in Show Contacts 
+ * */
+function openMenue() {
+  if (doc('menuePopup').style.transform != 'translateX(0px)') {
+    doc('menuePopup').style.transform = 'translatex(0)';
+  } else {
+    doc('menuePopup').style.transform = 'translatex(100vw)';
+  }
+}
+
+/**
+ * Width function for Contacts 
+ * */
+function widthContactSize() {
+  let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+  if (width &lt;= 850) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+/**
+ * EventListener for Responsiv 
  * */
 window.addEventListener("resize", function () {
-    widthSize();
+  let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+  if (width &lt;= 850) {
+    if (doc('listAllContacts').style.transform != 'translatex(0px)') {
+      doc('listAllContacts').style.transform = 'translatex(0)';
+      doc('showContactsView').style.transform = 'translatex(100vw)';
+      backToContacts();
+    }
+  } else {
+    doc('listAllContacts').style.transform = 'unset';
+    doc('showContactsView').style.transform = 'unset';
+  }
 });
 
 /**
- * Not close Event 
- * 
- * This function prevents closing a popup when clicking on certain levels
- * 
-*/
+ * Popup function for show Info Popup 
+ * */
+function savePopup(saveInfo) {
+  doc('save_info').innerHTML = 'Contact succesfully created'
+  if (saveInfo == 'edit') {
+    doc('save_info').innerHTML = 'Contact succesfully saved';
+  } else if (saveInfo == 'delete') {
+    doc('save_info').innerHTML = 'Contact deleted';
+  } else if (saveInfo == 'exist') {
+    doc('save_info').innerHTML = 'Contact Email Exist';
+  }
+  doc('save_info').style.transform = 'translatex(0)';
+  setTimeout(() => {
+    doc('save_info').style.transform = 'translatex(150vw)';
+  }, 1500);
+}
+
+/**
+ * Popup Title 
+ * */
+function popupNames(contactAdd) {
+  if (contactAdd == 'add') {
+    return /*html*/`
+        &lt;p class="popupTop">Add contact&lt;/p>
+        &lt;p class="popupBottom">Tasks are better with a team!&lt;/p>
+        &lt;div class="popupBottomLine">&lt;/div>
+    `;
+  } else {
+    return /*html*/`
+        &lt;p class="popupTop">Edit contact&lt;/p>
+        &lt;div class="popupBottomLine">&lt;/div>
+    `;
+  }
+}
+
+/**
+ * Closing Popup for Create or Edit Contact 
+ * */
+function closePopup() {
+  doc('logoutScreen').style.display = 'none';
+  if (doc('addContactPopup').style.transform == 'translateX(0px)') {
+    doc('addContactPopup').style.transform = 'translateX(150vw)';
+  }
+  if (doc('menuePopup')) {
+    doc('menuePopup').style.transform = 'translatex(100vw)';
+  }
+  doc('user').innerHTML = '';
+  doc('popupTitle').innerHTML = '';
+  doc('back').classList.remove('back');
+}
+
+/**
+ * Not Closing event for Popup with onclick function 
+ * */
 function notClose(event) {
-    event.stopPropagation();
+  event.stopPropagation();
 }</code></pre>
         </article>
     </section>

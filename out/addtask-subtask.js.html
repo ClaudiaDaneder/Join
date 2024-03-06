@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: logout.js</title>
+    <title>JSDoc: Source: addtask-subtask.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: logout.js</h1>
+    <h1 class="page-title">Source: addtask-subtask.js</h1>
 
     
 
@@ -26,161 +26,220 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>let onlineUser = [];
-let yourId;
-let onlineName = [];
-
-async function initOnline() {
-    await loadOnlineUsers();
-    initals();
-    widthSize();
-}
-
-/**
- * Load All User as Online Storage and Online Status as Local Storage 
- * 
- * @param {string} contactsKey - This is the variable of the key in the online storage
- * 
- * @param {array} onlineUser - This is the JSON Araay into which the data from the online storage is pushed
+            <pre class="prettyprint source linenums"><code>/**
+ * This function is used to display different icons on the subtask input based on the value. as sson as an input is made, the buttons to either clear or add a subtask are displayed. 
  */
-async function loadOnlineUsers() {
-    try {
-        onlineUser = JSON.parse(await getItem(`${contactsKey}`));
-        yourId = await JSON.parse(localStorage.getItem('userOnline'));
-    } catch (e) {
-        console.error('Loading error:', e);
-    }
-}
+function updateSubtaskButtons(id) {
+    let subtaskField = document.getElementById('subtasks');
+    if (subtaskField.value === '') {
+        document.getElementById('subtaskfield-buttons').innerHTML = showPlusButton();
 
-/**
- * This function find Log Status 
- * 
- * @param {string} userFind - This is the variable to find the User are Online
- * 
- * */
-function logout(userFind) {
-    if (userFind != 'guest') {
-        userOnline();
     } else {
-        window.open('index.html', '_self');
+        document.getElementById('subtaskfield-buttons').innerHTML = showClearOrAddButtons(id);
+    }
+}
+
+
+/**
+ * This function returns the html code to display the + symbol.
+ * 
+ * @returns string
+ */
+function showPlusButton() {
+    return `&lt;button type="button" class="subtaskfield-button-general">&lt;img src="/img/addtask_icon_subtaskfield_plus.svg">&lt;/button>`;
+}
+
+
+/**
+ * This function returns the html code to display the buttons to either clear or add a subtask. Depending on whether the function is used on the site "addtask" or "board", the button triggers a different function. 
+ * 
+ * @param {number} id 
+ * @returns string
+ */
+function showClearOrAddButtons(id) {
+    let button = `addToSubtasks()`;
+    if (id) {
+        button = `setNewSubTask(${id})`;
+    }
+    return `&lt;button type="button" class="subtaskfield-button-general" onclick="clearSubtaskField()">&lt;img src="/img/addtask_icon_subtaskfield_cancel.svg">&lt;/button>&lt;img src="/img/delet-edit-line.png">&lt;button type="button" class="subtaskfield-button-general" onclick="${button}">&lt;img src="/img/addtask_icon_subtaskfield_check.svg">&lt;/button>&lt;/div>`;
+}
+
+
+/**
+ * This function is used to save the current subtask into the array "subtasks". 
+ */
+function addToSubtasks() {
+    let subtaskField = document.getElementById('subtasks');
+    let subtaskContent = subtaskField.value.trim();
+    if (!subtaskContent) {
+        return;
+    }
+    subtasks.push({ 'subtasktext': subtaskContent, 'done': false });
+    clearSubtaskField();
+    generateSubtasklist();
+}
+
+
+/**
+ * This function is used to generate a list of each subtask that is currently stored within the array "subtasks".
+ */
+function generateSubtasklist() {
+    let subtaskList = document.getElementById('subtasklist');
+    subtaskList.innerHTML = '';
+    for (let i = 0; i &lt; subtasks.length; i++) {
+        let subtask = subtasks[i].subtasktext;
+        subtaskList.innerHTML += showSubtaskItem(i, subtask)
+    }
+}
+
+
+/**
+ * This function generates the html code for each individual subtask, including the buttons to either edit or delete the subtask.
+ * 
+ * @param {number} i 
+ * @param {string} subtask 
+ * @returns string
+ */
+function showSubtaskItem(i, subtask) {
+    let w = parseInt(window.innerWidth)
+    if (w > 500) {
+        return `&lt;div class="subtasklist-item" id="subtasklist-item_${i}" ondblclick="editSubtasklistItem(${i})" onmouseenter="showEditButtons(${i})" onmouseleave="showEditButtons(${i})">
+    &lt;div class="subtasklist-infos">&lt;div class="subtasklist-marker">•&lt;/div>${subtask}&lt;/div>
+    &lt;div id="edit-buttons_${i}" class="subtaskfield-button-container hide">
+        &lt;button class="subtaskfield-button-general" type="button" onclick="editSubtasklistItem(${i})">&lt;img src="/img/addtask_icon_subtask_edit.svg">&lt;/button>
+        &lt;img src="/img/delet-edit-line.png">
+        &lt;button class="subtaskfield-button-general" type="button" onclick="deleteSubtasklistItem(${i})">&lt;img src="/img/addtask_icon_subtask_delete.svg">&lt;/button>
+    &lt;/div>`;
+    } else { return `&lt;div class="subtasklist-item" id="subtasklist-item_${i}" ondblclick="editSubtasklistItem(${i})">
+    &lt;div class="subtasklist-infos">&lt;div class="subtasklist-marker">•&lt;/div>${subtask}&lt;/div>
+    &lt;div id="edit-buttons_${i}" class="subtaskfield-button-container">
+        &lt;button class="subtaskfield-button-general" type="button" onclick="editSubtasklistItem(${i})">&lt;img src="/img/addtask_icon_subtask_edit.svg">&lt;/button>
+        &lt;img src="/img/delet-edit-line.png">
+        &lt;button class="subtaskfield-button-general" type="button" onclick="deleteSubtasklistItem(${i})">&lt;img src="/img/addtask_icon_subtask_delete.svg">&lt;/button>
+    &lt;/div>`;
+
     }
 }
 
 /**
- * This function Log User out and clear Data Online- and Localstorage 
+ * This function is used to show or hide the buttons used to either edit or delete an item from the subtask list when hovering over the respective item.
  * 
- * @param {string} yourId - User ID are saved in Localstorage an delete this
+ * @param {number} i 
+ */
+function showEditButtons(i) {
+    let editButtons = document.getElementById(`edit-buttons_${i}`);
+    if (editButtons) {
+        editButtons.classList.toggle('hide');
+    }
+}
+
+
+/**
+ * This function is used to transform a subtasklist item into an input field in order to edit the subtasklist item. The cursor is automatically moved to the end of the value.
  * 
- * */
-async function userOnline() {
-    for (let i = 0; i &lt; onlineUser.length; i++) {
-        let userID = onlineUser[i]['email'];
-        if (yourId == userID) {
-            onlineUser[i]['online'] = false;
-            await setItem('allContacts', JSON.stringify(onlineUser));
-            localStorage.setItem('userOnline', JSON.stringify(null));
-            window.open('index.html', '_self');
+ * @param {number} s 
+ * @param {number} id 
+ * @param {number} j 
+ */
+function editSubtasklistItem(s, id, j) {
+    let listItem = document.getElementById(`subtasklist-item_${s}`);
+
+    if (subtasks[s]) {
+        let subtaskText = subtasks[s].subtasktext;
+
+        let newHTML = showSubtaskItemEditField(subtaskText, s, id, j);
+        listItem.innerHTML = newHTML;
+        let editField = document.getElementById('editfield');
+        if (editField) {
+            moveCursorToEnd(editField);
         }
     }
 }
 
+
 /**
- * This function Set Initals in Header button 
- * */
-async function initals() {
-    if (yourId != null) {
-        await setUserData();
-    } else {
-        doc('initals').innerHTML = 'G';
-        doc('logoutButton').setAttribute('onclick', `logout('guest')`);
+ * This function returns html code that is needed to display the input field. Depending on where the function is being used (at addtask or on the board), the buttons to delete or update a subtasklist item each have different functionalities.
+ * 
+ * @param {string} subtaskText 
+ * @param {number} s 
+ * @param {number} id 
+ * @returns string
+ */
+function showSubtaskItemEditField(subtaskText, s, id) {
+    let updatebutton = `updateSubtasklistItem(${s})`;
+    let deletebutton = `deleteSubtasklistItem(${s})`;
+    if (id) {
+        updatebutton = `updateEditPopup(${s}, ${id})`;
+        deletebutton = `deleteSubtasklist(${s}, ${id})`;
     }
+    return `&lt;div class="styled-subtaskitem-edit-input">
+        &lt;input class="subtaskitem-edit-input" type="text" id="editfield" value="${subtaskText}">
+        &lt;div class="subtaskfield-button-container">
+            &lt;button type="button" class="subtaskfield-button-general" id="deleteButton" onclick="${deletebutton}">&lt;img src="/img/addtask_icon_subtask_delete.svg">&lt;/button>
+            &lt;button type="button" class="subtaskfield-button-general" id="updateButton" onclick="${updatebutton}">&lt;img src="/img/addtask_icon_subtaskfield_check.svg">&lt;/button>
+        &lt;/div>
+    &lt;/div>`;
 }
 
+
 /**
- * This function Save User Name in onlineName, Split name to Initails and and Set Attribute from logout Button
- * 
- * @param {string} names.split - Splits the first and last name to create 2 strings
- * @param {string} nameParts.map - keeps only the first letter and removes the rest
- * 
- * */
-async function setUserData() {
-    for (let i = 0; i &lt; onlineUser.length; i++) {
-        if (onlineUser[i]['email'] == yourId) {
-            names = onlineUser[i]['name'];
-            onlineName.push(names);
-            let nameParts = names.split(" ");
-            doc('initals').innerHTML = nameParts.map(part => part.charAt(0)).join("");
-            doc('logoutButton').setAttribute('onclick', `logout('${yourId}')`);
-        }
-    }
+ * This function adds a blue border to the subtaskfield when it's in focus.
+ */
+function subtaskfieldFocus() {
+    document.getElementById('styled-subtaskfield').classList.toggle('subtaskfield-focus')
 }
 
+
 /**
- * Function for show Screen of Logout, Privacy Policy and Legal Notice 
- * */
-function openUser() {
-    if (doc('logoutScreen').style.display == 'flex') {
-        doc('logoutScreen').style.display = 'none';
-    } else {
-        doc('logoutScreen').style.display = 'flex';
-    }
+ * This function removes the blue border when it's not in focus.
+ */
+function subtaskfieldBlur() {
+    document.getElementById('styled-subtaskfield').classList.remove('subtaskfield-focus')
 }
 
+
 /**
- * Check Width Size for Responsiv
- *
- *  @param clientWidth - the size of the user screen
- *
- * */
-async function widthSize() {
-    let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    if (width &lt;= 850) {
-        subtitleMobile();
-    } else {
-        subtitle();
-    }
+ * This function is used to delete a specific item from the array "subtasks".
+ * 
+ * @param {number} s 
+ */
+function deleteSubtasklistItem(s) {
+    subtasks.splice(s, 1);
+    generateSubtasklist();
 }
 
+
 /**
- * Set Responsiv as Header Title and Logo 
- * */
-function subtitleMobile() {
-    if (doc('subtitleHeader')) {
-        doc('subtitleHeader').classList.remove('headerText');
-        doc('subtitleHeader').classList.add('headerMobile');
-        doc('subtitleHeader').innerHTML = '&lt;img class="mobileLogo" src="./img/join_logo_dark.svg">';
-    }
+ * This function updates the new value from the input field to the respective item within the subtasklist, and then regenerates the list of subtasks after a short timeout.
+ * 
+ * @param {number} s 
+ */
+function updateSubtasklistItem(s) {
+    let editField = document.getElementById('editfield');
+
+    subtasks[s].subtasktext = editField.value;
+    setTimeout(() => {
+        generateSubtasklist();
+    }, 100);
 }
 
+
 /**
- * Set Header Title 
- * */
-function subtitle() {
-    if (doc('subtitleHeader')) {
-        doc('subtitleHeader').classList.remove('headerMobile');
-        doc('subtitleHeader').classList.add('headerText');
-        doc('subtitleHeader').innerHTML = 'Kanban Project Management Tool';
-    }
+ * This function is used to reset the input field and respective buttons to the default values after a subtask has been added to the list.
+ */
+function clearSubtaskField() {
+    let subtaskField = document.getElementById('subtasks');
+    subtaskField.value = '';
+    updateSubtaskButtons()
 }
 
-/**
- * Event Listener for automate Width Size
- * 
- * This event listener triggers the function for widthSize and sends the string goToMobile 
- * 
- * */
-window.addEventListener("resize", function () {
-    widthSize();
-});
 
 /**
- * Not close Event 
- * 
- * This function prevents closing a popup when clicking on certain levels
- * 
-*/
-function notClose(event) {
-    event.stopPropagation();
+ * This function clears the subtask list either when the whole form is being cleared or a new task has been created. 
+ */
+function clearSubtaskList() {
+    let subtaskList = document.getElementById('subtasklist');
+    subtaskList.innerHTML = '';
 }</code></pre>
         </article>
     </section>

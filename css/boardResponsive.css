@@ -1,4 +1,7 @@
 @media screen and (max-width: 1440px) {
+    body{
+        overflow-y: auto;
+    }
     .addTask-container {
         width: 1000px;
         height: 800px;
