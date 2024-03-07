@@ -87,7 +87,7 @@ function sign_up() {
     doc('login').innerHTML = sign_upStart();
     signUpStyle('animated', 'fadeIn', 'animated_Out', 'fadeOut');
     loginFormStyle('326px', '16px', 'center', 'unset');
-    doc('logSign').setAttribute('onsubmit', 'checkPasswords(); return false');
+    doc('logSign').setAttribute('onsubmit', 'checkRememberMeClick(); return false');
     remeChecked = [];
 }
 
@@ -223,9 +223,9 @@ function pwIdInfo() {
 function anable(activ) {
     if (doc('anable') != null) {
         if (activ == '1') {
-            buttonStyle(false, 'buttonDisabled', 'button');
+            buttonStyle('buttonDisabled', 'button');
         } else {
-            buttonStyle(true, 'button', 'buttonDisabled');
+            buttonStyle('button', 'buttonDisabled');
         }
     }
 }
@@ -240,8 +240,7 @@ function anable(activ) {
  * @param {string} anabledStyle -classlist of remove style 
  * 
  * */
-function buttonStyle(disabledButton, anabledStyle, disabledSytle) {
-    doc('anable').disabled = disabledButton;
+function buttonStyle(anabledStyle, disabledSytle) {
     doc('anable').classList.remove(`${anabledStyle}`);
     doc('anable').classList.add(`${disabledSytle}`);
 }

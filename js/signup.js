@@ -1,4 +1,19 @@
 /**
+ * This function checks whether the privacy policy has been accepted
+ */
+function checkRememberMeClick(){
+    if(remeChecked == 1 && doc('passwordchangePWsignC')){
+        checkPasswords();
+    }else{
+        doc('secSign').innerHTML = 'Please accept Privacy policy';
+        savePopupSign('no');
+        setTimeout(() => {
+            doc('secSign').innerHTML = 'You Signed Up seccesfully';
+        }, 2000);
+    }
+}
+
+/**
  * This function checks whether the passwords entered are identical
  * If an error occurs, the input fields that affect it will be marked red
  */
@@ -125,11 +140,13 @@ function searchColor(color) {
 /**
  * This function changes the style value and loads the login page
  */
-function savePopupSign() {
+function savePopupSign(not) {
     doc('secSign').style.transform = 'translatex(0)';
     setTimeout(() => {
         doc('secSign').style.transform = 'translatex(150vw)';
-        loginSite();
+        if(not != 'no'){
+            loginSite();
+        }
     }, 1500);
 }
 

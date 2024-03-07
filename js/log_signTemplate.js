@@ -37,7 +37,7 @@ function sign_upStart() {
         </div>
     </div>
     <div class="loginButton" id="disabled">
-        <button type="submit" class="buttonDisabled" id="anable" disabled>Sign up</button>
+        <button type="submit" class="buttonDisabled" id="anable">Sign up</button>
     </div>
     `;
 }
