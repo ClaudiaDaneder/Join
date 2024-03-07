@@ -57,8 +57,13 @@
 }
 
 @media (max-width: 1050px) {
+    .popupClosedMobile {
+        top: 12px;
+        right: 15px;
+    }
+
     #addContactPopup {
-        height: 760px;
+        height: 605px;
         width: 90vw;
         flex-direction: column;
     }
@@ -77,7 +82,7 @@
 
     .leftContainer {
         width: 90vw;
-        height: 351px;
+        height: 200px;
         justify-content: center;
         align-items: flex-start;
         padding-left: 24px;
@@ -104,12 +109,12 @@
 
     .clearContact {
         position: absolute;
-        top: 294px;
+        top: 140px;
     }
 
     .circleEdit {
         position: absolute;
-        top: 294px;
+        top: 140px;
     }
 
     .input {
@@ -120,7 +125,7 @@
     form {
         width: 90vw;
         position: absolute;
-        top: 444px;
+        top: 290px;
     }
 
     form input {
@@ -329,9 +334,6 @@
 
 @media (max-height: 780px) {
     #addContactPopup {
-        bottom: unset;
-        margin: unset;
-        margin-left: auto;
-        margin-right: auto;
+        max-height: 600px;
     }
 }

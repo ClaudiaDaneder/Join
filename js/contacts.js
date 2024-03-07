@@ -2,7 +2,7 @@ let contacts = [];
 let firstLetter = [];
 let contactsKey = 'allContacts';
 
-async function init() {
+async function init(id) {
     await includeHTML();
     await loadRemote();
     loadLetter();
@@ -10,6 +10,9 @@ async function init() {
     initOnline();
     await enableNavigation();
     await navigation('show');
+    if(id){
+        addClassList(id);
+    }
 }
 
 /**
@@ -168,7 +171,7 @@ async function saveContact(i, id) {
     contacts[i]['phone'] = doc('phone').value;
     await setItem(`${contactsKey}`, JSON.stringify(contacts));
     showContact(id);
-    init();
+    init(id);
     savePopup('edit');
     closePopup();
 }
@@ -315,7 +318,7 @@ function loadCircle(id, color, circleName) {
  * 
  * */
 function addClassList(id) {
-    if (doc(`cID${id}`)) {
+    if (doc(`cID${id}`) || location.assign(`#cID${id}`)) {
         doc(`cID${id}`).classList.remove('list');
         doc(`cID${id}`).classList.add('listVisited');
     }

@@ -489,8 +489,8 @@ input[type="text"]:focus {
     .selected {
         width: 64px !important;
         height: 78.03px !important;
-        top: 40px !important;
-        left: 38px !important;
+        top: 55px !important;
+        left: 55px !important;
     }
 }
 
@@ -516,4 +516,15 @@ input[type="text"]:focus {
         width: 177px;
     }
 
+}
+
+@media (max-height: 750px) {
+    .login {
+        max-height: 350px;
+    }
+
+    .footer {
+        top: unset;
+        bottom: 0;
+    }
 }
