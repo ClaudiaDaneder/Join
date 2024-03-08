@@ -196,9 +196,16 @@ async function deleteContact(id) {
     }
 }
 
+/**
+ * Delete contacts only with rights or its your account 
+ * 
+ * @param {string} contactsID - number of array
+ * @param returns - return true
+ */
 function checkOnlineUser(contactsID){
     if(contacts[contactsID]['password'] == null || contacts[contactsID]['email'] == yourId) return true;
 }
+
 /**
  * This function looks for the data of the contact that is being edited and passes it on
  * 
