@@ -190,6 +190,8 @@ function savePopup(saveInfo) {
     doc('save_info').innerHTML = 'Contact deleted';
   } else if (saveInfo == 'exist') {
     doc('save_info').innerHTML = 'Contact Email Exist';
+  } else if('denied'){
+    doc('save_info').innerHTML = 'Access Denied';
   }
   doc('save_info').style.transform = 'translatex(0)';
   setTimeout(() => {

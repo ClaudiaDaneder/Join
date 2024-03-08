@@ -183,15 +183,22 @@ async function saveContact(i, id) {
  * 
  * */
 async function deleteContact(id) {
-    contacts.splice(id, 1);
-    await setItem(`${contactsKey}`, JSON.stringify(contacts));
-    firstLetter = [];
-    doc('showContact').innerHTML = '';
-    init();
-    savePopup('delete');
-    checkBackSlide();
+    if(checkOnlineUser(id) == true){
+        contacts.splice(id, 1);
+        await setItem(`${contactsKey}`, JSON.stringify(contacts));
+        firstLetter = [];
+        doc('showContact').innerHTML = '';
+        init();
+        savePopup('delete');
+        checkBackSlide();
+    }else{
+        savePopup('denied');
+    }
 }
 
+function checkOnlineUser(contactsID){
+    if(contacts[contactsID]['password'] == null || contacts[contactsID]['email'] == yourId) return true;
+}
 /**
  * This function looks for the data of the contact that is being edited and passes it on
  * 
