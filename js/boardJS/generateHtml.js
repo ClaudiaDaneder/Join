@@ -242,24 +242,28 @@ function setNewSubTask(id) {
 
 
 function editCurrentTask(id) {
-
   let title = document.getElementById("titleEditValue").value;
   let description = document.getElementById("descriptionEditValue").value;
   let dueDate = document.getElementById("due-date").value;
+
   for (let i = 0; i < allDownloadTasks.length; i++) {
     if (allDownloadTasks[i]["task-id"] == id) {
       allDownloadTasks[i]["title"] = title;
       allDownloadTasks[i]["description"] = description;
       allDownloadTasks[i]["due-date"] = dueDate;
-      allDownloadTasks[i]["assignee-infos"] = selectedContacts;
+      
+      // Überprüfen, ob neue Kontakte ausgewählt wurden, bevor sie zugewiesen werden
+      if (selectedContacts.length > 0) {
+        allDownloadTasks[i]["assignee-infos"] = selectedContacts;
+      }
     }
-
   }
 
   setItem('allTasks', allDownloadTasks);
-  renderallTasks();
+  renderAllTasks();
   openCurrentTask(id);
 }
+
 
 function updateSelectedContacts() {
   let selectedContacts = []; 

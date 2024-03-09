@@ -30,7 +30,7 @@ function drop(ev) {
   updateTaskList(taskId, targetElement.id);
 
   openAndCloseNoTask();
-  renderallTasks();
+  renderAllTasks();
   upDateAllDate();
 }
 

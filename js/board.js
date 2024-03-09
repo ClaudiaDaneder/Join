@@ -3,7 +3,7 @@ async function init() {
   await includeHTML();
   await loadTaskFromStorage();
   await fillTasks();
-  renderallTasks();
+  renderAllTasks();
   initOnline();
   enableNavigation();
   navigation('show');
@@ -57,6 +57,7 @@ async function loadTaskFromStorage() {
   allDownloadTasks = JSON.parse(allTaskAsString);
 }
 
+
 function addTaskToCategory(task) {
   switch (task["status"]) {
     case "toDos":
@@ -82,7 +83,6 @@ async function fillTasks() {
   inProgress = [];
   awaitFeedback = [];
   done = [];
-
   for (let i = 0; i < allDownloadTasks.length; i++) {
     const task = allDownloadTasks[i];
     boardSubTask.push(task["subtasks"].length);
@@ -91,62 +91,24 @@ async function fillTasks() {
 }
 
 
-function renderallTasks() {
-  renderToDo(),
-    renderInProgress(),
-    renderAwaitFeedback(),
-    renderDone(),
-    openAndCloseNoTask();
+function renderAllTasks() {
+  renderTasks(toDos, "toDo");
+  renderTasks(inProgress, "inProgress");
+  renderTasks(awaitFeedback, "awaitFeedback");
+  renderTasks(done, "done");
+  openAndCloseNoTask();
 }
 
 
-function renderToDo() {
-  let toDoContainer = document.getElementById("toDo");
-  toDoContainer.innerHTML = "";
-  for (let i = 0; i < toDos.length; i++) {
-    let isHighlighted = searchResults.length === 0 || searchResults.includes(toDos[i]["task-id"]);
+function renderTasks(tasksArray, containerId) {
+  let container = document.getElementById(containerId);
+  container.innerHTML = "";
+  for (let i = 0; i < tasksArray.length; i++) {
+    let task = tasksArray[i];
+    let isHighlighted = searchResults.length === 0 || searchResults.includes(task["task-id"]);
     if (isHighlighted) {
-      const taskHtml = createTaskHtml(toDos[i], toDos[i]["task-id"], true);
-      toDoContainer.innerHTML += taskHtml;
-    }
-  }
-}
-
-
-function renderInProgress() {
-  let inProgressContainer = document.getElementById("inProgress");
-  inProgressContainer.innerHTML = "";
-  for (let i = 0; i < inProgress.length; i++) {
-    let isHighlighted = searchResults.length === 0 || searchResults.includes(inProgress[i]["task-id"]);
-    if (isHighlighted) {
-      const taskHtml = createTaskHtml(inProgress[i], inProgress[i]["task-id"], true);
-      inProgressContainer.innerHTML += taskHtml;
-    }
-  }
-}
-
-
-function renderAwaitFeedback() {
-  let feedbackContainer = document.getElementById("awaitFeedback");
-  feedbackContainer.innerHTML = "";
-  for (let i = 0; i < awaitFeedback.length; i++) {
-    let isHighlighted = searchResults.length === 0 || searchResults.includes(awaitFeedback[i]["task-id"]);
-    if (isHighlighted) {
-      const taskHtml = createTaskHtml(awaitFeedback[i], awaitFeedback[i]["task-id"], true);
-      feedbackContainer.innerHTML += taskHtml;
-    }
-  }
-}
-
-
-function renderDone() {
-  let doneContainer = document.getElementById("done");
-  doneContainer.innerHTML = "";
-  for (let i = 0; i < done.length; i++) {
-    let isHighlighted = searchResults.length === 0 || searchResults.includes(done[i]["task-id"]);
-    if (isHighlighted) {
-      const taskHtml = createTaskHtml(done[i], done[i]["task-id"], true);
-      doneContainer.innerHTML += taskHtml;
+      const taskHtml = createTaskHtml(task, task["task-id"], true);
+      container.innerHTML += taskHtml;
     }
   }
 }
@@ -172,11 +134,13 @@ function openAndCloseNoTask() {
   checkTaskLength(done, done.children.length);
 }
 
+
 function checkTaskLength(task, length) {
   if (length === 0) {
     task.parentNode.style.overflowY = 'hidden';
   }
 }
+
 
 async function upDateAllDate() {
   allDownloadTasks = [];
@@ -213,20 +177,19 @@ function searchTasks() {
     }
   }
 
-  renderallTasks();
+  renderAllTasks();
 }
 
 
 function endSearch() {
   document.getElementById("searchInput").value = "";
   searchResults = [];
-  renderallTasks();
+  renderAllTasks();
 }
 
 
-
 function closeModal() {
-  renderallTasks();
+  renderAllTasks();
   document.getElementById('modal-window').classList.remove('animation-slide-in');
   document.getElementById('modal-window').classList.add('animation-slide-out');
   setTimeout(function () {
@@ -236,13 +199,16 @@ function closeModal() {
   }, 500);
 }
 
+
 function searchfieldFocus() {
   document.getElementById('inputField').classList.toggle('subtaskfield-focus')
 }
 
+
 function searchfieldBlur() {
   document.getElementById('inputField').classList.remove('subtaskfield-focus')
 }
+
 
 function closeInput() {
   if (doc('contacts-dropdown').classList.contains('active')) {
@@ -251,9 +217,11 @@ function closeInput() {
   }
 }
 
+
 function notClose(event) {
   event.stopPropagation();
 }
+
 
 window.addEventListener('click', function(e){
   if (e.target.id == 'addTaskContainerBG') {

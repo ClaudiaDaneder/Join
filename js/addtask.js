@@ -75,14 +75,29 @@ async function saveToStorage(task) {
  */
 async function determineTaskId() {
     let allSavedTasks = JSON.parse(await getItem('allTasks'));
-    lastID = allSavedTasks[allSavedTasks.length - 1];
-    if (lastID == null || lastID == '') {
-        lastID = 0;
-    } else {
-        lastID = lastID['task-id'] + 1;
+    let lastID = 0;
+    if (allSavedTasks && allSavedTasks.length > 0) {
+        lastID = Math.max(...allSavedTasks.map(task => task['task-id']));
     }
-    return lastID;
+
+    let newID = lastID + 1;
+    for (let i = newID; i <= Number.MAX_SAFE_INTEGER; i++) {
+        if (!await isIdUsed(i)) {
+            return i;
+        }
+    }
 }
+
+
+async function isIdUsed(id) {
+    let allSavedTasks = JSON.parse(await getItem('allTasks'));
+    if (allSavedTasks) {
+        return allSavedTasks.some(task => task['task-id'] === id);
+    } else {
+        return false;
+    }
+}
+
 
 
 /**

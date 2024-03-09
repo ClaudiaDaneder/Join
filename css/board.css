@@ -91,7 +91,6 @@ button {
     padding-block: 0px;
     padding-inline: 0px;
 }
-
 #modal-overlay {
     position: fixed;
     top: 0;
@@ -679,8 +678,9 @@ button {
 }
 
 .boardSiteContainer section{
-    overflow-y: auto;
+    overflow-y: hidden;
     overflow-x: hidden;
+    overflow: visible;
     padding: 9px;
     height: 100%;
 }
