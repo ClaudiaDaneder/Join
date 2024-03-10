@@ -135,13 +135,15 @@
     .taskColumn {
         flex-direction: row;
         width: 95%;
+        height: unset;
     }
 
     .boardSiteContainer section {
         overflow-y: hidden;
         overflow-x: scroll;
         width: 100%;
-        box-sizing: border-box
+        box-sizing: border-box;
+        height: unset;
     }
 }
 
