@@ -1,3 +1,8 @@
+/**
+ * Finds a task by its ID in the allDownloadTasks array.
+ * @param {number|string} taskId - The ID of the task to find.
+ * @returns {Object|null} The found task object or null if no task is found.
+ */
 function findTaskById(taskId) {
   return allDownloadTasks.find(
     (element) => parseInt(element["task-id"]) === parseInt(taskId)
@@ -5,16 +10,19 @@ function findTaskById(taskId) {
 }
 
 
+/**
+ * Opens and displays the task modal for the given task ID.
+ * @param {number|string} taskId - The ID of the task to open.
+ */
 async function openCurrentTask(taskId) {
   const { modalOverlay, modulWindow } = initializeDomElements();
   modulWindow.innerHTML = "";
-    modalOverlay.classList.remove('hide');
-    modulWindow.classList.remove('animation-slide-out');
-    setTimeout(function () {
-      modulWindow.classList.remove('hide');
-      modulWindow.classList.add('animation-slide-in');
-    }, 100)
-
+  modalOverlay.classList.remove('hide');
+  modulWindow.classList.remove('animation-slide-out');
+  setTimeout(function () {
+    modulWindow.classList.remove('hide');
+    modulWindow.classList.add('animation-slide-in');
+  }, 100);
 
   const task = findTaskById(taskId);
   if (!task) {
@@ -33,6 +41,10 @@ async function openCurrentTask(taskId) {
 }
 
 
+/**
+ * Initializes and returns DOM elements related to the modal overlay and window.
+ * @returns {Object} The modal overlay and window DOM elements.
+ */
 function initializeDomElements() {
   const modalOverlay = document.getElementById("modal-overlay");
   const modulWindow = document.getElementById("modal-window");
@@ -50,6 +62,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
 });
 
 
+/**
+ * Toggles the checked state of a subtask.
+ * @param {number} i - The index of the subtask to toggle.
+ */
 function changeSubBox(i) {
   var checkBox = document.getElementById("checkBox_" + i);
   if (checkBox) {
@@ -65,11 +81,18 @@ function changeSubBox(i) {
 }
 
 
+/**
+ * Closes the current task modal.
+ */
 function closeCurrentTask() {
-  closeModal()
+  closeModal();
 }
 
 
+/**
+ * Deletes a task from the allDownloadTasks array and updates local storage.
+ * @param {number|string} taskId - The ID of the task to delete.
+ */
 async function deletThisArray(taskId) {
   let foundIndex = -1;
   for (let i = 0; i < allDownloadTasks.length; i++) {
@@ -81,12 +104,10 @@ async function deletThisArray(taskId) {
   if (foundIndex !== -1) {
     allDownloadTasks.splice(foundIndex, 1);
     await setItem("allTasks", allDownloadTasks);
-    console.log(`Task mit ID ${taskId} wurde gelöscht.`);
+    console.log(`Task with ID ${taskId} has been deleted.`);
   } else {
-    console.log(`Task mit ID ${taskId} nicht gefunden.`);
+    console.log(`Task with ID ${taskId} was not found.`);
   }
   closeCurrentTask();
   await init();
 }
-
-

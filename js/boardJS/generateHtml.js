@@ -1,9 +1,19 @@
+/**
+ * Generates a CSS class name based on the first word of a category.
+ * @param {string} category - The category to extract the class name from.
+ * @returns {string} The generated class name.
+ */
 function getCategoryClass(category) {
   let firstWord = category.split(" ")[0];
   return firstWord.charAt(0).toLowerCase() + firstWord.slice(1);
 }
 
 
+/**
+ * Calculates the progress percentage of completed subtasks.
+ * @param {Array} allSubtasks - An array of subtask objects.
+ * @returns {string} The percentage of completed subtasks as a string.
+ */
 function calculateSubtaskProgress(allSubtasks) {
   let completedSubtasks = allSubtasks.filter(subtask => subtask.done).length;
   let percentage = allSubtasks.length > 0 ? Math.round((completedSubtasks / allSubtasks.length) * 100) : 0;
@@ -11,6 +21,13 @@ function calculateSubtaskProgress(allSubtasks) {
 }
 
 
+/**
+ * Creates HTML for a progress bar based on subtask completion.
+ * @param {string} subtaskPercentage - The percentage of completed subtasks.
+ * @param {number} completedSubtasks - The count of completed subtasks.
+ * @param {number} totalSubtasks - The total count of subtasks.
+ * @returns {string} The HTML string for the progress bar.
+ */
 function createProgressBar(subtaskPercentage, completedSubtasks, totalSubtasks) {
   if (totalSubtasks > 0) {
     return `
@@ -27,6 +44,11 @@ function createProgressBar(subtaskPercentage, completedSubtasks, totalSubtasks) 
 }
 
 
+/**
+ * Generates HTML for displaying assignee information.
+ * @param {Object} task - The task object containing assignee information.
+ * @returns {string} The HTML string representing the assignees.
+ */
 function getAssigneeHtml(task) {
   let assigneeHtmlBoard = '';
   const assign = task["assignee-infos"];
@@ -47,6 +69,13 @@ function getAssigneeHtml(task) {
 }
 
 
+/**
+ * Constructs the HTML structure for a task element.
+ * @param {Object} task - The task object.
+ * @param {string} taskId - The ID of the task.
+ * @param {boolean} isHighlighted - Whether the task is highlighted or not.
+ * @returns {string} The HTML string representing the task.
+ */
 function createTaskHtml(task, taskId, isHighlighted) {
   let taskClass = isHighlighted ? "task highlight" : "task hidden";
   let categoryClass = getCategoryClass(task.category);
@@ -70,6 +99,11 @@ function createTaskHtml(task, taskId, isHighlighted) {
 }
 
 
+/**
+ * Creates an image element for the task's priority.
+ * @param {Object} prio - The priority object of the task.
+ * @returns {string} The HTML string for the priority image.
+ */
 function createPrioContainer(prio) {
   let currentPrio = prio["prio"];
 
@@ -88,7 +122,11 @@ function createPrioContainer(prio) {
 }
 
 
-
+/**
+ * Generates HTML for assignees in a more detailed format.
+ * @param {Array} assignees - An array of assignee objects.
+ * @returns {string} The HTML string representing detailed assignees.
+ */
 function createAssigneeHtml(assignees) {
   if (!Array.isArray(assignees)) {
     return "";
@@ -112,6 +150,11 @@ function createAssigneeHtml(assignees) {
 }
 
 
+/**
+ * Prepares HTML for editing assignee information.
+ * @param {Array} assignees - An array of assignee objects.
+ * @returns {string} The HTML string for editable assignee elements.
+ */
 function editAssignee(assignees) {
   if (!Array.isArray(assignees)) {
     return "";
@@ -135,6 +178,11 @@ function editAssignee(assignees) {
 }
 
 
+/**
+ * Extracts the initials from a full name.
+ * @param {string} name - The full name to extract initials from.
+ * @returns {string} The initials extracted from the name.
+ */
 function getInitials(name) {
   let initials = name
     .split(" ")
@@ -144,15 +192,32 @@ function getInitials(name) {
 }
 
 
+/**
+ * Formats a date string into DD-MM-YYYY format.
+ * @param {string} dateString - The date string to format.
+ * @returns {string} The formatted date string.
+ */
 function formatDateToDDMMYYYY(dateString) {
   const parts = dateString.split("-");
   return `${parts[0]}-${parts[1]}-${parts[2]}`;
 }
 
+
+/**
+ * Capitalizes the first letter of a string.
+ * @param {string} string - The string to capitalize.
+ * @returns {string} The capitalized string.
+ */
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+
+/**
+ * Generates the HTML for subtasks within a task.
+ * @param {string} id - The ID of the task.
+ * @returns {void}
+ */
 function generateSubTasksHtml(id) {
   let editSubTasksHtml = document.getElementById('renderSubTasks');
   editSubTasksHtml.innerHTML = '';
@@ -192,6 +257,12 @@ function generateSubTasksHtml(id) {
 }
 
 
+/**
+ * Deletes a subtask from a task.
+ * @param {number} j - The index of the subtask to delete.
+ * @param {string} taskId - The ID of the task.
+ * @returns {void}
+ */
 function deleteSubtasklist(j, taskId) {
   subtasks.splice(j, 1);
   for (let i = 0; i < allDownloadTasks.length; i++) {
@@ -203,6 +274,12 @@ function deleteSubtasklist(j, taskId) {
 }
 
 
+/**
+ * Updates the popup window for editing a subtask.
+ * @param {number} j - The index of the subtask to update.
+ * @param {string} id - The ID of the task.
+ * @returns {void}
+ */
 function updateEditPopup(j, id) {
   let subtext = document.getElementById('editfield');
   for (let i = 0; i < allDownloadTasks.length; i++) {
@@ -216,6 +293,12 @@ function updateEditPopup(j, id) {
 }
 
 
+/**
+ * Updates the priority of a task.
+ * @param {string} taskId - The ID of the task to update.
+ * @param {string} newPriority - The new priority to set.
+ * @returns {void}
+ */
 function updateTaskPriority(taskId, newPriority) {
   for (let i = 0; i < allDownloadTasks.length; i++) {
     if (allDownloadTasks[i]['task-id'] == taskId) {
@@ -228,6 +311,11 @@ function updateTaskPriority(taskId, newPriority) {
 }
 
 
+/**
+ * Adds a new subtask to a task.
+ * @param {string} id - The ID of the task.
+ * @returns {void}
+ */
 function setNewSubTask(id) {
   let subtext = document.getElementById('subtasks');
   for (let i = 0; i < allDownloadTasks.length; i++) {
@@ -241,6 +329,10 @@ function setNewSubTask(id) {
 }
 
 
+/**
+ * Updates and saves the task details based on user input from the editing interface.
+ * @param {string} id - The ID of the task to be edited.
+ */
 function editCurrentTask(id) {
   let title = document.getElementById("titleEditValue").value;
   let description = document.getElementById("descriptionEditValue").value;
@@ -258,13 +350,16 @@ function editCurrentTask(id) {
       }
     }
   }
-
   setItem('allTasks', allDownloadTasks);
   renderAllTasks();
   openCurrentTask(id);
 }
 
 
+/**
+ * Updates the selected contacts based on user interaction in the contact assignment interface.
+ * @returns {Array} - An array of selected contacts.
+ */
 function updateSelectedContacts() {
   let selectedContacts = []; 
   const checkboxes = document.querySelectorAll('#assignee .checkbox-option');
@@ -280,8 +375,14 @@ function updateSelectedContacts() {
 }
 
 
-
-
+/**
+ * Generates and returns HTML content for a task based on its details and associated HTML for assignees and subtasks.
+ * @param {Object} task - The task object containing all the details.
+ * @param {string} assigneeHtmlBoard - HTML content for the assignees of the task.
+ * @param {string} subTasksHtml - HTML content for the subtasks of the task.
+ * @param {string} editAssigneeHtml - HTML content for editing assignee information.
+ * @returns {Promise<string>} - A promise that resolves to the HTML content for the task.
+ */
 async function generateTaskHtml(task, assigneeHtmlBoard, subTasksHtml, editAssigneeHtml) {
   const firstPart = task.category.split(" ")[0].toLowerCase();
   const originalDate = task["due-date"];
@@ -289,7 +390,7 @@ async function generateTaskHtml(task, assigneeHtmlBoard, subTasksHtml, editAssig
   let Prio = capitalizeFirstLetter(task["prio"]);
   let prioimage = createPrioContainer(task)
 
-  return /*html*/`
+  return `
     <button onclick="closeModal()" type="button"><img class="close-png" src="./img/close.png"></button>
     <section class="editCurrentTask" id="editCurrentTask" style="display: none;">
     <div class="editCurrentTitle">
@@ -368,6 +469,12 @@ async function generateTaskHtml(task, assigneeHtmlBoard, subTasksHtml, editAssig
   </div>`;
 }
 
+
+/**
+ * Updates the priority of a task when a priority button is clicked.
+ * @param {string} priority - The new priority to be set for the task.
+ * @param {Object} task - The task object whose priority is to be updated.
+ */
 function updatePriority(priority, task) {
   const selectedButton = document.getElementById(priority);
   const isSelected = selectedButton.classList.contains('selected');
@@ -389,22 +496,28 @@ function updatePriority(priority, task) {
       break;
     }
   }
-
   setItem('allTasks', allDownloadTasks);
 }
 
 
-
+/**
+ * Toggles the display state between the current task view and the task editing interface.
+ * @param {string} status - The new status to set for the task editing interface visibility.
+ */
 async function editTask(status) {
   let currentOpenTask = document.getElementById("currentOpenTask");
   let toEditTask = document.getElementById("editCurrentTask");
 
   currentOpenTask.style.display = "none";
   toEditTask.style.display = "";
-
-
 }
 
+
+/**
+ * Creates HTML content for displaying subtasks of a task.
+ * @param {Array} subTasks - An array of subtask objects.
+ * @returns {string} - The HTML content for the subtasks.
+ */
 function createSubtasksHtml(subTasks) {
   let subTaskhtml = "";
   for (let i = 0; i < subTasks.length; i++) {
