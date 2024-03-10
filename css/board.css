@@ -448,7 +448,7 @@ section{
 .boardSiteContainer {
     position: relative;
     left: 232px;
-    top: 176px;
+    top: 126px;
     bottom: 30px;
     width: calc(100% - 232px);
     box-sizing: border-box;
