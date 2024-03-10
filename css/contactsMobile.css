@@ -188,7 +188,7 @@
         left: 0;
         width: 100vw;
         top: 80px;
-        height: calc(100vh - 80px - 70px);
+        height: calc(100dvh - 80px - 70px);
         transform: translateX(0);
         transition: all 200ms ease-in-out;
     }
