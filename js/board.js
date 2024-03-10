@@ -9,7 +9,6 @@ let boardSubTask = [];
 let searchResults = [];
 
 
-
 /**
  * Initializes the task board by loading tasks from storage, filling categories, and rendering tasks.
  */
