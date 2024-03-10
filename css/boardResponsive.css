@@ -136,6 +136,8 @@
         flex-direction: row;
         width: 95%;
         height: unset;
+        overflow-y: hidden !important;
+        overflow-x: auto !important;
     }
 
     .boardSiteContainer section {

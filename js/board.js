@@ -122,25 +122,12 @@ function openAndCloseNoTask() {
 
   document.getElementById("noTaskToDo").style.display =
     toDo.children.length === 0 ? "" : "none";
-  checkTaskLength(toDo, toDo.children.length);
   document.getElementById("noTaskInProgress").style.display =
     inProgress.children.length === 0 ? "" : "none";
-  checkTaskLength(inProgress, inProgress.children.length);
   document.getElementById("noTaskAwaitFeedback").style.display =
     awaitFeedback.children.length === 0 ? "" : "none";
-  checkTaskLength(awaitFeedback, awaitFeedback.children.length);
   document.getElementById("noTaskDone").style.display =
     done.children.length === 0 ? "" : "none";
-  checkTaskLength(done, done.children.length);
-}
-
-
-function checkTaskLength(task, length) {
-  if (length === 0) {
-    task.style.overflowY = 'hidden';
-  }else{
-    task.style.overflowY = 'auto';
-  }
 }
 
 async function upDateAllDate() {
