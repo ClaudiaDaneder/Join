@@ -117,12 +117,10 @@
     let isMobile = window.innerWidth < 768;
 
 window.addEventListener('resize', () => {
-    // Überprüfen, ob wir von Nicht-Mobil auf Mobil wechseln
     if (!isMobile && window.innerWidth < 768) {
         isMobile = true;
         location.reload();
     } else if (isMobile && window.innerWidth >= 768) {
-        // Optional: Wenn Sie auch bei der Rückkehr zum Desktop neuladen möchten
         isMobile = false;
         location.reload();
     }
