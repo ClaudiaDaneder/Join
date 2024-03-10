@@ -171,7 +171,9 @@ window.addEventListener("resize", function () {
     if (doc('listAllContacts').style.transform != 'translatex(0px)') {
       doc('listAllContacts').style.transform = 'translatex(0)';
       doc('showContactsView').style.transform = 'translatex(100vw)';
-      backToContacts();
+      if(location.assign('#')){
+        backToContacts();
+      }
     }
   } else {
     doc('listAllContacts').style.transform = 'unset';

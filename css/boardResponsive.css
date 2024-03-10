@@ -137,7 +137,7 @@
         width: 95%;
         height: unset;
         overflow-y: hidden !important;
-        overflow-x: auto !important;
+        overflow-x: scroll !important;
     }
 
     .boardSiteContainer section {

@@ -188,7 +188,7 @@
         left: 0;
         width: 100vw;
         top: 80px;
-        height: calc(100vh - 80px - 70px);
+        height: calc(100dvh - 80px - 70px);
         transform: translateX(0);
         transition: all 200ms ease-in-out;
     }
@@ -246,6 +246,7 @@
     .contactList {
         margin-top: 10px;
         padding-bottom: 30px;
+        height: 71dvh;
     }
 
     .contactsView {
@@ -300,7 +301,7 @@
         height: 56px;
         border-radius: 28px;
         position: absolute;
-        top: calc(100% - 80px);
+        top: 68dvh;
         right: 20px;
         background: transparent;
     }
