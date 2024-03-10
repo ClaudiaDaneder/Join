@@ -681,6 +681,7 @@ section{
     max-height: 95%;
     padding: 10px;
     overflow-x: hidden !important;
+    height: 1024px;
 }
 
 .boardSiteContainer section{
