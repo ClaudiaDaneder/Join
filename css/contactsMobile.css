@@ -246,6 +246,7 @@
     .contactList {
         margin-top: 10px;
         padding-bottom: 30px;
+        height: 71dvh;
     }
 
     .contactsView {
@@ -300,7 +301,7 @@
         height: 56px;
         border-radius: 28px;
         position: absolute;
-        top: calc(100% - 80px);
+        top: 68dvh;
         right: 20px;
         background: transparent;
     }
