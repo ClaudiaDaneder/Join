@@ -1,4 +1,4 @@
-//Initialisierung
+
 async function init() {
   await includeHTML();
   await loadTaskFromStorage();
@@ -10,7 +10,6 @@ async function init() {
 }
 
 
-//Globale Variablen
 let currentTask;
 let toDos = [];
 let inProgress = [];
@@ -51,7 +50,6 @@ function closeAddTask() {
 }
 
 
-// Datenladen und -verarbeiten
 async function loadTaskFromStorage() {
   let allTaskAsString = await getItem("allTasks");
   allDownloadTasks = JSON.parse(allTaskAsString);
