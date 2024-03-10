@@ -137,10 +137,11 @@ function openAndCloseNoTask() {
 
 function checkTaskLength(task, length) {
   if (length === 0) {
-    task.parentNode.style.overflowY = 'hidden';
+    task.style.overflowY = 'hidden';
+  }else{
+    task.style.overflowY = 'auto';
   }
 }
-
 
 async function upDateAllDate() {
   allDownloadTasks = [];

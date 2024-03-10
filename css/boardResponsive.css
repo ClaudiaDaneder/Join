@@ -59,6 +59,14 @@
         width: 800px;
         height: 800px;
     }
+     body{
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+     }
+
+     section{
+        overflow-x: hidden !important;
+     }
 
     @keyframes addTaskContainerSlideIn {
         0% {
@@ -126,7 +134,7 @@
 
     .taskColumn {
         flex-direction: row;
-        width: 100%;
+        width: 95%;
     }
 
     .boardSiteContainer section {
