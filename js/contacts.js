@@ -136,11 +136,16 @@ function addContact() {
  * @param {number} id - this is the id of the contact
  * 
  * */
-function editContact(id) {
-    doc('addContactPopup').style.transform = 'translateX(0)';
-    doc('popupTitle').innerHTML = popupNames('edit');
-    loadEditContact(id);
-    doc('back').classList.add('back');
+function editContact(id, i) {
+    if(checkOnlineUser(i) == true){
+        doc('addContactPopup').style.transform = 'translateX(0)';
+        doc('popupTitle').innerHTML = popupNames('edit');
+        loadEditContact(id);
+        doc('back').classList.add('back');
+    }else{
+        savePopup('denied');
+    }
+    
 }
 
 /**

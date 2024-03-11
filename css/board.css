@@ -694,7 +694,6 @@ button {
 
 .boardSiteContainer section{
     padding: 9px;
-    min-height: 1024px;
 }
 .taskContent {
     display: flex;

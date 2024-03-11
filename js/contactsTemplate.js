@@ -32,7 +32,7 @@ function loadContactShow(id, initials, name, email, phone, i) {
         <div class="contactName">
             <p class="cName">${name}</p>
             <div class="edit">
-                <p onclick="notClose(event), editContact(${id})"><img src="./img/edit.svg">Edit</p>
+                <p onclick="notClose(event), editContact(${id}, ${i})"><img src="./img/edit.svg">Edit</p>
                 <p onclick="deleteContact(${i})"><img src="./img/delete.svg">Delete</p>
             </div>
         </div>
