@@ -671,7 +671,8 @@ button {
     gap: 26px;
     max-width: 1080px;
     max-height: 70vh;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .taskContainer button {
