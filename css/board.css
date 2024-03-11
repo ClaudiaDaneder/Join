@@ -91,10 +91,6 @@ button {
     padding-block: 0px;
     padding-inline: 0px;
 }
-section{
-    overflow-y: hidden;
-    overflow-x: hidden;
-}
 #modal-overlay {
     position: fixed;
     top: 0;
@@ -662,6 +658,7 @@ section{
     gap: 26px;
     max-width: 1080px;
     max-height: 70vh;
+    overflow: auto;
 }
 
 .taskContainer button {
@@ -680,8 +677,6 @@ section{
     gap: 16px;
     max-height: 95%;
     padding: 10px;
-    overflow-x: hidden !important;
-    overflow-y: auto !important;
     height: 1024px;
 }
 

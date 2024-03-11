@@ -50,7 +50,9 @@
 @media screen and (max-width: 1250px) {
     .taskContainer {
         gap: 16px;
+        
     }
+    
 }
 
 
@@ -58,6 +60,9 @@
     .addTask-container {
         width: 800px;
         height: 800px;
+    }.taskContainer {
+        overflow: visible;
+        
     }
      body{
         overflow-y: auto !important;
