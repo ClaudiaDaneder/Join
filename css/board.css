@@ -103,7 +103,6 @@ button {
     justify-content: center;
     align-items: center;
 }
-
 .width-height-full-prozent {
     display: flex;
     flex-direction: column;
@@ -113,11 +112,21 @@ button {
     color: #2A3647;
     max-height: calc(80% - 80px);
 }
-
+#draggable {
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+    color: white;
+    padding: 10px;
+    text-align: center;
+  }
 .width-height-full-prozent p {
     color: #000;
 }
-
+.addTaskContainer{
+    display: flex;
+    justify-content: space-between;
+}
 .rotating {
     transition: transform 0.37s ease-in-out;
     /* sanfte Animation */
@@ -638,8 +647,12 @@ button {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 22%;
 }
-
+.header-container-to-add-current-task-mobile{
+    display: flex;
+    justify-content: space-between;
+}
 .added-task-txt {
     font-size: 20px;
 
@@ -658,8 +671,7 @@ button {
     gap: 26px;
     max-width: 1080px;
     max-height: 70vh;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: auto;
 }
 
 .taskContainer button {
@@ -677,10 +689,12 @@ button {
     flex-direction: column;
     gap: 16px;
     padding: 10px;
+    min-height: 618px;
 }
 
 .boardSiteContainer section{
     padding: 9px;
+    min-height: 1024px;
 }
 .taskContent {
     display: flex;

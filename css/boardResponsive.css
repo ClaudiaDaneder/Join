@@ -57,6 +57,13 @@
 
 
 @media screen and (max-width: 1200px) {
+    .header-container-to-add-current-task-mobile{
+        display: flex!important;
+    }
+    .addTaskContainer{
+        display: none;
+    }
+
     .addTask-container {
         width: 800px;
         height: 800px;
@@ -143,6 +150,7 @@
         height: unset;
         overflow-y: hidden !important;
         overflow-x: scroll !important;
+        min-height: 0;
     }
 
     .boardSiteContainer section {
@@ -150,7 +158,8 @@
         overflow-x: scroll;
         width: 100%;
         box-sizing: border-box;
-        height: unset;
+        height: unset!important;
+        min-height: 0;
     }
 }
 

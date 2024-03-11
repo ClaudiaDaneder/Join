@@ -63,12 +63,31 @@
                         </button>
                     </div>
                 </div>
-
+                <div class="addTaskContainer">
+                    <div class="header-container-to-add-current-task">
+                        <h4 class="added-task-txt">To do</h4>
+                        <button type="button" onclick="openAddTask(`toDos`)"><img
+                                src="img/plus_button.png"></button>
+                    </div>
+                    <div class="header-container-to-add-current-task">
+                                            <h4 class="added-task-txt">In progress</h4>
+                                            <button type="button" onclick="openAddTask(`inProgress`)"><img
+                                                    src="img/plus_button.png"></button>
+                                        </div>
+                    <div class="header-container-to-add-current-task">
+                                            <h4 class="added-task-txt">Await feedback</h4>
+                                            <button type="button" onclick="openAddTask(`awaitFeedback`)"><img
+                                                    src="img/plus_button.png"></button>
+                                        </div>
+                    <div class="header-container-to-add-current-task">
+                                            <h4 class="added-task-txt">Done</h4>
+                                        </div>
+                </div>
                 <div class="taskContainer" onclick="endSearch()">
                     <div class="parrent-add-task-container">
-                        <div class="header-container-to-add-current-task">
+                        <div class="header-container-to-add-current-task-mobile" style="display: none;">
                             <h4 class="added-task-txt">To do</h4>
-                            <button type="button" onclick="openAddTask(`toDos`)"><img
+                            <button type="button" onclick="openAddTask(toDos)"><img
                                     src="img/plus_button.png"></button>
                         </div>
                         <section ondrop="drop(event)" ondragover="allowDrop(event)">
@@ -77,9 +96,9 @@
                         </section>
                     </div>
                     <div class="parrent-add-task-container">
-                        <div class="header-container-to-add-current-task">
+                        <div class="header-container-to-add-current-task-mobile" style="display: none;">
                             <h4 class="added-task-txt">In progress</h4>
-                            <button type="button" onclick="openAddTask(`inProgress`)"><img
+                            <button type="button" onclick="openAddTask(inProgress)"><img
                                     src="img/plus_button.png"></button>
                         </div>
                         <section ondrop="drop(event)" ondragover="allowDrop(event)">
@@ -88,9 +107,9 @@
                         </section>
                     </div>
                     <div class="parrent-add-task-container">
-                        <div class="header-container-to-add-current-task">
+                        <div class="header-container-to-add-current-task-mobile" style="display: none;">
                             <h4 class="added-task-txt">Await feedback</h4>
-                            <button type="button" onclick="openAddTask(`awaitFeedback`)"><img
+                            <button type="button" onclick="openAddTask(awaitFeedback)"><img
                                     src="img/plus_button.png"></button>
                         </div>
                         <section ondrop="drop(event)" ondragover="allowDrop(event)">
@@ -99,7 +118,7 @@
                         </section>
                     </div>
                     <div class="parrent-add-task-container">
-                        <div class="header-container-to-add-current-task">
+                        <div class="header-container-to-add-current-task-mobile" style="display: none;">
                             <h4 class="added-task-txt">Done</h4>
                         </div>
                         <section ondrop="drop(event)" ondragover="allowDrop(event)">
