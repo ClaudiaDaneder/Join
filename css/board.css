@@ -658,7 +658,8 @@ button {
     gap: 26px;
     max-width: 1080px;
     max-height: 70vh;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .taskContainer button {
@@ -676,12 +677,10 @@ button {
     flex-direction: column;
     gap: 16px;
     padding: 10px;
-    min-height: 1024px;
 }
 
 .boardSiteContainer section{
     padding: 9px;
-    min-height: 1024px;
 }
 .taskContent {
     display: flex;
