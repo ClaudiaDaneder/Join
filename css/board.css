@@ -679,9 +679,6 @@ button {
     padding: 10px;
 }
 
-.boardSiteContainer section{
-    padding: 9px;
-}
 .taskContent {
     display: flex;
     flex-direction: column;
