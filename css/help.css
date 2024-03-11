@@ -22,9 +22,6 @@ body {
     padding-bottom: 32px;
 }
 
-.titleDS{
-    word-break: break-all;
-}
 
 h1 {
     font-size: 61px;
@@ -172,10 +169,22 @@ ol li p {
     .arrow-back { 
         left: 88%
     }
+
+    a {
+        word-break: break-all;
+    }
 }
 
 @media screen and (max-width: 370px) {
     h1 {
-        font-size: 42px
+        font-size: 30px
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    body {
+        font-size: 14px;
     }
 }

@@ -3,7 +3,6 @@ let subtasks = [];
 let selectedContacts = [];
 let selectedPriority;
 
-
 async function initAddTask() {
     clearLocalStorage();
     await includeHTML();
@@ -11,7 +10,6 @@ async function initAddTask() {
     await enableNavigation();
     navigation('show');
 }
-
 
 /**
  * This function defines what constitutes a task, and collects all necessary data to store it. 
@@ -41,7 +39,6 @@ async function addNewTask() {
     redirectToBoard();
 }
 
-
 /**
  * This function loads all previously saved contacts from storage.
  */
@@ -50,7 +47,6 @@ async function loadContactsFromStorage() {
     allContacts = JSON.parse(allContactsAsString);
     loadContactsIntoDropdown(allContacts);
 }
-
 
 /**
  * This function first loads the previously saved tasks from storage, then pushes the current task into this array, and then saves all of them to the storage again. 
@@ -67,7 +63,6 @@ async function saveToStorage(task) {
     await setItem('allTasks', updatedTasksAsString);
 }
 
-
 /**
  * This function is used to determine the task-id of the current task, by checking the last task-id in storage, and adding 1 to it, so that they have consecutive, unique IDs.
  * 
@@ -79,7 +74,6 @@ async function determineTaskId() {
     if (allSavedTasks && allSavedTasks.length > 0) {
         lastID = Math.max(...allSavedTasks.map(task => task['task-id']));
     }
-
     let newID = lastID + 1;
     for (let i = newID; i <= Number.MAX_SAFE_INTEGER; i++) {
         if (!await isIdUsed(i)) {
@@ -87,7 +81,6 @@ async function determineTaskId() {
         }
     }
 }
-
 
 async function isIdUsed(id) {
     let allSavedTasks = JSON.parse(await getItem('allTasks'));
@@ -97,8 +90,6 @@ async function isIdUsed(id) {
         return false;
     }
 }
-
-
 
 /**
  * This function is used to load matching contacts into the contacts dropdown. If no contacts are available, a message will be displayed.
@@ -121,7 +112,6 @@ function loadContactsIntoDropdown(filteredContacts) {
     }
 }
 
-
 /**
  * This function registers clicks outside of the contacts dropdown area. If the dropdown is open, the function closes it and hides the input field. 
  */
@@ -141,7 +131,6 @@ document.addEventListener('click', function (event) {
     }
     updateSelectedContacts();
 });
-
 
 /**
  * This function is used to open or close the contacts dropdown on click.
@@ -165,7 +154,6 @@ async function toggleContactsDropdown(event) {
     }
 }
 
-
 /**
  * This function returns the appropriate html-code in case there are no contacts to display in the contacts dropdown.
  * 
@@ -174,7 +162,6 @@ async function toggleContactsDropdown(event) {
 function noContactsToShow() {
     return `<label class="checkbox-option no-contacts">No contacts to display. Please add a contact first.</label>`;
 }
-
 
 /**
  * This function renders the necessary information for all available contacts into the contacts dropdown.
@@ -191,7 +178,6 @@ function renderContacts(contactName, contactColor, initials, i) {
     <div class="name-plus-circle"><div class="assignee-circle ${contactColor}">${initials}</div>${contactName}</div></label>`;
 }
 
-
 /**
  * This function transforms the header of the contacts dropdown into an input field to filter contacts on input. 
  */
@@ -200,7 +186,6 @@ function enableContactsSearchField() {
     hiddenContactsInput.classList.remove('hide');
     moveCursorToEnd(hiddenContactsInput);
 }
-
 
 /**
  * This function filters contacts on input. Until an input is made, all saved contacts will be displayed
@@ -218,7 +203,6 @@ async function filterContacts() {
     loadContactsIntoDropdown(filteredContacts);
 }
 
-
 /**
  * This function updates the array of selected contacts based on whether their checkbox has been checked or not. The contact name and their associated color are being registered.
  */
@@ -235,7 +219,6 @@ function updateSelectedContacts() {
     });
     generateSelectedAssigneesList();
 }
-
 
 /**
  * This function changes the background color and the image of the checkbox if a contact has been selected within the contacts dropdown. 
@@ -255,7 +238,6 @@ function changeSelectedContactBackground(i) {
     }
 }
 
-
 /**
  * This function generates a list of selected contacts in the form of colored circles containing the intials of the respective contacts. 
  */
@@ -271,14 +253,12 @@ function generateSelectedAssigneesList() {
     }
 }
 
-
 /**
  * This function temporarily stores the array of the selected contacts in the local storage.
  */
 function saveSelectedContacts() {
     localStorage.setItem('selectedContacts', JSON.stringify(selectedContacts));
 }
-
 
 /**
  * This function loads the selected contacts from local storage and marks those previously selected ones again, in case the contacts dropdown has been closed and opened up again.
@@ -299,7 +279,6 @@ function loadSelectedContacts() {
     }
 }
 
-
 /**
  * This function sets the priority-buttons to 'medium' by default. It registers clicks on other priority-buttons and sets the priority accordingly.
  */
@@ -312,7 +291,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
-
 
 /**
  * This function adds or removes the appropriate css class to or from the selected priority button to highlight it correctly.
@@ -330,7 +308,6 @@ function selectPriority(priority) {
     }
 }
 
-
 /**
  * This function registers the selected priority button and sets the 'prio' value in task to the selected one. 
  * 
@@ -339,7 +316,6 @@ function selectPriority(priority) {
 function checkPriority(task) {
     task.prio = selectedPriority;
 }
-
 
 /**
  * This function registers clicks on the document. Based on the clicked element, it either opens the user dropdown menu, toggles the category dropdown or closes the dropdown (if the click happens outside of the dropdown area). 
@@ -362,7 +338,6 @@ document.addEventListener('click', function (event) {
     }
 });
 
-
 /**
  * This function opens and closes the category dropdown.
  */
@@ -377,7 +352,6 @@ function toggleCategoryDropdown() {
         document.getElementById('category-arrow').style.transform = 'rotate(180deg)'
     }
 }
-
 
 /**
  * This function is used to select a value from the category dropdown. As soon as a selection is made, the dropdown is being closed and the selection set as the value of a hidden input field to report it back to "task".
@@ -395,7 +369,6 @@ function selectCategory(category) {
     }
 }
 
-
 /**
  * This function is used to reset all fields back to their default values.
  */
@@ -410,14 +383,12 @@ function resetForm() {
     clearLocalStorage();
 }
 
-
 /**
  * This function is used to reset the default value of the priority buttons back to 'medium'.
  */
 function resetPrioButtons() {
     selectPriority('medium');
 }
-
 
 /**
  * This function is used to reset the category dropdown.
@@ -426,7 +397,6 @@ function resetCategoryField() {
     document.getElementById('category-arrow').classList.remove('hide')
     document.getElementById('category-dropdown-text').innerHTML = 'Select task category';
 }
-
 
 /**
  * This function is used to reset the checkboxes and background colors within the contacts dropdown.
@@ -443,7 +413,6 @@ function resetCheckboxOptions() {
     updateSelectedContacts();
 }
 
-
 /**
  * This function disables the 'create task' button while the task is being saved to the board.
  */
@@ -452,14 +421,12 @@ function disableCreateButton() {
     document.getElementById('create-button').classList.add('blue-create-button');
 }
 
-
 /**
  * This function clears the temporarily stored selected contacts from the local storage.
  */
 function clearLocalStorage() {
     localStorage.removeItem('selectedContacts');
 }
-
 
 /**
  * This function shows the popup to indicate that the task has been saved.
@@ -473,7 +440,6 @@ function showPopup() {
     }
 }
 
-
 /**
  * This function redirects the user to the board, after a short timeout.
  */
@@ -482,7 +448,6 @@ function redirectToBoard() {
         window.location.href = 'board.html';
     }, 900);
 }
-
 
 /**
  * This function sets the cursor at the end of an input value to make it easier to edit the value.

@@ -212,4 +212,5 @@ function clearSubtaskField() {
 function clearSubtaskList() {
     let subtaskList = document.getElementById('subtasklist');
     subtaskList.innerHTML = '';
+    subtasks = [];
 }
