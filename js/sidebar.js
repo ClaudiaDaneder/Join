@@ -1,3 +1,6 @@
+/**
+ * This function enables the sidebar to check what page the user is currently on and indicates the position.
+ */
 function enableNavigation() {
     document.querySelectorAll('.aria').forEach(link => {
         if (link.href === window.location.href) {
@@ -6,6 +9,9 @@ function enableNavigation() {
     })
 }
 
+/**
+ * This function is used to change the function of the "back" arrows depending on whether the user has opened the page from within the application or from outside (i.e. the login screens)
+ */
 async function navigation(){
     let navigation = document.getElementById('navigation_link');
     let header = document.getElementById('header_link');

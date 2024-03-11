@@ -5,6 +5,9 @@ async function initLegalNotice() {
     navigation('show');
 }
 
+/**
+ * This function closes the user popup on the header.
+ */
 function closePopup() {
     if (doc('logoutScreen').style.display == 'flex') {
         doc('logoutScreen').style.display = 'none';
