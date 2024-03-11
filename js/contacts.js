@@ -27,7 +27,7 @@ function loadContacts() {
 
     for (let i = 0; i < loadFirstLetter.length; i++) {
         let contactLetterLoad = loadFirstLetter[i];
-        doc('contactLoad').innerHTML += letterTemp(contactLetterLoad, i);
+        doc('contactLoad').innerHTML += letterTemp(contactLetterLoad.toUpperCase(), i);
         loadNames(contactLetterLoad, i);
     }
 }
@@ -41,8 +41,8 @@ function loadContacts() {
  * */
 function loadNames(contactLetterLoad, i) {
     for (let c = 0; c < contacts.length; c++) {
-        let saveLetter = contacts[c]['name'].charAt(0);
-        if (contactLetterLoad.includes(saveLetter)) {
+        let saveLetter = contacts[c]['name'].toLowerCase().charAt(0);
+        if (contactLetterLoad.toLowerCase().includes(saveLetter)) {
             let contact = contacts[c];
             let initials = initialsLoad(contact['name'])
             doc(`contactShow${i}`).innerHTML += contactListTemp(contact['id'], initials, contact['name'], contact['email']);
@@ -396,7 +396,7 @@ function loadLetter() {
     for (let i = 0; i < contacts.length; i++) {
         let contactsName = contacts[i]['name'];
         if (contactsName) {
-            let saveLetter = contactsName.charAt(0);
+            let saveLetter = contactsName.toLowerCase().charAt(0);
             if (!firstLetter.includes(saveLetter)) {
                 firstLetter.push(saveLetter);
             }

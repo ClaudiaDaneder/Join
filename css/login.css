@@ -452,6 +452,10 @@ input[type="text"]:focus {
 }
 
 @media (max-width: 850px) {
+    #wrong{
+        width: 94%;
+    }
+    
     .sign_up {
         width: 100vw;
         align-items: flex-end;
