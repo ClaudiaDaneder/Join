@@ -28,8 +28,8 @@ async function init() {
  * @param {string} status - The initial status of the new task.
  */
 function openAddTask(status) {
-  let w = parseInt(window.innerWidth)
-  if (w > 850) {
+  let containerStatus = parseInt(window.innerWidth)
+  if (containerStatus > 850) {
     resetForm();
     document.getElementById('my-form').value = status;
     document.getElementById("addTaskContainerBG").classList.remove('hide');
