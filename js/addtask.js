@@ -82,6 +82,12 @@ async function determineTaskId() {
     }
 }
 
+/**
+ * This function is used to determine whether a task-id is already in use before applying it to the current task. 
+ * 
+ * @param {number} id 
+ * @returns task-id
+ */
 async function isIdUsed(id) {
     let allSavedTasks = JSON.parse(await getItem('allTasks'));
     if (allSavedTasks) {
