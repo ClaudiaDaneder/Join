@@ -83,6 +83,7 @@ function createTaskHtml(task, taskId, isHighlighted) {
   let progressBarHtml = createProgressBar(subtaskPercentage, task["subtasks"].filter(subtask => subtask.done).length, task["subtasks"].length);
   let prioHTML = createPrioContainer(task);
   let assigneeHtmlBoard = getAssigneeHtml(task);
+  
 
   return `
       <div class="${taskClass}" onclick="openCurrentTask('${taskId}')" draggable="true" ondragstart="drag(event, '${taskId}')" id="${taskId}">

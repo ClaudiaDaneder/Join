@@ -127,6 +127,7 @@
     .task {
         width: 252px;
         min-width: 252px;
+        margin-bottom: 30px;
     }
 
     .added-task-txt {
@@ -151,6 +152,8 @@
         overflow-y: hidden !important;
         overflow-x: scroll !important;
         min-height: 0;
+        padding-right: 35px;
+        padding-bottom: unset;
     }
 
     .boardSiteContainer section {
