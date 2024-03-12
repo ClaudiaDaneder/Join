@@ -184,7 +184,7 @@
     .boardSiteContainer {
         left: 200px;
         width: calc(100% - 190px);
-        padding: 0 48px;
+        padding: 0 38px;
     }
 
     .addTask-container {
@@ -364,7 +364,7 @@
         font-size: 16px;
     }
     .boardSiteContainer {
-        padding: 0 32px 120px 32px;
+        padding: 0 22px 120px 22px;
     }
 
     .inputFieldAndAddTaskBtn {

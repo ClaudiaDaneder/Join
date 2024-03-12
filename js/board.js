@@ -276,4 +276,12 @@ window.addEventListener('click', function(e){
       }, 300);
     }
   }
-});  
+}); 
+
+function addHoverEffect(section) {
+  document.getElementById(section).classList.add('drop-highlight');
+}
+
+function removeHoverEffect(section) {
+  document.getElementById(section).classList.remove('drop-highlight');
+}

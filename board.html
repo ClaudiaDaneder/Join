@@ -90,7 +90,7 @@
                             <button type="button" onclick="openAddTask(toDos)"><img
                                     src="img/plus_button.png"></button>
                         </div>
-                        <section ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <section ondrop="drop(event), removeHoverEffect('toDo')" ondragover="allowDrop(event), addHoverEffect('toDo')" ondragleave="removeHoverEffect('toDo')">
                             <div class="noTask" id="noTaskToDo" draggable="false"> No tasks To do</div>
                             <div id="toDo" class="taskColumn drag-area"></div>
                         </section>
@@ -101,7 +101,7 @@
                             <button type="button" onclick="openAddTask(inProgress)"><img
                                     src="img/plus_button.png"></button>
                         </div>
-                        <section ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <section ondrop="drop(event), removeHoverEffect('inProgress')" ondragover="allowDrop(event), addHoverEffect('inProgress')" ondragleave="removeHoverEffect('inProgress')">
                             <div class="noTask" id="noTaskInProgress" draggable="false">No tasks In progress</div>
                             <div id="inProgress" class="taskColumn drag-area"></div>
                         </section>
@@ -112,7 +112,7 @@
                             <button type="button" onclick="openAddTask(awaitFeedback)"><img
                                     src="img/plus_button.png"></button>
                         </div>
-                        <section ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <section ondrop="drop(event), removeHoverEffect('awaitFeedback')" ondragover="allowDrop(event), addHoverEffect('awaitFeedback')" ondragleave="removeHoverEffect('awaitFeedback')">
                             <div class="noTask" id="noTaskAwaitFeedback" draggable="false">No tasks Await feedback</div>
                             <div id="awaitFeedback" class="taskColumn drag-area"></div>
                         </section>
@@ -121,7 +121,7 @@
                         <div class="header-container-to-add-current-task-mobile" style="display: none;">
                             <h4 class="added-task-txt">Done</h4>
                         </div>
-                        <section ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <section ondrop="drop(event), removeHoverEffect('done')" ondragover="allowDrop(event), addHoverEffect('done')" ondragleave="removeHoverEffect('done')">
                             <div class="noTask" id="noTaskDone" draggable="false">No tasks Done</div>
                             <div id="done" class="taskColumn drag-area"></div>
                         </section>
